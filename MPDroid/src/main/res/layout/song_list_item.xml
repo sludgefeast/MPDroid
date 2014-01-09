@@ -45,19 +45,21 @@
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:ellipsize="end"
+            android:ellipsize="marquee"
             android:gravity="center_vertical"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            tools:text="Into The Galaxy" />
+            tools:text="Into The Galaxy" 
+            android:singleLine="true" />
 
         <TextView
             android:id="@+id/track_artist"
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:ellipsize="end"
+            android:ellipsize="marquee"
             android:gravity="center_vertical"
+            android:scrollHorizontally="true"
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="?attr/listItemSecondaryTextColor"
