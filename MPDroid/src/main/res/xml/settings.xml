@@ -242,6 +242,13 @@
                 android:key="enableRating"
                 android:persistent="true"
                 android:title="@string/enableRating" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="collapseAlbums"
+                android:persistent="true"
+                android:title="@string/collapseAlbums" />
+
         </PreferenceScreen>
 
         <CheckBoxPreference
