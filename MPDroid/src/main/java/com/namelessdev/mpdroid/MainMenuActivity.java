@@ -19,6 +19,8 @@ package com.namelessdev.mpdroid;
 import com.namelessdev.mpdroid.fragments.BrowseFragment;
 import com.namelessdev.mpdroid.fragments.LibraryFragment;
 import com.namelessdev.mpdroid.helpers.MPDConnectionHandler;
+import com.namelessdev.mpdroid.fragments.CollapsedPlaylistFragment;
+import com.namelessdev.mpdroid.helpers.MPDControl;
 import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
 import com.namelessdev.mpdroid.preferences.ConnectionModifier;
 import com.namelessdev.mpdroid.preferences.ConnectionSettings;
