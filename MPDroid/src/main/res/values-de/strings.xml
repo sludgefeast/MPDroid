@@ -217,6 +217,7 @@
     <string name="enableRating">Bewertungsleiste anzeigen</string>
     <string name="startStreaming">Stream starten</string>
     <string name="stopStreaming">Stream stoppen</string>
+    <string name="collapseAlbums">Alben in der Playlist einzeilig</string>
 
     <string name="behavior">Verhalten bei Anruf</string>
     <string name="pauseOnPhoneStateChange">Wiedergabe pausieren</string>
