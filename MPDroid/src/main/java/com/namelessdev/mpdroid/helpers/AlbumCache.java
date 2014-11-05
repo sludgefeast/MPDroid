@@ -69,7 +69,7 @@ public class AlbumCache {
 
     protected File mFilesDir;
 
-    protected Date mLastUpdate = null;
+    protected Date mLastUpdate = null; // date of mpd's last db update
 
     protected CachedMPD mMPD;
 
@@ -207,7 +207,8 @@ public class AlbumCache {
     protected synchronized boolean isUpToDate() {
         final Date mpdlast = mMPD.getStatistics().getDBUpdateTime();
         Log.d(TAG, "lastupdate " + mLastUpdate + " mpd date " + mpdlast);
-        return (null != mLastUpdate && null != mpdlast && mLastUpdate.after(mpdlast));
+        return (null != mLastUpdate && null != mpdlast &&
+                (mLastUpdate.equals(mpdlast) || mLastUpdate.after(mpdlast)));
     }
 
     protected synchronized boolean load() {
@@ -289,11 +290,12 @@ public class AlbumCache {
             return true;
         }
         Log.d(TAG, "Cache is NOT up to date. fetching ...");
-        mLastUpdate = Calendar.getInstance().getTime();
+
+        final Date oldUpdate = mLastUpdate;
+        mLastUpdate =  mMPD.getStatistics().getDBUpdateTime();
 
         Tools.notifyUser(R.string.updatingLocalAlbumCacheNote);
 
-        final Date oldUpdate = mLastUpdate;
         mAlbumDetails = new HashMap<>();
         mAlbumSet = new HashSet<>();
 
