@@ -610,39 +610,17 @@ abstract class NowPlayingFragmentBase extends Fragment implements
                     public void onProgressChanged(final SeekBar seekBar, final int progress,
                             final boolean fromUser) {
 
+                        if (fromUser) {
+                            MPDControl.run(MPDControl.ACTION_VOLUME_SET, progress);
+                        }
                     }
 
                     @Override
                     public void onStartTrackingTouch(final SeekBar seekBar) {
-                        mVolTimerTask = new TimerTask() {
-                            private int mLastSentVol = -1;
-
-                            private SeekBar mProgress;
-
-                            @Override
-                            public void run() {
-                                final int progress = mProgress.getProgress();
-
-                                if (mLastSentVol != progress) {
-                                    mLastSentVol = progress;
-                                    MPDControl.run(MPDControl.ACTION_VOLUME_SET, progress);
-                                }
-                            }
-
-                            public TimerTask setProgress(final SeekBar prg) {
-                                mProgress = prg;
-                                return this;
-                            }
-                        }.setProgress(seekBar);
-
-                        mVolTimer.scheduleAtFixedRate(mVolTimerTask, (long) MPDStatusMap.VOLUME_MIN,
-                                (long) MPDStatusMap.VOLUME_MAX);
                     }
 
                     @Override
                     public void onStopTrackingTouch(final SeekBar seekBar) {
-                        mVolTimerTask.cancel();
-                        mVolTimerTask.run();
                     }
                 };
 
@@ -1271,7 +1249,6 @@ abstract class NowPlayingFragmentBase extends Fragment implements
     @Override
     public void volumeChanged(final int oldVolume) {
         final int volume = mMPDStatus.getVolume();
-
         toggleVolumeBar(volume);
         mVolumeSeekBar.setProgress(volume);
     }
