@@ -38,6 +38,7 @@ public class PlaylistSong extends AbstractPlaylistMusic {
     @Override
     public String getPlaylistSubLine() {
         final Collection<String> subLineTexts = new ArrayList<>();
+        subLineTexts.add(getFormattedTime().toString());
         if (!Tools.isEmpty(getArtistName())) {
             subLineTexts.add(getArtistName());
         }
