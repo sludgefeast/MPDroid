@@ -165,6 +165,8 @@
     <string name="updateDBDetails">Aktualisiere die MPD-Datenbank</string>
     <string name="useLocalAlbumCache">Album-Cache verwenden</string>
     <string name="useLocalAlbumCacheDescription">Teile der MPD-Datenbank lokal speichern</string>
+    <string name="sortAlbumsByLastMod">Alben nach Datum der Änderung sortieren</string>
+    <string name="sortAlbumsByLastModDescription">Neueste Alben zuerst</string>
     <string name="sortAlbumsByYear">Erscheinungsjahr</string>
     <string name="sortAlbumsByYearDescription">Sortiere Alben nach Erscheinungsjahr</string>
     <string name="showAlbumTrackCount">Titelanzahl anzeigen</string>
