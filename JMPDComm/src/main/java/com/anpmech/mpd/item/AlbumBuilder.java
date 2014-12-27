@@ -71,6 +71,11 @@ public final class AlbumBuilder {
     private long mBuilderSongCount;
 
     /**
+     * Storage for the last modification time, to build an album.
+     */
+    private long mBuilderLastMod;
+
+    /**
      * This method builds a {@code Album} object based on the settings set by the methods.
      *
      * @param clearAfter Will clear the information in {@code this} prior to returning.
@@ -78,7 +83,7 @@ public final class AlbumBuilder {
      */
     public Album build(final boolean clearAfter) {
         final Album album = new Album(mBuilderName, mBuilderArtist, mBuilderHasAlbumArtist,
-                mBuilderSongCount, mBuilderDuration, mBuilderDate, mBuilderPath);
+                                      mBuilderSongCount, mBuilderDuration, mBuilderDate, mBuilderPath, mBuilderLastMod);
 
         if (clearAfter) {
             clear();
@@ -108,6 +113,7 @@ public final class AlbumBuilder {
         mBuilderPath = null;
         mBuilderSongCount = 0L;
         mBuilderDate = 0L;
+        mBuilderLastMod = -1L;
     }
 
     /**
@@ -123,6 +129,7 @@ public final class AlbumBuilder {
         mBuilderPath = album.getPath();
         mBuilderSongCount = album.getSongCount();
         mBuilderDate = album.getDate();
+        mBuilderLastMod = album.getLastMod();
     }
 
     /**
@@ -228,6 +235,15 @@ public final class AlbumBuilder {
      */
     public void setDate(final long date) {
         mBuilderDate = date;
+    }
+
+    /**
+     * Sets the last mod date of this album.
+     *
+     * @param date The date the album files were last modified.
+     */
+    public void setLastMod(final long date) {
+        mBuilderLastMod = date;
     }
 
     /**
