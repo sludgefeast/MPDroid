@@ -314,6 +314,9 @@ public class AlbumCache {
         }
 
         try {
+            AlbumDetails details = new AlbumDetails();
+            String currentAlbum = "";
+            long lastMod = -1L;
             for (final Music music : allmusic) {
                 final String albumArtist = music.getAlbumArtistName();
                 final String artist = music.getArtistName();
@@ -322,28 +325,43 @@ public class AlbumCache {
                     album = "";
                 }
                 final List<String> albumInfo = Arrays.asList
-                        (album, artist == null ? "" : artist,
-                                albumArtist == null ? "" : albumArtist);
+                    (album, artist == null ? "" : artist,
+                     albumArtist == null ? "" : albumArtist);
                 mAlbumSet.add(albumInfo);
 
                 final boolean isAlbumArtist = albumArtist != null && !albumArtist.isEmpty();
                 final String thisAlbum =
                         albumCode(isAlbumArtist ? albumArtist : artist, album, isAlbumArtist);
-                final AlbumDetails details;
-                if (mAlbumDetails.containsKey(thisAlbum)) {
-                    details = mAlbumDetails.get(thisAlbum);
-                } else {
-                    details = new AlbumDetails();
-                    mAlbumDetails.put(thisAlbum, details);
+                if (!thisAlbum.equals(currentAlbum)) { // different Album than previous Song
+                    if (mAlbumDetails.containsKey(thisAlbum)) {
+                        // have details for this album already
+                        details = mAlbumDetails.get(thisAlbum);
+                    } else {  // new album
+                        details = new AlbumDetails();
+                        mAlbumDetails.put(thisAlbum, details);
+                        lastMod = -1L;
+                        details.mLastMod = -1L;
+                    }
+                    currentAlbum = thisAlbum;
                 }
+
                 if (details.mPath == null) {
                     details.mPath = music.getParentDirectory();
+                }
+
+                if (null!=details.mPath && !details.mPath.equals("")) {// don't take directories
+                    lastMod = music.getLastMod();
+                    if (lastMod > details.mLastMod) { // is newer
+                        details.mLastMod = lastMod;
+                        //Log.d(TAG, "lastMod: " + thisAlbum+": "+  details.mPath + " - " + details.mLastMod );
+                    }
                 }
                 // if (details.times == null)
                 // details.times = new ArrayList<Long>();
                 // details.times.add((Long)m.getTime());
                 details.mNumTracks += 1;
                 details.mTotalTime += music.getTime();
+
                 if (details.mDate == 0) {
                     details.mDate = music.getDate();
                 }
@@ -456,6 +474,8 @@ public class AlbumCache {
 
         long mDate = 0;
 
+        long mLastMod = -1L;
+
         // List<Long> times = null;
         long mNumTracks = 0;
 
@@ -470,6 +490,7 @@ public class AlbumCache {
             mNumTracks = in.readLong();
             mTotalTime = in.readLong();
             mDate = in.readLong();
+            mLastMod = in.readLong();
         }
 
         private void writeObject(final DataOutput out) throws IOException {
@@ -478,6 +499,7 @@ public class AlbumCache {
             out.writeLong(mNumTracks);
             out.writeLong(mTotalTime);
             out.writeLong(mDate);
+            out.writeLong(mLastMod);
         }
     }
 
