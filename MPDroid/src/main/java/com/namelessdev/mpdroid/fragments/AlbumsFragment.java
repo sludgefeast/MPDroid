@@ -50,10 +50,13 @@ import android.widget.ProgressBar;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 public class AlbumsFragment extends BrowseFragment<Album> {
 
     private static final String ALBUM_YEAR_SORT_KEY = "sortAlbumsByYear";
+
+    private static final String ALBUM_LASTMOD_SORT_KEY = "sortAlbumsByLastMod";
 
     private static final String SHOW_ALBUM_TRACK_COUNT_KEY = "showAlbumTrackCount";
 
@@ -106,14 +109,20 @@ public class AlbumsFragment extends BrowseFragment<Album> {
     protected void asyncUpdate() {
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mApp);
         final boolean sortByYear = settings.getBoolean(ALBUM_YEAR_SORT_KEY, false);
+        final boolean sortByLastMod = settings.getBoolean(ALBUM_LASTMOD_SORT_KEY, false);
 
         try {
-            replaceItems(mApp.getMPD().getAlbums(mArtist, sortByYear, mIsCountDisplayed));
+            replaceItems(mApp.getMPD().getAlbums(mArtist, sortByYear | sortByLastMod,
+                    mIsCountDisplayed));
 
             if (sortByYear) {
                 Collections.sort(mItems, Album.SORT_BY_DATE);
             } else {
                 Collections.sort(mItems);
+            }
+            if (sortByLastMod) {
+                Log.d(TAG, " Sorting by Last Mod.");
+                Collections.sort((List<? extends Album>) mItems, Album.SORT_BY_LASTMOD);
             }
 
             if (mGenre != null) { // filter albums not in genre
