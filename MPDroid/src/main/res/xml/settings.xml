@@ -160,11 +160,19 @@
             android:summary="@string/useLocalAlbumCacheDescription"
             android:title="@string/useLocalAlbumCache" />
 
-        <CheckBoxPreference
+        <!-- CheckBoxPreference
             android:defaultValue="false"
             android:key="sortAlbumsByLastMod"
             android:summary="@string/sortAlbumsByLastModDescription"
-            android:title="@string/sortAlbumsByLastMod" />
+            android:title="@string/sortAlbumsByLastMod" / -->
+
+        <ListPreference
+            android:defaultValue="alphabet"
+            android:entries="@array/setting_albumsort_array"
+            android:entryValues="@array/setting_albumsort_array_values"
+            android:key="sortAlbumsBy"
+            android:summary="@string/sortAlbumsByDescription"
+            android:title="@string/sortAlbumsBy" />
 
         <ListPreference
             android:defaultValue="both"
@@ -174,11 +182,11 @@
             android:summary="@string/artistTagToUseDescription"
             android:title="@string/artistTagToUse" />
 
-        <CheckBoxPreference
+        <!-- CheckBoxPreference
             android:key="sortAlbumsByYear"
             android:persistent="true"
             android:summary="@string/sortAlbumsByYearDescription"
-            android:title="@string/sortAlbumsByYear" />
+            android:title="@string/sortAlbumsByYear" / -->
 
         <CheckBoxPreference
             android:defaultValue="true"

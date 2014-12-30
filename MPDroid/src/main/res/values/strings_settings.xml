@@ -55,4 +55,16 @@
         <item>artist</item>
     </string-array>
 
+    <string-array name="setting_albumsort_array">
+        <item>@string/alphabetically</item>
+        <item>@string/albumyear</item>
+        <item>@string/lastmodified</item>
+    </string-array>
+
+    <string-array name="setting_albumsort_array_values">
+        <item>alphabetically</item>
+        <item>albumyear</item>
+        <item>lastmodified</item>
+    </string-array>
+
 </resources>

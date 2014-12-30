@@ -178,10 +178,15 @@
     <string name="updateDBDetails">Refresh MPD\'s database</string>
     <string name="useLocalAlbumCache">Use Album Cache</string>
     <string name="useLocalAlbumCacheDescription">Save MPD Database Info Locally</string>
-    <string name="sortAlbumsByLastMod">Sort Albums by Last Modification Date</string>
+    <string name="sortAlbumsBy">How to Sort Albums</string>
+    <string name="sortAlbumsByDescription">Sort Albums in all Album Lists</string>
+    <string name="alphabetically">Alphabetically</string>
+    <string name="albumyear">Album Year</string>
+    <string name="lastmodified">Last Modified With Cache Only!)</string>
+    <!-- string name="sortAlbumsByLastMod">Sort Albums by Last Modification Date</string>
     <string name="sortAlbumsByLastModDescription">List recently added Albums first</string>
     <string name="sortAlbumsByYear">Album year</string>
-    <string name="sortAlbumsByYearDescription">Sort albums by year</string>
+    <string name="sortAlbumsByYearDescription">Sort albums by year</string -->
     <string name="showAlbumTrackCount">Album track count</string>
     <string name="showAlbumTrackCountDescription">Show number of tracks on album</string>
     <string name="enableLocalCover">Download local cover art</string>

@@ -54,7 +54,10 @@ import java.util.List;
 
 public class AlbumsFragment extends BrowseFragment<Album> {
 
-    private static final String ALBUM_YEAR_SORT_KEY = "sortAlbumsByYear";
+    private static final String PREFERENCE_ALBUM_SORT = "sortAlbumsBy";
+    private static final String PREFERENCE_ALBUM_SORT_ALPH    = "alphabetically";
+    private static final String PREFERENCE_ALBUM_SORT_YEAR    = "albumyear";
+    private static final String PREFERENCE_ALBUM_SORT_LASTMOD = "lastmodified";
 
     private static final String ALBUM_LASTMOD_SORT_KEY = "sortAlbumsByLastMod";
 
@@ -108,23 +111,20 @@ public class AlbumsFragment extends BrowseFragment<Album> {
     @Override
     protected void asyncUpdate() {
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mApp);
-        final boolean sortByYear = settings.getBoolean(ALBUM_YEAR_SORT_KEY, false);
-        final boolean sortByLastMod = settings.getBoolean(ALBUM_LASTMOD_SORT_KEY, false);
+        final String sortBy = settings.getString(PREFERENCE_ALBUM_SORT,
+                                                 PREFERENCE_ALBUM_SORT_ALPH);
+        boolean getDetails = true;
+        if (sortBy.equals(PREFERENCE_ALBUM_SORT_ALPH)) {
+            getDetails = false;
+        }
 
         try {
-            replaceItems(mApp.getMPD().getAlbums(mArtist, sortByYear | sortByLastMod,
-                    mIsCountDisplayed));
-
-            if (sortByYear) {
+            replaceItems(mApp.getMPD().getAlbums(mArtist, getDetails, mIsCountDisplayed));
+            if (sortBy.equals(PREFERENCE_ALBUM_SORT_YEAR)) {
                 Collections.sort(mItems, Album.SORT_BY_DATE);
-            } else {
-                Collections.sort(mItems);
-            }
-            if (sortByLastMod) {
-                Log.d(TAG, " Sorting by Last Mod.");
-                Collections.sort((List<? extends Album>) mItems, Album.SORT_BY_LASTMOD);
-            }
-
+            } else if (sortBy.equals(PREFERENCE_ALBUM_SORT_LASTMOD)) {
+                Collections.sort(mItems, Album.SORT_BY_LASTMOD);
+            } // else they are already sorted
             if (mGenre != null) { // filter albums not in genre
                 for (int i = mItems.size() - 1; i >= 0; i--) {
                     if (!mApp.getMPD().isAlbumInGenre(mItems.get(i), mGenre)) {
