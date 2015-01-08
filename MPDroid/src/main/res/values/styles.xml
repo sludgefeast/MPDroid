@@ -67,6 +67,8 @@
         <item name="stopIcon">@drawable/ic_media_stop</item>
         <item name="prevIcon">@drawable/ic_media_previous</item>
         <item name="nextIcon">@drawable/ic_media_next</item>
+        <item name="forwardIcon">@drawable/ic_media_ff</item>
+        <item name="rewindIcon">@drawable/ic_media_rew</item>
         <item name="volumeIcon">@drawable/ic_action_volume</item>
         <item name="playQueueIcon">@drawable/ic_action_play_queue</item>
         <item name="overflowButton">@android:style/Widget.Holo.ActionButton.Overflow</item>
@@ -110,6 +112,8 @@
         <item name="stopIcon">@drawable/ic_media_stop_light</item>
         <item name="prevIcon">@drawable/ic_media_previous_light</item>
         <item name="nextIcon">@drawable/ic_media_next_light</item>
+        <item name="forwardIcon">@drawable/ic_media_ff</item>
+        <item name="rewindIcon">@drawable/ic_media_rew</item>
         <item name="volumeIcon">@drawable/ic_action_volume_light</item>
         <item name="playQueueIcon">@drawable/ic_action_play_queue_light</item>
         <item name="overflowButton">@android:style/Widget.Holo.Light.ActionButton.Overflow</item>

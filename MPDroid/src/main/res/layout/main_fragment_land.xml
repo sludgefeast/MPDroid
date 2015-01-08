@@ -235,6 +235,13 @@
             android:src="?attr/prevIcon" />
 
         <ImageButton
+            android:id="@+id/rewind"
+            style="@style/PlayerButton"
+            android:layout_width="@dimen/playerbutton_width"
+            android:layout_height="wrap_content"
+            android:src="?attr/rewindIcon" />
+
+        <ImageButton
             android:id="@+id/playpause"
             style="@style/PlayerButton"
             android:layout_width="@dimen/playerbutton_width"
@@ -249,11 +256,19 @@
             android:src="?attr/stopIcon" />
 
         <ImageButton
+            android:id="@+id/forward"
+            style="@style/PlayerButton"
+            android:layout_width="@dimen/playerbutton_width"
+            android:layout_height="wrap_content"
+            android:src="?attr/forwardIcon" />
+
+        <ImageButton
             android:id="@+id/next"
             style="@style/PlayerButton"
             android:layout_width="@dimen/playerbutton_width"
             android:layout_height="wrap_content"
             android:src="?attr/nextIcon" />
+
 
         <ImageButton
             android:id="@+id/repeat"

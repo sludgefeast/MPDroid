@@ -215,6 +215,12 @@
 
             <CheckBoxPreference
                 android:defaultValue="true"
+                android:key="enableRepeatAndShuffleButton"
+                android:persistent="true"
+                android:title="@string/enableRepeatAndShuffleButton" />
+
+            <CheckBoxPreference
+                android:defaultValue="true"
                 android:key="tabletUI"
                 android:persistent="true"
                 android:title="@string/enableTabletUI" />

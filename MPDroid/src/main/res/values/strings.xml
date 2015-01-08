@@ -215,6 +215,7 @@
     <string name="streamUrl">URL:</string>
     <string name="genreAdded">Genre %s added</string>
     <string name="enableStopButton">Show stop button</string>
+    <string name="enableRepeatAndShuffleButton">Show Repeat and Shuffle buttons instead of FF and REW buttons</string>
     <string name="singleMode">Single mode</string>
     <string name="consumeMode">Consume mode</string>
     <string name="albumCover">Album cover</string>

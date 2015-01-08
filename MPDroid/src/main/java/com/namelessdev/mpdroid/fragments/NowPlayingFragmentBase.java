@@ -134,6 +134,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
 
     private Music mCurrentSong = null;
 
+    private ImageButton mFFButton = null;
+
     private Handler mHandler;
 
     private boolean mIsAudioNameTextEnabled = false;
@@ -145,6 +147,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
     private View.OnTouchListener mPopupMenuTouchListener = null;
 
     private Timer mPosTimer = null;
+
+    private ImageButton mREWButton = null;
 
     private ImageButton mRepeatButton = null;
 
@@ -761,6 +765,20 @@ abstract class NowPlayingFragmentBase extends Fragment implements
         mPlayPauseButton = getEventButton(view, R.id.playpause, true);
         mRepeatButton = getEventButton(view, R.id.repeat, false);
         mShuffleButton = getEventButton(view, R.id.shuffle, false);
+        mFFButton = getEventButton(view, R.id.forward, false);
+        mREWButton = getEventButton(view, R.id.rewind, false);
+        if (mSharedPreferences.getBoolean("enableRepeatAndShuffleButton", false)) {
+            mFFButton.setVisibility(View.GONE);
+            mREWButton.setVisibility(View.GONE);
+            mRepeatButton.setVisibility(View.VISIBLE);
+            mShuffleButton.setVisibility(View.VISIBLE);
+        } else {
+            mRepeatButton.setVisibility(View.GONE);
+            mShuffleButton.setVisibility(View.GONE);
+            mFFButton.setVisibility(View.VISIBLE);
+            mREWButton.setVisibility(View.VISIBLE);
+        }
+
         mStopButton = getEventButton(view, R.id.stop, true);
         applyViewVisibility(mStopButton, "enableStopButton");
 

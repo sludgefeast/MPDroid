@@ -117,6 +117,12 @@ public final class MPDControl {
             case R.id.shuffle:
                 run(ACTION_TOGGLE_RANDOM);
                 break;
+            case R.id.forward:
+                run(ACTION_FF);
+                break;
+            case R.id.rewind:
+                run(ACTION_REW);
+                break;
             case R.id.stop:
                 run(ACTION_STOP);
                 break;
