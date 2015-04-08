@@ -18,12 +18,14 @@ package com.namelessdev.mpdroid.helpers;
 
 import com.anpmech.mpd.MPD;
 import com.anpmech.mpd.concurrent.ResultFuture;
+import com.anpmech.mpd.item.Music;
 import com.anpmech.mpd.subsystem.Playback;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.StringDef;
+import android.util.Log;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -65,6 +67,10 @@ public final class MPDControl {
     public static final String ACTION_PREVIOUS = FULLY_QUALIFIED_NAME + "PREVIOUS";
 
     public static final String ACTION_SEEK = FULLY_QUALIFIED_NAME + "SEEK";
+
+    public static final String ACTION_FF = FULLY_QUALIFIED_NAME + "FF";
+
+    public static final String ACTION_REW = FULLY_QUALIFIED_NAME + "REW";
 
     public static final String ACTION_VOLUME_SET = FULLY_QUALIFIED_NAME + "SET_VOLUME";
 
@@ -148,7 +154,8 @@ public final class MPDControl {
      * @return A {@link ResultFuture} for interested callers.
      */
     public static ResultFuture run(@ControlType final String userCommand, final long l) {
-        final Playback playback = APP.getMPD().getPlayback();
+        final MPD mpd = APP.getMPD();
+        final Playback playback = mpd.getPlayback();
         ResultFuture future = null;
 
         switch (userCommand) {
@@ -161,6 +168,35 @@ public final class MPDControl {
             case ACTION_NEXT:
                 future = playback.next();
                 break;
+            case ACTION_FF:
+                final long ffPos = mpd.getStatus().getElapsedTime() + 10;
+                final long duration = (long) (mpd.getStatus().getDuration() / 1000.);
+                if (ffPos >= duration) {
+                    future = playback.next();
+                } else {
+                    future = playback.seek(ffPos);
+                }
+                break;
+            case ACTION_REW:
+                final long rewPos = mpd.getStatus().getElapsedTime() - 10;
+                if (rewPos >= 0) {
+                    future = playback.seek(rewPos);
+                } else {
+                    if (mpd.getStatus().getSongPos() > 1) {
+                        future = playback.previous();
+                        try {
+                            mpd.getStatus().update(); // have to do this _now_
+                            final long prevduration = (long) (mpd.getStatus().getDuration()
+                                    / 1000.);
+                            future = playback.seek(prevduration - 20);
+                        } catch (Exception e) {
+                            Log.w(TAG, "Could not seek to end of previous track,");
+                        }
+                    } else {
+                        future = playback.seek(0);
+                    }
+                }
+                break;
             case ACTION_PAUSE:
                 future = playback.pause();
                 break;
@@ -168,7 +204,17 @@ public final class MPDControl {
                 future = playback.play();
                 break;
             case ACTION_PREVIOUS:
-                future = playback.previous();
+                if (mpd.getStatus().getElapsedTime() < 5) {
+                    future = playback.previous();
+                } else {
+                    final int songPos = mpd.getStatus().getSongPos();
+                    final Music music = mpd.getPlaylist().getByIndex(songPos);
+                    if (music.isStream()) {
+                        future = playback.previous();
+                    } else {
+                        future = playback.seek(0);
+                    }
+                }
                 break;
             case ACTION_SEEK:
                 long li = l;
