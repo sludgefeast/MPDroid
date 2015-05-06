@@ -160,11 +160,10 @@
             android:summary="@string/useLocalAlbumCacheDescription"
             android:title="@string/useLocalAlbumCache" />
 
-        <!-- CheckBoxPreference
-            android:defaultValue="false"
-            android:key="sortAlbumsByLastMod"
-            android:summary="@string/sortAlbumsByLastModDescription"
-            android:title="@string/sortAlbumsByLastMod" / -->
+        <PreferenceScreen
+            android:key="clearLocalAlbumCache"
+            android:summary="@string/clearLocalAlbumCacheDescription"
+            android:title="@string/clearLocalAlbumCache" />
 
         <ListPreference
             android:defaultValue="alphabet"

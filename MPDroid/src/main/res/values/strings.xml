@@ -350,4 +350,6 @@
     <string name="songComments">Comments</string>
 
     <string name="activityReload">"Changes occurred, reloading."</string>
+    <string name="clearLocalAlbumCacheDescription">Force Rebuilding of the Local Album Cache</string>
+    <string name="clearLocalAlbumCache">Clear Album Cache</string>
 </resources>
