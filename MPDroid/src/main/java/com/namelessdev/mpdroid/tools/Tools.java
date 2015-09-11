@@ -35,6 +35,7 @@ import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 public final class Tools {
@@ -208,5 +209,14 @@ public final class Tools {
                 APP.removeConnectionLock(token);
             }
         }
+    }
+
+    public static int[] toIntArray(final Collection<Integer> list) {
+        final int[] ret = new int[list.size()];
+        int i = 0;
+        for (final Integer e : list) {
+            ret[i++] = e;
+        }
+        return ret;
     }
 }
