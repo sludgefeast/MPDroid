@@ -315,13 +315,13 @@ public final class Tools {
         float result;
 
         if (value == null || value.isEmpty()) {
-            result = Float.MIN_VALUE;
+            result = Float.NaN;
         } else {
             try {
                 result = Float.parseFloat(value);
             } catch (final NumberFormatException ignored) {
                 Log.error(TAG, PARSE_ERROR + "float: " + value);
-                result = Float.MIN_VALUE;
+                result = Float.NaN;
             }
         }
 
