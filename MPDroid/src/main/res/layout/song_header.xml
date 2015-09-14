@@ -23,10 +23,23 @@
     android:focusable="false"
     tools:ignore="InconsistentLayout">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:ellipsize="marquee"
+        android:scrollHorizontally="true"
+        android:singleLine="true" />
+
     <FrameLayout
         android:id="@+id/albumCoverFrame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
 
         <com.namelessdev.mpdroid.ui.SquareImageView
             android:id="@+id/albumCover"
@@ -44,18 +57,6 @@
             android:layout_gravity="center"
             android:visibility="invisible" />
     </FrameLayout>
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:minHeight="?attr/actionBarSize"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:ellipsize="marquee"
-        android:scrollHorizontally="true"
-        android:singleLine="true" />
 
     <RelativeLayout
         android:id="@+id/tracks_info_container"
@@ -118,5 +119,6 @@
         android:layout_marginTop="-32dp"
         android:paddingRight="8dp"
         android:src="@drawable/ic_media_play"
-        app:borderWidth="0dp" />
+        app:borderWidth="0dp"
+        android:alpha="0.5" />
 </RelativeLayout>
