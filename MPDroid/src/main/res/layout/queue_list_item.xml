@@ -17,7 +17,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="68dip"
+    android:layout_height="wrap_content"
     android:layout_gravity="left"
     android:background="?android:attr/activatedBackgroundIndicator"
     android:baselineAligned="true"
@@ -34,7 +34,8 @@
         android:layout_gravity="center"
         android:layout_marginLeft="16dip"
         android:contentDescription="@string/albumCover"
-        android:src="?attr/noCoverArtIcon" />
+        android:src="?attr/noCoverArtIcon"
+        android:layout_marginTop="2dip" />
 
     <LinearLayout
         android:layout_width="match_parent"
