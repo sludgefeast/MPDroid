@@ -39,6 +39,7 @@ import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.helpers.QueueControl;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
 import com.namelessdev.mpdroid.models.AbstractPlaylistMusic;
+import com.namelessdev.mpdroid.models.PlaylistAlbum;
 import com.namelessdev.mpdroid.models.PlaylistSong;
 import com.namelessdev.mpdroid.models.PlaylistStream;
 import com.namelessdev.mpdroid.tools.Tools;
@@ -49,6 +50,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -927,6 +929,14 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
             }
 
             final AbstractPlaylistMusic music = getItem(position);
+            try {
+                PlaylistAlbum album = (PlaylistAlbum) music;
+                viewHolder.mTitle.setTypeface(viewHolder.mTitle.getTypeface(), Typeface.ITALIC);
+                viewHolder.mArtist.setTypeface(viewHolder.mArtist.getTypeface(), Typeface.ITALIC);
+            } catch (ClassCastException cce) {
+                viewHolder.mTitle.setTypeface(viewHolder.mTitle.getTypeface(), Typeface.NORMAL);
+                viewHolder.mArtist.setTypeface(viewHolder.mArtist.getTypeface(), Typeface.NORMAL);
+            }
 
             viewHolder.mArtist.setText(music.getPlaylistSubLine());
             viewHolder.mTitle.setText(music.getPlayListMainLine());
