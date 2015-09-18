@@ -39,7 +39,6 @@ import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.helpers.QueueControl;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
 import com.namelessdev.mpdroid.models.AbstractPlaylistMusic;
-import com.namelessdev.mpdroid.models.PlaylistAlbum;
 import com.namelessdev.mpdroid.models.PlaylistSong;
 import com.namelessdev.mpdroid.models.PlaylistStream;
 import com.namelessdev.mpdroid.tools.Tools;
@@ -929,17 +928,17 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
             }
 
             final AbstractPlaylistMusic music = getItem(position);
-            try {
-                PlaylistAlbum album = (PlaylistAlbum) music;
+            String mainline = music.getPlayListMainLine();
+            if (mainline.startsWith("PLA (")) { // is an album line
+                mainline = mainline.substring(4);
                 viewHolder.mTitle.setTypeface(viewHolder.mTitle.getTypeface(), Typeface.ITALIC);
                 viewHolder.mArtist.setTypeface(viewHolder.mArtist.getTypeface(), Typeface.ITALIC);
-            } catch (ClassCastException cce) {
+            } else {
                 viewHolder.mTitle.setTypeface(viewHolder.mTitle.getTypeface(), Typeface.NORMAL);
                 viewHolder.mArtist.setTypeface(viewHolder.mArtist.getTypeface(), Typeface.NORMAL);
             }
-
             viewHolder.mArtist.setText(music.getPlaylistSubLine());
-            viewHolder.mTitle.setText(music.getPlayListMainLine());
+            viewHolder.mTitle.setText(mainline);
             viewHolder.mMenuButton.setTag(music.getSongId());
             viewHolder.mPlay.setImageResource(music.getCurrentSongIconRefID());
 
