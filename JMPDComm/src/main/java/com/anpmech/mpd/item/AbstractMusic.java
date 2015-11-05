@@ -363,7 +363,9 @@ abstract class AbstractMusic<T extends AbstractMusic<T>> extends AbstractEntry<T
     }
 
     public Artist getAlbumArtist() {
-        return Artist.byName(getAlbumArtistName());
+        final String name = getAlbumArtistName();
+        if (name == null) return null;
+        return Artist.byName(name);
     }
 
     /**
