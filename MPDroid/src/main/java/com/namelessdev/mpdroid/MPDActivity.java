@@ -493,6 +493,7 @@ public abstract class MPDActivity extends AppCompatActivity implements IdleSubsy
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
                     mActivity.finish();
+                    System.exit(0);
                     break;
                 case DialogInterface.BUTTON_POSITIVE:
                     try {
