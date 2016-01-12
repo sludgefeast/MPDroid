@@ -268,7 +268,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
 
         @Override
         public void run() {
-            final MPDApplication app = (MPDApplication) mContext;
+            final MPDApplication app = (MPDApplication) mContext.getApplicationContext();
 
             try {
                 setMarker(PAUSING_MARKER);
