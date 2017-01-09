@@ -182,6 +182,9 @@ abstract class LibraryFragmentBase extends Fragment {
                 case LibraryTabsUtil.TAB_RANDOM:
                     fragment = getFragment(RandomBrowseFragment.class);
                     break;
+                case LibraryTabsUtil.TAB_FAVORITES:
+                    fragment = getFragment(FavoritesFragment.class);
+                    break;
                 default:
                     throw new IllegalStateException("getItem() called with invalid Item.");
             }

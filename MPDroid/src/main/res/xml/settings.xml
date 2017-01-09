@@ -198,6 +198,25 @@
                 android:title="@string/genreSeparators" />
 
         </PreferenceCategory>
+
+        <PreferenceCategory android:title="@string/favorites">
+
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="useFavorites"
+                android:persistent="true"
+                android:title="@string/useFavorites" />
+
+            <EditTextPreference
+                android:defaultValue=""
+                android:key="favoriteKey"
+                android:dependency="useFavorites"
+                android:persistent="true"
+                android:summary="@string/favoriteKeyDescription"
+                android:title="@string/favoriteKey" />
+
+        </PreferenceCategory>
+
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -278,6 +297,7 @@
         <PreferenceScreen
             android:key="clearSearchHistory"
             android:title="@string/clearSearchHistory" />
+
     </PreferenceScreen>
 
     <PreferenceScreen android:title="@string/behavior">
