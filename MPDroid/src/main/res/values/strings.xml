@@ -186,7 +186,7 @@
     <string name="showAlbumTrackCount">Album track count</string>
     <string name="showAlbumTrackCountDescription">Show number of tracks on album</string>
     <string name="optimizeGenres">Optimize genres</string>
-    <string name="optimizeGenresDescription">Split &amp; trim  genre values and adjust case</string>
+    <string name="optimizeGenresDescription">Split &amp; trim genre values and adjust case</string>
     <string name="genreSeparators">Genre separators</string>
     <string name="useFavorites">Use favorites</string>
     <string name="favoriteKey">Favorite key</string>

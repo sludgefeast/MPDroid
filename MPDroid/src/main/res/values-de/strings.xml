@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2010-2016 The MPDroid Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -324,5 +324,8 @@
     <string name="favoriteKeyDescription">Identifikation um Favoriten zu personalisieren</string>
     <string name="removeFromFavorites">%s von den Favoriten entfernt</string>
     <string name="useFavorites">Verwende Favoriten</string>
+    <string name="genreSeparators">Genre Trennzeichen</string>
+    <string name="optimizeGenres">Genre optimieren</string>
+    <string name="optimizeGenresDescription">Trenne und formatiere Genre</string>
     <!-- End MediaPlayer Error Strings -->
 </resources>
