@@ -21,13 +21,21 @@ import com.namelessdev.mpdroid.R;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public final class LibraryTabsUtil {
+
+    public interface TabConfigurationListener {
+        void onTabsChanged();
+    }
 
     public static final String TAB_ALBUMS = "albums";
 
@@ -54,6 +62,8 @@ public final class LibraryTabsUtil {
 
     private static final String LIBRARY_TABS_SETTINGS_KEY = "currentLibraryTabs";
 
+    private static List<String> CURRENT_TABS;
+
     private static final HashMap<String, Integer> TABS = new HashMap<>();
 
     static {
@@ -65,26 +75,42 @@ public final class LibraryTabsUtil {
         TABS.put(TAB_GENRES, R.string.genres);
     }
 
+    private static final Set<TabConfigurationListener> TAB_CONFIGURATION_LISTENERS =
+            new HashSet<>();
+
     private LibraryTabsUtil() {
     }
 
     public static Iterable<String> getAllLibraryTabs() {
-        return new ArrayList<>(Arrays.asList(DEFAULT_LIBRARY_TABS.split('\\'
-                + LIBRARY_TABS_DELIMITER)));
+        return getTabsListFromString(DEFAULT_LIBRARY_TABS);
     }
 
-    public static ArrayList<String> getCurrentLibraryTabs() {
-        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(APP);
-        String currentSettings =
-                settings.getString(LIBRARY_TABS_SETTINGS_KEY, DEFAULT_LIBRARY_TABS);
+    public static void addTabConfigurationListener(final TabConfigurationListener listener) {
+        TAB_CONFIGURATION_LISTENERS.add(listener);
+    }
 
-        if (currentSettings.isEmpty()) {
-            currentSettings = DEFAULT_LIBRARY_TABS;
-            resetLibraryTabs();
+    public static List<String> getCurrentLibraryTabs() {
+        if (CURRENT_TABS == null) {
+            final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(APP);
+            String currentSettings =
+                    settings.getString(LIBRARY_TABS_SETTINGS_KEY, DEFAULT_LIBRARY_TABS);
+
+            if (currentSettings.isEmpty()) {
+                currentSettings = DEFAULT_LIBRARY_TABS;
+                saveLibraryTabsString(DEFAULT_LIBRARY_TABS);
+            }
+
+            CURRENT_TABS = getTabsListFromString(currentSettings);
+
+            // remove not existing tabs (in case of an app version downgrade)
+            for (int i = CURRENT_TABS.size() - 1; i>=0; i--) {
+                if (!TABS.containsKey(CURRENT_TABS.get(i))) {
+                    CURRENT_TABS.remove(i);
+                }
+            }
         }
 
-        return new ArrayList<>(Arrays.asList(currentSettings.split('\\'
-                + LIBRARY_TABS_DELIMITER)));
+        return CURRENT_TABS;
     }
 
     @StringRes
@@ -92,12 +118,13 @@ public final class LibraryTabsUtil {
         return TABS.get(tab);
     }
 
-    public static ArrayList<String> getTabsListFromString(final String tabs) {
+    private static List<String> getTabsListFromString(final String tabs) {
         return new ArrayList<>(Arrays.asList(tabs.split('\\'
                 + LIBRARY_TABS_DELIMITER)));
     }
 
-    public static String getTabsStringFromList(final ArrayList<String> tabs) {
+    @NonNull
+    private static String getTabsStringFromList(final List<String> tabs) {
         final StringBuilder resultTabs;
 
         if (tabs == null || tabs.isEmpty()) {
@@ -115,13 +142,24 @@ public final class LibraryTabsUtil {
     }
 
     public static void resetLibraryTabs() {
-        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(APP);
-        settings.edit().putString(LIBRARY_TABS_SETTINGS_KEY, DEFAULT_LIBRARY_TABS).commit();
+        saveLibraryTabsString(DEFAULT_LIBRARY_TABS);
+        notifyTabsChanged();
     }
 
-    public static void saveCurrentLibraryTabs(final ArrayList<String> tabs) {
+    public static void saveCurrentLibraryTabs(final List<String> tabs) {
+        saveLibraryTabsString(getTabsStringFromList(tabs));
+        notifyTabsChanged();
+    }
+
+    private static void saveLibraryTabsString(final String tabsString) {
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(APP);
-        final String currentSettings = getTabsStringFromList(tabs);
-        settings.edit().putString(LIBRARY_TABS_SETTINGS_KEY, currentSettings).commit();
+        settings.edit().putString(LIBRARY_TABS_SETTINGS_KEY, tabsString).commit();
+        CURRENT_TABS = null;
+    }
+
+    private static void notifyTabsChanged() {
+        for (final TabConfigurationListener listener : TAB_CONFIGURATION_LISTENERS) {
+            listener.onTabsChanged();
+        }
     }
 }

@@ -125,8 +125,7 @@ public class LibraryTabsSettings extends PreferenceActivity {
         final Iterable<String> allTabs = LibraryTabsUtil.getAllLibraryTabs();
 
         // get a list of all currently visible tabs
-        final AbstractList<String> currentTabs = LibraryTabsUtil.
-                getCurrentLibraryTabs();
+        final List<String> currentTabs = LibraryTabsUtil.getCurrentLibraryTabs();
 
         // create a list of all currently hidden tabs
         final ArrayList<String> hiddenTabs = new ArrayList<>();
