@@ -165,22 +165,21 @@ class TabItem {
     final String mText;
 
     TabItem(final String text) {
-        super();
         mText = text;
     }
 }
 
-class TabListDataBinder implements SeparatedListDataBinder {
+class TabListDataBinder implements SeparatedListDataBinder<TabItem> {
 
     @Override
-    public boolean isEnabled(final int position, final List<?> items, final Object item) {
+    public boolean isEnabled(final int position, final List<TabItem> items, final TabItem item) {
         return true;
     }
 
     @Override
     public void onDataBind(final Context context, final View targetView,
-            final List<?> items, final Object item, final int position) {
-        ((TextView) targetView).setText(LibraryTabsUtil.getTabTitleResId(((TabItem) item).mText));
+            final List<TabItem> items, final TabItem item, final int position) {
+        ((TextView) targetView).setText(LibraryTabsUtil.getTabTitleResId(item.mText));
     }
 
 }

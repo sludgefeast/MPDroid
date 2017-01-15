@@ -84,23 +84,24 @@ public class AboutActivity extends Activity {
     /**
      * This is the DataBinder to use with the {@link SeparatedListAdapter}.
      */
-    private static final class AboutDataBinder implements SeparatedListDataBinder {
+    private static final class AboutDataBinder implements SeparatedListDataBinder<AboutListItem> {
 
         /**
          * Sole constructor.
          */
         private AboutDataBinder() {
-            super();
         }
 
         @Override
-        public boolean isEnabled(final int position, final List<?> items, final Object item) {
+        public boolean isEnabled(final int position, final List<AboutListItem> items,
+                                 final AboutListItem item) {
             return false;
         }
 
         @Override
-        public void onDataBind(final Context context, final View targetView, final List<?> items,
-                final Object item, final int position) {
+        public void onDataBind(final Context context, final View targetView,
+                               final List<AboutListItem> items,
+                               final AboutListItem item, final int position) {
             ((TextView) targetView.findViewById(android.R.id.text1)).setText(item.toString());
         }
     }

@@ -18,6 +18,7 @@ package com.namelessdev.mpdroid.views;
 
 import com.anpmech.mpd.item.Album;
 import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.Item;
 import com.anpmech.mpd.item.Music;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.adapters.SeparatedListDataBinder;
@@ -28,7 +29,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class SearchResultDataBinder implements SeparatedListDataBinder {
+public class SearchResultDataBinder implements SeparatedListDataBinder<Item<?>> {
 
     /**
      * Join not empty strings
@@ -36,7 +37,7 @@ public class SearchResultDataBinder implements SeparatedListDataBinder {
      * @param parts : parts to join
      * @return the formatted result
      */
-    public static String join(final String... parts) {
+    private static String join(final String... parts) {
         final StringBuilder result = new StringBuilder();
 
         for (int i = 0; i < parts.length; i++) {
@@ -52,13 +53,13 @@ public class SearchResultDataBinder implements SeparatedListDataBinder {
     }
 
     @Override
-    public boolean isEnabled(final int position, final List<?> items, final Object item) {
+    public boolean isEnabled(final int position, final List<Item<?>> items, final Item<?> item) {
         return true;
     }
 
     @Override
-    public void onDataBind(final Context context, final View targetView, final List<?> items,
-            final Object item, final int position) {
+    public void onDataBind(final Context context, final View targetView, final List<Item<?>> items,
+            final Item<?> item, final int position) {
         final TextView text1 = (TextView) targetView.findViewById(R.id.upper_line);
         final TextView text2 = (TextView) targetView.findViewById(R.id.lower_line);
         String formattedResult1 = null;
@@ -70,7 +71,7 @@ public class SearchResultDataBinder implements SeparatedListDataBinder {
             formattedResult1 = music.getTitle();
             formattedResult2 = join(music.getAlbumName(), music.getArtistName());
         } else if (item instanceof Artist) {
-            formattedResult1 = ((Artist) item).toString();
+            formattedResult1 = item.toString();
         } else if (item instanceof Album) {
             final Album album = (Album) item;
             final Artist artist = album.getArtist();
