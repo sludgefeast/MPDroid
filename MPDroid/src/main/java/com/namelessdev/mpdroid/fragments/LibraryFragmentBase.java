@@ -37,7 +37,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 abstract class LibraryFragmentBase extends Fragment {
 
@@ -99,21 +100,23 @@ abstract class LibraryFragmentBase extends Fragment {
         return view;
     }
 
+    /*
     public void setCurrentItem(final int item, final boolean smoothScroll) {
         if (mViewPager != null) {
             mViewPager.setCurrentItem(item, smoothScroll);
         }
     }
+    */
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the primary
      * sections of the app.
      */
-    private static final class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        private static final List<String> CURRENT_TABS = LibraryTabsUtil.getCurrentLibraryTabs();
+    private static final class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         private final Context mContext;
+
+        private final Map<Class<?>, String> mFragmentTabs = new HashMap<>();
 
         /**
          * Sole constructor.
@@ -125,11 +128,18 @@ abstract class LibraryFragmentBase extends Fragment {
             super(fm);
 
             mContext = context;
+
+            LibraryTabsUtil.addTabConfigurationListener(new LibraryTabsUtil.TabConfigurationListener() {
+                @Override
+                public void onTabsChanged() {
+                    SectionsPagerAdapter.this.notifyDataSetChanged();
+                }
+            });
         }
 
         @Override
         public int getCount() {
-            return CURRENT_TABS.size();
+            return LibraryTabsUtil.getCurrentLibraryTabs().size();
         }
 
         /**
@@ -139,19 +149,17 @@ abstract class LibraryFragmentBase extends Fragment {
          * @param <T>    The class type, always BrowseFragment.
          * @return A fragment instantiation.
          */
-        private <T extends BrowseFragment<?>> Fragment getFragment(final Class<T> tClass) {
+        private <T extends BrowseFragment<?>> Fragment createFragment(final Class<T> tClass) {
             final BrowseFragment<?> fragment =
                     (BrowseFragment<?>) Fragment.instantiate(mContext, tClass.getName());
-
             fragment.setEmbedded(true);
-
             return fragment;
         }
 
         @Override
         public Fragment getItem(final int position) {
             final Fragment fragment;
-            final String tab = CURRENT_TABS.get(position);
+            final String tab = LibraryTabsUtil.getCurrentLibraryTabs().get(position);
 
             switch (tab) {
                 case LibraryTabsUtil.TAB_ALBUMS:
@@ -159,43 +167,51 @@ abstract class LibraryFragmentBase extends Fragment {
                             PreferenceManager.getDefaultSharedPreferences(mContext);
 
                     if (settings.getBoolean(ArtistsFragment.PREFERENCE_ALBUM_LIBRARY, true)) {
-                        fragment = getFragment(AlbumsGridFragment.class);
+                        fragment = createFragment(AlbumsGridFragment.class);
                     } else {
-                        fragment = getFragment(AlbumsFragment.class);
+                        fragment = createFragment(AlbumsFragment.class);
                     }
                     break;
                 case LibraryTabsUtil.TAB_ARTISTS:
-                    fragment = getFragment(ArtistsFragment.class);
+                    fragment = createFragment(ArtistsFragment.class);
                     break;
                 case LibraryTabsUtil.TAB_FILES:
-                    fragment = getFragment(FSFragment.class);
+                    fragment = createFragment(FSFragment.class);
                     break;
                 case LibraryTabsUtil.TAB_GENRES:
-                    fragment = getFragment(GenresFragment.class);
+                    fragment = createFragment(GenresFragment.class);
                     break;
                 case LibraryTabsUtil.TAB_PLAYLISTS:
-                    fragment = getFragment(PlaylistsFragment.class);
+                    fragment = createFragment(PlaylistsFragment.class);
                     break;
                 case LibraryTabsUtil.TAB_STREAMS:
-                    fragment = getFragment(StreamsFragment.class);
+                    fragment = createFragment(StreamsFragment.class);
                     break;
                 case LibraryTabsUtil.TAB_RANDOM:
-                    fragment = getFragment(RandomBrowseFragment.class);
+                    fragment = createFragment(RandomBrowseFragment.class);
                     break;
                 case LibraryTabsUtil.TAB_FAVORITES:
-                    fragment = getFragment(FavoritesFragment.class);
+                    fragment = createFragment(FavoritesFragment.class);
                     break;
                 default:
                     throw new IllegalStateException("getItem() called with invalid Item.");
             }
 
+            mFragmentTabs.put(fragment.getClass(), tab);
+
             return fragment;
         }
 
         @Override
-        public CharSequence getPageTitle(final int position) {
-            final String tab = CURRENT_TABS.get(position);
+        public int getItemPosition(final Object object) {
+            final int index = LibraryTabsUtil.getCurrentLibraryTabs().indexOf(
+                    mFragmentTabs.get(object.getClass()));
+            return index >= 0 ? index : POSITION_NONE;
+        }
 
+        @Override
+        public CharSequence getPageTitle(final int position) {
+            final String tab = LibraryTabsUtil.getCurrentLibraryTabs().get(position);
             return mContext.getString(LibraryTabsUtil.getTabTitleResId(tab));
         }
     }

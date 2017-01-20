@@ -526,16 +526,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
              * @return True if the album popup menu entry should be visible, false otherwise.
              */
             private boolean isAlbumVisible() {
-                final boolean isAlbumVisible;
                 final String album = mCurrentSong.getAlbumName();
-
-                if (album != null && !album.isEmpty()) {
-                    isAlbumVisible = true;
-                } else {
-                    isAlbumVisible = false;
-                }
-
-                return isAlbumVisible;
+                return album != null && !album.isEmpty();
             }
 
             /**
@@ -544,16 +536,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
              * @return True if the artist popup menu entry should be visible, false otherwise.
              */
             private boolean isArtistVisible() {
-                final boolean isArtistVisible;
                 final String artist = mCurrentSong.getArtistName();
-
-                if (artist != null && !artist.isEmpty()) {
-                    isArtistVisible = true;
-                } else {
-                    isArtistVisible = false;
-                }
-
-                return isArtistVisible;
+                return artist != null && !artist.isEmpty();
             }
 
             /**
@@ -605,7 +589,6 @@ abstract class NowPlayingFragmentBase extends Fragment implements
                     @Override
                     public void onProgressChanged(final SeekBar seekBar, final int progress,
                             final boolean fromUser) {
-
                     }
 
                     @Override
@@ -625,7 +608,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
                                 }
                             }
 
-                            public TimerTask setProgress(final SeekBar prg) {
+                            TimerTask setProgress(final SeekBar prg) {
                                 mProgress = prg;
                                 return this;
                             }

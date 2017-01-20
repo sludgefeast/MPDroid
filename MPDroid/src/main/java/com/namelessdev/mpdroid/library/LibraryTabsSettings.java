@@ -125,8 +125,7 @@ public class LibraryTabsSettings extends PreferenceActivity {
         final Iterable<String> allTabs = LibraryTabsUtil.getAllLibraryTabs();
 
         // get a list of all currently visible tabs
-        final AbstractList<String> currentTabs = LibraryTabsUtil.
-                getCurrentLibraryTabs();
+        final List<String> currentTabs = LibraryTabsUtil.getCurrentLibraryTabs();
 
         // create a list of all currently hidden tabs
         final ArrayList<String> hiddenTabs = new ArrayList<>();
@@ -166,22 +165,21 @@ class TabItem {
     final String mText;
 
     TabItem(final String text) {
-        super();
         mText = text;
     }
 }
 
-class TabListDataBinder implements SeparatedListDataBinder {
+class TabListDataBinder implements SeparatedListDataBinder<TabItem> {
 
     @Override
-    public boolean isEnabled(final int position, final List<?> items, final Object item) {
+    public boolean isEnabled(final int position, final List<TabItem> items, final TabItem item) {
         return true;
     }
 
     @Override
     public void onDataBind(final Context context, final View targetView,
-            final List<?> items, final Object item, final int position) {
-        ((TextView) targetView).setText(LibraryTabsUtil.getTabTitleResId(((TabItem) item).mText));
+            final List<TabItem> items, final TabItem item, final int position) {
+        ((TextView) targetView).setText(LibraryTabsUtil.getTabTitleResId(item.mText));
     }
 
 }

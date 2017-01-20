@@ -21,10 +21,10 @@ import android.view.View;
 
 import java.util.List;
 
-public interface SeparatedListDataBinder {
+public interface SeparatedListDataBinder<ItemT>  {
 
-    boolean isEnabled(int position, List<?> items, Object item);
+    boolean isEnabled(int position, List<ItemT> items, ItemT item);
 
-    void onDataBind(Context context, View targetView, List<?> items,
-            Object item, int position);
+    void onDataBind(Context context, View targetView, List<ItemT> items,
+                    ItemT item, int position);
 }
