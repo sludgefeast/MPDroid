@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="JMPDComm" pattern="(file[JMPDCommAndroid]:*/||file[JMPDCommJava]:*/||file[dmix]:JMPDComm/LICENSE)&amp;&amp;!file[dmix]:*/" />
-</component>
