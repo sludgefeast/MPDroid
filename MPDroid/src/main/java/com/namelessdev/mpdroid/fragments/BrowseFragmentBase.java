@@ -178,7 +178,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
     private long mLastDBUpdate;
 
     protected BrowseFragmentBase(@StringRes final int rAdd, @StringRes final int rAdded) {
-        super();
+
 
         mIrAdd = rAdd;
         mIrAdded = rAdded;
@@ -923,7 +923,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
          */
         private UpdatePlaylistList(final Collection<PlaylistFile> playlistFiles,
                 final Context context) {
-            super();
+
 
             mApp = (MPDApplication) context.getApplicationContext();
             mPlaylistFiles = playlistFiles;

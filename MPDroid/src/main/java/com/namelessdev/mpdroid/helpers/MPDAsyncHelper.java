@@ -48,7 +48,7 @@ public class MPDAsyncHelper implements Handler.Callback {
     private Handler mWorkerHandler;
 
     public MPDAsyncHelper() {
-        super();
+
 
         mHelperHandler = new Handler(this);
         mMPDAsyncWorker = new MPDAsyncWorker(mHelperHandler);

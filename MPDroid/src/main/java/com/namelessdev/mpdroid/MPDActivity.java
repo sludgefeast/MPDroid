@@ -478,7 +478,7 @@ public abstract class MPDActivity extends AppCompatActivity implements IdleSubsy
          * @param activity The current activity.
          */
         DialogClickListener(final Activity activity) {
-            super();
+
 
             mActivity = activity;
         }

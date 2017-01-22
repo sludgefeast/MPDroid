@@ -188,7 +188,7 @@ public class IdleSubsystemMonitor implements Runnable {
      * @param mpd MPD server to monitor.
      */
     public IdleSubsystemMonitor(final MPD mpd) {
-        super();
+
 
         mMPD = mpd;
         mStop = false;

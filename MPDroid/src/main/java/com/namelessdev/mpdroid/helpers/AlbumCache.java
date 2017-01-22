@@ -81,7 +81,7 @@ public class AlbumCache {
     protected Set<List<String>> mUniqueAlbumSet;
 
     protected AlbumCache(final CachedMPD mpd) {
-        super();
+
         Log.d(TAG, "Starting ...");
         setMPD(mpd);
     }

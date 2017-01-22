@@ -57,7 +57,7 @@ public class AlbumDataBinder<T extends Item<T>> extends BaseDataBinder<T> {
      *                        null.
      */
     public AlbumDataBinder(final Artist displayedArtist) {
-        super();
+
 
         final MPDApplication app = MPDApplication.getInstance();
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(app);

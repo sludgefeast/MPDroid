@@ -219,7 +219,7 @@ public class Playback {
      * @param connection The connection to send playback commands over.
      */
     public Playback(final MPDStatus status, final MPDConnection connection) {
-        super();
+
 
         mConnection = connection;
         mStatus = status;

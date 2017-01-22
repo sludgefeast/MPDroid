@@ -59,7 +59,7 @@ final class MusicList implements Iterable<Music> {
     private final List<Integer> mSongID;
 
     MusicList() {
-        super();
+
 
         mList = Collections.synchronizedList(new ArrayList<Music>());
         mSongID = Collections.synchronizedList(new ArrayList<Integer>());

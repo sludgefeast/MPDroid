@@ -383,7 +383,7 @@ public class FSFragment extends BrowseFragment {
          * @param item Item to add.
          */
         private AddFSItem(final FilesystemTreeEntry item) {
-            super();
+
 
             mItem = item;
         }
@@ -420,7 +420,7 @@ public class FSFragment extends BrowseFragment {
          * Sole constructor.
          */
         private EntryComparator() {
-            super();
+
         }
 
         /**
@@ -495,7 +495,7 @@ public class FSFragment extends BrowseFragment {
          * @param directory The directory to refresh.
          */
         private RefreshDatabase(final Directory directory) {
-            super();
+
 
             mDirectory = directory;
         }

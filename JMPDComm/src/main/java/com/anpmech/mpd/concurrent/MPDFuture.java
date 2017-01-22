@@ -55,7 +55,7 @@ abstract class MPDFuture<T> {
      * @param future The future to be subclassed.
      */
     MPDFuture(final ResultFuture future) {
-        super();
+
 
         mFuture = future.mFuture;
     }
@@ -66,7 +66,7 @@ abstract class MPDFuture<T> {
      * @param future The future to wrap.
      */
     MPDFuture(final Future<?> future) {
-        super();
+
 
         mFuture = future;
     }

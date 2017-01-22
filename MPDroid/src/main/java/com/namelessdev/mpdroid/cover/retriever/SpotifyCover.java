@@ -84,7 +84,7 @@ public class SpotifyCover extends AbstractWebCover {
      * The default constructor.
      */
     public SpotifyCover() {
-        super();
+
     }
 
     /**

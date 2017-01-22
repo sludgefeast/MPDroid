@@ -44,7 +44,7 @@ abstract class BaseDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
     final boolean mEnableCache;
 
     protected BaseDataBinder() {
-        super();
+
         final MPDApplication app = MPDApplication.getInstance();
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(app);
 

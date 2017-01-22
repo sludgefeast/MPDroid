@@ -79,7 +79,7 @@ public class CommandQueue extends AbstractList<MPDCommand> {
      * @param capacity The initial capacity of this {@code CommandQueue}.
      */
     public CommandQueue(final int capacity) {
-        super();
+
 
         mCommandQueue = new ArrayList<>(capacity);
         mCommandQueueStringLength = EMPTY_COMMAND_SIZE;

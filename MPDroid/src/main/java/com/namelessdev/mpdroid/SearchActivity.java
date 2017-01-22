@@ -140,7 +140,7 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
     private ActionBar.Tab mTabSongs;
 
     public SearchActivity() {
-        super();
+
         mAddString = R.string.addSong;
         mAddedString = R.string.songAdded;
         mArtistResults = new ArrayList<>();

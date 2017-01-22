@@ -76,7 +76,7 @@ public class CommandResponse extends ObjectResponse<String> {
      * This constructor builds this class from an empty MPD protocol result.
      */
     public CommandResponse() {
-        super();
+
     }
 
     /**

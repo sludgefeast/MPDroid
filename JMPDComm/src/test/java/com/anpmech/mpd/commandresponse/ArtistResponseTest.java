@@ -40,7 +40,7 @@ public class ArtistResponseTest extends ObjectResponseTest<Artist, ArtistRespons
      * Sole constructor.
      */
     public ArtistResponseTest() {
-        super();
+
     }
 
     /**

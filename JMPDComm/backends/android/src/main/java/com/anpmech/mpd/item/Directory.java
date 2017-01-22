@@ -137,13 +137,6 @@ public class Directory extends AbstractDirectory<Directory> {
     private static final class DirectoryParcelCreator implements Parcelable.Creator<Directory> {
 
         /**
-         * Sole constructor.
-         */
-        private DirectoryParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it
          * from the given Parcel whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

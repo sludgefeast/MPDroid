@@ -102,8 +102,6 @@ public class MPDCommand {
      * @see #create(CharSequence, CharSequence...)
      */
     private MPDCommand(final CharSequence baseCommand, final String command) {
-        super();
-
         mBaseCommand = baseCommand;
         mCommand = command;
     }
@@ -115,15 +113,7 @@ public class MPDCommand {
      * @return The MPD protocol boolean value.
      */
     public static String booleanValue(final boolean valueToTranslate) {
-        final String result;
-
-        if (valueToTranslate) {
-            result = "1";
-        } else {
-            result = "0";
-        }
-
-        return result;
+        return valueToTranslate ? "1" : "0";
     }
 
     /**

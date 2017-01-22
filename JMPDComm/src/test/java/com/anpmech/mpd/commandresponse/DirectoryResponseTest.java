@@ -40,7 +40,7 @@ public class DirectoryResponseTest extends ObjectResponseTest<Directory, Directo
      * Sole constructor.
      */
     public DirectoryResponseTest() {
-        super();
+
     }
 
     /**

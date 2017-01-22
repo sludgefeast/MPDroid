@@ -46,7 +46,7 @@ public class StreamResponseTest extends ObjectResponseTest<Stream, StreamRespons
      * Sole constructor.
      */
     public StreamResponseTest() {
-        super();
+
     }
 
     /**

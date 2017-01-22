@@ -59,7 +59,7 @@ public class StreamResponse extends ObjectResponse<Stream> {
      * This constructor builds this class from an empty MPD protocol result.
      */
     public StreamResponse() {
-        super();
+
     }
 
     /**

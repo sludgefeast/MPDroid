@@ -25,7 +25,7 @@ public class SearchRecentProvider extends SearchRecentSuggestionsProvider {
     public static final int MODE = DATABASE_MODE_QUERIES;
 
     public SearchRecentProvider() {
-        super();
+
         setupSuggestions(AUTHORITY, MODE);
     }
 }

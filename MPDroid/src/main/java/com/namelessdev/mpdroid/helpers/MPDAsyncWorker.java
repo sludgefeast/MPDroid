@@ -50,7 +50,7 @@ public class MPDAsyncWorker implements Handler.Callback,
     private ConnectionInfo mConnectionInfo = ConnectionInfo.EMPTY;
 
     MPDAsyncWorker(final Handler helperHandler) {
-        super();
+
 
         final SharedPreferences settings = PreferenceManager
                 .getDefaultSharedPreferences(MPDApplication.getInstance());

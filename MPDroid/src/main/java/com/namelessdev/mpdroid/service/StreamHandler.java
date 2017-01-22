@@ -151,7 +151,7 @@ public final class StreamHandler implements
      */
     StreamHandler(final MPDroidService serviceContext, final Handler serviceHandler,
             final AudioManager audioManager) {
-        super();
+
         if (DEBUG) {
             Log.d(TAG, "StreamHandler constructor.");
         }

@@ -78,7 +78,7 @@ public class NotificationHandler implements AlbumCoverHandler.NotificationCallba
     private boolean mIsMediaPlayerBuffering;
 
     NotificationHandler(final MPDroidService serviceContext) {
-        super();
+
 
         mServiceContext = serviceContext;
 

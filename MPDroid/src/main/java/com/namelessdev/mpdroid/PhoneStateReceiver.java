@@ -249,7 +249,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
          * @param result  The PendingResult used to finalize the parent BroadcastReceiver.
          */
         private PauseForCall(final Context context, final PendingResult result) {
-            super();
+
 
             mContext = context;
             mResult = result;

@@ -139,13 +139,6 @@ public class Listing extends AbstractListing<Listing> {
     private static final class ListingParcelCreator implements Creator<Listing> {
 
         /**
-         * Sole constructor.
-         */
-        private ListingParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it
          * from the given Parcel whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

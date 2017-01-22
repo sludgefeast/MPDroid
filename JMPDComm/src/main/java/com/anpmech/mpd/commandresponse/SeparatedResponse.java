@@ -59,7 +59,7 @@ public class SeparatedResponse extends ObjectResponse<CommandResponse> {
      * This constructor builds this class from an empty MPD protocol result.
      */
     public SeparatedResponse() {
-        super();
+
     }
 
     /**

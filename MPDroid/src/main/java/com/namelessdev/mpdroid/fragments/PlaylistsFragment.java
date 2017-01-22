@@ -186,7 +186,7 @@ public class PlaylistsFragment extends BrowseFragment<PlaylistFile> {
         private final int mItemIndex;
 
         DialogClickListener(final int itemIndex) {
-            super();
+
             mItemIndex = itemIndex;
         }
 

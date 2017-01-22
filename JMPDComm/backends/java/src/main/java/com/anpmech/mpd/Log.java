@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 public final class Log {
 
     private Log() {
-        super();
+
     }
 
     /**

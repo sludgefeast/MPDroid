@@ -40,7 +40,7 @@ public class ListingResponseTest extends ObjectResponseTest<Listing, ListingResp
      * Sole constructor.
      */
     public ListingResponseTest() {
-        super();
+
     }
 
     /**

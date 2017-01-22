@@ -99,7 +99,7 @@ public class ServiceBinder implements
      * @param clientHandler The handler where service messages will be delivered.
      */
     public ServiceBinder(final Context clientContext, final Handler clientHandler) {
-        super();
+
 
         mClientContext = clientContext;
         mClientHandler = clientHandler;

@@ -132,7 +132,7 @@ public final class CoverManager {
     private boolean mActive = true;
 
     private CoverManager() {
-        super();
+
 
         mRequestExecutor.submit(new RequestProcessorTask());
         setCoverRetrieversFromPreferences();
@@ -543,7 +543,7 @@ public final class CoverManager {
         private final CoverInfo mCoverInfo;
 
         private CreateBitmapTask(final CoverInfo coverInfo) {
-            super();
+
             mCoverInfo = coverInfo;
         }
 
@@ -697,7 +697,7 @@ public final class CoverManager {
         private final CoverInfo mCoverInfo;
 
         private FetchCoverTask(final CoverInfo coverInfo) {
-            super();
+
             mCoverInfo = coverInfo;
         }
 

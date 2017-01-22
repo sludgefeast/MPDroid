@@ -48,7 +48,7 @@ public class PlaylistFileResponseTest extends
      * Sole constructor.
      */
     public PlaylistFileResponseTest() {
-        super();
+
     }
 
     /**

@@ -60,7 +60,7 @@ public class SeparatedListAdapter extends BaseAdapter {
     public SeparatedListAdapter(final Context context, @LayoutRes final int viewId,
             @LayoutRes final int separatorViewId, final SeparatedListDataBinder binder,
             final List<?> items) {
-        super();
+
         mViewId = viewId;
         mBinder = binder;
         mItems = Collections.unmodifiableList(items);

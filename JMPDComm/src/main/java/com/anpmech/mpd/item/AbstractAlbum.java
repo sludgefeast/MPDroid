@@ -62,7 +62,7 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
 
     AbstractAlbum(final String name, final Artist artist, final boolean hasAlbumArtist,
             final long songCount, final long duration, final long date, final String path) {
-        super();
+
         mName = name;
         mSongCount = songCount;
         mDuration = duration;
@@ -189,7 +189,7 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
          * Sole constructor.
          */
         private SortByDate() {
-            super();
+
         }
 
         /**

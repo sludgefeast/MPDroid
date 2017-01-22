@@ -132,13 +132,6 @@ public class Music extends AbstractMusic<Music> {
     private static final class MusicParcelCreator implements Parcelable.Creator<Music> {
 
         /**
-         * Sole constructor.
-         */
-        private MusicParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it
          * from the given Parcel whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

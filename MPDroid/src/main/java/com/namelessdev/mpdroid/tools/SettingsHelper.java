@@ -49,7 +49,7 @@ public final class SettingsHelper {
     private static final String TAG = "SettingsHelper";
 
     private SettingsHelper() {
-        super();
+
     }
 
     private static ConnectionInfo getConnectionSettings(final String wifiSSID,

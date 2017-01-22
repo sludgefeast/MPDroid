@@ -350,7 +350,7 @@ public class ConnectionModifier extends PreferenceFragment {
          * @param editTextPreference The stream URL EditTextPreference to validate.
          */
         protected CommonValidator(final EditTextPreference editTextPreference) {
-            super();
+
 
             mPreferenceTextEdit = editTextPreference;
         }

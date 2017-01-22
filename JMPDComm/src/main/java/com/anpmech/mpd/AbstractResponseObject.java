@@ -57,7 +57,7 @@ public class AbstractResponseObject {
      * @param response The response for the object.
      */
     AbstractResponseObject(@Nullable final String name, @Nullable final String response) {
-        super();
+
 
         if (name == null && response == null) {
             throw new IllegalArgumentException(

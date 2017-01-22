@@ -71,6 +71,6 @@ public class CommandResult extends AbstractCommandResult {
      * @see #EMPTY
      */
     private CommandResult() {
-        super();
+
     }
 }

@@ -110,13 +110,6 @@ public class AudioOutput extends AbstractAudioOutput implements Parcelable {
             implements Parcelable.Creator<AudioOutput> {
 
         /**
-         * Sole constructor.
-         */
-        private AudioOutputParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it
          * from the given Parcel whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

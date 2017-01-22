@@ -103,13 +103,6 @@ public class Album extends AbstractAlbum<Album> {
     private static final class AlbumParcelCreator implements Parcelable.Creator<Album> {
 
         /**
-         * Sole constructor.
-         */
-        private AlbumParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it
          * from the given Parcel whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

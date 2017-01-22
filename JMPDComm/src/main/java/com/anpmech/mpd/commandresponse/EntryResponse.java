@@ -59,7 +59,7 @@ public class EntryResponse extends ObjectResponse<Entry> {
      * This constructor builds this class from an empty MPD protocol result.
      */
     public EntryResponse() {
-        super();
+
     }
 
     /**

@@ -349,7 +349,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
          */
         private DeleteDialogClickListener(final Context context, final int itemIndex,
                 final List<Stream> streams) {
-            super();
+
 
             mApp = (MPDApplication) context.getApplicationContext();
             mItemIndex = itemIndex;
@@ -381,7 +381,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
 
         private AddEditOnClickListener(final EditText nameEdit, final EditText urlEdit,
                 final int index, final CharSequence streamUrlToAdd) {
-            super();
+
 
             mNameEdit = nameEdit;
             mUrlEdit = urlEdit;

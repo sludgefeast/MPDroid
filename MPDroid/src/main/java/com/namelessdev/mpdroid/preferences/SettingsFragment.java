@@ -79,7 +79,7 @@ public class SettingsFragment extends PreferenceFragment {
     private EditTextPreference mVersion;
 
     public SettingsFragment() {
-        super();
+
         mPreferencesBound = false;
     }
 

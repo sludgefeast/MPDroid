@@ -86,7 +86,7 @@ public class AlbumInfo {
      * @param music The {@link Music} item used to construct this AlbumInfo.
      */
     public AlbumInfo(final Music music) {
-        super();
+
 
         String artist = music.getAlbumArtistName();
 
@@ -107,7 +107,7 @@ public class AlbumInfo {
      * @param album The {@link Album} item used to construct this AlbumInfo.
      */
     public AlbumInfo(final Album album) {
-        super();
+
 
         final Artist artist = album.getArtist();
         if (artist != null) {
@@ -153,7 +153,7 @@ public class AlbumInfo {
      */
     private AlbumInfo(final String artistName, final String albumName, final String parentDirectory,
             final String filename) {
-        super();
+
 
         mArtistName = artistName;
         mAlbumName = albumName;

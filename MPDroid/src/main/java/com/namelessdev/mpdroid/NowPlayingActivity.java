@@ -235,7 +235,7 @@ public class NowPlayingActivity extends MPDActivity {
         private final Activity mActivity;
 
         private NowPlayingPagerAdapter(final Activity activity) {
-            super();
+
 
             mActivity = activity;
         }

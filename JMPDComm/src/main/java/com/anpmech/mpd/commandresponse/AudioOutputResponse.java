@@ -54,7 +54,7 @@ public class AudioOutputResponse extends ObjectResponse<AudioOutput> {
      * This constructor builds this class from an empty MPD protocol result.
      */
     public AudioOutputResponse() {
-        super();
+
     }
 
     /**

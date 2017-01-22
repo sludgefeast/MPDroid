@@ -70,7 +70,7 @@ public final class StringComparators {
      * This is a utility class (static methods only), don't instantiate.
      */
     private StringComparators() {
-        super();
+
     }
 
     /**

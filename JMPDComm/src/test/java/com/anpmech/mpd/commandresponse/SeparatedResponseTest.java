@@ -60,7 +60,7 @@ public class SeparatedResponseTest
      * Sole constructor.
      */
     public SeparatedResponseTest() {
-        super();
+
     }
 
     /**

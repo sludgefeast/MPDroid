@@ -43,7 +43,7 @@ public class AlbumCoverDownloadListener implements CoverDownloadListener {
     private ProgressBar mCoverArtProgress;
 
     public AlbumCoverDownloadListener(final ImageView coverArt) {
-        super();
+
         mCoverArt = coverArt;
         mCoverArt.setVisibility(View.VISIBLE);
         freeCoverDrawable();
@@ -52,7 +52,7 @@ public class AlbumCoverDownloadListener implements CoverDownloadListener {
     public AlbumCoverDownloadListener(final ImageView coverArt,
             final ProgressBar coverArtProgress,
             final boolean bigCoverNotFound) {
-        super();
+
         mCoverArt = coverArt;
         mBigCoverNotFound = bigCoverNotFound;
         mCoverArt.setVisibility(View.VISIBLE);

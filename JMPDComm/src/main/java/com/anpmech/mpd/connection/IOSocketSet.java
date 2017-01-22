@@ -89,7 +89,7 @@ class IOSocketSet {
      * @throws IOException Thrown upon a communication error with the server.
      */
     IOSocketSet(final SocketAddress socketAddress, final int readWriteTimeout) throws IOException {
-        super();
+
 
         /** Do not store the socketAddress as a field, it could prevent a weak map cleanup. */
         mSocket = new Socket();
@@ -193,7 +193,7 @@ class IOSocketSet {
          * @param ioSocketSet This is "this" IOSocketSet.
          */
         private Timeout(final IOSocketSet ioSocketSet) {
-            super();
+
 
             mSocketSet = ioSocketSet;
         }

@@ -61,7 +61,7 @@ public class CoverAsyncHelper implements CoverDownloadListener, Handler.Callback
      * Sole constructor.
      */
     public CoverAsyncHelper() {
-        super();
+
     }
 
     private static void displayCoverRetrieverName(final CoverInfo coverInfo) {

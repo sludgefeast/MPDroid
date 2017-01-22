@@ -97,13 +97,6 @@ public class Artist extends AbstractArtist<Artist> {
     private static final class ArtistParcelCreator implements Parcelable.Creator<Artist> {
 
         /**
-         * Sole constructor.
-         */
-        private ArtistParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it
          * from the given Parcel whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

@@ -47,7 +47,7 @@ public class AudioOutputResponseTest extends
      * Sole constructor.
      */
     public AudioOutputResponseTest() {
-        super();
+
     }
 
     /**

@@ -39,7 +39,7 @@ public class CommandResponseTest extends ObjectResponseTest<String, CommandRespo
      * Sole constructor.
      */
     public CommandResponseTest() {
-        super();
+
     }
 
     /**

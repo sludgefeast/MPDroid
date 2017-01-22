@@ -72,7 +72,7 @@ abstract class AbstractAudioOutput {
      * @param response The MPD server generated response.
      */
     AbstractAudioOutput(@NotNull final ResponseObject response) {
-        super();
+
 
         mResponseObject = response;
     }

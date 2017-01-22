@@ -60,7 +60,7 @@ final class WorkerRunnable implements Runnable {
      */
     WorkerRunnable(final Handler handler, final CharSequence token, final Runnable runnable,
             final MPDAsyncHelper.AsyncExecListener listener) {
-        super();
+
 
         mToken = token;
         mRunnable = runnable;

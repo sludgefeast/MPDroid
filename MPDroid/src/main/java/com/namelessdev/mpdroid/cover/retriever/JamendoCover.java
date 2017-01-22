@@ -80,7 +80,7 @@ public class JamendoCover extends AbstractWebCover {
     private static final String TAG = "JamendoCover";
 
     public JamendoCover() {
-        super();
+
     }
 
     /**

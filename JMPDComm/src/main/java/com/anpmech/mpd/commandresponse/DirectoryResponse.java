@@ -61,7 +61,7 @@ public class DirectoryResponse extends ObjectResponse<Directory> {
      * This constructor builds this class from an empty MPD protocol result.
      */
     public DirectoryResponse() {
-        super();
+
     }
 
     /**

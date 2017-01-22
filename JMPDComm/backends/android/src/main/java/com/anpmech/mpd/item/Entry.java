@@ -78,13 +78,6 @@ public class Entry extends AbstractEntry<Entry> {
     private static final class EntryParcelCreator implements Parcelable.Creator<Entry> {
 
         /**
-         * The sole constructor.
-         */
-        private EntryParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it
          * from the given Parcel whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

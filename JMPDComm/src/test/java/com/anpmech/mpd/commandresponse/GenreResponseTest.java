@@ -48,7 +48,7 @@ public class GenreResponseTest extends ObjectResponseTest<Genre, GenreResponse> 
      * Sole constructor.
      */
     public GenreResponseTest() {
-        super();
+
     }
 
     /**

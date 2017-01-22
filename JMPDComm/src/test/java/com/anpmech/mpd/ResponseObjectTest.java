@@ -74,7 +74,7 @@ public class ResponseObjectTest {
      *                     lines.
      */
     public ResponseObjectTest() throws IOException {
-        super();
+
 
         final CommandResult result = CommandResultCreator.generate(
                 TestTools.FILE_SINGULAR_TRACK_FILE);

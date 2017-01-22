@@ -84,13 +84,6 @@ public class Genre extends AbstractGenre {
     private static final class GenreParcelCreator implements Parcelable.Creator<Genre> {
 
         /**
-         * Sole constructor.
-         */
-        private GenreParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it
          * from the given Parcel whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

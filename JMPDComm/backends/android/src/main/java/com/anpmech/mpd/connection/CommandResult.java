@@ -82,7 +82,7 @@ public class CommandResult extends AbstractCommandResult implements Parcelable {
      * @see #EMPTY
      */
     private CommandResult() {
-        super();
+
     }
 
     /**
@@ -114,13 +114,6 @@ public class CommandResult extends AbstractCommandResult implements Parcelable {
      * This class is used to instantiate a CommandResult from a {@code Parcel}.
      */
     private static final class CommandResultCreator implements Creator<CommandResult> {
-
-        /**
-         * Sole constructor.
-         */
-        private CommandResultCreator() {
-            super();
-        }
 
         /**
          * Create a new instance of the Parcelable class, instantiating it

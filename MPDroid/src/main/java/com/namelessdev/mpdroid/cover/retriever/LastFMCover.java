@@ -125,7 +125,7 @@ public class LastFMCover extends AbstractWebCover {
      * The default constructor.
      */
     public LastFMCover() {
-        super();
+
     }
 
     /**

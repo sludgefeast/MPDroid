@@ -59,7 +59,7 @@ public class SongViewHolder extends AbstractViewHolder {
      * @param view The current {@link View}.
      */
     public SongViewHolder(final View view) {
-        super();
+
 
         mTrackArtist = (TextView) view.findViewById(R.id.track_artist);
         mTrackDuration = (TextView) view.findViewById(R.id.track_duration);

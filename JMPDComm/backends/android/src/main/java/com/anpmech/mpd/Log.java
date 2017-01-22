@@ -33,7 +33,6 @@ package com.anpmech.mpd;
 public final class Log {
 
     private Log() {
-        super();
     }
 
     /**

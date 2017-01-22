@@ -85,7 +85,7 @@ public final class MPDControl {
     private static final int VOLUME_STEP = 5;
 
     private MPDControl() {
-        super();
+
     }
 
     /**

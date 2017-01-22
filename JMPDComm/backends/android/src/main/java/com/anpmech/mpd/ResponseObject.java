@@ -105,13 +105,6 @@ public class ResponseObject extends AbstractResponseObject implements Parcelable
     private static final class ResponseParcelCreator implements Creator<ResponseObject> {
 
         /**
-         * Sole constructor.
-         */
-        private ResponseParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it from the given Parcel
          * whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

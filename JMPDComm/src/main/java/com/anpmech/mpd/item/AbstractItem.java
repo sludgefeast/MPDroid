@@ -65,7 +65,7 @@ abstract class AbstractItem<T extends AbstractItem<T>> implements Comparable<T> 
     }
 
     AbstractItem() {
-        super();
+
     }
 
     /**

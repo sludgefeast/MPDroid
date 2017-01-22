@@ -137,7 +137,7 @@ public class EditActivity extends AppCompatActivity implements AdapterView.OnIte
         private final String mLabel;
 
         private ActionItem(final String actionString, final String label) {
-            super();
+
             mActionString = actionString;
             mLabel = label;
         }

@@ -63,7 +63,7 @@ abstract class AbstractWebCover implements ICoverRetriever {
      * Sole constructor.
      */
     protected AbstractWebCover() {
-        super();
+
     }
 
     /**

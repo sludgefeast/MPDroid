@@ -53,7 +53,7 @@ public class MusicResponseTest extends ObjectResponseTest<Music, MusicResponse> 
      * Sole constructor.
      */
     public MusicResponseTest() {
-        super();
+
     }
 
     /**

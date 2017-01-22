@@ -40,7 +40,7 @@ public class StreamFetcher {
     private final Collection<String> mHandlers = new LinkedList<>();
 
     StreamFetcher() {
-        super();
+
         mHandlers.add("http");
         mHandlers.add("mms");
         mHandlers.add("mmsh");

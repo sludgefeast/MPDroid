@@ -104,7 +104,7 @@ abstract class IOCommandProcessor implements Callable<CommandResult> {
      */
     IOCommandProcessor(final MPDConnectionStatus connectionStatus, final String commandString,
             final int[] excludeResponses) {
-        super();
+
 
         mConnectionStatus = connectionStatus;
         mCommandString = commandString;

@@ -194,7 +194,7 @@ public class ConnectionChooser extends PreferenceFragment {
          * Sole constructor.
          */
         private WifiComparator() {
-            super();
+
         }
 
         /**

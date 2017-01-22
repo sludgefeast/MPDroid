@@ -310,7 +310,7 @@ public class OutputsFragment extends ListFragment implements AdapterView.OnItemC
          * @param outputs The list of AudioOutputs to modify.
          */
         private UpdateAudioOutputs(final MPD mpd, final List<AudioOutput> outputs) {
-            super();
+
 
             mMPD = mpd;
             mOutputs = outputs;

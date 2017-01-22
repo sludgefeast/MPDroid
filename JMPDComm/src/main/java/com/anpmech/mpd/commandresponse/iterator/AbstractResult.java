@@ -98,7 +98,7 @@ abstract class AbstractResult<T> implements ListIterator<T>, Iterable<T> {
      * @throws IllegalArgumentException if the position parameter is less than 0.
      */
     protected AbstractResult(final String result, final int position) {
-        super();
+
 
         if (position < 0) {
             throw new IllegalArgumentException("Position must 0 or greater.");

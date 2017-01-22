@@ -726,7 +726,7 @@ abstract class AbstractMusic<T extends AbstractMusic<T>> extends AbstractEntry<T
          * Sole constructor.
          */
         protected ComparatorWithoutTrackNumber() {
-            super();
+
         }
 
         /**

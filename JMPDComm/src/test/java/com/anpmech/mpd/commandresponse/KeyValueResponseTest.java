@@ -42,7 +42,7 @@ public class KeyValueResponseTest
      * Sole constructor.
      */
     public KeyValueResponseTest() {
-        super();
+
     }
 
     /**

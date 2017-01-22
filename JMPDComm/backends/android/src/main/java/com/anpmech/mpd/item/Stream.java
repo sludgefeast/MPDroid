@@ -84,13 +84,6 @@ public class Stream extends AbstractStream {
     private static final class StreamParcelCreator implements Parcelable.Creator<Stream> {
 
         /**
-         * Sole constructor.
-         */
-        private StreamParcelCreator() {
-            super();
-        }
-
-        /**
          * Create a new instance of the Parcelable class, instantiating it
          * from the given Parcel whose data had previously been written by
          * {@link Parcelable#writeToParcel Parcelable.writeToParcel()}.

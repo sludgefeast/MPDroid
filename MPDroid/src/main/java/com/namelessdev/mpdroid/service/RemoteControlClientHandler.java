@@ -76,7 +76,7 @@ public class RemoteControlClientHandler implements AlbumCoverHandler.FullSizeCal
     private RemoteControlSeekBarHandler mSeekBar = null;
 
     RemoteControlClientHandler(final MPDroidService serviceContext, final Handler serviceHandler) {
-        super();
+
 
         mServiceHandler = serviceHandler;
 

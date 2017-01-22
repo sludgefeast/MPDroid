@@ -59,7 +59,7 @@ public class PlaylistFileResponse extends ObjectResponse<PlaylistFile> {
      * This constructor builds this class from an empty MPD protocol result.
      */
     public PlaylistFileResponse() {
-        super();
+
     }
 
     /**

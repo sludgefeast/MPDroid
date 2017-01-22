@@ -89,7 +89,7 @@ public abstract class ObjectResponseTest<T, S extends ObjectResponse<T>> {
      * Sole constructor.
      */
     protected ObjectResponseTest() {
-        super();
+
     }
 
     /**

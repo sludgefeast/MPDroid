@@ -1277,7 +1277,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
         private long mTotalTrackTime = 0L;
 
         private PosTimerTask(final long start, final long total) {
-            super();
+
             mStartTrackTime = start;
             mTotalTrackTime = total;
             mTimerStartTime = new Date().getTime();

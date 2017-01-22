@@ -54,7 +54,7 @@ class AlbumCoverHandler implements CoverDownloadListener {
     private NotificationCallback mNotificationListener;
 
     AlbumCoverHandler(final MPDroidService serviceContext) {
-        super();
+
 
         mIconHeight = serviceContext
                 .getResources()

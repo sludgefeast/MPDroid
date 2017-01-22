@@ -46,7 +46,7 @@ public class EntryResponseTest extends ObjectResponseTest<Entry, EntryResponse> 
      * Sole constructor.
      */
     public EntryResponseTest() {
-        super();
+
     }
 
     /**
