@@ -15,6 +15,7 @@ local.properties
 
 # Local IDEA workspace
 .idea/
+*.iml
 
 # Gradle cache
 .gradle
