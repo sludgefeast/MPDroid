@@ -16,12 +16,12 @@
 
 package com.namelessdev.mpdroid.tools;
 
+import android.util.Log;
+
 import com.anpmech.mpd.item.Stream;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
-
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

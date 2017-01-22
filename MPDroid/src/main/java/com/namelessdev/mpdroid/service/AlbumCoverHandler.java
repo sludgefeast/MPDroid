@@ -16,13 +16,13 @@
 
 package com.namelessdev.mpdroid.service;
 
+import android.graphics.Bitmap;
+import android.util.Log;
+
 import com.anpmech.mpd.Tools;
 import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 import com.namelessdev.mpdroid.cover.CoverDownloadListener;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
-
-import android.graphics.Bitmap;
-import android.util.Log;
 
 import java.util.Collection;
 

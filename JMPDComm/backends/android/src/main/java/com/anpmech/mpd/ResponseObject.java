@@ -27,10 +27,10 @@
 
 package com.anpmech.mpd;
 
-import org.jetbrains.annotations.Nullable;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This class represents a response or a name for one object, abstracted for the Android backend.

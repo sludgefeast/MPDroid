@@ -16,11 +16,11 @@
 
 package com.namelessdev.mpdroid.adapters;
 
-import com.anpmech.mpd.item.Item;
-
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.widget.SectionIndexer;
+
+import com.anpmech.mpd.item.Item;
 
 import java.text.Collator;
 import java.util.ArrayList;

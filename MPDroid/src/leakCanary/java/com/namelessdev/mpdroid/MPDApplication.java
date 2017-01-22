@@ -16,10 +16,10 @@
 
 package com.namelessdev.mpdroid;
 
+import android.support.v4.app.Fragment;
+
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-
-import android.support.v4.app.Fragment;
 
 public class MPDApplication extends MPDApplicationBase {
 

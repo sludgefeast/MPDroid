@@ -16,13 +16,6 @@
 
 package com.namelessdev.mpdroid.library;
 
-import com.mobeta.android.dslv.DragSortController;
-import com.mobeta.android.dslv.DragSortListView;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.adapters.SeparatedListAdapter;
-import com.namelessdev.mpdroid.adapters.SeparatedListDataBinder;
-import com.namelessdev.mpdroid.tools.LibraryTabsUtil;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -31,7 +24,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.AbstractList;
+import com.mobeta.android.dslv.DragSortController;
+import com.mobeta.android.dslv.DragSortListView;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.adapters.SeparatedListAdapter;
+import com.namelessdev.mpdroid.adapters.SeparatedListDataBinder;
+import com.namelessdev.mpdroid.tools.LibraryTabsUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 

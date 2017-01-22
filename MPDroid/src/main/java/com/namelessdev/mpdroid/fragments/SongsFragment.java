@@ -16,26 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Album;
-import com.anpmech.mpd.item.Artist;
-import com.anpmech.mpd.item.Music;
-import com.anpmech.mpd.item.PlaylistFile;
-import com.anpmech.mpd.subsystem.status.MPDStatus;
-import com.anpmech.mpd.subsystem.status.MPDStatusMap;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.adapters.ArrayAdapter;
-import com.namelessdev.mpdroid.cover.AlbumCoverDownloadListener;
-import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
-import com.namelessdev.mpdroid.cover.CoverManager;
-import com.namelessdev.mpdroid.favorites.Favorites;
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
-import com.namelessdev.mpdroid.tools.Tools;
-import com.namelessdev.mpdroid.ui.ToolbarHelper;
-import com.namelessdev.mpdroid.views.SongDataBinder;
-
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -68,6 +48,26 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Album;
+import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.Music;
+import com.anpmech.mpd.item.PlaylistFile;
+import com.anpmech.mpd.subsystem.status.MPDStatus;
+import com.anpmech.mpd.subsystem.status.MPDStatusMap;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.adapters.ArrayAdapter;
+import com.namelessdev.mpdroid.cover.AlbumCoverDownloadListener;
+import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
+import com.namelessdev.mpdroid.cover.CoverManager;
+import com.namelessdev.mpdroid.favorites.Favorites;
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
+import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
+import com.namelessdev.mpdroid.tools.Tools;
+import com.namelessdev.mpdroid.ui.ToolbarHelper;
+import com.namelessdev.mpdroid.views.SongDataBinder;
 
 import java.io.IOException;
 import java.util.Collection;

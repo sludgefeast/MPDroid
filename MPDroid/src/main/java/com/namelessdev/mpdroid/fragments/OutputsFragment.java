@@ -16,16 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.MPDCommand;
-import com.anpmech.mpd.connection.MPDConnectionListener;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.subsystem.AudioOutput;
-import com.anpmech.mpd.subsystem.status.StatusChangeListener;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.MainMenuActivity;
-import com.namelessdev.mpdroid.helpers.MPDAsyncHelper;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -37,6 +27,16 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.MPDCommand;
+import com.anpmech.mpd.connection.MPDConnectionListener;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.subsystem.AudioOutput;
+import com.anpmech.mpd.subsystem.status.StatusChangeListener;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.MainMenuActivity;
+import com.namelessdev.mpdroid.helpers.MPDAsyncHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;

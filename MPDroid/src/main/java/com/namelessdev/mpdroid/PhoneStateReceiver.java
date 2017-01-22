@@ -16,13 +16,6 @@
 
 package com.namelessdev.mpdroid;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.subsystem.status.MPDStatus;
-import com.anpmech.mpd.subsystem.status.MPDStatusMap;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +25,13 @@ import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.subsystem.status.MPDStatus;
+import com.anpmech.mpd.subsystem.status.MPDStatusMap;
+import com.namelessdev.mpdroid.helpers.MPDControl;
+import com.namelessdev.mpdroid.tools.Tools;
 
 import java.io.IOException;
 

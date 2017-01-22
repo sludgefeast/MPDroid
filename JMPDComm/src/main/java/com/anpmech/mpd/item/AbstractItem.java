@@ -30,9 +30,7 @@ package com.anpmech.mpd.item;
 
 import java.text.Collator;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

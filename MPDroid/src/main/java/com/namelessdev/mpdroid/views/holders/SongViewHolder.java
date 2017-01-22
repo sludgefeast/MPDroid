@@ -16,12 +16,12 @@
 
 package com.namelessdev.mpdroid.views.holders;
 
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.views.SongDataBinder;
-
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.views.SongDataBinder;
 
 /**
  * This class holds the {@link View}s required for the {@link SongDataBinder}.

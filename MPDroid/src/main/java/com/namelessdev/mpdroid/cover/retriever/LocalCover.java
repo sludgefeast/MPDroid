@@ -16,12 +16,12 @@
 
 package com.namelessdev.mpdroid.cover.retriever;
 
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;

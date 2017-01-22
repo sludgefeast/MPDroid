@@ -16,11 +16,11 @@
 
 package com.namelessdev.mpdroid.views.holders;
 
-import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
-
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 
 public class PlayQueueViewHolder extends AlbumCoverHolder {
 

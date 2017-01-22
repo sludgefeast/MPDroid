@@ -16,16 +16,6 @@
 
 package com.namelessdev.mpdroid.preferences;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.subsystem.status.MPDStatistics;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.SearchRecentProvider;
-import com.namelessdev.mpdroid.cover.CoverManager;
-import com.namelessdev.mpdroid.cover.retriever.CachedCover;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,6 +31,16 @@ import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
 import android.text.format.Formatter;
 import android.util.Log;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.subsystem.status.MPDStatistics;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.SearchRecentProvider;
+import com.namelessdev.mpdroid.cover.CoverManager;
+import com.namelessdev.mpdroid.cover.retriever.CachedCover;
+import com.namelessdev.mpdroid.tools.Tools;
 
 import java.io.IOException;
 

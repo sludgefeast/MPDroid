@@ -16,12 +16,12 @@
 
 package com.namelessdev.mpdroid.helpers;
 
+import android.util.Log;
+
 import com.anpmech.mpd.Tools;
 import com.anpmech.mpd.item.Album;
 import com.anpmech.mpd.item.Artist;
 import com.anpmech.mpd.item.Music;
-
-import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

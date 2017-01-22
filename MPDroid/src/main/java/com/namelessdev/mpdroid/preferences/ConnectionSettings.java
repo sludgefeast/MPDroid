@@ -16,11 +16,6 @@
 
 package com.namelessdev.mpdroid.preferences;
 
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.MainMenuActivity;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -34,6 +29,11 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.MainMenuActivity;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.tools.Tools;
 
 /**
  * This Activity is used to modify connection preferences.

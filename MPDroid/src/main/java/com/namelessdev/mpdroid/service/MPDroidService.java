@@ -16,20 +16,6 @@
 
 package com.namelessdev.mpdroid.service;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.connection.MPDConnectionListener;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Music;
-import com.anpmech.mpd.subsystem.status.IdleSubsystemMonitor;
-import com.anpmech.mpd.subsystem.status.MPDStatusMap;
-import com.anpmech.mpd.subsystem.status.StatusChangeListener;
-import com.namelessdev.mpdroid.ConnectionInfo;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.RemoteControlReceiver;
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.helpers.MPDAsyncHelper;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -45,6 +31,20 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.text.format.DateUtils;
 import android.util.Log;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.connection.MPDConnectionListener;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Music;
+import com.anpmech.mpd.subsystem.status.IdleSubsystemMonitor;
+import com.anpmech.mpd.subsystem.status.MPDStatusMap;
+import com.anpmech.mpd.subsystem.status.StatusChangeListener;
+import com.namelessdev.mpdroid.ConnectionInfo;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.RemoteControlReceiver;
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
+import com.namelessdev.mpdroid.helpers.MPDAsyncHelper;
+import com.namelessdev.mpdroid.helpers.MPDControl;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;

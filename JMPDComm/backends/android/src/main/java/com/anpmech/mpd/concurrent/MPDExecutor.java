@@ -27,10 +27,10 @@
 
 package com.anpmech.mpd.concurrent;
 
-import com.anpmech.mpd.connection.CommandResult;
-
 import android.os.Handler;
 import android.os.Looper;
+
+import com.anpmech.mpd.connection.CommandResult;
 
 import java.security.PrivilegedAction;
 import java.util.concurrent.Callable;

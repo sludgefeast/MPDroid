@@ -16,28 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.anpmech.mpd.Tools;
-import com.anpmech.mpd.connection.MPDConnectionListener;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Album;
-import com.anpmech.mpd.item.Artist;
-import com.anpmech.mpd.item.Directory;
-import com.anpmech.mpd.item.Music;
-import com.anpmech.mpd.item.Stream;
-import com.anpmech.mpd.subsystem.status.MPDStatus;
-import com.anpmech.mpd.subsystem.status.MPDStatusMap;
-import com.anpmech.mpd.subsystem.status.StatusChangeListener;
-import com.anpmech.mpd.subsystem.status.TrackPositionListener;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.cover.AlbumCoverDownloadListener;
-import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
-import com.namelessdev.mpdroid.cover.CoverManager;
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-import com.namelessdev.mpdroid.helpers.UpdateTrackInfo;
-import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -72,6 +50,28 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.anpmech.mpd.Tools;
+import com.anpmech.mpd.connection.MPDConnectionListener;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Album;
+import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.Directory;
+import com.anpmech.mpd.item.Music;
+import com.anpmech.mpd.item.Stream;
+import com.anpmech.mpd.subsystem.status.MPDStatus;
+import com.anpmech.mpd.subsystem.status.MPDStatusMap;
+import com.anpmech.mpd.subsystem.status.StatusChangeListener;
+import com.anpmech.mpd.subsystem.status.TrackPositionListener;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.cover.AlbumCoverDownloadListener;
+import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
+import com.namelessdev.mpdroid.cover.CoverManager;
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
+import com.namelessdev.mpdroid.helpers.MPDControl;
+import com.namelessdev.mpdroid.helpers.UpdateTrackInfo;
+import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
 
 import java.io.IOException;
 import java.util.Date;

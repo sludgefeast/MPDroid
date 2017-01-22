@@ -16,19 +16,19 @@
 
 package com.namelessdev.mpdroid.locale;
 
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-import com.namelessdev.mpdroid.service.MPDroidService;
-import com.namelessdev.mpdroid.service.NotificationHandler;
-import com.namelessdev.mpdroid.service.StreamHandler;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.helpers.MPDControl;
+import com.namelessdev.mpdroid.service.MPDroidService;
+import com.namelessdev.mpdroid.service.NotificationHandler;
+import com.namelessdev.mpdroid.service.StreamHandler;
+import com.namelessdev.mpdroid.tools.Tools;
 
 public class ActionFireReceiver extends BroadcastReceiver {
 

@@ -16,14 +16,6 @@
 
 package com.namelessdev.mpdroid.service;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.subsystem.status.MPDStatus;
-import com.anpmech.mpd.subsystem.status.MPDStatusMap;
-import com.namelessdev.mpdroid.ConnectionInfo;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-
 import android.annotation.TargetApi;
 import android.content.res.Resources;
 import android.media.AudioAttributes;
@@ -42,6 +34,14 @@ import android.support.annotation.StringRes;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.subsystem.status.MPDStatus;
+import com.anpmech.mpd.subsystem.status.MPDStatusMap;
+import com.namelessdev.mpdroid.ConnectionInfo;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.helpers.MPDControl;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

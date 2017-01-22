@@ -16,10 +16,10 @@
 
 package com.namelessdev.mpdroid.helpers;
 
-import com.namelessdev.mpdroid.ConnectionInfo;
-
 import android.os.Handler;
 import android.os.Message;
+
+import com.namelessdev.mpdroid.ConnectionInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;

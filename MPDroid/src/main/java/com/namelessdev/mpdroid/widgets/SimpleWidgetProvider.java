@@ -16,10 +16,6 @@
 
 package com.namelessdev.mpdroid.widgets;
 
-import com.namelessdev.mpdroid.MainMenuActivity;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -28,6 +24,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
+
+import com.namelessdev.mpdroid.MainMenuActivity;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.helpers.MPDControl;
 
 public class SimpleWidgetProvider extends AppWidgetProvider {
 

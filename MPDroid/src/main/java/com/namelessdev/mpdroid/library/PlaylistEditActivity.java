@@ -16,18 +16,6 @@
 
 package com.namelessdev.mpdroid.library;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.MPDPlaylist;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Music;
-import com.anpmech.mpd.item.PlaylistFile;
-import com.anpmech.mpd.subsystem.status.StatusChangeListener;
-import com.mobeta.android.dslv.DragSortController;
-import com.mobeta.android.dslv.DragSortListView;
-import com.namelessdev.mpdroid.MPDActivity;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -39,6 +27,18 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.MPDPlaylist;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Music;
+import com.anpmech.mpd.item.PlaylistFile;
+import com.anpmech.mpd.subsystem.status.StatusChangeListener;
+import com.mobeta.android.dslv.DragSortController;
+import com.mobeta.android.dslv.DragSortListView;
+import com.namelessdev.mpdroid.MPDActivity;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.tools.Tools;
 
 import java.io.IOException;
 import java.util.AbstractMap;

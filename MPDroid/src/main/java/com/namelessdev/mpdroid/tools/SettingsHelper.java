@@ -16,19 +16,19 @@
 
 package com.namelessdev.mpdroid.tools;
 
-import com.anpmech.mpd.MPDCommand;
-import com.namelessdev.mpdroid.ConnectionInfo;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.preferences.ConnectionModifier;
-
-import org.jetbrains.annotations.NotNull;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.anpmech.mpd.MPDCommand;
+import com.namelessdev.mpdroid.ConnectionInfo;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.preferences.ConnectionModifier;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
 

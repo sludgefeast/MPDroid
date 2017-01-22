@@ -16,27 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.MPDCommand;
-import com.anpmech.mpd.commandresponse.PlaylistFileResponse;
-import com.anpmech.mpd.connection.MPDConnectionListener;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Artist;
-import com.anpmech.mpd.item.Item;
-import com.anpmech.mpd.item.PlaylistFile;
-import com.anpmech.mpd.subsystem.status.MPDStatus;
-import com.anpmech.mpd.subsystem.status.MPDStatusMap;
-import com.anpmech.mpd.subsystem.status.StatusChangeListener;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.adapters.ArrayIndexerAdapter;
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.helpers.MPDAsyncHelper.AsyncExecListener;
-import com.namelessdev.mpdroid.helpers.MPDAsyncWorker;
-import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
-import com.namelessdev.mpdroid.tools.Tools;
-import com.namelessdev.mpdroid.ui.ToolbarHelper;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -72,6 +51,27 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.MPDCommand;
+import com.anpmech.mpd.commandresponse.PlaylistFileResponse;
+import com.anpmech.mpd.connection.MPDConnectionListener;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.Item;
+import com.anpmech.mpd.item.PlaylistFile;
+import com.anpmech.mpd.subsystem.status.MPDStatus;
+import com.anpmech.mpd.subsystem.status.MPDStatusMap;
+import com.anpmech.mpd.subsystem.status.StatusChangeListener;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.adapters.ArrayIndexerAdapter;
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
+import com.namelessdev.mpdroid.helpers.MPDAsyncHelper.AsyncExecListener;
+import com.namelessdev.mpdroid.helpers.MPDAsyncWorker;
+import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
+import com.namelessdev.mpdroid.tools.Tools;
+import com.namelessdev.mpdroid.ui.ToolbarHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;

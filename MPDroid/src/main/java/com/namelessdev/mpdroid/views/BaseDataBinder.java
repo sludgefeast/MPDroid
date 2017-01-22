@@ -16,6 +16,13 @@
 
 package com.namelessdev.mpdroid.views;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.view.View;
+
 import com.anpmech.mpd.item.Item;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
@@ -27,13 +34,6 @@ import com.namelessdev.mpdroid.cover.CoverManager;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
 import com.namelessdev.mpdroid.views.holders.AlbumCoverHolder;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.view.View;
 
 import java.util.List;
 

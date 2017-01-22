@@ -16,8 +16,6 @@
 
 package com.namelessdev.mpdroid.adapters;
 
-import com.namelessdev.mpdroid.R;
-
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
@@ -25,6 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.namelessdev.mpdroid.R;
 
 import java.util.Collections;
 import java.util.List;

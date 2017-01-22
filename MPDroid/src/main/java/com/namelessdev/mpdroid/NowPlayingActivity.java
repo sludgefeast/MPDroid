@@ -16,12 +16,6 @@
 
 package com.namelessdev.mpdroid;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.subsystem.status.MPDStatus;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-import com.namelessdev.mpdroid.helpers.QueueControl;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,6 +30,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.subsystem.status.MPDStatus;
+import com.namelessdev.mpdroid.helpers.MPDControl;
+import com.namelessdev.mpdroid.helpers.QueueControl;
+import com.namelessdev.mpdroid.tools.Tools;
 
 
 public class NowPlayingActivity extends MPDActivity {

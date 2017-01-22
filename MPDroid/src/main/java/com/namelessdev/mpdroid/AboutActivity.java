@@ -16,9 +16,6 @@
 
 package com.namelessdev.mpdroid;
 
-import com.namelessdev.mpdroid.adapters.SeparatedListAdapter;
-import com.namelessdev.mpdroid.adapters.SeparatedListDataBinder;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -27,6 +24,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.namelessdev.mpdroid.adapters.SeparatedListAdapter;
+import com.namelessdev.mpdroid.adapters.SeparatedListDataBinder;
 
 import java.util.ArrayList;
 import java.util.Collection;

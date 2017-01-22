@@ -16,10 +16,6 @@
 
 package com.namelessdev.mpdroid.preferences;
 
-import com.namelessdev.mpdroid.R;
-
-import org.jetbrains.annotations.Nullable;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -41,6 +37,10 @@ import android.text.TextWatcher;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.namelessdev.mpdroid.R;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.text.ParseException;
 import java.util.Arrays;

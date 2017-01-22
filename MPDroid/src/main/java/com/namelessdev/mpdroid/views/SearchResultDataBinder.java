@@ -16,16 +16,16 @@
 
 package com.namelessdev.mpdroid.views;
 
+import android.content.Context;
+import android.view.View;
+import android.widget.TextView;
+
 import com.anpmech.mpd.item.Album;
 import com.anpmech.mpd.item.Artist;
 import com.anpmech.mpd.item.Item;
 import com.anpmech.mpd.item.Music;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.adapters.SeparatedListDataBinder;
-
-import android.content.Context;
-import android.view.View;
-import android.widget.TextView;
 
 import java.util.List;
 

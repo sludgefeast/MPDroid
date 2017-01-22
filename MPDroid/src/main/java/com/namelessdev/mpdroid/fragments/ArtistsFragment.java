@@ -16,18 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Album;
-import com.anpmech.mpd.item.Artist;
-import com.anpmech.mpd.item.Genre;
-import com.anpmech.mpd.item.Music;
-import com.anpmech.mpd.item.PlaylistFile;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
-import com.namelessdev.mpdroid.models.GenresGroup;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,10 +26,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Album;
+import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.Music;
+import com.anpmech.mpd.item.PlaylistFile;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
+import com.namelessdev.mpdroid.models.GenresGroup;
+import com.namelessdev.mpdroid.tools.Tools;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 
 public class ArtistsFragment extends BrowseFragment<Artist> {
 

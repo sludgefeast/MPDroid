@@ -16,14 +16,14 @@
 
 package com.namelessdev.mpdroid.cover;
 
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
+
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
+import com.namelessdev.mpdroid.tools.Tools;
 
 import java.util.ArrayList;
 import java.util.Arrays;

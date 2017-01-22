@@ -16,16 +16,16 @@
 
 package com.namelessdev.mpdroid;
 
+import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
+
 import com.anpmech.mpd.MPDCommand;
 import com.anpmech.mpd.Tools;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
 
 import java.util.Arrays;
 

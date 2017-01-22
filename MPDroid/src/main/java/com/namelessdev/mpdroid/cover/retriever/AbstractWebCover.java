@@ -16,9 +16,9 @@
 
 package com.namelessdev.mpdroid.cover.retriever;
 
-import com.namelessdev.mpdroid.cover.CoverManager;
-
 import android.util.Log;
+
+import com.namelessdev.mpdroid.cover.CoverManager;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

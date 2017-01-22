@@ -16,13 +16,13 @@
 
 package com.namelessdev.mpdroid.tools;
 
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

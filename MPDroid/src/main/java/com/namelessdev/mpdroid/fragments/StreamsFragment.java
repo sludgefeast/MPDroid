@@ -16,21 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.MPDCommand;
-import com.anpmech.mpd.commandresponse.StreamResponse;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Artist;
-import com.anpmech.mpd.item.PlaylistFile;
-import com.anpmech.mpd.item.Stream;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.playlists.Playlist;
-import com.namelessdev.mpdroid.playlists.PlaylistEntry;
-import com.namelessdev.mpdroid.playlists.Playlists;
-import com.namelessdev.mpdroid.tools.StreamFetcher;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -52,6 +37,21 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.MPDCommand;
+import com.anpmech.mpd.commandresponse.StreamResponse;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.PlaylistFile;
+import com.anpmech.mpd.item.Stream;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.playlists.Playlist;
+import com.namelessdev.mpdroid.playlists.PlaylistEntry;
+import com.namelessdev.mpdroid.playlists.Playlists;
+import com.namelessdev.mpdroid.tools.StreamFetcher;
+import com.namelessdev.mpdroid.tools.Tools;
 
 import java.io.IOException;
 import java.util.ArrayList;

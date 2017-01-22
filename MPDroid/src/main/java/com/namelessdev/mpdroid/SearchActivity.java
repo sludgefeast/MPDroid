@@ -16,19 +16,6 @@
 
 package com.namelessdev.mpdroid;
 
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Album;
-import com.anpmech.mpd.item.Artist;
-import com.anpmech.mpd.item.Item;
-import com.anpmech.mpd.item.Music;
-import com.namelessdev.mpdroid.adapters.SeparatedListAdapter;
-import com.namelessdev.mpdroid.favorites.Favorites;
-import com.namelessdev.mpdroid.helpers.MPDAsyncHelper.AsyncExecListener;
-import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
-import com.namelessdev.mpdroid.tools.Tools;
-import com.namelessdev.mpdroid.ui.ToolbarHelper;
-import com.namelessdev.mpdroid.views.SearchResultDataBinder;
-
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,6 +40,18 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Album;
+import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.Item;
+import com.anpmech.mpd.item.Music;
+import com.namelessdev.mpdroid.adapters.SeparatedListAdapter;
+import com.namelessdev.mpdroid.helpers.MPDAsyncHelper.AsyncExecListener;
+import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
+import com.namelessdev.mpdroid.tools.Tools;
+import com.namelessdev.mpdroid.ui.ToolbarHelper;
+import com.namelessdev.mpdroid.views.SearchResultDataBinder;
 
 import java.io.IOException;
 import java.util.ArrayList;

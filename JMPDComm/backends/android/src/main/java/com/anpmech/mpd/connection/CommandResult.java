@@ -27,10 +27,10 @@
 
 package com.anpmech.mpd.connection;
 
-import com.anpmech.mpd.commandresponse.CommandResponse;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.anpmech.mpd.commandresponse.CommandResponse;
 
 /**
  * This is the core of the {@link CommandResponse} classes, abstracted for the Android backend.

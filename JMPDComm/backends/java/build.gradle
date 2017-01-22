@@ -25,8 +25,6 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.awt.HeadlessException
-
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 
@@ -137,7 +135,7 @@ class BrowseJavadoc implements TaskExecutionListener {
 
             try {
                 desktop.newInstance().browse(mIndexFile.toURI())
-            } catch (final HeadlessException ignored) {
+            } catch (final java.awt.HeadlessException ignored) {
             }
         }
     }

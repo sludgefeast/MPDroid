@@ -16,10 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.adapters.ArrayAdapter;
-import com.namelessdev.mpdroid.views.AlbumGridDataBinder;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +24,10 @@ import android.widget.AbsListView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.adapters.ArrayAdapter;
+import com.namelessdev.mpdroid.views.AlbumGridDataBinder;
 
 public class AlbumsGridFragment extends AlbumsFragment {
 

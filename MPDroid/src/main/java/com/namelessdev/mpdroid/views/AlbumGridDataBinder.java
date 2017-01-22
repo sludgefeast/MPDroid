@@ -16,6 +16,13 @@
 
 package com.namelessdev.mpdroid.views;
 
+import android.content.Context;
+import android.support.annotation.LayoutRes;
+import android.util.Log;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.ToggleButton;
+
 import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.item.Album;
 import com.anpmech.mpd.item.Artist;
@@ -26,13 +33,6 @@ import com.namelessdev.mpdroid.favorites.Favorites;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
 import com.namelessdev.mpdroid.views.holders.AlbumViewHolder;
-
-import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.util.Log;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.ToggleButton;
 
 import java.io.IOException;
 import java.util.List;

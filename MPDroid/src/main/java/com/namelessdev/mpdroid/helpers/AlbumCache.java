@@ -16,6 +16,8 @@
 
 package com.namelessdev.mpdroid.helpers;
 
+import android.util.Log;
+
 import com.anpmech.mpd.commandresponse.MusicResponse;
 import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.item.Artist;
@@ -23,8 +25,6 @@ import com.anpmech.mpd.item.Music;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.tools.Tools;
-
-import android.util.Log;
 
 import java.io.BufferedOutputStream;
 import java.io.DataInput;

@@ -16,10 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.tools.LibraryTabsUtil;
-import com.namelessdev.mpdroid.ui.ToolbarHelper;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -36,6 +32,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.tools.LibraryTabsUtil;
+import com.namelessdev.mpdroid.ui.ToolbarHelper;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -16,16 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Artist;
-import com.anpmech.mpd.item.Music;
-import com.anpmech.mpd.item.PlaylistFile;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.adapters.ArrayAdapter;
-import com.namelessdev.mpdroid.library.PlaylistEditActivity;
-import com.namelessdev.mpdroid.tools.Tools;
-import com.namelessdev.mpdroid.views.StoredPlaylistDataBinder;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
@@ -36,6 +26,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
+
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.Music;
+import com.anpmech.mpd.item.PlaylistFile;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.adapters.ArrayAdapter;
+import com.namelessdev.mpdroid.library.PlaylistEditActivity;
+import com.namelessdev.mpdroid.tools.Tools;
+import com.namelessdev.mpdroid.views.StoredPlaylistDataBinder;
 
 import java.io.IOException;
 

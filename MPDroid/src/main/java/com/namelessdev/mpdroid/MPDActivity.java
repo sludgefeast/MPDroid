@@ -16,15 +16,6 @@
 
 package com.namelessdev.mpdroid;
 
-import com.anpmech.mpd.connection.MPDConnectionListener;
-import com.anpmech.mpd.connection.MPDConnectionStatus;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.subsystem.status.IdleSubsystemMonitor;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-import com.namelessdev.mpdroid.preferences.ConnectionSettings;
-import com.namelessdev.mpdroid.preferences.SettingsActivity;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
@@ -46,6 +37,15 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.WindowManager;
+
+import com.anpmech.mpd.connection.MPDConnectionListener;
+import com.anpmech.mpd.connection.MPDConnectionStatus;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.subsystem.status.IdleSubsystemMonitor;
+import com.namelessdev.mpdroid.helpers.MPDControl;
+import com.namelessdev.mpdroid.preferences.ConnectionSettings;
+import com.namelessdev.mpdroid.preferences.SettingsActivity;
+import com.namelessdev.mpdroid.tools.Tools;
 
 import java.io.IOException;
 import java.net.UnknownHostException;

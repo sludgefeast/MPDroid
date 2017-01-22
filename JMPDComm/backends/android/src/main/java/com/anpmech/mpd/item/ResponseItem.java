@@ -27,11 +27,11 @@
 
 package com.anpmech.mpd.item;
 
+import android.os.Parcel;
+
 import com.anpmech.mpd.ResponseObject;
 
 import org.jetbrains.annotations.NotNull;
-
-import android.os.Parcel;
 
 /**
  * This class is used to create {@link Item} subclasses using a response backend, abstracted for

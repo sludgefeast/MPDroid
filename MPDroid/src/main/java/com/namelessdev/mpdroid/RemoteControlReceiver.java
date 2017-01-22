@@ -16,12 +16,6 @@
 
 package com.namelessdev.mpdroid;
 
-import com.namelessdev.mpdroid.helpers.MPDControl;
-import com.namelessdev.mpdroid.service.MPDroidService;
-import com.namelessdev.mpdroid.service.NotificationHandler;
-import com.namelessdev.mpdroid.service.StreamHandler;
-import com.namelessdev.mpdroid.tools.Tools;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +23,12 @@ import android.media.AudioManager;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.KeyEvent;
+
+import com.namelessdev.mpdroid.helpers.MPDControl;
+import com.namelessdev.mpdroid.service.MPDroidService;
+import com.namelessdev.mpdroid.service.NotificationHandler;
+import com.namelessdev.mpdroid.service.StreamHandler;
+import com.namelessdev.mpdroid.tools.Tools;
 
 /**
  * RemoteControlReceiver receives media player button stuff. Most of the code was taken from the

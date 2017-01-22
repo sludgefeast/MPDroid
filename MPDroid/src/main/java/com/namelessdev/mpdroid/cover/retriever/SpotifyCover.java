@@ -16,13 +16,13 @@
 
 package com.namelessdev.mpdroid.cover.retriever;
 
+import android.util.Log;
+
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.util.Log;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

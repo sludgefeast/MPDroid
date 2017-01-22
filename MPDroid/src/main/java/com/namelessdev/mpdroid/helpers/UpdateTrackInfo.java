@@ -16,6 +16,11 @@
 
 package com.namelessdev.mpdroid.helpers;
 
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.preference.PreferenceManager;
+import android.util.Log;
+
 import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.item.FilesystemTreeEntry;
 import com.anpmech.mpd.item.Music;
@@ -23,11 +28,6 @@ import com.anpmech.mpd.subsystem.Sticker;
 import com.anpmech.mpd.subsystem.status.MPDStatus;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
-
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.io.IOException;
 

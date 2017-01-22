@@ -16,9 +16,6 @@
 
 package com.namelessdev.mpdroid.tools;
 
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -34,6 +31,9 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.widget.Toast;
+
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.helpers.MPDControl;
 
 import java.util.concurrent.TimeUnit;
 

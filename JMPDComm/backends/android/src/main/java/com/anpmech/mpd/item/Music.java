@@ -27,15 +27,15 @@
 
 package com.anpmech.mpd.item;
 
-import com.anpmech.mpd.ResponseObject;
-
-import org.jetbrains.annotations.NotNull;
-
 import android.annotation.TargetApi;
 import android.media.MediaMetadata;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.anpmech.mpd.ResponseObject;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
 

@@ -16,6 +16,13 @@
 
 package com.namelessdev.mpdroid.views;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.LayoutRes;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageButton;
+
 import com.anpmech.mpd.item.Item;
 import com.anpmech.mpd.item.Music;
 import com.namelessdev.mpdroid.R;
@@ -23,13 +30,6 @@ import com.namelessdev.mpdroid.SongCommentActivity;
 import com.namelessdev.mpdroid.adapters.ArrayDataBinder;
 import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
 import com.namelessdev.mpdroid.views.holders.SongViewHolder;
-
-import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.LayoutRes;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.ImageButton;
 
 import java.util.List;
 

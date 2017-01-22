@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import java.awt.HeadlessException
-
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
@@ -171,7 +169,7 @@ class BrowseJavadoc implements TaskExecutionListener {
 
             try {
                 desktop.newInstance().browse(mIndexFile.toURI())
-            } catch (final HeadlessException ignored) {
+            } catch (final java.awt.HeadlessException ignored) {
             }
         }
     }

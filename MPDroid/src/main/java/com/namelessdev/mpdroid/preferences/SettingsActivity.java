@@ -16,12 +16,12 @@
 
 package com.namelessdev.mpdroid.preferences;
 
+import android.os.Bundle;
+
 import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.subsystem.status.StatusChangeListener;
 import com.namelessdev.mpdroid.MPDActivity;
 import com.namelessdev.mpdroid.R;
-
-import android.os.Bundle;
 
 public class SettingsActivity extends MPDActivity implements StatusChangeListener {
 

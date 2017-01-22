@@ -16,11 +16,11 @@
 
 package com.namelessdev.mpdroid.adapters;
 
-import com.anpmech.mpd.item.Item;
-import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
-
 import android.content.Context;
 import android.view.View;
+
+import com.anpmech.mpd.item.Item;
+import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
 
 import java.util.List;
 

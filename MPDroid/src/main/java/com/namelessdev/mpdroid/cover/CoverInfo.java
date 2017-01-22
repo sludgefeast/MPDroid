@@ -16,10 +16,10 @@
 
 package com.namelessdev.mpdroid.cover;
 
+import android.graphics.Bitmap;
+
 import com.namelessdev.mpdroid.cover.retriever.ICoverRetriever;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
-
-import android.graphics.Bitmap;
 
 import java.util.Arrays;
 

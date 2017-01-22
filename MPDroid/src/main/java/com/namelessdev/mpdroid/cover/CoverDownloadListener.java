@@ -16,9 +16,9 @@
 
 package com.namelessdev.mpdroid.cover;
 
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-
 import android.graphics.Bitmap;
+
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
 
 import java.util.Collection;
 

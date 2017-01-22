@@ -16,13 +16,13 @@
 
 package com.namelessdev.mpdroid.cover.retriever;
 
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.cover.CoverManager;
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.util.Log;
+
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.cover.CoverManager;
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;

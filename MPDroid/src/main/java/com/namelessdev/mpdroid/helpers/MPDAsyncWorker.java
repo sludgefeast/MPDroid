@@ -16,17 +16,17 @@
 
 package com.namelessdev.mpdroid.helpers;
 
-import com.namelessdev.mpdroid.ConnectionInfo;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.cover.retriever.GracenoteCover;
-import com.namelessdev.mpdroid.preferences.ConnectionModifier;
-import com.namelessdev.mpdroid.tools.SettingsHelper;
-
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.preference.PreferenceManager;
+
+import com.namelessdev.mpdroid.ConnectionInfo;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.cover.retriever.GracenoteCover;
+import com.namelessdev.mpdroid.preferences.ConnectionModifier;
+import com.namelessdev.mpdroid.tools.SettingsHelper;
 
 /**
  * Asynchronous worker thread-class for long during operations on JMPDComm.

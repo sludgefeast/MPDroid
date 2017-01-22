@@ -27,12 +27,12 @@
 
 package com.anpmech.mpd.item;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.anpmech.mpd.ResponseObject;
 
 import org.jetbrains.annotations.NotNull;
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
  * This class serves as a base for non-music MPD database entries, abstracted for the Android

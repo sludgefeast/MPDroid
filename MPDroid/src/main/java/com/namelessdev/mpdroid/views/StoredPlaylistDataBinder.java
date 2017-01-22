@@ -16,6 +16,13 @@
 
 package com.namelessdev.mpdroid.views;
 
+import android.content.Context;
+import android.support.annotation.LayoutRes;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import com.anpmech.mpd.Tools;
 import com.anpmech.mpd.item.Item;
 import com.anpmech.mpd.item.Music;
@@ -24,13 +31,6 @@ import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
 import com.namelessdev.mpdroid.views.holders.PlaylistViewHolder;
-
-import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.List;
 

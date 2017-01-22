@@ -16,23 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Album;
-import com.anpmech.mpd.item.Artist;
-import com.anpmech.mpd.item.Genre;
-import com.anpmech.mpd.item.PlaylistFile;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.adapters.ArrayIndexerAdapter;
-import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
-import com.namelessdev.mpdroid.cover.CoverManager;
-import com.namelessdev.mpdroid.favorites.Favorites;
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
-import com.namelessdev.mpdroid.models.GenresGroup;
-import com.namelessdev.mpdroid.tools.Tools;
-import com.namelessdev.mpdroid.views.AlbumDataBinder;
-import com.namelessdev.mpdroid.views.holders.AlbumViewHolder;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -49,6 +32,22 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
+
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Album;
+import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.Genre;
+import com.anpmech.mpd.item.PlaylistFile;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.adapters.ArrayIndexerAdapter;
+import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
+import com.namelessdev.mpdroid.cover.CoverManager;
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
+import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
+import com.namelessdev.mpdroid.models.GenresGroup;
+import com.namelessdev.mpdroid.tools.Tools;
+import com.namelessdev.mpdroid.views.AlbumDataBinder;
+import com.namelessdev.mpdroid.views.holders.AlbumViewHolder;
 
 import java.io.IOException;
 import java.util.Collections;

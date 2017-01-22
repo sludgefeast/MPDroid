@@ -16,14 +16,14 @@
 
 package com.namelessdev.mpdroid.widgets;
 
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
+
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.helpers.MPDControl;
 
 public class SimpleWidgetProviderWithStop extends SimpleWidgetProvider {
 

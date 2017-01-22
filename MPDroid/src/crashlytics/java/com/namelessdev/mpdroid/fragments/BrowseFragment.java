@@ -16,13 +16,13 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import com.anpmech.mpd.item.Item;
-import com.crashlytics.android.Crashlytics;
-
 import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
+
+import com.anpmech.mpd.item.Item;
+import com.crashlytics.android.Crashlytics;
 
 public abstract class BrowseFragment<T extends Item<T>> extends BrowseFragmentBase<T> {
 

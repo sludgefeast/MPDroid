@@ -16,12 +16,6 @@
 
 package com.namelessdev.mpdroid.ui;
 
-import com.anpmech.mpd.subsystem.AudioOutput;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
-import com.namelessdev.mpdroid.preferences.SettingsActivity;
-
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
@@ -32,6 +26,12 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.anpmech.mpd.subsystem.AudioOutput;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
+import com.namelessdev.mpdroid.preferences.SettingsActivity;
 
 /**
  * Class that is meant to help standard Toolbars (and ActionBars)

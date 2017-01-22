@@ -16,14 +16,14 @@
 
 package com.namelessdev.mpdroid.helpers;
 
+import android.support.annotation.IdRes;
+import android.support.annotation.StringDef;
+
 import com.anpmech.mpd.MPD;
 import com.anpmech.mpd.concurrent.ResultFuture;
 import com.anpmech.mpd.subsystem.Playback;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
-
-import android.support.annotation.IdRes;
-import android.support.annotation.StringDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

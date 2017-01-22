@@ -16,16 +16,6 @@
 
 package com.namelessdev.mpdroid.service;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.item.Music;
-import com.anpmech.mpd.subsystem.status.MPDStatusMap;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.MainMenuActivity;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.RemoteControlReceiver;
-import com.namelessdev.mpdroid.cover.AlbumCoverDownloadListener;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -37,6 +27,16 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.RemoteViews;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.item.Music;
+import com.anpmech.mpd.subsystem.status.MPDStatusMap;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.MainMenuActivity;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.RemoteControlReceiver;
+import com.namelessdev.mpdroid.cover.AlbumCoverDownloadListener;
+import com.namelessdev.mpdroid.helpers.MPDControl;
 
 /**
  * A class to handle everything necessary for the MPDroid notification.

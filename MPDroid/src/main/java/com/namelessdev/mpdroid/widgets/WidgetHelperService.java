@@ -16,13 +16,13 @@
 
 package com.namelessdev.mpdroid.widgets;
 
+import android.app.IntentService;
+import android.content.Intent;
+
 import com.anpmech.mpd.subsystem.status.MPDStatus;
 import com.anpmech.mpd.subsystem.status.MPDStatusMap;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.tools.Tools;
-
-import android.app.IntentService;
-import android.content.Intent;
 
 public class WidgetHelperService extends IntentService {
 

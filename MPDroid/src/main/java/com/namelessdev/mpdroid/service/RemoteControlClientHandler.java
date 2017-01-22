@@ -16,13 +16,6 @@
 
 package com.namelessdev.mpdroid.service;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.item.Music;
-import com.anpmech.mpd.subsystem.status.MPDStatus;
-import com.anpmech.mpd.subsystem.status.MPDStatusMap;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.RemoteControlReceiver;
-
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
@@ -35,6 +28,13 @@ import android.os.Build;
 import android.os.Handler;
 import android.text.format.DateUtils;
 import android.util.Log;
+
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.item.Music;
+import com.anpmech.mpd.subsystem.status.MPDStatus;
+import com.anpmech.mpd.subsystem.status.MPDStatusMap;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.RemoteControlReceiver;
 
 /**
  * A class to handle everything necessary to integrate the music server with Android's

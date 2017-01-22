@@ -16,19 +16,6 @@
 
 package com.namelessdev.mpdroid.cover;
 
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.cover.retriever.CachedCover;
-import com.namelessdev.mpdroid.cover.retriever.CoverArtArchiveCover;
-import com.namelessdev.mpdroid.cover.retriever.DeezerCover;
-import com.namelessdev.mpdroid.cover.retriever.GracenoteCover;
-import com.namelessdev.mpdroid.cover.retriever.ICoverRetriever;
-import com.namelessdev.mpdroid.cover.retriever.ItunesCover;
-import com.namelessdev.mpdroid.cover.retriever.JamendoCover;
-import com.namelessdev.mpdroid.cover.retriever.LastFMCover;
-import com.namelessdev.mpdroid.cover.retriever.LocalCover;
-import com.namelessdev.mpdroid.cover.retriever.SpotifyCover;
-import com.namelessdev.mpdroid.helpers.AlbumInfo;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -41,6 +28,19 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.cover.retriever.CachedCover;
+import com.namelessdev.mpdroid.cover.retriever.CoverArtArchiveCover;
+import com.namelessdev.mpdroid.cover.retriever.DeezerCover;
+import com.namelessdev.mpdroid.cover.retriever.GracenoteCover;
+import com.namelessdev.mpdroid.cover.retriever.ICoverRetriever;
+import com.namelessdev.mpdroid.cover.retriever.ItunesCover;
+import com.namelessdev.mpdroid.cover.retriever.JamendoCover;
+import com.namelessdev.mpdroid.cover.retriever.LastFMCover;
+import com.namelessdev.mpdroid.cover.retriever.LocalCover;
+import com.namelessdev.mpdroid.cover.retriever.SpotifyCover;
+import com.namelessdev.mpdroid.helpers.AlbumInfo;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;

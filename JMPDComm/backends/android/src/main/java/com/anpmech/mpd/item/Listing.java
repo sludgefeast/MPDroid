@@ -27,15 +27,15 @@
 
 package com.anpmech.mpd.item;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.anpmech.mpd.ResponseObject;
 import com.anpmech.mpd.connection.CommandResult;
 import com.anpmech.mpd.connection.MPDConnection;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
  * This class creates a Listing Item, an abstraction of a filesystem directory in the <A

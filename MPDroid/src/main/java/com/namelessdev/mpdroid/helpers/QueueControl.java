@@ -16,14 +16,14 @@
 
 package com.namelessdev.mpdroid.helpers;
 
+import android.support.annotation.IntDef;
+import android.util.Log;
+
 import com.anpmech.mpd.MPD;
 import com.anpmech.mpd.MPDPlaylist;
 import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.item.Music;
 import com.namelessdev.mpdroid.MPDApplication;
-
-import android.support.annotation.IntDef;
-import android.util.Log;
 
 import java.io.IOException;
 import java.lang.annotation.Retention;

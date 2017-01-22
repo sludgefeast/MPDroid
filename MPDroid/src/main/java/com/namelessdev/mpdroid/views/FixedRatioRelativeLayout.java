@@ -16,14 +16,14 @@
 
 package com.namelessdev.mpdroid.views;
 
-import com.namelessdev.mpdroid.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
 import android.support.annotation.StyleRes;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
+
+import com.namelessdev.mpdroid.R;
 
 public class FixedRatioRelativeLayout extends RelativeLayout {
 
