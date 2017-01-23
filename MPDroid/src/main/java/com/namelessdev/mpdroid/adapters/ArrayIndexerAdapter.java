@@ -42,7 +42,7 @@ public class ArrayIndexerAdapter<T extends Item<T>> extends ArrayAdapter<T>
     private final String[] mSections;
 
     public ArrayIndexerAdapter(final Context context, final ArrayDataBinder<T> dataBinder,
-            final List<T> items) {
+                               final List<T> items) {
         super(context, dataBinder, items);
 
         // in this HashMap we will store here the positions for the sections
@@ -51,7 +51,7 @@ public class ArrayIndexerAdapter<T extends Item<T>> extends ArrayAdapter<T>
     }
 
     public ArrayIndexerAdapter(final Context context, @LayoutRes final int textViewResourceId,
-            final List<T> items) {
+                               final List<T> items) {
         super(context, textViewResourceId, items);
 
         // in this HashMap we will store here the positions for the sections

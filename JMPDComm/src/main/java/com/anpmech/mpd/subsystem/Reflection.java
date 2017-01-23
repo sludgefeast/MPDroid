@@ -46,10 +46,10 @@ public class Reflection {
 
     /**
      * Command text required to generate a command to retrieve a list of permitted commands.
-     *
+     * <p>
      * <BR><BR><B>Protocol command syntax:</B><BR>
      * {@code commands}<BR>
-     *
+     * <p>
      * <BR><B>Sample protocol output:</B><BR> {@code commands}<BR> {@code command: add}<BR> ...
      * (removed for clarity)<BR> {@code OK}<BR>
      */
@@ -57,7 +57,7 @@ public class Reflection {
 
     /**
      * Command text required to generate a command to retrieve server configuration options.
-     *
+     * <p>
      * <p><B>This is currently not functional for this library due to lack of socket connection
      * functionality.</B></p>
      */
@@ -65,9 +65,9 @@ public class Reflection {
 
     /**
      * Command text required to generate a command to receive a list of supported decoders.
-     *
+     * <p>
      * <BR><BR><B>Protocol command syntax:</B><BR> {@code decoders}<BR>
-     *
+     * <p>
      * <BR><B>Sample protocol output:</B><BR> {@code decoders}<BR> {@code plugin: mad}<BR> {@code
      * suffix: mp3}<BR> {@code suffix: mp2}<BR> {@code mime_type: audio/mpeg}<BR> {@code OK}
      */
@@ -75,9 +75,9 @@ public class Reflection {
 
     /**
      * Command text required to generate a command to receive a list of non-permitted commands.
-     *
+     * <p>
      * <BR><BR><B>Protocol command syntax:</B><BR> {@code notcommands}<BR>
-     *
+     * <p>
      * <BR><B>Sample protocol output:</B><BR> {@code notcommands}<BR> {@code command: config}<BR>
      * {@code command: kill}<BR> {@code OK}<BR>
      */
@@ -86,7 +86,7 @@ public class Reflection {
     /**
      * Command text required to generate a command to receive a list of available metadata for
      * {@code Music} objects.
-     *
+     * <p>
      * <BR><BR><B>Protocol command syntax:</B><BR> {@code tagtypes} {@code tagtypes}
      * <BR>{@code tagtype: Artist}<BR> {@code tagtype: ArtistSort}<BR> ... (removed for clarity)
      * <BR> {@code OK}<BR>
@@ -95,9 +95,9 @@ public class Reflection {
 
     /**
      * Command text required to generate a command to receive a list of URL handlers.
-     *
+     * <p>
      * <BR><BR><B>Protocol command syntax:</B><BR> {@code urlhandlers}<BR>
-     *
+     * <p>
      * <BR><B>Sample protocol output:</B><BR> {@code urlhandlers}<BR> {@code handler: file}<BR>
      * {@code handler: http}<BR> {@code handler: https}<BR> {@code handler: local}<BR> {@code
      * OK}<BR>
@@ -207,7 +207,7 @@ public class Reflection {
 
     /**
      * Returns a collection of commands explicitly not permitted for use.
-     *
+     * <p>
      * <p>Retrieves and returns a collection of commands explicitly not permitted to use on the
      * current media server with the current permissions.</p>
      *

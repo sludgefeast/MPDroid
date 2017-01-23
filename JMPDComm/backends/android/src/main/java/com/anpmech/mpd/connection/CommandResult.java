@@ -34,10 +34,10 @@ import com.anpmech.mpd.commandresponse.CommandResponse;
 
 /**
  * This is the core of the {@link CommandResponse} classes, abstracted for the Android backend.
- *
+ * <p>
  * <p>This class contains the bare results from the connection. Processing required from this
  * result should be done in another class.</p>
- *
+ * <p>
  * <p>This class is immutable, thus, thread-safe.</p>
  */
 public class CommandResult extends AbstractCommandResult implements Parcelable {

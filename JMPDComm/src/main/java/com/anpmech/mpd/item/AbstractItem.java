@@ -78,9 +78,9 @@ abstract class AbstractItem<T extends AbstractItem<T>> implements Comparable<T> 
         list1.addAll(list2);
         Collections.sort(list1);
 
-        for (int i = list1.size()-1; i>= 0; i--) {
+        for (int i = list1.size() - 1; i >= 0; i--) {
             final T item = list1.get(i);
-            if (item.isUnknown() || i>0 && item.isNameSame(list1.get(i-1))) {
+            if (item.isUnknown() || i > 0 && item.isNameSame(list1.get(i - 1))) {
                 list1.remove(i);
             }
         }

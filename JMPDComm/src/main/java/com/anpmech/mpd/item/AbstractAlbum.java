@@ -61,7 +61,7 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
     private final long mSongCount;
 
     AbstractAlbum(final String name, final Artist artist, final boolean hasAlbumArtist,
-            final long songCount, final long duration, final long date, final String path) {
+                  final long songCount, final long duration, final long date, final String path) {
 
         mName = name;
         mSongCount = songCount;

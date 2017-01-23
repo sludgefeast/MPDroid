@@ -35,15 +35,17 @@ import java.util.concurrent.Callable;
 
 /**
  * Class representing multiple blocking IO connections to the server.
- *
+ * <p>
  * <p>Connection status cannot be depended on, connection status for one thread may not be the
  * same as another, so, connection status for this class is private.</p>
- *
+ * <p>
  * <p>This class was designed with thread safety in mind.</p>
  */
 public class MultiIOMPDConnection extends MPDConnection {
 
-    /** The class log identifier. */
+    /**
+     * The class log identifier.
+     */
     private static final String TAG = "MPDConnectionMultiSocket";
 
     /**
@@ -79,7 +81,7 @@ public class MultiIOMPDConnection extends MPDConnection {
      */
     @Override
     Callable<CommandResult> getCommandProcessor(final String command,
-            final int[] excludeResponses) {
+                                                final int[] excludeResponses) {
         return new MultiIOCommandProcessor(mSocketAddress, mConnectionStatus, command,
                 mReadWriteTimeout, excludeResponses);
     }

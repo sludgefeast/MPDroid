@@ -48,7 +48,7 @@ public class SimpleWidgetProviderWithStop extends SimpleWidgetProvider {
 
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager,
-            final int[] appWidgetIds) {
+                         final int[] appWidgetIds) {
         final RemoteViews views = new RemoteViews(context.getPackageName(),
                 R.layout.widget_simple_with_stop);
 

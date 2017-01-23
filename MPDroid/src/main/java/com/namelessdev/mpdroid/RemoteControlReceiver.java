@@ -146,7 +146,7 @@ public class RemoteControlReceiver extends BroadcastReceiver {
      * @see BroadcastReceiver#onReceive(Context, Intent)
      */
     private void redirectIntentToService(final Context context, final boolean forceService,
-            final Intent intent) {
+                                         final Intent intent) {
         intent.setClass(context, MPDroidService.class);
         final IBinder iBinder = peekService(context, intent);
         if (forceService || iBinder != null && iBinder.isBinderAlive()) {

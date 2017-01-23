@@ -37,17 +37,17 @@ import java.io.IOException;
 
 /**
  * This class handles any telephony handling required for the connected server.
- *
+ * <p>
  * <p>There are a few things that must be considered when maintaining this class. First, all of
  * this occurs on the UI thread. This is why we instantiate a thread prior to waiting for
  * connection and status.</p>
- *
+ * <p>
  * <p>BroadcastReceiver will only last about 10 seconds, so no long running processes.</p>
- *
+ * <p>
  * <p>Also, <i>expect</i> races. Devices may send <b>multiple</b> broadcasts during each phone
  * state changes. There may be multiple MPDroid devices around the house telling MPD to do the same
  * thing (no toggling!). There will always be possible races here, but attempt to minimize.</p>
- *
+ * <p>
  * <p>State persistence is a requirement. To keep things persistent, we use the Android
  * {@link PreferenceManager} infrastructure. This comes with a large downside: If a marker is set
  * but not unset, due to conditionals, make sure it has a chance to be unset in the future; a bad
@@ -55,25 +55,39 @@ import java.io.IOException;
  */
 public class PhoneStateReceiver extends BroadcastReceiver {
 
-    /** A key to hold the pause during phone call user configuration setting. */
+    /**
+     * A key to hold the pause during phone call user configuration setting.
+     */
     public static final String PAUSE_DURING_CALL = "pauseOnPhoneStateChange";
 
-    /** The debug flag, if set to true, debug output will emit in the logcat. */
+    /**
+     * The debug flag, if set to true, debug output will emit in the logcat.
+     */
     private static final boolean DEBUG = false;
 
-    /** A marker used when the app pauses / resumes playback */
+    /**
+     * A marker used when the app pauses / resumes playback
+     */
     private static final String PAUSED_MARKER = "PausedMarker";
 
-    /** A marker used to prevent races from causing more than one pause to be sent. */
+    /**
+     * A marker used to prevent races from causing more than one pause to be sent.
+     */
     private static final String PAUSING_MARKER = "PausingMarker";
 
-    /** A key to hold the play after phone call user configuration setting. */
+    /**
+     * A key to hold the play after phone call user configuration setting.
+     */
     private static final String PLAY_AFTER_CALL = "playOnPhoneStateChange";
 
-    /** The class log identifier. */
+    /**
+     * The class log identifier.
+     */
     private static final String TAG = "PhoneStateReceiver";
 
-    /** The settings to store the persistent markers in. */
+    /**
+     * The settings to store the persistent markers in.
+     */
     private SharedPreferences mSettings;
 
     /**

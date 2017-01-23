@@ -101,7 +101,7 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
     }
 
     public void onUpdate(final RemoteViews views, final Context context,
-            final AppWidgetManager appWidgetManager) {
+                         final AppWidgetManager appWidgetManager) {
         Log.v(TAG, "Enter onUpdate");
 
         // Initialise given widgets to default state, where we launch MPDroid on
@@ -118,7 +118,7 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager,
-            final int[] appWidgetIds) {
+                         final int[] appWidgetIds) {
         final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_simple);
 
         onUpdate(views, context, appWidgetManager);

@@ -19,7 +19,9 @@ package com.namelessdev.mpdroid.views.holders;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-/** This class defines a holder for album covers. */
+/**
+ * This class defines a holder for album covers.
+ */
 public class AlbumCoverHolder extends AbstractViewHolder {
 
     public ImageView mAlbumCover;

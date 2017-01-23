@@ -61,6 +61,7 @@ public class Favorites {
 
     /**
      * Marks an album as a favorite.
+     *
      * @param album Favored album
      * @throws IOException
      * @throws MPDException
@@ -72,6 +73,7 @@ public class Favorites {
 
     /**
      * Removes an album from favorites.
+     *
      * @param album Album to remove
      * @throws IOException
      * @throws MPDException
@@ -83,6 +85,7 @@ public class Favorites {
 
     /**
      * Determines if an album is favored.
+     *
      * @param album Album to check
      * @return true, if album is favored
      * @throws IOException
@@ -100,6 +103,7 @@ public class Favorites {
 
     /**
      * Determine all favored albums.
+     *
      * @return all favored albums
      * @throws IOException
      * @throws MPDException
@@ -116,6 +120,7 @@ public class Favorites {
 
     /**
      * Computes the sticker name for album favorites incl. the personalization key.
+     *
      * @return Sticker name for album favorites
      */
     private static String computeFavoriteStickerKey() {
@@ -128,6 +133,7 @@ public class Favorites {
 
     /**
      * Are favorites activated in preferences?
+     *
      * @return true, if activated.
      */
     public static boolean areFavoritesActivated() {

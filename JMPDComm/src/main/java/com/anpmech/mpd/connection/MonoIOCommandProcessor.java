@@ -39,7 +39,7 @@ import java.util.Map;
  * This class sends one {@link com.anpmech.mpd.MPDCommand} or {@link com.anpmech.mpd.CommandQueue}
  * string over a single connection resource, queueing if necessary, then processes and returns the
  * result.
- *
+ * <p>
  * <p>Only <b>one</b> thread should access command processing methods of this class, per instance,
  * per SocketAddress.</p>
  */
@@ -47,7 +47,7 @@ class MonoIOCommandProcessor extends IOCommandProcessor {
 
     /**
      * A map of blocking IO socket corresponding to it's SocketAddress.
-     *
+     * <p>
      * <p>Do not synchronize this map, this class does not have a concurrency expectation.</p>
      */
     private static final Map<SocketAddress, IOSocketSet> SOCKET_MAP = new HashMap<>(1);
@@ -78,8 +78,8 @@ class MonoIOCommandProcessor extends IOCommandProcessor {
      *                         {@link CommandResponse} inclusion.
      */
     MonoIOCommandProcessor(final SocketAddress socketAddress,
-            final MPDConnectionStatus connectionStatus, final String commandString,
-            final int readWriteTimeout, final int[] excludeResponses) {
+                           final MPDConnectionStatus connectionStatus, final String commandString,
+                           final int readWriteTimeout, final int[] excludeResponses) {
         super(connectionStatus, commandString, excludeResponses);
 
         mReadWriteTimeout = readWriteTimeout;

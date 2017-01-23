@@ -214,7 +214,7 @@ public class AlbumsFragment extends BrowseFragment<Album> {
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenu.ContextMenuInfo menuInfo) {
+                                    final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         final MenuItem otherCoverItem = menu.add(POPUP_COVER_BLACKLIST,
                 POPUP_COVER_BLACKLIST, 0, R.string.otherCover);
@@ -226,7 +226,7 @@ public class AlbumsFragment extends BrowseFragment<Album> {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         mCoverArtProgress = (ProgressBar) view.findViewById(R.id.albumCoverProgress);
         return view;
@@ -234,7 +234,7 @@ public class AlbumsFragment extends BrowseFragment<Album> {
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         final Activity activity = getActivity();
         final Bundle bundle = new Bundle();
         final Fragment fragment = Fragment.instantiate(activity, SongsFragment.class.getName(),

@@ -181,7 +181,7 @@ public abstract class MPDActivity extends AppCompatActivity implements IdleSubsy
         sAlertDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(final DialogInterface dialog, final int keyCode,
-                    final KeyEvent event) {
+                                 final KeyEvent event) {
                 // Handle all keys!
                 return true;
             }

@@ -96,7 +96,7 @@ public class Playback {
 
     /**
      * Command text required to generate a command to set the consume state.
-     *
+     * <p>
      * <p>The argument for this command should be STATE. STATE should be {@link #STATE_OFF} or
      * {@link #STATE_ON}. When consume is activated, each song played is removed from playlist.</p>
      */
@@ -121,7 +121,7 @@ public class Playback {
     /**
      * Command text required to generate a command to manipulate the {@code random} playback
      * option.
-     *
+     * <p>
      * <p>The argument for this command should be STATE. STATE should be {@link #STATE_OFF} or
      * {@link #STATE_ON}. This will cause any further playback from the playlist queue to be out
      * of order.</p>
@@ -131,7 +131,7 @@ public class Playback {
     /**
      * Command text required to generate a command to manipulate the {@code repeat} playback
      * option.
-     *
+     * <p>
      * <p>The argument for this command should be STATE. STATE should be {@link #STATE_OFF} or
      * {@link #STATE_ON}. This will cause the playlist queue to repeat tracks once all playlist
      * items have been exhausted.</p>
@@ -140,10 +140,10 @@ public class Playback {
 
     /**
      * Command text required to generate a command to retrieve the replay gain status.
-     *
+     * <p>
      * <BR><BR><B>Protocol command syntax:</B><BR>
      * {@code replay_gain_status}<BR>
-     *
+     * <p>
      * <BR><B>Sample protocol output:</B><BR> {@code replay_gain_status}<BR>
      * {@code replay_gain_mode: off}<BR> {@code OK}<BR>
      */
@@ -318,7 +318,7 @@ public class Playback {
 
     /**
      * Plays the playlist queue starting with the {@code track} parameter.
-     *
+     * <p>
      * <p>This requires the {@link Music} item be populated with a song id.</p>
      *
      * @param track The track to play.
@@ -414,7 +414,7 @@ public class Playback {
 
     /**
      * This method sets the MixRamp delay (in seconds).
-     *
+     * <p>
      * <p>If set to {@link #MIX_RAMP_DELAY_DISABLE}, MixRamp will be disabled and will fall back
      * to crossfading.</p>
      *

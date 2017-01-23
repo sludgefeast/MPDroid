@@ -53,7 +53,7 @@ public final class SettingsHelper {
     }
 
     private static ConnectionInfo getConnectionSettings(final String wifiSSID,
-            final ConnectionInfo previousInfo) {
+                                                        final ConnectionInfo previousInfo) {
         final String server = getStringSetting(
                 getStringWithSSID(ConnectionModifier.KEY_HOSTNAME, wifiSSID));
         final int port = getIntegerSetting(getStringWithSSID(ConnectionModifier.KEY_PORT, wifiSSID),

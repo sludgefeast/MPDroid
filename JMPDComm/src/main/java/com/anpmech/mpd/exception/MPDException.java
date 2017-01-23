@@ -111,16 +111,24 @@ public class MPDException extends Exception {
 
     private static final long serialVersionUID = -5837769913914420046L;
 
-    /** The command sent for this error. */
+    /**
+     * The command sent for this error.
+     */
     public final String mCommand;
 
-    /** The position of the command queue the error occurred. 0 if not a command queue. */
+    /**
+     * The position of the command queue the error occurred. 0 if not a command queue.
+     */
     public final int mCommandQueuePosition;
 
-    /** The error code which caused this error in media server response. */
+    /**
+     * The error code which caused this error in media server response.
+     */
     public final int mErrorCode;
 
-    /** The message text which caused this error in media server response. */
+    /**
+     * The message text which caused this error in media server response.
+     */
     public final String mErrorMessage;
 
     /**
@@ -235,7 +243,7 @@ public class MPDException extends Exception {
      * {@code start} parameter is null, the string will match the first character of the
      * {@code message}, if the {@code end} parameter is null, the string will match to the length
      * of the String.
-     *
+     * <p>
      * <p>This method is not intended to be an all-purpose string parser, and shouldn't be used
      * for anything beyond simple line parsing.</p>
      *

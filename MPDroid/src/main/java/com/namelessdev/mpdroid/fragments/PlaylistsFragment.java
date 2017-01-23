@@ -46,7 +46,7 @@ import java.io.IOException;
 
 /**
  * This Fragment lists the current stored {@link PlaylistFile}s.
- *
+ * <p>
  * This class is kept updated via the {@link BrowseFragmentBase#PLAYLIST_FILES} Collection. This
  * collection will not include the {@link Stream#PLAYLIST_NAME} playlist. That playlist is
  * considered special and used only with the {@link StreamsFragment}.
@@ -120,7 +120,7 @@ public class PlaylistsFragment extends BrowseFragment<PlaylistFile> {
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenu.ContextMenuInfo menuInfo) {
+                                    final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         final MenuItem editItem = menu
                 .add(Menu.NONE, EDIT, 0, R.string.editPlaylist);
@@ -134,7 +134,7 @@ public class PlaylistsFragment extends BrowseFragment<PlaylistFile> {
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         final Activity activity = getActivity();
         final Bundle bundle = new Bundle(1);
         final Fragment fragment =

@@ -35,7 +35,7 @@ import java.util.ListIterator;
 
 /**
  * This class contains methods used to process {@link String} entries from a MPD response.
- *
+ * <p>
  * <p>This class is immutable, thus, thread-safe.</p>
  */
 public class CommandResponse extends ObjectResponse<String> {

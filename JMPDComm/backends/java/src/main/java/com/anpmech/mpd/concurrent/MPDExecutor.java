@@ -62,7 +62,7 @@ public final class MPDExecutor {
      * exiting.
      */
     public static ResultFuture schedule(final Runnable task, final long delay,
-            final TimeUnit unit) {
+                                        final TimeUnit unit) {
         return new ResultFuture(EXECUTOR.schedule(task, delay, unit));
     }
 
@@ -70,10 +70,10 @@ public final class MPDExecutor {
      * Submits a value-returning task for execution in the future and returns a Future representing
      * the pending results of the task. The Future's <tt>get</tt> method will return the task's
      * result upon successful completion.
-     *
+     * <p>
      * <p>If you would like to immediately block waiting for a task, you can use constructions of
      * the form <tt>result = exec.submit(aCallable).get();</tt></p>
-     *
+     * <p>
      * <p> Note: The {@link Executors} class includes a set of methods that can convert some other
      * common closure-like objects, for example, {@link PrivilegedAction} to {@link Callable} form
      * so they can be submitted.</p>
@@ -87,7 +87,7 @@ public final class MPDExecutor {
      * @throws NullPointerException       If the task is null.
      */
     public static <T extends CommandResult> ResultFuture schedule(final Callable<T> task,
-            final long delay, final TimeUnit unit) {
+                                                                  final long delay, final TimeUnit unit) {
         return new ResultFuture(EXECUTOR.schedule(task, delay, unit));
     }
 
@@ -102,10 +102,10 @@ public final class MPDExecutor {
      * Submits a value-returning task for execution and returns a Future representing the pending
      * results of the task. The Future's <tt>get</tt> method will return the task's result upon
      * successful completion.
-     *
+     * <p>
      * <p>If you would like to immediately block waiting for a task, you can use constructions of
      * the form <tt>result = exec.submit(aCallable).get();</tt></p>
-     *
+     * <p>
      * <p> Note: The {@link Executors} class includes a set of methods that can convert some other
      * common closure-like objects, for example, {@link PrivilegedAction} to {@link Callable} form
      * so they can be submitted.</p>

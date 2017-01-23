@@ -120,7 +120,7 @@ public class StreamFetcher {
     }
 
     private static String parsePlaylist(final String data, final String key,
-            final Iterable<String> handlers) {
+                                        final Iterable<String> handlers) {
         final String[] lines = data.split("(\r\n|\n|\r)");
 
         for (final String line : lines) {

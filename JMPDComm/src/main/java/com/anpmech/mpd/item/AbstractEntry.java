@@ -58,7 +58,7 @@ public abstract class AbstractEntry<T extends AbstractEntry<T>> extends Response
 
     /**
      * The media server response key returned for the file size of an entry.
-     *
+     * <p>
      * <p>This is currently only used on non-music listings.</p>
      */
     private static final String RESPONSE_SIZE = "size";
@@ -96,7 +96,7 @@ public abstract class AbstractEntry<T extends AbstractEntry<T>> extends Response
 
     /**
      * This returns a representation of the source of the media, relative to the media server.
-     *
+     * <p>
      * <p>This can be a filename, a URL, etc. If this item's filename is a URL, the URI fragment is
      * removed.</p>
      *
@@ -124,7 +124,7 @@ public abstract class AbstractEntry<T extends AbstractEntry<T>> extends Response
 
     /**
      * This method returns the last modified time for this entry in Unix time.
-     *
+     * <p>
      * <p>The Last-Modified response value is expected to be given in ISO8601.</p>
      *
      * @return The last modified time for this entry in Unix time.
@@ -153,7 +153,7 @@ public abstract class AbstractEntry<T extends AbstractEntry<T>> extends Response
 
     /**
      * This returns a representation of the source of the media, relative to the media server.
-     *
+     * <p>
      * <p>This can be a filename, a URL, etc. If this item's filename is a URL, the URI fragment is
      * removed.</p>
      *
@@ -205,7 +205,7 @@ public abstract class AbstractEntry<T extends AbstractEntry<T>> extends Response
 
     /**
      * This returns the size a MPD entry file.
-     *
+     * <p>
      * <p><b>This is only available with some MPD command responses.</b></p>
      *
      * @return The size of a MPD entry file, {@link Integer#MIN_VALUE} if it doesn't exist in this

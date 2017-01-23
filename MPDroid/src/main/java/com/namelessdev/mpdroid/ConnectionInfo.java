@@ -31,7 +31,7 @@ import java.util.Arrays;
 
 /**
  * This class stores information about the current connection, at the time of creation.
- *
+ * <p>
  * This class is immutable, thus thread-safe.
  */
 public final class ConnectionInfo implements Parcelable {
@@ -43,7 +43,7 @@ public final class ConnectionInfo implements Parcelable {
 
     /**
      * This is an empty object used for initialization.
-     *
+     * <p>
      * <p>Everything from this object will be {@code false}, {@code empty} or the item default.</p>
      */
     public static final ConnectionInfo EMPTY = new ConnectionInfo.Builder().build();
@@ -108,8 +108,8 @@ public final class ConnectionInfo implements Parcelable {
      * @see Builder
      */
     private ConnectionInfo(@NotNull final String server, final int port, final String password,
-            @NonNull final Uri stream, final boolean isNotificationPersistent,
-            final ConnectionInfo lastConnection) {
+                           @NonNull final Uri stream, final boolean isNotificationPersistent,
+                           final ConnectionInfo lastConnection) {
 
 
         mServer = server;
@@ -284,7 +284,7 @@ public final class ConnectionInfo implements Parcelable {
     /**
      * This method returns whether the server information has changed since the prior
      * ConnectionInfo.
-     *
+     * <p>
      * <p>This is true if {@link #hasHostnameChanged()}, {@link #hasHostPortChanged()} and
      * {@link #hasHostPasswordChanged()} is true, false otherwise.</p>
      *

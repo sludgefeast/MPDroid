@@ -41,7 +41,7 @@ import java.util.concurrent.TimeUnit;
  * This is a class which serves as the base for a <A HREF="http://www.musicpd.org/doc/protocol"
  * target="_top">MPD protocol</A> key/value based responses with useful tools for processing and
  * error handling.
- *
+ * <p>
  * <p>This class is designed with thread-safety in mind. If the class generated map is used, as
  * long as there is only one map writer at a time, there should be no concurrency issues. If there
  * is going to be more than one writer at a time, external locking, or a the alternative
@@ -76,7 +76,7 @@ class ResponseMap {
 
     /**
      * This Semaphore allows blocking to wait for the map's initial update.
-     *
+     * <p>
      * <p>This Semaphore is constructed with a lack of permits, denoting no map validity until set
      * otherwise.</p>
      */
@@ -89,7 +89,7 @@ class ResponseMap {
 
     /**
      * This constructs the {@link ConcurrentHashMap} backed ResponseMap.
-     *
+     * <p>
      * <p>This map will always have a {@code loadFactor} of {@code 0.75f} and a {@code
      * concurrencyLevel} of {@code 1}, as reasonably, there will only be one writer at a time.</p>
      *
@@ -219,7 +219,7 @@ class ResponseMap {
 
     /**
      * Simply returns the map from the media server response for the command.
-     *
+     * <p>
      * <p>Subclasses should override this method and include it's own line of values.</p>
      *
      * @return The map from the media server response for the command.

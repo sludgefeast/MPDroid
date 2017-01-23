@@ -379,7 +379,7 @@ public class NotificationHandler implements AlbumCoverHandler.NotificationCallba
      * @param trackTitle The current track title.
      */
     private void updateBufferingContent(final RemoteViews resultView,
-            final CharSequence trackTitle) {
+                                        final CharSequence trackTitle) {
         resultView.setViewVisibility(R.id.notificationClose, View.GONE);
         resultView.setTextViewText(R.id.notificationTitle,
                 mServiceContext.getString(R.string.buffering));

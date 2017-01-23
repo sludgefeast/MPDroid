@@ -21,7 +21,7 @@ import android.view.View;
 
 import java.util.List;
 
-public interface SeparatedListDataBinder<ItemT>  {
+public interface SeparatedListDataBinder<ItemT> {
 
     boolean isEnabled(int position, List<ItemT> items, ItemT item);
 

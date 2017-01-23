@@ -191,7 +191,7 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen,
-            @NonNull final Preference preference) {
+                                         @NonNull final Preference preference) {
         // Is it the connectionscreen which is called?
         if (preference.getKey() == null) {
             return false;

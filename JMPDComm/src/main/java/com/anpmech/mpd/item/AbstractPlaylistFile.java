@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 
 /**
  * This class is the generic base for the PlaylistFile items, abstracted for backend.
- *
+ * <p>
  * <p>This item is returned from methods of the
  * <A HREF="http://www.musicpd.org/doc/protocol/database.html">database</A>
  * subsystem of the <A HREF="http://www.musicpd.org/doc/protocol">MPD protocol</A>.</p>

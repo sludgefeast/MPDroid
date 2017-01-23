@@ -50,7 +50,7 @@ public class MPDStatisticsMap extends ResponseMap implements MPDStatistics {
 
     /**
      * The default number of statistic response entries.
-     *
+     * <p>
      * <p>The statistics command responds with 7 entries as of standard MPD implementation 0.19.
      * Unlike the status command, the statistics entry response count is much less likely to
      * fluctuate.</p>

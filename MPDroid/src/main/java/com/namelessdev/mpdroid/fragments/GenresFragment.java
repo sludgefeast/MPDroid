@@ -87,7 +87,7 @@ public class GenresFragment extends BrowseFragment<GenresGroup> {
     }
 
     private List<GenresGroup> groupGenres(final Collection<Genre> genres) {
-        final Map<String,GenresGroup> groupMap = new HashMap<>();
+        final Map<String, GenresGroup> groupMap = new HashMap<>();
 
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mApp);
         final boolean optimizeGenres = settings.getBoolean(PREFERENCE_OPTIMIZE_GENRES, false);
@@ -97,7 +97,7 @@ public class GenresFragment extends BrowseFragment<GenresGroup> {
 
         for (final Genre genre : genres) {
             final String[] genreNames = genreSeparators.isEmpty()
-                    ? new String[] { genre.getName() }
+                    ? new String[]{genre.getName()}
                     : genre.getName().split("[" + Pattern.quote(genreSeparators) + "]");
             for (String genreName : genreNames) {
                 if (optimizeGenres) {
@@ -134,7 +134,7 @@ public class GenresFragment extends BrowseFragment<GenresGroup> {
             }
             if (!word.isEmpty()) {
                 result += word.substring(0, 1).toUpperCase() +
-                          (word.length() > 1 ? word.substring(1) : "");
+                        (word.length() > 1 ? word.substring(1) : "");
             }
         }
         return result;
@@ -164,7 +164,7 @@ public class GenresFragment extends BrowseFragment<GenresGroup> {
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         final Bundle bundle = new Bundle(1);
         final Fragment fragment =
                 Fragment.instantiate(getActivity(), ArtistsFragment.class.getName(), bundle);

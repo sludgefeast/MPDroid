@@ -40,7 +40,9 @@ class AlbumCoverHandler implements CoverDownloadListener {
 
     private final int mIconWidth;
 
-    /** The album cover helper instance. */
+    /**
+     * The album cover helper instance.
+     */
     private CoverAsyncHelper mCoverAsyncHelper = null;
 
     private Bitmap mFullSizeAlbumCover = null;
@@ -125,7 +127,7 @@ class AlbumCoverHandler implements CoverDownloadListener {
      */
     @Override
     public final void onCoverDownloaded(final AlbumInfo albumInfo,
-            final Collection<Bitmap> bitmaps) {
+                                        final Collection<Bitmap> bitmaps) {
         mLastAlbumInfo = albumInfo;
 
         /**

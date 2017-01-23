@@ -39,7 +39,7 @@ import java.util.ListIterator;
 
 /**
  * This class is used to create an Object from a {@link CommandResult}.
- *
+ * <p>
  * <p>This class is immutable, thus, thread-safe. All optional operations, as defined by the
  * {@link Collection} interface will throw an {@link UnsupportedOperationException}.</p>
  *
@@ -195,11 +195,11 @@ public abstract class ObjectResponse<T> implements Collection<T> {
      * to be equal, {@code o} must represent the same object as this instance using a
      * class-specific comparison. The general contract is that this comparison should be reflexive,
      * symmetric, and transitive. Also, no object reference other than null is equal to null.
-     *
+     * <p>
      * <p>The default implementation returns {@code true} only if {@code this == o}. See
      * <a href="{@docRoot}reference/java/lang/Object.html#writing_equals">Writing a correct
      * {@code equals} method</a> if you intend implementing your own {@code equals} method.</p>
-     *
+     * <p>
      * <p>The general contract for the {@code equals} and {@link #hashCode()} methods is that if
      * {@code equals} returns {@code true} for any two objects, then {@code hashCode()} must
      * return the same value for these objects. This means that subclasses of {@code Object}
@@ -267,10 +267,10 @@ public abstract class ObjectResponse<T> implements Collection<T> {
      * Returns an integer hash code for this object. By contract, any two objects for which
      * {@link #equals} returns {@code true} must return the same hash code value. This means that
      * subclasses of {@code Object} usually override both methods or neither method.
-     *
+     * <p>
      * <p>Note that hash values must not change over time unless information used in equals
      * comparisons also changes.</p>
-     *
+     * <p>
      * <p>See <a href="{@docRoot}reference/java/lang/Object.html#writing_hashCode">Writing a
      * correct {@code hashCode} method</a> if you intend implementing your own {@code hashCode}
      * method.</p>
@@ -373,10 +373,10 @@ public abstract class ObjectResponse<T> implements Collection<T> {
 
     /**
      * Returns a new array containing all elements contained in this {@code Collection}.
-     *
+     * <p>
      * If the implementation has ordered elements it will return the element
      * array in the same order as an iterator would return them.
-     *
+     * <p>
      * The array returned does not reflect any changes of the {@code Collection}. A new
      * array is created even if the underlying data structure is already an
      * array.
@@ -403,10 +403,10 @@ public abstract class ObjectResponse<T> implements Collection<T> {
      * an array of the same type is created. If the specified array is used and is larger than this
      * {@code Collection}, the array element following the {@code Collection} elements is set to
      * null.
-     *
+     * <p>
      * If the implementation has ordered elements it will return the element array in the same
      * order as an iterator would return them.
-     *
+     * <p>
      * {@code toArray(new Object[0])} behaves exactly the same way as {@code toArray()} does.
      *
      * @param array the array.

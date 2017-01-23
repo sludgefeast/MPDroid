@@ -36,60 +36,96 @@ public class ServiceBinder implements
         Handler.Callback,
         ServiceConnection {
 
-    /** Length of time to give a message prior to Messenger termination. */
+    /**
+     * Length of time to give a message prior to Messenger termination.
+     */
     public static final long MESSAGE_DELAY = 15000L;
 
-    /** This is the class unique Binder identifier. */
+    /**
+     * This is the class unique Binder identifier.
+     */
     static final int LOCAL_UID = 100;
 
-    /** Message sent to the client upon successful connection. */
+    /**
+     * Message sent to the client upon successful connection.
+     */
     public static final int CONNECTED = LOCAL_UID + 1;
 
-    /** Message sent to the client upon disconnection. */
+    /**
+     * Message sent to the client upon disconnection.
+     */
     public static final int DISCONNECTED = LOCAL_UID + 2;
 
-    /** Used as an argument in a what/boolean pair message. */
+    /**
+     * Used as an argument in a what/boolean pair message.
+     */
     public static final int TRUE = LOCAL_UID + 3;
 
-    /** Used as an argument in a what/boolean pair message. */
+    /**
+     * Used as an argument in a what/boolean pair message.
+     */
     public static final int FALSE = LOCAL_UID + 4;
 
-    /** Handled by the client handler to set persistent what/bool set. */
+    /**
+     * Handled by the client handler to set persistent what/bool set.
+     */
     public static final int SET_PERSISTENT = LOCAL_UID + 5;
 
-    /** Sent to the service upon successful connection. */
+    /**
+     * Sent to the service upon successful connection.
+     */
     static final int REGISTER_CLIENT = LOCAL_UID + 6;
 
-    /** Sent to the service before unbind. */
+    /**
+     * Sent to the service before unbind.
+     */
     static final int UNREGISTER_CLIENT = LOCAL_UID + 7;
 
-    /** Turns on debugging messages. */
+    /**
+     * Turns on debugging messages.
+     */
     private static final boolean DEBUG = MPDroidService.DEBUG;
 
     private static final String TAG = "ServiceBinder";
 
-    /** The application context of the client. */
+    /**
+     * The application context of the client.
+     */
     private final Context mClientContext;
 
-    /** The handler which processes messages on behalf of the client of this class. */
+    /**
+     * The handler which processes messages on behalf of the client of this class.
+     */
     private final Handler mClientHandler;
 
-    /** The messenger for the ServiceBinder client. */
+    /**
+     * The messenger for the ServiceBinder client.
+     */
     private final Messenger mClientMessenger;
 
-    /** Local initiating bind and service persistence. */
+    /**
+     * Local initiating bind and service persistence.
+     */
     private final Intent mIntent;
 
-    /** Local handler used only for local (usually delayed) messaging. */
+    /**
+     * Local handler used only for local (usually delayed) messaging.
+     */
     private final Handler mLocalHandler;
 
-    /** If service and bind are persistent. */
+    /**
+     * If service and bind are persistent.
+     */
     private boolean mIsPersistent = false;
 
-    /** The message to send on successful connection. */
+    /**
+     * The message to send on successful connection.
+     */
     private Message mMessageOnConnection = null;
 
-    /** The messenger from the service used for two way service communication. */
+    /**
+     * The messenger from the service used for two way service communication.
+     */
     private Messenger mServiceMessenger = null;
 
     /**
@@ -180,7 +216,9 @@ public class ServiceBinder implements
         return result;
     }
 
-    /** Initiates our service binding, after complete, onBindService() should be called. */
+    /**
+     * Initiates our service binding, after complete, onBindService() should be called.
+     */
     private void doBindService() {
         mClientContext.bindService(mIntent, this, Context.BIND_AUTO_CREATE);
 
@@ -373,7 +411,9 @@ public class ServiceBinder implements
         }
     }
 
-    /** Setup unbinding after a short delay. */
+    /**
+     * Setup unbinding after a short delay.
+     */
     private void setupDisconnectionDelay() {
         if (DEBUG) {
             Log.d(TAG, "If not interrupted, unbinding from service in " +

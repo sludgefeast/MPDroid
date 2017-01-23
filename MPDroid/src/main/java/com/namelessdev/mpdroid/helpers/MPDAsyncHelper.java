@@ -63,7 +63,7 @@ public class MPDAsyncHelper implements Handler.Callback {
 
     /**
      * Executes a Runnable asynchronously.
-     *
+     * <p>
      * <p>Meant to use for individual long during operations. This method returns immediately and
      * provides no indication of runnable completion.</p>
      *
@@ -76,7 +76,7 @@ public class MPDAsyncHelper implements Handler.Callback {
 
     /**
      * Executes a Runnable asynchronously.
-     *
+     * <p>
      * <p>Meant to use for individual long during operations. This method returns immediately and
      * provides indication through the {@code listener} parameter.</p>
      *
@@ -85,7 +85,7 @@ public class MPDAsyncHelper implements Handler.Callback {
      * @param runnable The runnable to run.
      */
     public void execAsync(final AsyncExecListener listener, final CharSequence token,
-            final Runnable runnable) {
+                          final Runnable runnable) {
         if (mWorkerHandler == null) {
             mWorkerHandler = mMPDAsyncWorker.startThread();
         }
@@ -133,7 +133,7 @@ public class MPDAsyncHelper implements Handler.Callback {
 
     /**
      * Updates the connection settings.
-     *
+     * <p>
      * <p>If the connection settings have changed, the results will call back as well.</p>
      *
      * @return The updated connection settings.

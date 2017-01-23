@@ -32,10 +32,10 @@ import com.anpmech.mpd.commandresponse.CommandResponse;
 
 /**
  * This is the core of the {@link CommandResponse} classes, abstracted for the Java backend.
- *
+ * <p>
  * <p>This class contains the bare results from the connection. Processing required from this
  * result should be done in a subclass.</p>
- *
+ * <p>
  * <p>This class is subclassed to process any MPD protocol server responses. This class is
  * immutable, thus, thread-safe.</p>
  */

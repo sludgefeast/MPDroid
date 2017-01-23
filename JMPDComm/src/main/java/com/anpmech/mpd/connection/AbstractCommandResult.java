@@ -37,7 +37,7 @@ import java.util.StringTokenizer;
 
 /**
  * This is the core of the {@link CommandResponse} classes.
- *
+ * <p>
  * <p>This class is subclassed to process any MPD protocol server responses. This class is
  * immutable, thus, thread-safe.</p>
  */
@@ -204,7 +204,7 @@ public class AbstractCommandResult {
      * Returns an integer hash code for this object. By contract, any two objects for which {@link
      * #equals} returns {@code true} must return the same hash code value. This means that
      * subclasses of {@code Object} usually override both methods or neither method.
-     *
+     * <p>
      * <p>Note that hash values must not change over time unless information used in equals
      * comparisons also changes.</p>
      *

@@ -54,7 +54,7 @@ public class ToolbarHelper {
     }
 
     public static void addStandardMenuItemClickListener(final Fragment fragment, Toolbar toolbar,
-            final Toolbar.OnMenuItemClickListener chainedListener) {
+                                                        final Toolbar.OnMenuItemClickListener chainedListener) {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final MenuItem menuItem) {
@@ -77,7 +77,7 @@ public class ToolbarHelper {
 
     @SuppressWarnings("unused")
     public static void addStandardMenuItemClickListener(final Activity activity, Toolbar toolbar,
-            final Toolbar.OnMenuItemClickListener chainedListener) {
+                                                        final Toolbar.OnMenuItemClickListener chainedListener) {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final MenuItem menuItem) {

@@ -49,7 +49,7 @@ public class EditActivity extends AppCompatActivity implements AdapterView.OnIte
     private List<ActionItem> mItems;
 
     private void finishWithAction(final ActionItem action, final String extra,
-            final String overrideLabel) {
+                                  final String overrideLabel) {
         final Intent intent = new Intent();
         final Bundle bundle = new Bundle();
         bundle.putString(BUNDLE_ACTION_STRING, action.mActionString);
@@ -102,7 +102,7 @@ public class EditActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         final ActionItem item = mItems.get(position);
         if (item.mActionString.equals(MPDControl.ACTION_VOLUME_SET)) {
             final SeekBar seekBar = new SeekBar(this);

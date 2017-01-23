@@ -40,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * This class creates a Directory Item, an abstraction of a filesystem directory in the <A
  * HREF="http://www.musicpd.org/doc/protocol">MPD Protocol</A>, for the Android backend.
- *
+ * <p>
  * <p>This class is similar to {@link Listing}, but rather than using the
  * <A HREF="http://www.musicpd.org/doc/protocol/database.html#command_listfiles">{@code
  * listfiles}</A> command, the

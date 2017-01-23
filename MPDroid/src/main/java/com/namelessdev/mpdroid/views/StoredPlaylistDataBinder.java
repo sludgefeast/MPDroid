@@ -62,8 +62,8 @@ public class StoredPlaylistDataBinder<T extends Item<T>> extends BaseDataBinder<
 
     @Override
     public void onDataBind(final Context context, final View targetView,
-            final AbstractViewHolder viewHolder, final List<T> items, final Object item,
-            final int position) {
+                           final AbstractViewHolder viewHolder, final List<T> items, final Object item,
+                           final int position) {
         final PlaylistViewHolder holder = (PlaylistViewHolder) viewHolder;
         final Music music = (Music) item;
         String artist = music.getArtistName();
@@ -106,7 +106,7 @@ public class StoredPlaylistDataBinder<T extends Item<T>> extends BaseDataBinder<
 
     @Override
     public View onLayoutInflation(final Context context, final View targetView,
-            final List<T> items) {
+                                  final List<T> items) {
         return setViewVisible(targetView, R.id.playlist_cover, mEnableCache);
     }
 }

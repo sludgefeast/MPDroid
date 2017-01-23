@@ -42,7 +42,7 @@ import java.util.Map;
 /**
  * This class contains methods used to process {@link Map.Entry} entries from a
  * {@code key}:{@code value} MPD response.
- *
+ * <p>
  * <p>This class is immutable, thus, thread-safe.</p>
  */
 public class KeyValueResponse extends ObjectResponse<Map.Entry<String, String>> {
@@ -99,7 +99,7 @@ public class KeyValueResponse extends ObjectResponse<Map.Entry<String, String>> 
      * @return True if the list was modified, false otherwise.
      */
     private static <T, S> boolean addAllMatching(final Collection<S> list,
-            final Iterator<Map.Entry<T, S>> iterator, final T key) {
+                                                 final Iterator<Map.Entry<T, S>> iterator, final T key) {
         final int hash = list.hashCode();
 
         while (iterator.hasNext()) {
@@ -123,7 +123,7 @@ public class KeyValueResponse extends ObjectResponse<Map.Entry<String, String>> 
      * @return True if the list was modified, false otherwise.
      */
     private static <T, S> boolean putAll(final Map<T, S> map,
-            final Iterator<Map.Entry<T, S>> iterator) {
+                                         final Iterator<Map.Entry<T, S>> iterator) {
         final int hash = map.hashCode();
 
         while (iterator.hasNext()) {
@@ -164,7 +164,7 @@ public class KeyValueResponse extends ObjectResponse<Map.Entry<String, String>> 
     /**
      * This method returns a list of values from a {@code key}:{@code value} pair MPD protocol
      * response.
-     *
+     * <p>
      * <p>Care should be taken to only call this method with a {@code key}:{@code value} pair MPD
      * protocol response.</p>
      *

@@ -181,7 +181,7 @@
             android:summary="@string/showAlbumTrackCountDescription"
             android:title="@string/showAlbumTrackCount" />
 
-        <PreferenceCategory android:title="@string/genres" >
+        <PreferenceCategory android:title="@string/genres">
 
             <CheckBoxPreference
                 android:defaultValue="false"

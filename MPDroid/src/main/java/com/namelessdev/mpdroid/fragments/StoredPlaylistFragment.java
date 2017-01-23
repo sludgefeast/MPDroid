@@ -177,6 +177,6 @@ public class StoredPlaylistFragment extends BrowseFragment<Music> {
 
     @Override
     public String toString() {
-        return mPlaylist != null ? mPlaylist.getName() :getString(R.string.playlist);
+        return mPlaylist != null ? mPlaylist.getName() : getString(R.string.playlist);
     }
 }

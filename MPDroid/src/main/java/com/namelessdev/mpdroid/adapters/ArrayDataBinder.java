@@ -33,7 +33,7 @@ public interface ArrayDataBinder<T extends Item<T>> {
     boolean isEnabled(int position, List<T> items, Object item);
 
     void onDataBind(Context context, View targetView, AbstractViewHolder viewHolder,
-            List<T> items, Object item, int position);
+                    List<T> items, Object item, int position);
 
     View onLayoutInflation(Context context, View targetView, List<T> items);
 }

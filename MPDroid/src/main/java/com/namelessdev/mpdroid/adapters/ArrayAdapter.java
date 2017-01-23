@@ -45,7 +45,7 @@ public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter
     private final List<T> mItems;
 
     public ArrayAdapter(final Context context, final ArrayDataBinder<T> dataBinder,
-            final List<T> items) {
+                        final List<T> items) {
         super(context, 0, items);
         mDataBinder = dataBinder;
 
@@ -61,7 +61,7 @@ public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter
     }
 
     public ArrayAdapter(final Context context, @LayoutRes final int textViewResourceId,
-            final List<T> items) {
+                        final List<T> items) {
         super(context, textViewResourceId, items);
         mDataBinder = null;
 

@@ -21,7 +21,7 @@ import android.os.Message;
 
 /**
  * A simple Runnable used to callback to a helper thread after finishing a Runnable.
- *
+ * <p>
  * This class is immutable, thus thread safe.
  */
 final class WorkerRunnable implements Runnable {
@@ -33,7 +33,7 @@ final class WorkerRunnable implements Runnable {
 
     /**
      * The final destination callback.
-     *
+     * <p>
      * <p>If null, there will be no indication of completion.</p>
      */
     private final MPDAsyncHelper.AsyncExecListener mListener;
@@ -45,7 +45,7 @@ final class WorkerRunnable implements Runnable {
 
     /**
      * The source assigned token to give back to the source in the callable.
-     *
+     * <p>
      * <p>If null, there will be no indication of completion.</p>
      */
     private final CharSequence mToken;
@@ -59,7 +59,7 @@ final class WorkerRunnable implements Runnable {
      * @param listener The source and destination listener.
      */
     WorkerRunnable(final Handler handler, final CharSequence token, final Runnable runnable,
-            final MPDAsyncHelper.AsyncExecListener listener) {
+                   final MPDAsyncHelper.AsyncExecListener listener) {
 
 
         mToken = token;

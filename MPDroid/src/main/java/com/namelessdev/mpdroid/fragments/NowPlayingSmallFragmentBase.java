@@ -130,7 +130,7 @@ abstract class NowPlayingSmallFragmentBase extends Fragment implements
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.now_playing_small_fragment, container, false);
         mSongTitle = (TextView) view.findViewById(R.id.song_title);
         mSongTitle.setSelected(true);

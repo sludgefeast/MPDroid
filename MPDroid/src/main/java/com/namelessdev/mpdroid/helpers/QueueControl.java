@@ -228,7 +228,7 @@ public final class QueueControl {
      * @param arg3    An integer argument for the command.
      */
     public static void run(@ControlType final int command, final int arg1, final int arg2,
-            final int arg3) {
+                           final int arg3) {
         new Thread(new Runnable() {
             @Override
             public void run() {

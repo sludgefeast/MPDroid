@@ -35,7 +35,7 @@ import java.util.Iterator;
 /**
  * This class is used to create an {@link Iterator} to iterate over a result to find a defined
  * beginning block token and end block token to create an Object.
- *
+ * <p>
  * <p>This Iterator should be used for iteration which requires more than one line and ends
  * with a block token rather than a {@code newline}.</p>
  *
@@ -51,7 +51,7 @@ abstract class MultiLineResult<T> extends PartialBlockResult<T> {
     /**
      * This constructor is used when the first token found in a response is used as the
      * beginning and ending delimiter for a result.
-     *
+     * <p>
      * <p>This is used for MPD protocol results which have one single type of information in
      * the result.</p>
      *
@@ -82,7 +82,7 @@ abstract class MultiLineResult<T> extends PartialBlockResult<T> {
      * @throws IllegalArgumentException If the position parameter is less than 0.
      */
     protected MultiLineResult(final String result, final int position,
-            final String[] beginBlockTokens, final String[] endBlockTokens) {
+                              final String[] beginBlockTokens, final String[] endBlockTokens) {
         super(result, position, beginBlockTokens);
 
         mEndBlockTokens = endBlockTokens;
@@ -117,7 +117,7 @@ abstract class MultiLineResult<T> extends PartialBlockResult<T> {
      * {@code Collection}.
      */
     static int count(final String result, final String[] beginBlockTokens,
-            final String[] endBlockTokens) {
+                     final String[] endBlockTokens) {
         final Iterator<Void> iterator = new MultiLineNoop(result, beginBlockTokens, endBlockTokens);
 
         return AbstractObjectResult.count(iterator);

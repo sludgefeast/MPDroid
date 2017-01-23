@@ -90,13 +90,13 @@ abstract class MPDFuture<T> {
 
     /**
      * Attempts to cancel execution of this task.
-     *
+     * <p>
      * <p>This attempt will fail if the task has already completed, has already been cancelled, or
      * could not be cancelled for some other reason. If successful, and this task has not started
      * when {@code cancel} is called, this task should never run.  If the task has already started,
      * then the {@code mayInterruptIfRunning} parameter determines whether the thread executing
      * this task should be interrupted in an attempt to stop the task.</p>
-     *
+     * <p>
      * <p>After this method returns, subsequent calls to {@link #isDone} will always return
      * {@code true}.  Subsequent calls to {@link #isCancelled} will always return {@code true}
      * if this method returned {@code true}.</p>
@@ -188,7 +188,7 @@ abstract class MPDFuture<T> {
 
     /**
      * Returns {@code true} if this task completed.
-     *
+     * <p>
      * <p>Completion may be due to normal termination, an exception, or cancellation -- in all of
      * these cases, this method will return {@code true}.</p>
      *

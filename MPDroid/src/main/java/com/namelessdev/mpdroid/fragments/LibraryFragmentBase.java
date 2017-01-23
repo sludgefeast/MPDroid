@@ -45,7 +45,7 @@ abstract class LibraryFragmentBase extends Fragment {
     /**
      * The {@link PagerAdapter} that will provide fragments for each of the sections. We use a
      * {@link FragmentPagerAdapter} derivative, which will keep every loaded fragment in memory.
-     *
+     * <p>
      * If this becomes too memory intensive, it may be best to switch to a
      * {@link FragmentStatePagerAdapter}.
      */
@@ -68,7 +68,7 @@ abstract class LibraryFragmentBase extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.library_tabs_fragment, container, false);
         mViewPager = (ViewPager) view.findViewById(R.id.pager);
         if (mSectionsPagerAdapter != null) {

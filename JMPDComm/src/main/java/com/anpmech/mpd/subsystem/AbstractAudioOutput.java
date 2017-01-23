@@ -66,7 +66,7 @@ abstract class AbstractAudioOutput {
 
     /**
      * Sole constructor.
-     *
+     * <p>
      * <p>The parameters to this constructor cannot both be null or non-null simultaneously.</p>
      *
      * @param response The MPD server generated response.
@@ -142,7 +142,7 @@ abstract class AbstractAudioOutput {
      * Returns an integer hash code for this object. By contract, any two objects for which {@link
      * #equals} returns {@code true} must return the same hash code value. This means that
      * subclasses of {@code Object} usually override both methods or neither method.
-     *
+     * <p>
      * <p>Note that hash values must not change over time unless information used in equals
      * comparisons also changes.</p>
      *

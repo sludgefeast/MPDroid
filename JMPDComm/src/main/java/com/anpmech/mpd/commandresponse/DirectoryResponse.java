@@ -36,7 +36,7 @@ import java.util.ListIterator;
 
 /**
  * This class contains methods used to process {@link Directory} entries from a MPD response.
- *
+ * <p>
  * <p>This class is immutable, thus, thread-safe.</p>
  *
  * @see ListingResponse

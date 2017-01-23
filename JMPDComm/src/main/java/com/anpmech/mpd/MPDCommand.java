@@ -43,7 +43,9 @@ public class MPDCommand {
 
     public static final String MPD_CMD_FIND = "find";
 
-    /** Added in MPD protocol 0.16.0 */
+    /**
+     * Added in MPD protocol 0.16.0
+     */
     public static final String MPD_CMD_FIND_ADD = "findadd";
 
     public static final String MPD_CMD_GROUP = "group";
@@ -80,18 +82,26 @@ public class MPDCommand {
 
     public static final String MPD_CMD_SEARCH = "search";
 
-    /** Added in MPD protocol 0.17.0. */
+    /**
+     * Added in MPD protocol 0.17.0.
+     */
     public static final String MPD_CMD_SEARCH_ADD_PLAYLIST = "searchaddpl";
 
     public static final String MPD_SEARCH_FILENAME = "filename";
 
-    /** The class log identifier. */
+    /**
+     * The class log identifier.
+     */
     private static final String TAG = "MPDCommand";
 
-    /** The base protocol command. */
+    /**
+     * The base protocol command.
+     */
     private final CharSequence mBaseCommand;
 
-    /** The fully formatted protocol command and arguments. */
+    /**
+     * The fully formatted protocol command and arguments.
+     */
     private final String mCommand;
 
     /**

@@ -50,8 +50,8 @@ public class AlbumCoverDownloadListener implements CoverDownloadListener {
     }
 
     public AlbumCoverDownloadListener(final ImageView coverArt,
-            final ProgressBar coverArtProgress,
-            final boolean bigCoverNotFound) {
+                                      final ProgressBar coverArtProgress,
+                                      final boolean bigCoverNotFound) {
 
         mCoverArt = coverArt;
         mBigCoverNotFound = bigCoverNotFound;

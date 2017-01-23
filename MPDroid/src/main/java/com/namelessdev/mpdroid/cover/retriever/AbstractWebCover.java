@@ -68,7 +68,7 @@ abstract class AbstractWebCover implements ICoverRetriever {
 
     /**
      * This method encodes a query string fragment to explicitly retain it's ampersand.
-     *
+     * <p>
      * <p>This is required to explicitly show which URI query ampersands require encoding.</p>
      *
      * @param query The query string requiring ampersand encoding.
@@ -98,7 +98,7 @@ abstract class AbstractWebCover implements ICoverRetriever {
      * @throws MalformedURLException Upon incorrect input for the URI to ASCII conversion.
      */
     protected static URL encodeUrl(final String host, final String path,
-            final String query) throws URISyntaxException, MalformedURLException {
+                                   final String query) throws URISyntaxException, MalformedURLException {
         String uri = new URI("https", host, path, query, null).toASCIIString();
 
         if (uri.contains(AMPERSAND_TOKEN)) {
@@ -143,7 +143,7 @@ abstract class AbstractWebCover implements ICoverRetriever {
      * @param url      The query URL.
      */
     protected static void logError(final String tag, final String key, final Object response,
-            final URL url) {
+                                   final URL url) {
         if (CoverManager.DEBUG) {
             Log.d(tag, "No items of key " + key + " in response " + response + " for url " + url);
         }

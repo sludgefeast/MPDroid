@@ -32,7 +32,7 @@ import com.anpmech.mpd.connection.CommandResult;
 
 /**
  * This class is an abstraction to build classes which use entire response blocks.
- *
+ * <p>
  * <p>This class is used when the Iterator will skip no lines of the response. This typically
  * used for Iterators which output Strings.</p>
  *

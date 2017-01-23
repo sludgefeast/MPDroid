@@ -278,7 +278,7 @@ public final class CoverManager {
 
     /**
      * Checks if device connected to a WIFI network.
-     *
+     * <p>
      * <p>On Android SDK 21 and later this sets the first WIFI network found as the
      * default.</p>
      *
@@ -345,7 +345,7 @@ public final class CoverManager {
 
     /**
      * This method loads a serialized object file into a raw {@link Map}.
-     *
+     * <p>
      * <p>This method suppresses raw types and unchecked warnings due to the required
      * serialization.</p>
      *
@@ -395,7 +395,7 @@ public final class CoverManager {
      * @param <V>   The Map's list value type.
      */
     private static <T extends Map<K, Collection<V>>, K, V> void mapCollectionValue(final T map,
-            final K key, final V value) {
+                                                                                   final K key, final V value) {
         Collection<V> valueList = map.get(key);
 
         if (valueList == null) {
@@ -548,7 +548,7 @@ public final class CoverManager {
         }
 
         private int calculateInSampleSize(final BitmapFactory.Options options, final int reqWidth,
-                final int reqHeight) {
+                                          final int reqHeight) {
             // Raw height and width of image
             final int height = options.outHeight;
             final int width = options.outWidth;

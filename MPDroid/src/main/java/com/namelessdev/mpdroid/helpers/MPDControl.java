@@ -35,7 +35,9 @@ import java.util.concurrent.TimeUnit;
  */
 public final class MPDControl {
 
-    /** If these are sent to the run() class, the volume will not change. */
+    /**
+     * If these are sent to the run() class, the volume will not change.
+     */
     public static final int INVALID_INT = Integer.MIN_VALUE;
 
     public static final long INVALID_LONG = Long.MIN_VALUE;
@@ -212,7 +214,7 @@ public final class MPDControl {
 
     /**
      * This method sets up the connection.
-     *
+     * <p>
      * <p>This should be used, as required, prior to run().</p>
      *
      * @param timeout The maximum time to wait for both a connection and/or status.

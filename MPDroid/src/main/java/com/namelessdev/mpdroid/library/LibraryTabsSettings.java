@@ -177,7 +177,7 @@ class TabListDataBinder implements SeparatedListDataBinder<TabItem> {
 
     @Override
     public void onDataBind(final Context context, final View targetView,
-            final List<TabItem> items, final TabItem item, final int position) {
+                           final List<TabItem> items, final TabItem item, final int position) {
         ((TextView) targetView).setText(LibraryTabsUtil.getTabTitleResId(item.mText));
     }
 

@@ -52,13 +52,19 @@ import java.util.Map;
  */
 public class Sticker {
 
-    /** A response returned from a {@link #CMD_ACTION_FIND}. */
+    /**
+     * A response returned from a {@link #CMD_ACTION_FIND}.
+     */
     private static final String CMD_RESPONSE_FILE = "file";
 
-    /** The base command for this subsystem. */
+    /**
+     * The base command for this subsystem.
+     */
     private static final String CMD_STICKER = "sticker";
 
-    /** A response returned from any sticker command. */
+    /**
+     * A response returned from any sticker command.
+     */
     private static final String CMD_RESPONSE_STICKER = CMD_STICKER;
 
     /**
@@ -110,19 +116,29 @@ public class Sticker {
      */
     private static final String CMD_ACTION_FIND = CMD_STICKER + ' ' + "find";
 
-    /** This is a {@code {TYPE}} argument for sticker commands. */
+    /**
+     * This is a {@code {TYPE}} argument for sticker commands.
+     */
     private static final String CMD_STICKER_TYPE_SONG = "song";
 
-    /** The debug flag, enable to get debug information in the log output. */
+    /**
+     * The debug flag, enable to get debug information in the log output.
+     */
     private static final boolean DEBUG = true;
 
-    /** The maximum rating used for the home grown rating system. */
+    /**
+     * The maximum rating used for the home grown rating system.
+     */
     private static final int MAX_RATING = 100;
 
-    /** The minimum rating used for the home grown rating system. */
+    /**
+     * The minimum rating used for the home grown rating system.
+     */
     private static final int MIN_RATING = 0;
 
-    /** This is a sticker {@code NAME} argument for the home grown ratings. */
+    /**
+     * This is a sticker {@code NAME} argument for the home grown ratings.
+     */
     private static final String RATING_STICKER = "rating";
 
     private static final String STICKERS_NOT_AVAILABLE =
@@ -130,7 +146,9 @@ public class Sticker {
 
     private static final String TAG = "Sticker";
 
-    /** The connection to the server. */
+    /**
+     * The connection to the server.
+     */
     private final MPDConnection mConnection;
 
     /**
@@ -259,15 +277,15 @@ public class Sticker {
      */
     @Deprecated
     public Map<Music, Map<String, String>> find(final FilesystemTreeEntry entry,
-            final String name) throws IOException, MPDException {
+                                                final String name) throws IOException, MPDException {
         //TODO: why are only music entries supported? Directories are generally the URI to find stickers
         onlyMusicSupported(entry);
 
-        final Map<Music,String> foundStickers = find(entry.getFullPath(), name);
+        final Map<Music, String> foundStickers = find(entry.getFullPath(), name);
 
         final Map<Music, Map<String, String>> restructuredFoundStickers = new HashMap<>(foundStickers.size());
         for (final Music song : foundStickers.keySet()) {
-            restructuredFoundStickers.put(song,Collections.singletonMap(name, foundStickers.get(song)));
+            restructuredFoundStickers.put(song, Collections.singletonMap(name, foundStickers.get(song)));
         }
         return restructuredFoundStickers;
     }
@@ -277,7 +295,7 @@ public class Sticker {
      * each matching track, it prints the URI and that one sticker's value.
      *
      * @param path The to search below in the entry's hierarchy.
-     * @param name  The name to search the stickers for.
+     * @param name The name to search the stickers for.
      * @return A map of entries from the media server with the corresponding sticker values.
      * @throws IOException  Thrown upon a communication error with the server.
      * @throws MPDException Thrown if an error occurs as a result of command execution.

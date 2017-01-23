@@ -201,7 +201,7 @@ public final class AlbumBuilder {
      * @see #setBase(String, Artist, boolean)
      */
     public void setBase(final String albumName, final String artistName,
-            final boolean isAlbumArtist) {
+                        final boolean isAlbumArtist) {
         setBase(albumName, Artist.byName(artistName), isAlbumArtist);
     }
 
@@ -215,7 +215,7 @@ public final class AlbumBuilder {
      * @see #setBase(String, String, boolean)
      */
     public void setBase(final String albumName, final Artist artist,
-            final boolean isAlbumArtist) {
+                        final boolean isAlbumArtist) {
         setArtist(artist, isAlbumArtist);
         mBuilderName = albumName;
     }

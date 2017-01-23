@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * A set of fields associated with the socket address with which it is constructed.
- *
+ * <p>
  * <p>This class is not thread safe and use should be restricted to one thread per instance or with
  * a {@link ThreadLocal} resource.</p>
  */
@@ -137,7 +137,7 @@ class IOSocketSet {
 
     /**
      * Gets the current connected status of the Socket object.
-     *
+     * <p>
      * <p>This is <b>not</b> a replacement for connection status, and is more of a low level
      * status.</p>
      *
@@ -177,7 +177,7 @@ class IOSocketSet {
 
     /**
      * This class is used to cancel a blocking IO socket from another thread.
-     *
+     * <p>
      * <p>This class should be used in a {@link ScheduledExecutorService}.</p>
      */
     private static final class Timeout implements Runnable {

@@ -63,7 +63,7 @@ public abstract class MPDConnectionStatus {
 
     /**
      * The connection status binary semaphore.
-     *
+     * <p>
      * <p>This Semaphore starts off with no available permits, denoting a lack of connection until
      * set otherwise.</p>
      */
@@ -119,7 +119,7 @@ public abstract class MPDConnectionStatus {
     /**
      * This is called at the end of the connection class
      * {@link MPDConnectionListener#connectionConnected(int)} callback.
-     *
+     * <p>
      * <p>This is called from the actual connection class, to prevent calling prior to something
      * that needs to be taken care of by the connection prior to child callbacks.</p>
      *
@@ -140,7 +140,7 @@ public abstract class MPDConnectionStatus {
     /**
      * This is called at the end of the connection class
      * {@link MPDConnectionListener#connectionConnecting()} callback.
-     *
+     * <p>
      * <p>This is called from the actual connection class, to prevent calling prior to something
      * that needs to be taken care of by the connection prior to child callbacks.</p>
      */
@@ -158,7 +158,7 @@ public abstract class MPDConnectionStatus {
     /**
      * This is called at the end of the connection class
      * {@link MPDConnectionListener#connectionDisconnected(String)} callback.
-     *
+     * <p>
      * <p>This is called from the actual connection class, to prevent calling prior to something
      * that needs to be taken care of by the connection prior to child callbacks.</p>
      *

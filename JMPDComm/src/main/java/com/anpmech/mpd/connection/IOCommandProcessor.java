@@ -103,7 +103,7 @@ abstract class IOCommandProcessor implements Callable<CommandResult> {
      *                         {@link CommandResponse} inclusion.
      */
     IOCommandProcessor(final MPDConnectionStatus connectionStatus, final String commandString,
-            final int[] excludeResponses) {
+                       final int[] excludeResponses) {
 
 
         mConnectionStatus = connectionStatus;

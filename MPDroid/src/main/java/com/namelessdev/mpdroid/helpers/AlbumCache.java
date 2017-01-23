@@ -87,7 +87,7 @@ public class AlbumCache {
     }
 
     public static String albumCode(final String artist, final String album,
-            final boolean isAlbumArtist) {
+                                   final boolean isAlbumArtist) {
         return (artist != null ? artist : "") + "//" +
                 (isAlbumArtist ? "AA" : "A") +
                 "//" + (album != null ? album : "");
@@ -103,7 +103,7 @@ public class AlbumCache {
     }
 
     protected static Set<String> getKeysByValue(final Map<String, Set<String>> map,
-            final String val) {
+                                                final String val) {
         final Set<String> result = new HashSet<>();
 
         for (final Map.Entry<String, Set<String>> stringSetEntry : map.entrySet()) {
@@ -142,7 +142,7 @@ public class AlbumCache {
     }
 
     public AlbumDetails getAlbumDetails(final String artist, final String album,
-            final boolean isAlbumArtist) {
+                                        final boolean isAlbumArtist) {
         return mAlbumDetails.get(albumCode(artist, album, isAlbumArtist));
     }
 
@@ -189,7 +189,7 @@ public class AlbumCache {
     }
 
     public String getDirByArtistAlbum(final String artist, final String album,
-            final boolean isAlbumArtist) {
+                                      final boolean isAlbumArtist) {
         final String albumCode = albumCode(artist, album, isAlbumArtist);
         final String result = mAlbumDetails.get(albumCode).mPath;
         Log.d(TAG, "key " + albumCode + " - " + result);

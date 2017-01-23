@@ -58,8 +58,8 @@ public class SeparatedListAdapter extends BaseAdapter {
     private int mViewId = -1; // The view to be displayed
 
     public SeparatedListAdapter(final Context context, @LayoutRes final int viewId,
-            @LayoutRes final int separatorViewId, final SeparatedListDataBinder binder,
-            final List<?> items) {
+                                @LayoutRes final int separatorViewId, final SeparatedListDataBinder binder,
+                                final List<?> items) {
 
         mViewId = viewId;
         mBinder = binder;

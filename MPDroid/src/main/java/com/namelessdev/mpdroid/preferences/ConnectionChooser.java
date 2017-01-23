@@ -132,7 +132,7 @@ public class ConnectionChooser extends PreferenceFragment {
      * @param wifiList The Wi-Fi entries to add to the PreferenceScreen parameter.
      */
     private static void getWifiEntries(final PreferenceScreen screen,
-            final Iterable<WifiConfiguration> wifiList) {
+                                       final Iterable<WifiConfiguration> wifiList) {
         for (final WifiConfiguration wifi : wifiList) {
             if (wifi != null && wifi.SSID != null) {
                 // Friendly SSID-Name
@@ -180,7 +180,7 @@ public class ConnectionChooser extends PreferenceFragment {
 
     /**
      * This comparator sorts {@link WifiConfiguration} entries.
-     *
+     * <p>
      * The WifiConfiguration entries are sorted in order of:
      * <ol>
      * <li>If Wi-Fi network is connected.</li>

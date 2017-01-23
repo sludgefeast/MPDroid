@@ -148,7 +148,7 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
     }
 
     protected void add(final Artist artist, final Album album, final boolean replace,
-            final boolean play) {
+                       final boolean play) {
         String note = null;
 
         try {
@@ -367,7 +367,7 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenu.ContextMenuInfo menuInfo) {
+                                    final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
@@ -419,7 +419,7 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         final Object selectedItem = parent.getAdapter().getItem(position);
         if (selectedItem instanceof Music) {
             add((Music) selectedItem, false, false);
@@ -428,7 +428,7 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
             intent.putExtra(Artist.EXTRA, (Parcelable) selectedItem);
             startActivityForResult(intent, -1);
         } else if (selectedItem instanceof Album) {
-             final Intent intent = new Intent(this, SimpleLibraryActivity.class);
+            final Intent intent = new Intent(this, SimpleLibraryActivity.class);
             intent.putExtra(Album.EXTRA, (Parcelable) selectedItem);
             startActivityForResult(intent, -1);
         }
@@ -471,8 +471,7 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
                     intent.putExtra(Album.EXTRA, music.getAlbum());
                     startActivityForResult(intent, -1);
                 }
-            }
-            else {
+            } else {
                 mApp.getAsyncHelper().execAsync(new Runnable() {
                     @Override
                     public void run() {
@@ -556,7 +555,7 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
      * @param noResultsView The View to hide if there are no results.
      */
     private void update(final ListView listView, final List<? extends Item<?>> resultList,
-            final View noResultsView) {
+                        final View noResultsView) {
         final ListAdapter separatedListAdapter = new SeparatedListAdapter(this,
                 R.layout.search_list_item,
                 new SearchResultDataBinder(),
@@ -594,7 +593,7 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
 
         @Override
         public void destroyItem(final ViewGroup container, final int position,
-                final Object object) {
+                                final Object object) {
             container.removeView((View) object);
         }
 

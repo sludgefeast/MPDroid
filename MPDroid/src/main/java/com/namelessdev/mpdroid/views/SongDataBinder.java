@@ -59,8 +59,8 @@ public class SongDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
 
     @Override
     public void onDataBind(final Context context, final View targetView,
-            final AbstractViewHolder viewHolder, final List<T> items, final Object item,
-            final int position) {
+                           final AbstractViewHolder viewHolder, final List<T> items, final Object item,
+                           final int position) {
         final SongViewHolder holder = (SongViewHolder) viewHolder;
         final Music song = (Music) item;
         final StringBuilder track = new StringBuilder();
@@ -100,7 +100,7 @@ public class SongDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
 
     @Override
     public View onLayoutInflation(final Context context, final View targetView,
-            final List<T> items) {
+                                  final List<T> items) {
         targetView.findViewById(R.id.show_comments).setOnClickListener(new CommentClickListener());
         return BaseDataBinder.setViewVisible(targetView, R.id.track_artist, mShowArtist);
     }

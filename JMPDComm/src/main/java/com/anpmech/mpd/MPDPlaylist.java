@@ -209,7 +209,7 @@ public class MPDPlaylist {
     /**
      * Retrieves music at position index in playlist. Operates on local copy of playlist, may not
      * reflect server's current playlist.
-     *
+     * <p>
      * Use of this method is discouraged, use {@link #getById(int)} to prevent races.
      *
      * @param index position.

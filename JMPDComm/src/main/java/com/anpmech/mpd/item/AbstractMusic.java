@@ -40,7 +40,7 @@ import java.util.Comparator;
 
 /**
  * Class representing a generic track entry in playlist, abstracted for backend.
- *
+ * <p>
  * <p>This item is returned from methods of the
  * <A HREF="http://www.musicpd.org/doc/protocol/database.html">database</A>
  * subsystem of the <A HREF="http://www.musicpd.org/doc/protocol">MPD protocol</A>.</p>
@@ -507,7 +507,7 @@ abstract class AbstractMusic<T extends AbstractMusic<T>> extends AbstractEntry<T
 
     /**
      * This returns a representation of the source of the media, relative to the media server.
-     *
+     * <p>
      * <p>This can be a filename, a URL, etc. If this item's filename is a URL, the URI fragment is
      * removed.</p>
      *

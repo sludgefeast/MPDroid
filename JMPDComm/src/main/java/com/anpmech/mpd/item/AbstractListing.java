@@ -40,7 +40,7 @@ import java.io.IOException;
 
 /**
  * This class is the generic base for the Listing entries, abstracted for backend.
- *
+ * <p>
  * <p>This class is similar to {@link AbstractDirectory}, but rather than using the
  * <A HREF="http://www.musicpd.org/doc/protocol/database.html#command_lsinfo">{@code lsinfo}</A>
  * server command, the
@@ -48,11 +48,11 @@ import java.io.IOException;
  * listfiles}</A> server command is used. When used with the standard MPD implementation, this
  * command provides much less information about the directory entries, but provides files which
  * are not recognized by the MPD server implementation.</p>
- *
+ * <p>
  * <p>This item is returned from methods of the
  * <A HREF="http://www.musicpd.org/doc/protocol/database.html">database</A>
  * subsystem of the <A HREF="http://www.musicpd.org/doc/protocol">MPD protocol</A>.</p>
- *
+ * <p>
  * <p>This class is mutable, but should be thread-safe.</p>
  *
  * @param <T> The Directory type.
@@ -61,7 +61,7 @@ abstract class AbstractListing<T extends AbstractListing<T>> extends AbstractDir
 
     /**
      * This is the command sent to retrieve all files in a directory.
-     *
+     * <p>
      * This is <b>only</b> to be used when finding the names of non-music entries is required.
      */
     private static final CharSequence CMD_LISTFILES = "listfiles";

@@ -264,7 +264,7 @@ abstract class AbstractResult<T> implements ListIterator<T>, Iterable<T> {
 
     /**
      * Returns the index of the next object in the iteration.
-     *
+     * <p>
      * <p>This will always be equivalent to {@link #nextIndexEnd()}</p>
      *
      * @return The index of the next object, or the size of the list if the iterator is at the
@@ -294,7 +294,7 @@ abstract class AbstractResult<T> implements ListIterator<T>, Iterable<T> {
 
     /**
      * Returns the index of the previous object in the iteration.
-     *
+     * <p>
      * <p>This will always be equivalent to {@link #previousIndexBegin()}</p>
      *
      * @return The index of the previous object, or -1 if the iterator is at the beginning.

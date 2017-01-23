@@ -65,31 +65,49 @@ public final class StreamHandler implements
         OnInfoListener,
         OnPreparedListener {
 
-    /** This is the class unique Binder identifier. */
+    /**
+     * This is the class unique Binder identifier.
+     */
     static final int LOCAL_UID = 400;
 
-    /** Messages that can be sent to clients. */
+    /**
+     * Messages that can be sent to clients.
+     */
     public static final int IS_ACTIVE = LOCAL_UID + 1;
 
-    /** Message to send to start this handler. */
+    /**
+     * Message to send to start this handler.
+     */
     public static final int START = LOCAL_UID + 2;
 
-    /** Message to send to stop this handler. */
+    /**
+     * Message to send to stop this handler.
+     */
     public static final int STOP = LOCAL_UID + 3;
 
-    /** Let notification know it's time to display buffering banner. */
+    /**
+     * Let notification know it's time to display buffering banner.
+     */
     static final int BUFFERING_BEGIN = LOCAL_UID + 4;
 
-    /** Remove the buffering banner from the notification handler. */
+    /**
+     * Remove the buffering banner from the notification handler.
+     */
     static final int BUFFERING_END = LOCAL_UID + 5;
 
-    /** Kills (or hides) the notification if StreamHandler started it. */
+    /**
+     * Kills (or hides) the notification if StreamHandler started it.
+     */
     static final int REQUEST_NOTIFICATION_STOP = LOCAL_UID + 6;
 
-    /** Like STREAMING_STOP, but does allows streaming to continue on audio state change. */
+    /**
+     * Like STREAMING_STOP, but does allows streaming to continue on audio state change.
+     */
     static final int STREAMING_PAUSE = LOCAL_UID + 7;
 
-    /** Keeps the notification alive, but puts it in non-streaming status. */
+    /**
+     * Keeps the notification alive, but puts it in non-streaming status.
+     */
     static final int STREAMING_STOP = LOCAL_UID + 8;
 
     private static final boolean DEBUG = MPDroidService.DEBUG;
@@ -100,7 +118,9 @@ public final class StreamHandler implements
      */
     private static final int INVALID_INT = Integer.MIN_VALUE;
 
-    /** Workaround to delay preparation of stream on Android 4.4.2 and earlier. */
+    /**
+     * Workaround to delay preparation of stream on Android 4.4.2 and earlier.
+     */
     private static final int PREPARE_ASYNC = 1;
 
     private static final String TAG = "StreamHandler";
@@ -115,29 +135,43 @@ public final class StreamHandler implements
 
     private final MPD mMPD;
 
-    /** The service context used to acquire the wake lock. */
+    /**
+     * The service context used to acquire the wake lock.
+     */
     private final MPDroidService mServiceContext;
 
-    /** The audio manager used to obtain audio focus. */
+    /**
+     * The audio manager used to obtain audio focus.
+     */
     private AudioManager mAudioManager = null;
 
     private ConnectionInfo mConnectionInfo;
 
-    /** Keep track of the number of errors encountered. */
+    /**
+     * Keep track of the number of errors encountered.
+     */
     private int mErrorIterator = 0;
 
-    /** Is this handler active? */
+    /**
+     * Is this handler active?
+     */
     private boolean mIsActive = false;
 
-    /** Is MPD playing? */
+    /**
+     * Is MPD playing?
+     */
     private boolean mIsPlaying = false;
 
     private MediaPlayer mMediaPlayer = null;
 
-    /** Keep track when MediaPlayer is preparing a stream. */
+    /**
+     * Keep track when MediaPlayer is preparing a stream.
+     */
     private boolean mPreparingStream = false;
 
-    /** Service handler used for communicating with service. */
+    /**
+     * Service handler used for communicating with service.
+     */
     private Handler mServiceHandler = null;
 
     /**
@@ -150,7 +184,7 @@ public final class StreamHandler implements
      *                       about whom grabs focus.
      */
     StreamHandler(final MPDroidService serviceContext, final Handler serviceHandler,
-            final AudioManager audioManager) {
+                  final AudioManager audioManager) {
 
         if (DEBUG) {
             Log.d(TAG, "StreamHandler constructor.");
@@ -233,7 +267,9 @@ public final class StreamHandler implements
         return "StreamHandler." + result;
     }
 
-    /** This is where the stream start is managed. */
+    /**
+     * This is where the stream start is managed.
+     */
     private void beginStreaming() {
         if (DEBUG) {
             Log.d(TAG, "StreamHandler.beginStreaming()");

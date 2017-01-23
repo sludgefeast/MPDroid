@@ -57,8 +57,8 @@ public class RemoteControlSeekBarHandler implements
     private int mPlaybackState = -1;
 
     RemoteControlSeekBarHandler(final Context serviceContext,
-            final RemoteControlClient remoteControlClient,
-            final int controlFlags) {
+                                final RemoteControlClient remoteControlClient,
+                                final int controlFlags) {
 
 
         mApp = (MPDApplication) serviceContext.getApplicationContext();

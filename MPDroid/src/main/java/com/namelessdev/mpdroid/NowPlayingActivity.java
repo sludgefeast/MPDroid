@@ -242,7 +242,7 @@ public class NowPlayingActivity extends MPDActivity {
 
         @Override
         public void destroyItem(final ViewGroup container, final int position,
-                final Object object) {
+                                final Object object) {
         }
 
         @Override

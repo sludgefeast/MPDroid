@@ -134,7 +134,7 @@ public class JamendoCover extends AbstractWebCover {
      * <BR><BR>
      * The simplified JSON format used to retrieve the image URLs from the <A
      * HREF="https://developer.jamendo.com/v3.0/albums">Jamendo v3 Albums API</a>.
-     *
+     * <p>
      * {{@link #JSON_KEY_RESULTS}:[{{@link #JSON_KEY_IMAGE}} : {"imageURL"}]}
      *
      * @param albumInfo The {@link AlbumInfo} used to generate the album cover query.

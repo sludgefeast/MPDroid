@@ -37,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * This class creates a Listing Item, an abstraction of a filesystem directory in the <A
  * HREF="http://www.musicpd.org/doc/protocol">MPD Protocol</A>, for the Java backend.
- *
+ * <p>
  * <p>This class is similar to {@link Directory}, but rather than using the
  * <A HREF="http://www.musicpd.org/doc/protocol/database.html#command_lsinfo">{@code lsinfo}</A>
  * server command, the
@@ -73,7 +73,7 @@ public class Listing extends AbstractDirectory<Listing> {
      * @see #byResponse(String)
      */
     private Listing(@NotNull final ResponseObject object,
-            @Nullable final CommandResult listFiles) {
+                    @Nullable final CommandResult listFiles) {
         super(object, listFiles);
     }
 

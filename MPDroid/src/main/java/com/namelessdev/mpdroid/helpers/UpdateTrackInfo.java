@@ -108,7 +108,7 @@ public class UpdateTrackInfo {
          * @param title       The title change.
          */
         void onTrackInfoUpdate(Music updatedSong, final float trackRating, CharSequence album,
-                CharSequence artist, CharSequence date, CharSequence title);
+                               CharSequence artist, CharSequence date, CharSequence title);
     }
 
     public interface TrackInfoUpdate {

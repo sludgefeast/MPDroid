@@ -97,7 +97,7 @@ public class CoverArtArchiveCover extends AbstractWebCover {
      * @throws JSONException If there was a problem parsing the JSON.
      */
     private static Collection<String> extractFromJson(final String response, final URL url,
-            final String rootKey, final String targetKey) throws JSONException {
+                                                      final String rootKey, final String targetKey) throws JSONException {
         final Collection<String> results = new ArrayList<>();
         final JSONObject root = new JSONObject(response);
 

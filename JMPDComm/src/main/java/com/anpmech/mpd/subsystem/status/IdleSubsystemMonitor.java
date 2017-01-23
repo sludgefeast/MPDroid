@@ -141,7 +141,7 @@ public class IdleSubsystemMonitor implements Runnable {
 
     /**
      * The listeners for this IdleSubsystemMonitor.
-     *
+     * <p>
      * <p>These errors should be treated seriously. They will affect function of this subsystem
      * monitor and likely to affect other parts of a implemented application.</p>
      */
@@ -602,7 +602,7 @@ public class IdleSubsystemMonitor implements Runnable {
 
     /**
      * Stops the IdleStatusMonitor, if running, then starts.
-     *
+     * <p>
      * <p>This method does not stop a running IdleSubsystemMonitor, so stop first, if
      * applicable.</p>
      */

@@ -190,7 +190,7 @@ class MPDApplicationBase extends Application implements
 
     /**
      * This method manually connects the global MPD instance using default connection information.
-     *
+     * <p>
      * <p>This method intentionally blocks the thread, do not use in the UI thread. Instead, use
      * {@link #addConnectionLock(Object)}.</p>
      *
@@ -235,7 +235,7 @@ class MPDApplicationBase extends Application implements
         return mMPD;
     }
 
-    public Favorites getFavorites(){
+    public Favorites getFavorites() {
         return mFavorites;
     }
 

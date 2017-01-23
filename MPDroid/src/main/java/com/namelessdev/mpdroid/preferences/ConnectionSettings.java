@@ -127,7 +127,7 @@ public class ConnectionSettings extends PreferenceActivity {
     /**
      * This is the callback for preference choices which have set the
      * {@link Preference#setFragment(String)} method.
-     *
+     * <p>
      * <p>No need to limit the code down to expected callers, {@link #isValidFragment(String)}
      * would have to be modified to allow unexpected callers to this method.</p>
      *
@@ -138,7 +138,7 @@ public class ConnectionSettings extends PreferenceActivity {
      */
     @Override
     public boolean onPreferenceStartFragment(final PreferenceFragment caller,
-            final Preference pref) {
+                                             final Preference pref) {
         final Fragment fragment = Fragment.instantiate(this, pref.getFragment(), pref.getExtras());
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
 

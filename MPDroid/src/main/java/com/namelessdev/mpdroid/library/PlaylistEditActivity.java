@@ -200,7 +200,7 @@ public class PlaylistEditActivity extends MPDActivity implements StatusChangeLis
      */
     @Override
     public void onItemClick(final AdapterView<?> adapterView, final View view, final int i,
-            final long l) {
+                            final long l) {
         final AbstractMap<String, Object> item = mSongList.get(i);
 
         if (item.get("marked").equals(true)) {

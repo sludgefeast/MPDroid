@@ -37,7 +37,7 @@ import java.util.ListIterator;
 /**
  * This class contains methods used to process {@link Artist} entries, of the AlbumArtist type
  * only, from a MPD response.
- *
+ * <p>
  * <p>This class is immutable, thus, thread-safe.</p>
  */
 public class AlbumArtistResponse extends ObjectResponse<Artist> {

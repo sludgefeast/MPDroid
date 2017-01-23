@@ -118,7 +118,7 @@ public final class StringComparators {
      * lexicographically follows {@code t}
      */
     private static int compareNatural(final String s, final String t, final boolean caseSensitive,
-            final Collator collator) {
+                                      final Collator collator) {
         int sIndex = 0;
         int tIndex = 0;
 

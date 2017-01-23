@@ -100,7 +100,7 @@ public final class Tools {
 
     /**
      * This method searches for the next value in a String, beginning at the specified position.
-     *
+     * <p>
      * <p>The rationale behind this method is to provide a fast find method for key/value
      * searching. One advantage is {@link String#indexOf(String)} is the performance is severely
      * degraded in comparison {@link String#indexOf(int)}. A second advantage is when
@@ -120,7 +120,7 @@ public final class Tools {
      * {@code keys} parameter is empty, or -1 if not found.
      */
     private static int getNextIndex(final String result, final int position, final boolean getValue,
-            final String... keys) {
+                                    final String... keys) {
         int index = -1;
         int mpdDelimiterIndex = result.indexOf(MPD_KV_DELIMITER, position);
         int keyIndex;
@@ -163,7 +163,7 @@ public final class Tools {
 
     /**
      * This method searches for the next key in a String, beginning at a specified position.
-     *
+     * <p>
      * <p>The rationale behind this method is to provide a fast find method for key searching.
      * One advantage is {@link String#indexOf(String)} is the performance is severely
      * degraded in comparison {@link String#indexOf(int)}. A second advantage is when using
@@ -181,13 +181,13 @@ public final class Tools {
      * keys} parameter is empty, or -1 if not found.
      */
     public static int getNextKeyIndex(final String result, final int position,
-            final String... keys) {
+                                      final String... keys) {
         return getNextIndex(result, position, false, keys);
     }
 
     /**
      * This method searches for the next value in a String, beginning at the specified position.
-     *
+     * <p>
      * <p>The rationale behind this method is to provide a fast find method for key searching.
      * One advantage is {@link String#indexOf(String)} is the performance is severely
      * degraded in comparison {@link String#indexOf(int)}. A second advantage is when using
@@ -204,7 +204,7 @@ public final class Tools {
      * {@code keys} parameter is empty, or -1 if not found.
      */
     public static int getNextValueIndex(final String result, final int position,
-            final String... keys) {
+                                        final String... keys) {
         return getNextIndex(result, position, true, keys);
     }
 
@@ -593,7 +593,7 @@ public final class Tools {
      * @throws InterruptedException If the current thread is {@link Thread#interrupted()}.
      */
     public static boolean waitForValidity(final Semaphore semaphore, final long timeout,
-            final TimeUnit unit) throws InterruptedException {
+                                          final TimeUnit unit) throws InterruptedException {
         boolean isValid = false;
 
         try {

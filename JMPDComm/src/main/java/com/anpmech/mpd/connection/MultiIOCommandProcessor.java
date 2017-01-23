@@ -43,7 +43,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * This class sends one {@link MPDCommand} or {@link CommandQueue} string over multiple possible
  * connection resources, then processes and returns the result.
- *
+ * <p>
  * <p>This class was designed with thread safety in mind.</p>
  */
 class MultiIOCommandProcessor extends IOCommandProcessor {
@@ -51,7 +51,7 @@ class MultiIOCommandProcessor extends IOCommandProcessor {
     /**
      * The ThreadLocal pool for the corresponding SocketAddress from which to pull the Socket
      * for the current CommandProcessor thread.
-     *
+     * <p>
      * <p>This map should not need to be synchronized. ThreadLocal is thread safe, and is
      * generated during construction.</p>
      */
@@ -84,8 +84,8 @@ class MultiIOCommandProcessor extends IOCommandProcessor {
      *                         {@link CommandResponse} inclusion.
      */
     MultiIOCommandProcessor(final SocketAddress socketAddress,
-            final MPDConnectionStatus connectionStatus, final String commandString,
-            final int readWriteTimeout, final int[] excludeResponses) {
+                            final MPDConnectionStatus connectionStatus, final String commandString,
+                            final int readWriteTimeout, final int[] excludeResponses) {
         super(connectionStatus, commandString, excludeResponses);
 
         mSocketAddress = socketAddress;

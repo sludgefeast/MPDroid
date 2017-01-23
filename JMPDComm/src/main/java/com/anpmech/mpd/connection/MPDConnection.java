@@ -194,9 +194,9 @@ public abstract class MPDConnection implements MPDConnectionListener {
 
     /**
      * This method calls standard defaults for the host/port pair and MPD password, if it exists.
-     *
+     * <p>
      * <p>If a main password is required, it MUST be called prior to calling this method.</p>
-     *
+     * <p>
      * <p>All threads calling this method in the same instance with a different host will block
      * until the prior connection threads succeeds or fail. Otherwise, expected behaviour is this
      * method will return immediately and status will be provided to listeners via
@@ -210,9 +210,9 @@ public abstract class MPDConnection implements MPDConnectionListener {
 
     /**
      * Resolves a host then sets up connection to host/port pair.
-     *
+     * <p>
      * <p>If a main password is required, it MUST be called prior to calling this method.</p>
-     *
+     * <p>
      * <p>All threads calling this method in the same instance with a different host will block
      * until the prior connection threads succeeds or fail. Otherwise, expected behaviour is this
      * method will return immediately and status will be provided to listeners via
@@ -239,9 +239,9 @@ public abstract class MPDConnection implements MPDConnectionListener {
 
     /**
      * Sets up connection to host/port pair.
-     *
+     * <p>
      * <p>If a main password is required, it MUST be called prior to calling this method.</p>
-     *
+     * <p>
      * <p>All threads calling this method in the same instance with a different host will block
      * until the prior connection threads succeeds or fail. Otherwise, expected behaviour is this
      * method will return immediately and status will be provided to listeners via
@@ -328,7 +328,7 @@ public abstract class MPDConnection implements MPDConnectionListener {
 
     /**
      * Called when connecting, prior to other {@link MPDConnectionListener}s.
-     *
+     * <p>
      * <p>This implies that we've disconnected. This callback is intended to be transient. Status
      * change from connected to connecting may happen, but if a connection is not established, with
      * a connected callback, the disconnection status callback should be called.</p>
@@ -384,7 +384,7 @@ public abstract class MPDConnection implements MPDConnectionListener {
      * @return A command processor, ready for {@link ExecutorService} submission.
      */
     abstract Callable<CommandResult> getCommandProcessor(final String command,
-            final int[] excludeResponses);
+                                                         final int[] excludeResponses);
 
     /**
      * Get default address from the {@code MPD_HOST} environment variable.

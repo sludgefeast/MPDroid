@@ -201,7 +201,7 @@ public class MainMenuActivity extends MPDActivity implements
 
     @Override
     public void pushLibraryFragment(final Fragment fragment, final String label,
-            final View transitionView, final String transitionName, final Transition transition) {
+                                    final View transitionView, final String transitionName, final Transition transition) {
         final String title;
         if (fragment instanceof BrowseFragment) {
             title = ((BrowseFragment<?>) fragment).getTitle();

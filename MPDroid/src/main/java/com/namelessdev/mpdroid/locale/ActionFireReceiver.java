@@ -93,7 +93,7 @@ public class ActionFireReceiver extends BroadcastReceiver {
      * android.content.Intent)
      */
     private void redirectIntentToService(final boolean forceService, final Intent intent,
-            final String action) {
+                                         final String action) {
         intent.setClass(APP, MPDroidService.class);
         intent.setAction(action);
         final IBinder iBinder = peekService(APP, intent);

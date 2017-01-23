@@ -45,7 +45,7 @@ public interface MPDConnectionListener {
 
     /**
      * Called when connecting.
-     *
+     * <p>
      * <p>This implies that we've disconnected. This callback is intended to be transient. Status
      * change from connected to connecting may happen, but if a connection is not established, with
      * a connected callback, the disconnection status callback should be called.</p>

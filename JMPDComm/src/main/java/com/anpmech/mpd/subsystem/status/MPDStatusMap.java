@@ -113,7 +113,7 @@ public class MPDStatusMap extends ResponseMap implements MPDStatus {
 
     /**
      * The key from the status command for the value of the last error message.
-     *
+     * <p>
      * <p>This is one way to get retrieve an error message, though, it is better parsed from the
      * error code given by the {@link MPDException}.</p>
      */
@@ -217,28 +217,28 @@ public class MPDStatusMap extends ResponseMap implements MPDStatus {
 
     /**
      * The media server play state interface representation for RESPONSE_STATE_PAUSED.
-     *
+     * <p>
      * <p>This value is compatible with Android's PlaybackState.STATE_PAUSED.</p>
      */
     public static final int STATE_PAUSED = 2;
 
     /**
      * The media server play state interface representation for RESPONSE_STATE_PLAYING.
-     *
+     * <p>
      * <p>This value is compatible with Android's PlaybackState.STATE_PLAYING.</p>
      */
     public static final int STATE_PLAYING = 3;
 
     /**
      * The media server play state interface representation for RESPONSE_STATE_STOPPED.
-     *
+     * <p>
      * <p>This value is compatible with Android's PlaybackState.STATE_STOPPED.</p>
      */
     public static final int STATE_STOPPED = 1;
 
     /**
      * The default media server play state interface representation.
-     *
+     * <p>
      * <p>This value is compatible with Android's PlaybackState.STATE_NONE.</p>
      */
     public static final int STATE_UNKNOWN = 0;
@@ -260,7 +260,7 @@ public class MPDStatusMap extends ResponseMap implements MPDStatus {
 
     /**
      * The default number of MPDStatus entries.
-     *
+     * <p>
      * <p>The status command responds with ~20 entries during play as of standard MPD
      * implementation 0.19.</p>
      */

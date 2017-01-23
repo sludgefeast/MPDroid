@@ -35,7 +35,7 @@ import java.util.ListIterator;
 
 /**
  * This class contains methods used to process separated MPD responses.
- *
+ * <p>
  * <p>This class is immutable, thus, thread-safe.</p>
  */
 public class SeparatedResponse extends ObjectResponse<CommandResponse> {

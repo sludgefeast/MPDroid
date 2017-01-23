@@ -221,7 +221,7 @@ public class SimpleLibraryActivity extends MPDActivity implements ILibraryFragme
 
     @Override
     public void pushLibraryFragment(final Fragment fragment, final String label,
-            final View transitionView, final String transitionName, final Transition transition) {
+                                    final View transitionView, final String transitionName, final Transition transition) {
         final String title;
         if (fragment instanceof BrowseFragment) {
             title = ((BrowseFragment<?>) fragment).getTitle();

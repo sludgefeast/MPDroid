@@ -95,7 +95,7 @@ public class Music extends AbstractMusic<Music> {
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static void putResponseObject(final MediaMetadata.Builder metadata, final String key,
-            final Iterable<? extends Item<?>> response) {
+                                          final Iterable<? extends Item<?>> response) {
         for (final Item<?> item : response) {
             metadata.putString(key, item.getName());
         }

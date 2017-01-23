@@ -273,7 +273,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(final DialogInterface dialog,
-                                        final int which) {
+                                                    final int which) {
                                     final String name = input.getText().toString().trim();
                                     if (!name.isEmpty()) {
                                         addToPlaylistFile(PlaylistFile.byPath(name), id);
@@ -452,7 +452,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenu.ContextMenuInfo menuInfo) {
+                                    final ContextMenu.ContextMenuInfo menuInfo) {
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         final int index = (int) info.id;
         final T item = mItems.get(index);
@@ -512,7 +512,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         final View view = inflater.inflate(getLayoutResId(), container, false);
         mList = (AbsListView) view.findViewById(R.id.list);
         registerForContextMenu(mList);
@@ -665,7 +665,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
 
     /**
      * This method is used for the fast scroll visibility decision.
-     *
+     * <p>
      * <p>Don't override this if you want to change the fast scroll style, override
      * {@link #refreshFastScrollStyle(boolean)} instead.</p>
      */
@@ -922,7 +922,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
          * @param context       The current context.
          */
         private UpdatePlaylistList(final Collection<PlaylistFile> playlistFiles,
-                final Context context) {
+                                   final Context context) {
 
 
             mApp = (MPDApplication) context.getApplicationContext();

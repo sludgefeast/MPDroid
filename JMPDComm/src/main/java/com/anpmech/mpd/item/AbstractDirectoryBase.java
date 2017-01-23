@@ -39,11 +39,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * This class is the generic base for the {@link Directory} and {@link Listing} items, abstracted
  * for backend.
- *
+ * <p>
  * <p>This item is returned from methods of the
  * <A HREF="http://www.musicpd.org/doc/protocol/database.html">database</A>
  * subsystem of the <A HREF="http://www.musicpd.org/doc/protocol">MPD protocol</A>.</p>
- *
+ * <p>
  * <p>This class is mutable, but should be thread-safe.</p>
  *
  * @param <T> The AbstractDirectoryBase type.
@@ -73,7 +73,7 @@ abstract class AbstractDirectoryBase<T extends AbstractDirectoryBase<T>> extends
 
     /**
      * This is the CommandResult for a lsinfo/listfiles for this path.
-     *
+     * <p>
      * <p>This comes uninitialized, and will be populated upon a call to
      * {@link #refresh(MPDConnection)}</p>
      */
@@ -88,7 +88,7 @@ abstract class AbstractDirectoryBase<T extends AbstractDirectoryBase<T>> extends
      *               connection will be required to regenerate it.
      */
     protected AbstractDirectoryBase(@NotNull final ResponseObject object,
-            @Nullable final CommandResult result) {
+                                    @Nullable final CommandResult result) {
         super(object);
 
         mResult = result;

@@ -37,7 +37,7 @@ import java.util.Iterator;
 /**
  * This class is used to create an {@link Iterator} to iterate over a result to find a defined
  * beginning block, ending with a newline, to create an Object.
- *
+ * <p>
  * <p>This is an abstraction class to create a block {@link Iterator} which uses a partial
  * result.</p>
  *
@@ -58,7 +58,7 @@ abstract class PartialBlockResult<T> extends AbstractObjectResult<T> {
     /**
      * This constructor is used when the first token found in a response is used as the
      * beginning and ending delimiter for a result.
-     *
+     * <p>
      * <p>This is used for MPD protocol results which have one single type of information in
      * the result.</p>
      *
@@ -94,7 +94,7 @@ abstract class PartialBlockResult<T> extends AbstractObjectResult<T> {
      * @throws IllegalArgumentException If the position parameter is less than 0.
      */
     protected PartialBlockResult(final String result, final int position,
-            final String[] beginBlockTokens) {
+                                 final String[] beginBlockTokens) {
         super(result, position);
 
         mBeginBlockTokens = beginBlockTokens;

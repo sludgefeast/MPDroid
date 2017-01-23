@@ -244,7 +244,7 @@ public class ConnectionModifier extends PreferenceFragment {
      * @return The notification persistence Preference.
      */
     private static Preference getPersistentNotification(final Context context,
-            final String keyPrefix) {
+                                                        final String keyPrefix) {
         final Preference preference = new CheckBoxPreference(context);
         preference.setDefaultValue(Boolean.FALSE);
         preference.setTitle(R.string.persistentNotification);
@@ -363,7 +363,7 @@ public class ConnectionModifier extends PreferenceFragment {
          *                   positive button.
          */
         private static void enablePositiveButton(final EditTextPreference editText,
-                final boolean setEnabled) {
+                                                 final boolean setEnabled) {
             final Dialog dialog = editText.getDialog();
 
             if (dialog instanceof AlertDialog) {
@@ -440,7 +440,7 @@ public class ConnectionModifier extends PreferenceFragment {
         /**
          * This method is called to notify you that, somewhere within {@code s}, the text has been
          * changed.
-         *
+         * <p>
          * <p>It is legitimate to make further changes to {@code s} from this callback, but be
          * careful not to get yourself into an infinite loop, because any changes you make will
          * cause this method to be called again recursively.</p>
@@ -460,24 +460,24 @@ public class ConnectionModifier extends PreferenceFragment {
          * This method is called to notify you that, within {@code s}, the {@code count} characters
          * beginning at {@code start} are about to be replaced by new text with length {@code
          * after}.
-         *
+         * <p>
          * <p>It is an error to attempt to make changes to {@code s} from this callback.</p>
          */
         @Override
         public void beforeTextChanged(final CharSequence s, final int start, final int count,
-                final int after) {
+                                      final int after) {
 
         }
 
         /**
          * This method is called to notify you that, within {@code s}, the {@code count} characters
          * beginning at {@code start} have just replaced old text that had length {@code before}.
-         *
+         * <p>
          * <p>It is an error to attempt to make changes to {@code s} from this callback.</p>
          */
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before,
-                final int count) {
+                                  final int count) {
 
         }
     }
@@ -494,7 +494,7 @@ public class ConnectionModifier extends PreferenceFragment {
 
         /**
          * This field flags whether the port has been previously applied.
-         *
+         * <p>
          * If the user removes it from here, they will be warned, but it won't be reinserted.
          */
         private boolean mPortInserted;
@@ -517,7 +517,7 @@ public class ConnectionModifier extends PreferenceFragment {
          * @return The error output while trying to validate the port.
          */
         private static int getPort(final String text, final int authorityColonIndex,
-                final int portColonIndex) {
+                                   final int portColonIndex) {
             final int authorityEndIndex = text.indexOf('/', authorityColonIndex + 3);
             final String intString;
 
@@ -547,7 +547,7 @@ public class ConnectionModifier extends PreferenceFragment {
          * @throws ParseException If the URL fails validation after default port insertion.
          */
         private static void insertDefaultPort(final Editable s, final String text,
-                final int authorityColonIndex) throws ParseException {
+                                              final int authorityColonIndex) throws ParseException {
             final int authorityEndIndex = text.indexOf('/', authorityColonIndex + 3);
 
             if (authorityEndIndex == -1) {
@@ -592,7 +592,7 @@ public class ConnectionModifier extends PreferenceFragment {
         /**
          * This method is called to notify you that, somewhere within {@code s}, the text has been
          * changed.
-         *
+         * <p>
          * <p>It is legitimate to make further changes to {@code s} from this callback, but be
          * careful not to get yourself into an infinite loop, because any changes you make will
          * cause this method to be called again recursively.</p>
@@ -641,23 +641,23 @@ public class ConnectionModifier extends PreferenceFragment {
          * This method is called to notify you that, within {@code s}, the {@code count} characters
          * beginning at {@code start} are about to be replaced by new text with length {@code
          * after}.
-         *
+         * <p>
          * <p>It is an error to attempt to make changes to {@code s} from this callback.</p>
          */
         @Override
         public void beforeTextChanged(final CharSequence s, final int start, final int count,
-                final int after) {
+                                      final int after) {
         }
 
         /**
          * This method is called to notify you that, within {@code s}, the {@code count} characters
          * beginning at {@code start} have just replaced old text that had length {@code before}.
-         *
+         * <p>
          * <p>It is an error to attempt to make changes to {@code s} from this callback.</p>
          */
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before,
-                final int count) {
+                                  final int count) {
         }
     }
 }

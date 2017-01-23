@@ -38,7 +38,7 @@ class MultiLineNoop extends MultiLineResult<Void> {
     /**
      * This constructor is used when the first token found in a response is used as the
      * beginning and ending delimiter for a result.
-     *
+     * <p>
      * <p>This is used for MPD protocol results which have one single type of information
      * in the result.</p>
      *
@@ -63,7 +63,7 @@ class MultiLineNoop extends MultiLineResult<Void> {
      * @throws IllegalArgumentException If the position parameter is less than 0.
      */
     MultiLineNoop(final String result, final String[] beginBlockTokens,
-            final String[] endBlockTokens) {
+                  final String[] endBlockTokens) {
         super(result, 0, beginBlockTokens, endBlockTokens);
     }
 

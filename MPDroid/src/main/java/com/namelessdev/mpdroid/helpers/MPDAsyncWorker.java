@@ -44,7 +44,9 @@ public class MPDAsyncWorker implements Handler.Callback,
 
     private static final String TAG = "MPDAsyncWorker";
 
-    /** A handler for the MPDAsyncHelper object. */
+    /**
+     * A handler for the MPDAsyncHelper object.
+     */
     private final Handler mHelperHandler;
 
     private ConnectionInfo mConnectionInfo = ConnectionInfo.EMPTY;
@@ -83,7 +85,7 @@ public class MPDAsyncWorker implements Handler.Callback,
 
     /**
      * Called when a shared preference is changed, added, or removed.
-     *
+     * <p>
      * <p>This may be called even if a preference is set to its existing value. This callback will
      * be run the program's main thread.</p>
      *
@@ -92,7 +94,7 @@ public class MPDAsyncWorker implements Handler.Callback,
      */
     @Override
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences,
-            final String key) {
+                                          final String key) {
         final String currentSSID = SettingsHelper.getCurrentSSID();
 
         if (key != null && currentSSID != null && key.startsWith(currentSSID)) {

@@ -46,16 +46,24 @@ import java.util.List;
  */
 final class MusicList implements Iterable<Music> {
 
-    /** The debug flag, change to true for debugging log output. */
+    /**
+     * The debug flag, change to true for debugging log output.
+     */
     private static final boolean DEBUG = false;
 
-    /** The debug log identifier. */
+    /**
+     * The debug log identifier.
+     */
     private static final String TAG = "MusicList";
 
-    /** The playlist store in positional order. */
+    /**
+     * The playlist store in positional order.
+     */
     private final List<Music> mList;
 
-    /** A list of songIDs in songPos order. */
+    /**
+     * A list of songIDs in songPos order.
+     */
     private final List<Integer> mSongID;
 
     MusicList() {
@@ -112,7 +120,7 @@ final class MusicList implements Iterable<Music> {
 
     /**
      * Clear the music list backend.
-     *
+     * <p>
      * This should only be called when manually invalidating this list.
      */
     void clear() {

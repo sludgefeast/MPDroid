@@ -111,7 +111,7 @@ public final class LibraryTabsUtil {
             CURRENT_TABS = getTabsListFromString(currentSettings);
 
             // remove not existing tabs (in case of an app version downgrade)
-            for (int i = CURRENT_TABS.size() - 1; i>=0; i--) {
+            for (int i = CURRENT_TABS.size() - 1; i >= 0; i--) {
                 if (!TABS.containsKey(CURRENT_TABS.get(i))) {
                     CURRENT_TABS.remove(i);
                 }

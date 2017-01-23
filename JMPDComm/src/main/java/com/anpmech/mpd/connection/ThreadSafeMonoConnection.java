@@ -45,7 +45,7 @@ public interface ThreadSafeMonoConnection {
 
     /**
      * Resolves a host then sets up connection to host/port pair.
-     *
+     * <p>
      * <p>If a main password is required, it MUST be called prior to calling this method. This call
      * exits immediately and status will be provided at callback.</p>
      *
@@ -56,7 +56,7 @@ public interface ThreadSafeMonoConnection {
 
     /**
      * Sets up connection to host/port pair.
-     *
+     * <p>
      * <p>If a main password is required, it MUST be called prior to calling this method.</p>
      *
      * @param host The media server host to connect to.

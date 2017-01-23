@@ -49,7 +49,7 @@ public class Album extends AbstractAlbum<Album> {
 
 
     protected Album(final String name, final Artist artist, final boolean hasAlbumArtist,
-            final long songCount, final long duration, final long year, final String path) {
+                    final long songCount, final long duration, final long year, final String path) {
         super(name, artist, hasAlbumArtist, songCount, duration, year, path);
     }
 

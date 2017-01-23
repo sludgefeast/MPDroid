@@ -42,7 +42,7 @@ public interface FilesystemTreeEntry {
 
     /**
      * This method returns the last modified time for this entry in Unix time.
-     *
+     * <p>
      * <p>The Last-Modified response value is expected to be given in ISO8601.</p>
      *
      * @return The last modified time for this entry in Unix time.
@@ -51,7 +51,7 @@ public interface FilesystemTreeEntry {
 
     /**
      * This returns the size a MPD entry file.
-     *
+     * <p>
      * <p><b>This is only available with some MPD command responses.</b></p>
      *
      * @return The size of a MPD entry file, {@link Integer#MIN_VALUE} if it doesn't exist in this

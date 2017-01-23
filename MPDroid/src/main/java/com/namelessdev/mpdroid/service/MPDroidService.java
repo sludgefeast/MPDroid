@@ -60,83 +60,125 @@ public final class MPDroidService extends Service implements
         MPDConnectionListener,
         StatusChangeListener {
 
-    /** Enable this to get various DEBUG messages from this module. */
+    /**
+     * Enable this to get various DEBUG messages from this module.
+     */
     static final boolean DEBUG = false;
 
-    /** This is the class unique Binder identifier. */
+    /**
+     * This is the class unique Binder identifier.
+     */
     static final int LOCAL_UID = 200;
 
-    /** Request that all clients unbind due to service inactivity. */
+    /**
+     * Request that all clients unbind due to service inactivity.
+     */
     public static final int REQUEST_UNBIND = LOCAL_UID + 1;
 
-    /** Update the clients with the important handler status. */
+    /**
+     * Update the clients with the important handler status.
+     */
     public static final int UPDATE_CLIENT_STATUS = LOCAL_UID + 2;
 
-    /** The main process connection changed. */
+    /**
+     * The main process connection changed.
+     */
     public static final int CONNECTION_INFO_CHANGED = LOCAL_UID + 3;
 
     public static final int REFRESH_COVER = LOCAL_UID + 4;
 
     static final String PACKAGE_NAME = "com.namelessdev.mpdroid.service.";
 
-    /** Disconnects if no connection exists. */
+    /**
+     * Disconnects if no connection exists.
+     */
     private static final int DISCONNECT_ON_NO_CONNECTION = LOCAL_UID + 5;
 
-    /** A tag for manually signifying service ownership used by the onTaskRemoved() Intent. */
+    /**
+     * A tag for manually signifying service ownership used by the onTaskRemoved() Intent.
+     */
     private static final String SERVICE_OWNERSHIP;
 
-    /** Immediately attempts to stopSelf(). */
+    /**
+     * Immediately attempts to stopSelf().
+     */
     private static final int STOP_SELF = LOCAL_UID + 6;
 
     private static final String TAG = "MPDroidService";
 
     private static final String FULLY_QUALIFIED_NAME = PACKAGE_NAME + TAG;
 
-    /** Handled in onStartCommand(), this is the persistent service start intent action. */
+    /**
+     * Handled in onStartCommand(), this is the persistent service start intent action.
+     */
     public static final String ACTION_START = FULLY_QUALIFIED_NAME + ".ACTION_START";
 
-    /** Handled in RemoteControlReceiver, this attempts closing this service. */
+    /**
+     * Handled in RemoteControlReceiver, this attempts closing this service.
+     */
     public static final String ACTION_STOP = FULLY_QUALIFIED_NAME + ".ACTION_STOP";
 
-    /** Sends stop() to all handlers. */
+    /**
+     * Sends stop() to all handlers.
+     */
     private static final int WIND_DOWN_HANDLERS = LOCAL_UID + 7;
 
-    /** The inner class which handles messages for this service. */
+    /**
+     * The inner class which handles messages for this service.
+     */
     private final MessageHandler mMessageHandler = new MessageHandler();
 
-    /** Directs messages to our Message Handler inner class. */
+    /**
+     * Directs messages to our Message Handler inner class.
+     */
     private final Handler mHandler = new Handler(mMessageHandler);
 
     private AlbumCoverHandler mAlbumCoverHandler = null;
 
-    /** The Android AudioManager, used by this for audio focus control. */
+    /**
+     * The Android AudioManager, used by this for audio focus control.
+     */
     private AudioManager mAudioManager = null;
 
     private ConnectionInfo mConnectionInfo;
 
-    /** True if audio is focused on this service. */
+    /**
+     * True if audio is focused on this service.
+     */
     private boolean mIsAudioFocusedOnThis = false;
 
-    /** If the media server is playing, and this is true, notification should show. */
+    /**
+     * If the media server is playing, and this is true, notification should show.
+     */
     private boolean mIsNotificationStarted = false;
 
-    /** True if the notification persistent is overridden. */
+    /**
+     * True if the notification persistent is overridden.
+     */
     private boolean mIsPersistentOverridden = false;
 
-    /** If the media server is playing, and this is true, audio streaming will be attempted. */
+    /**
+     * If the media server is playing, and this is true, audio streaming will be attempted.
+     */
     private boolean mIsStreamStarted = false;
 
     private NotificationHandler mNotificationHandler = null;
 
-    /** If this flag is true, and stream is started/stopped, notification will continue. */
+    /**
+     * If this flag is true, and stream is started/stopped, notification will continue.
+     */
     private boolean mNotificationOwnsService = false;
 
     private RemoteControlClientHandler mRemoteControlClientHandler = null;
 
-    /** The audio stream handler. */
+    /**
+     * The audio stream handler.
+     */
     private StreamHandler mStreamHandler = null;
 
-    /** If this flag is true, and stream stops, notification should shut itself down. */
+    /**
+     * If this flag is true, and stream stops, notification should shut itself down.
+     */
     private boolean mStreamOwnsService = false;
 
     static {
@@ -275,7 +317,9 @@ public final class MPDroidService extends Service implements
         return mIsNotificationStarted || mIsStreamStarted;
     }
 
-    /** Initialize the {@code MPD} connection, monitors and listeners. */
+    /**
+     * Initialize the {@code MPD} connection, monitors and listeners.
+     */
     private void initializeAsyncHelper() {
         final MPDApplication app = getApp();
         final MPD mpd = app.getMPD();
@@ -301,7 +345,9 @@ public final class MPDroidService extends Service implements
          */
     }
 
-    /** Initializes the notification and handlers which are generally associated with it. */
+    /**
+     * Initializes the notification and handlers which are generally associated with it.
+     */
     private void initializeNotification() {
         Log.d(TAG, "initializeNotification()");
 
@@ -324,7 +370,9 @@ public final class MPDroidService extends Service implements
         mMessageHandler.sendMessageToClients(NotificationHandler.IS_ACTIVE, true);
     }
 
-    /** Initializes the streaming handler. */
+    /**
+     * Initializes the streaming handler.
+     */
     private void initializeStream() {
         if (DEBUG) {
             Log.d(TAG, "initializeStream()");
@@ -438,7 +486,9 @@ public final class MPDroidService extends Service implements
         mConnectionInfo = getApp().getConnectionSettings();
     }
 
-    /** If handlers have activated, use windDownService rather than stopSelf(). */
+    /**
+     * If handlers have activated, use windDownService rather than stopSelf().
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -946,10 +996,14 @@ public final class MPDroidService extends Service implements
         }
     }
 
-    /** This class handles all incoming messages. */
+    /**
+     * This class handles all incoming messages.
+     */
     private class MessageHandler implements Handler.Callback {
 
-        /** Tracker for clients that are currently bound to the service binder. */
+        /**
+         * Tracker for clients that are currently bound to the service binder.
+         */
         private final List<Messenger> mServiceClients = new ArrayList<>(3);
 
         /**
@@ -1188,13 +1242,13 @@ public final class MPDroidService extends Service implements
 
         /**
          * This processes the incoming (and likely changed) {@code ConnectionSettings} object.
-         *
+         * <p>
          * <p>This method is necessary as the {@code MPDAsyncHelper}, which produces the {@code
          * ConnectionSettings} object, only changes in the remote process upon connection settings
          * change. It is then parceled, bundled and sent as a message here then processed back into
          * a {@code ConnectionSettings} object. It is then sent to our {@code MPDAsyncHelper}
          * instance.</p>
-         *
+         * <p>
          * <p>Once sent to this process instance {@code MPDAsyncHelper}, this will then call the
          * ConnectionInfoListener callback which calls the onConnectionConfigChange().</p>
          *

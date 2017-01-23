@@ -111,8 +111,8 @@ public class AlbumDataBinder<T extends Item<T>> extends BaseDataBinder<T> {
 
     @Override
     public void onDataBind(final Context context, final View targetView,
-            final AbstractViewHolder viewHolder, final List<T> items, final Object item,
-            final int position) {
+                           final AbstractViewHolder viewHolder, final List<T> items, final Object item,
+                           final int position) {
         final AlbumViewHolder holder = (AlbumViewHolder) viewHolder;
         final Album album = (Album) item;
         final Artist artist = album.getArtist();
@@ -172,7 +172,7 @@ public class AlbumDataBinder<T extends Item<T>> extends BaseDataBinder<T> {
 
     @Override
     public View onLayoutInflation(final Context context, final View targetView,
-            final List<T> items) {
+                                  final List<T> items) {
         return setViewVisible(targetView, R.id.albumCover, mEnableCache);
     }
 }

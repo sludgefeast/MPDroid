@@ -42,7 +42,7 @@ import java.io.IOException;
 
 /**
  * This class is the generic base for the Directory items, abstracted for backend.
- *
+ * <p>
  * <p>This class is similar to {@link Listing}, but rather than using the <A
  * HREF="http://www.musicpd.org/doc/protocol/database.html#command_listfiles">{@code listfiles}</A>
  * command, the
@@ -50,11 +50,11 @@ import java.io.IOException;
  * server command is used. When used with the standard MPD implementation, this command provides
  * much more information about the directory listing. Unlike {@link AbstractListing} this command
  * will only list those recognized by the MPD server implementation.</p>
- *
+ * <p>
  * <p>This item is returned from methods of the
  * <A HREF="http://www.musicpd.org/doc/protocol/database.html">database</A>
  * subsystem of the <A HREF="http://www.musicpd.org/doc/protocol">MPD protocol</A>.</p>
- *
+ * <p>
  * <p>This class is mutable, but should be thread-safe.</p>
  *
  * @param <T> The Directory type.
@@ -74,7 +74,7 @@ abstract class AbstractDirectory<T extends AbstractDirectory<T>> extends Abstrac
      *               will be required to initialize it.
      */
     AbstractDirectory(@NotNull final ResponseObject object,
-            @Nullable final CommandResult lsInfo) {
+                      @Nullable final CommandResult lsInfo) {
         super(object, lsInfo);
     }
 

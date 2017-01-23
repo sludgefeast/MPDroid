@@ -166,7 +166,7 @@ public class MPD {
 
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private static List<Artist> getMergedArtists(final MPDConnection connection,
-            final CommandQueue commandQueue) throws IOException, MPDException {
+                                                 final CommandQueue commandQueue) throws IOException, MPDException {
         final CommandResult result = connection.submit(commandQueue).get();
 
         final ArtistResponse artists = new ArtistResponse(result);
@@ -380,7 +380,7 @@ public class MPD {
      * @throws MPDException Thrown if an error occurs as a result of command execution.
      */
     private void add(final CommandQueue commandQueue, final boolean replace,
-            final boolean playAfterAdd) throws IOException, MPDException {
+                     final boolean playAfterAdd) throws IOException, MPDException {
         int playPos = 0;
         final boolean isPlaying = mStatus.isState(MPDStatusMap.STATE_PLAYING);
         final boolean isConsume = mStatus.isConsume();
@@ -454,7 +454,7 @@ public class MPD {
      * @throws MPDException Thrown if an error occurs as a result of command execution.
      */
     public void add(final PlaylistFile databasePlaylist, final boolean replace,
-            final boolean play) throws IOException, MPDException {
+                    final boolean play) throws IOException, MPDException {
         final CommandQueue commandQueue = new CommandQueue();
 
         commandQueue.add(MPDPlaylist.loadCommand(databasePlaylist.getName()));
@@ -808,7 +808,7 @@ public class MPD {
     }
 
     protected MusicResponse genericSearch(final CharSequence searchCommand, final String type,
-            final String strToFind) throws IOException, MPDException {
+                                          final String strToFind) throws IOException, MPDException {
         final CommandResult result = mConnection.submit(searchCommand, type, strToFind).get();
 
         return new MusicResponse(result);
@@ -847,7 +847,7 @@ public class MPD {
     }
 
     public List<Album> getAlbums(final Artist artist, final boolean sortByYear,
-            final boolean trackCountNeeded) throws IOException, MPDException {
+                                 final boolean trackCountNeeded) throws IOException, MPDException {
         final List<Album> albums = getAlbums(artist, sortByYear, trackCountNeeded, false);
 
         // 1. the null artist list already contains all albums
@@ -860,7 +860,7 @@ public class MPD {
     }
 
     public List<Album> getAlbums(final Artist artist, final boolean sortByYear,
-            final boolean trackCountNeeded, final boolean useAlbumArtist)
+                                 final boolean trackCountNeeded, final boolean useAlbumArtist)
             throws IOException, MPDException {
         final List<Album> albums;
 
@@ -988,7 +988,7 @@ public class MPD {
 
     /**
      * This retrieves the current track from the {@link MPDPlaylist}/{@link MPDStatusMap} cache.
-     *
+     * <p>
      * <p>This method <b>depends</b> on a valid MPDStatus and MPDPlaylist prior to being run. The
      * reason it is not run by this method is to wait for validity will block and it is up to the
      * user to take precaution for this prior to running this method.</p>
@@ -1376,7 +1376,7 @@ public class MPD {
      * @throws MPDException Thrown if an error occurs as a result of command execution.
      */
     public List<Album> listAllAlbumsGrouped(final boolean useAlbumArtist,
-            final boolean includeUnknownAlbum) throws IOException, MPDException {
+                                            final boolean includeUnknownAlbum) throws IOException, MPDException {
         final AlbumBuilder albumBuilder = new AlbumBuilder();
         final String albumResponse = Music.RESPONSE_ALBUM;
         final String artistResponse;

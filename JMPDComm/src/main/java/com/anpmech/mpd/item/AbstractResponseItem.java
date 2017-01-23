@@ -69,12 +69,12 @@ public abstract class AbstractResponseItem<T extends AbstractResponseItem<T>> ex
      * as this instance using a class-specific comparison. The general contract
      * is that this comparison should be reflexive, symmetric, and transitive.
      * Also, no object reference other than null is equal to null.
-     *
+     * <p>
      * <p>The default implementation returns {@code true} only if {@code this ==
      * o}. See <a href="{@docRoot}reference/java/lang/Object.html#writing_equals">Writing a correct
      * {@code equals} method</a>
      * if you intend implementing your own {@code equals} method.
-     *
+     * <p>
      * <p>The general contract for the {@code equals} and {@link
      * #hashCode()} methods is that if {@code equals} returns {@code true} for
      * any two objects, then {@code hashCode()} must return the same value for

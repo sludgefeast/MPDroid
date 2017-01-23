@@ -40,25 +40,39 @@ import java.util.List;
  */
 public class CommandQueue extends AbstractList<MPDCommand> {
 
-    /** The initial length of the sum of command queue string lengths. */
+    /**
+     * The initial length of the sum of command queue string lengths.
+     */
     private static final int EMPTY_COMMAND_SIZE;
 
-    /** Command text used to end of any command list. */
+    /**
+     * Command text used to end of any command list.
+     */
     private static final String MPD_CMD_END_BULK = "command_list_end";
 
-    /** Command text used to begin of command list. */
+    /**
+     * Command text used to begin of command list.
+     */
     private static final String MPD_CMD_START_BULK = "command_list_begin";
 
-    /** Command text used to begin a separated command list. */
+    /**
+     * Command text used to begin a separated command list.
+     */
     private static final String MPD_CMD_START_BULK_OK = "command_list_ok_begin";
 
-    /** The class log identifier. */
+    /**
+     * The class log identifier.
+     */
     private static final String TAG = "CommandQueue";
 
-    /** The internal command queue storage. */
+    /**
+     * The internal command queue storage.
+     */
     private final List<MPDCommand> mCommandQueue;
 
-    /** The length of the command queue. */
+    /**
+     * The length of the command queue.
+     */
     private int mCommandQueueStringLength;
 
     static {

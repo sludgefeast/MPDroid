@@ -55,7 +55,9 @@ public class RemoteControlClientHandler implements AlbumCoverHandler.FullSizeCal
 
     private final Handler mServiceHandler;
 
-    /** A flag used to inform the RemoteControlClient that a buffering event is taking place. */
+    /**
+     * A flag used to inform the RemoteControlClient that a buffering event is taking place.
+     */
     private boolean mIsMediaPlayerBuffering = false;
 
     /**
@@ -72,7 +74,9 @@ public class RemoteControlClientHandler implements AlbumCoverHandler.FullSizeCal
 
     private RemoteControlClient mRemoteControlClient = null;
 
-    /** The RemoteControlClient Seekbar handled by the {@code RemoteControlClientSeekBarHandler}. */
+    /**
+     * The RemoteControlClient Seekbar handled by the {@code RemoteControlClientSeekBarHandler}.
+     */
     private RemoteControlSeekBarHandler mSeekBar = null;
 
     RemoteControlClientHandler(final MPDroidService serviceContext, final Handler serviceHandler) {
@@ -240,7 +244,9 @@ public class RemoteControlClientHandler implements AlbumCoverHandler.FullSizeCal
         getRemoteState(status.getState());
     }
 
-    /** Cleans up this object prior to closing the parent. */
+    /**
+     * Cleans up this object prior to closing the parent.
+     */
     final void stop() {
         if (mRemoteControlClient != null) {
             setPlaybackState(RemoteControlClient.PLAYSTATE_STOPPED);

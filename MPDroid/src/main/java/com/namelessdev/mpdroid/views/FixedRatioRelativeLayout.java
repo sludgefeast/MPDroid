@@ -47,7 +47,7 @@ public class FixedRatioRelativeLayout extends RelativeLayout {
     }
 
     public FixedRatioRelativeLayout(final Context context, @AttrRes final AttributeSet attrs,
-            @StyleRes final int defStyle) {
+                                    @StyleRes final int defStyle) {
         super(context, attrs, defStyle);
         readAttrs(context, attrs);
     }

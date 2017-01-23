@@ -33,7 +33,7 @@ import java.util.Map;
 /**
  * This class is used to create an {@link Iterator} to iterate over each {@code key}:{@code
  * value} of an MPD command response.
- *
+ * <p>
  * <b>This class requires a {@code key}:{@code value} MPD response.</b>
  */
 public class KeyValueIterator extends FullBlockResult<Map.Entry<String, String>> {
@@ -111,7 +111,7 @@ public class KeyValueIterator extends FullBlockResult<Map.Entry<String, String>>
          * as this instance using a class-specific comparison. The general contract
          * is that this comparison should be reflexive, symmetric, and transitive.
          * Also, no object reference other than null is equal to null.
-         *
+         * <p>
          * <p>The general contract for the {@code equals} and {@link
          * #hashCode()} methods is that if {@code equals} returns {@code true} for
          * any two objects, then {@code hashCode()} must return the same value for
@@ -179,7 +179,7 @@ public class KeyValueIterator extends FullBlockResult<Map.Entry<String, String>>
          * objects for which {@link #equals} returns {@code true} must return
          * the same hash code value. This means that subclasses of {@code Object}
          * usually override both methods or neither method.
-         *
+         * <p>
          * <p>Note that hash values must not change over time unless information used in equals
          * comparisons also changes.</p>
          *
