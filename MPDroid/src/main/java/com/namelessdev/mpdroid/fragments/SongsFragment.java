@@ -265,24 +265,14 @@ public class SongsFragment extends BrowseFragment<Music> implements
     }
 
     private CharSequence getHeaderInfoString() {
-        final String headerInfo;
-
         if (getActivity() == null) {
-            headerInfo = "";
-        } else {
-            final int count = mItems.size();
-            final int header;
-
-            if (count > 1) {
-                header = R.string.tracksInfoHeaderPlural;
-            } else {
-                header = R.string.tracksInfoHeader;
-            }
-
-            headerInfo = getString(header, count, getTotalTimeForTrackList());
+            return "";
         }
 
-        return headerInfo;
+        final int count = mItems.size();
+        final int header = count > 1 ? R.string.tracksInfoHeaderPlural :
+                R.string.tracksInfoHeader;
+        return getString(header, count, getTotalTimeForTrackList());
     }
 
     @Override
@@ -293,21 +283,11 @@ public class SongsFragment extends BrowseFragment<Music> implements
 
     @Override
     public String getTitle() {
-        final String result;
-
-        if (mAlbum == null) {
-            final Bundle bundle = getArguments();
-
-            if (bundle == null) {
-                result = super.getTitle();
-            } else {
-                result = bundle.getParcelable(Album.EXTRA).toString();
-            }
-        } else {
-            result = mAlbum.toString();
+        if (mAlbum != null) {
+            return mAlbum.toString();
         }
-
-        return result;
+        final Bundle bundle = getArguments();
+        return bundle != null ? bundle.getParcelable(Album.EXTRA).toString() : super.getTitle();
     }
 
     private CharSequence getTotalTimeForTrackList() {
@@ -356,7 +336,7 @@ public class SongsFragment extends BrowseFragment<Music> implements
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
 
         mList.setFastScrollEnabled(false);
@@ -392,7 +372,7 @@ public class SongsFragment extends BrowseFragment<Music> implements
         mCoverArtListener = new AlbumCoverDownloadListener(mCoverArt, mCoverArtProgress, false) {
             @Override
             public void onCoverDownloaded(final AlbumInfo albumInfo,
-                    final Collection<Bitmap> bitmaps) {
+                                          final Collection<Bitmap> bitmaps) {
                 super.onCoverDownloaded(albumInfo, bitmaps);
                 final Drawable drawable = mCoverArt.getDrawable();
                 if (drawable instanceof BitmapDrawable) {
@@ -579,7 +559,7 @@ public class SongsFragment extends BrowseFragment<Music> implements
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         // If in simple mode : add, replace and play the shown album.
         if (mApp.isInSimpleMode()) {
             mApp.getAsyncHelper().execAsync(new Runnable() {

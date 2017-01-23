@@ -108,7 +108,7 @@ public class OutputsFragment extends ListFragment implements AdapterView.OnItemC
 
     /**
      * Called when connecting.
-     *
+     * <p>
      * <p>This implies that we've disconnected. This callback is intended to be transient. Status
      * change from connected to connecting may happen, but if a connection is not established, with
      * a connected callback, the disconnection status callback should be called.</p>
@@ -157,22 +157,22 @@ public class OutputsFragment extends ListFragment implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         if (mOutputs.isEmpty() || position >= mOutputs.size()) {
             Log.e(TAG, "Failed to modify out of sync outputs.");
-        } else {
-            final MPD mpd = mApp.getMPD();
-            final AudioOutput output = mOutputs.get(position);
+            return;
+        }
+        final MPD mpd = mApp.getMPD();
+        final AudioOutput output = mOutputs.get(position);
 
-            try {
-                if (getListView().isItemChecked(position)) {
-                    mpd.enableOutput(output.getId());
-                } else {
-                    mpd.disableOutput(output.getId());
-                }
-            } catch (final IOException | IllegalStateException | MPDException e) {
-                Log.e(TAG, "Failed to modify output.", e);
+        try {
+            if (getListView().isItemChecked(position)) {
+                mpd.enableOutput(output.getId());
+            } else {
+                mpd.disableOutput(output.getId());
             }
+        } catch (final IOException | IllegalStateException | MPDException e) {
+            Log.e(TAG, "Failed to modify output.", e);
         }
     }
 
@@ -184,7 +184,6 @@ public class OutputsFragment extends ListFragment implements AdapterView.OnItemC
     @Override
     public void onPause() {
         mApp.removeStatusChangeListener(this);
-
         super.onPause();
     }
 
@@ -197,7 +196,6 @@ public class OutputsFragment extends ListFragment implements AdapterView.OnItemC
     @Override
     public void onResume() {
         super.onResume();
-
         mApp.addStatusChangeListener(this);
     }
 
@@ -230,9 +228,7 @@ public class OutputsFragment extends ListFragment implements AdapterView.OnItemC
      */
     public void refreshOutputs() {
         final Runnable updateAudioOutputs = new UpdateAudioOutputs(mApp.getMPD(), mOutputs);
-
         mApp.getAsyncHelper().execAsync(this, AudioOutput.EXTRA, updateAudioOutputs);
-
     }
 
     /**
@@ -310,8 +306,6 @@ public class OutputsFragment extends ListFragment implements AdapterView.OnItemC
          * @param outputs The list of AudioOutputs to modify.
          */
         private UpdateAudioOutputs(final MPD mpd, final List<AudioOutput> outputs) {
-
-
             mMPD = mpd;
             mOutputs = outputs;
         }

@@ -61,7 +61,7 @@ import java.util.List;
 /**
  * This fragment is used to display a list of Streams in a special playlist on the connected MPD
  * server.
- *
+ * <p>
  * This fragment is used to specifically store {@link Stream} URLs with using the URL fragment as
  * a name place holder. These streams are stored in the {@link Stream#PLAYLIST_NAME} playlist.
  */
@@ -113,7 +113,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
         final View view = factory.inflate(R.layout.stream_dialog, null);
         final EditText nameEdit = (EditText) view.findViewById(R.id.name_edit);
         final EditText urlEdit = (EditText) view.findViewById(R.id.url_edit);
-        final int streamTitle =  idx < 0 ? R.string.addStream : R.string.editStream;
+        final int streamTitle = idx < 0 ? R.string.addStream : R.string.editStream;
 
         if (idx >= 0 && idx < mUnordered.size()) {
             final Stream stream = mUnordered.get(idx);
@@ -215,7 +215,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenu.ContextMenuInfo menuInfo) {
+                                    final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         if (info.id >= 0L && info.id < (long) mItems.size()) {
@@ -237,7 +237,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
 
         view.findViewById(R.id.streamAddButton).setOnClickListener(new View.OnClickListener() {
@@ -252,7 +252,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         addAdapterItem(parent, position);
     }
 
@@ -315,7 +315,6 @@ public class StreamsFragment extends BrowseFragment<Stream> {
     @Override
     public void storedPlaylistChanged() {
         super.storedPlaylistChanged();
-
         updateList();
     }
 
@@ -348,9 +347,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
          * @param streams   The current list of streams.
          */
         private DeleteDialogClickListener(final Context context, final int itemIndex,
-                final List<Stream> streams) {
-
-
+                                          final List<Stream> streams) {
             mApp = (MPDApplication) context.getApplicationContext();
             mItemIndex = itemIndex;
             mStreamName = streams.get(itemIndex).getName();
@@ -380,9 +377,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
         private final EditText mUrlEdit;
 
         private AddEditOnClickListener(final EditText nameEdit, final EditText urlEdit,
-                final int index, final CharSequence streamUrlToAdd) {
-
-
+                                       final int index, final CharSequence streamUrlToAdd) {
             mNameEdit = nameEdit;
             mUrlEdit = urlEdit;
             mIndex = index;
@@ -396,15 +391,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
          * @return A trimmed getText string.
          */
         private String getText(final TextView textView) {
-            final String result;
-
-            if (textView == null) {
-                result = null;
-            } else {
-                result = textView.getText().toString().trim();
-            }
-
-            return result;
+            return textView != null ? textView.getText().toString().trim() : null;
         }
 
         @Override

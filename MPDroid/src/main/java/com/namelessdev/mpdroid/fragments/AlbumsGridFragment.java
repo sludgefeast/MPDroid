@@ -64,7 +64,6 @@ public class AlbumsGridFragment extends AlbumsFragment {
     @Override
     public void onResume() {
         super.onResume();
-
         mIsCountDisplayed = false;
     }
 }

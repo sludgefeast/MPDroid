@@ -85,7 +85,9 @@ abstract class NowPlayingFragmentBase extends Fragment implements
         TrackPositionListener, OnSharedPreferenceChangeListener, OnMenuItemClickListener,
         UpdateTrackInfo.FullTrackInfoUpdate {
 
-    /** In milliseconds. */
+    /**
+     * In milliseconds.
+     */
     private static final long ANIMATION_DURATION = 1000L;
 
     private static final int POPUP_ALBUM = 2;
@@ -198,7 +200,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
      * @return The generated {@code ImageButton}.
      */
     private static ImageButton getEventButton(final View view, @IdRes final int resource,
-            final boolean longPress) {
+                                              final boolean longPress) {
         final ImageButton button = (ImageButton) view.findViewById(resource);
         final ButtonEventHandler buttonEventHandler = new ButtonEventHandler();
 
@@ -211,23 +213,15 @@ abstract class NowPlayingFragmentBase extends Fragment implements
     }
 
     protected static int getPlayPauseResource(final int state) {
-        final int resource;
-
         if (MPDApplication.getInstance().isLightThemeSelected()) {
-            if (state == MPDStatusMap.STATE_PLAYING) {
-                resource = R.drawable.ic_media_pause_light;
-            } else {
-                resource = R.drawable.ic_media_play_light;
-            }
+            return state == MPDStatusMap.STATE_PLAYING ?
+                    R.drawable.ic_media_pause_light :
+                    R.drawable.ic_media_play_light;
         } else {
-            if (state == MPDStatusMap.STATE_PLAYING) {
-                resource = R.drawable.ic_media_pause;
-            } else {
-                resource = R.drawable.ic_media_play;
-            }
+            return state == MPDStatusMap.STATE_PLAYING ?
+                    R.drawable.ic_media_pause :
+                    R.drawable.ic_media_play;
         }
-
-        return resource;
     }
 
     /**
@@ -238,15 +232,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
      * attribute otherwise.
      */
     private static int getRepeatAttribute(final boolean on) {
-        final int attribute;
-
-        if (on) {
-            attribute = R.attr.repeatEnabled;
-        } else {
-            attribute = R.attr.repeatDisabled;
-        }
-
-        return attribute;
+        return on ? R.attr.repeatEnabled : R.attr.repeatDisabled;
     }
 
     /**
@@ -257,15 +243,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
      * attribute otherwise.
      */
     private static int getShuffleAttribute(final boolean on) {
-        final int attribute;
-
-        if (on) {
-            attribute = R.attr.shuffleEnabled;
-        } else {
-            attribute = R.attr.shuffleDisabled;
-        }
-
-        return attribute;
+        return on ? R.attr.shuffleEnabled : R.attr.shuffleDisabled;
     }
 
     /**
@@ -279,7 +257,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(final SeekBar seekBar, final int progress,
-                            final boolean fromUser) {
+                                                  final boolean fromUser) {
                     }
 
                     @Override
@@ -299,11 +277,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
     }
 
     private void applyViewVisibility(final View view, final String property) {
-        if (mSharedPreferences.getBoolean(property, false)) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
+        view.setVisibility(mSharedPreferences.getBoolean(property, false) ?
+                View.VISIBLE : View.GONE);
     }
 
     /**
@@ -429,7 +404,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
 
     /**
      * This method generates selected track information to send to another application.
-     *
+     * <p>
      * <p>The current format of this method should output: header artist - title and if the output
      * is a stream, the URL should be suffixed on the end.</p>
      *
@@ -588,7 +563,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(final SeekBar seekBar, final int progress,
-                            final boolean fromUser) {
+                                                  final boolean fromUser) {
                     }
 
                     @Override
@@ -704,23 +679,20 @@ abstract class NowPlayingFragmentBase extends Fragment implements
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         final Animation fadeIn = AnimationUtils.loadAnimation(mActivity, android.R.anim.fade_in);
         final Animation fadeOut = AnimationUtils.loadAnimation(mActivity, android.R.anim.fade_out);
-        final int viewLayout;
         final View view;
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
 
         mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
-        if (mApp.isTabletUiEnabled()) {
-            viewLayout = R.layout.main_fragment_tablet;
-        } else {
-            viewLayout = R.layout.main_fragment;
-        }
+        final int viewLayout = mApp.isTabletUiEnabled() ?
+                R.layout.main_fragment_tablet :
+                R.layout.main_fragment;
 
         view = inflater.inflate(viewLayout, container, false);
 
@@ -847,7 +819,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
 
     @Override
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences,
-            final String key) {
+                                          final String key) {
         switch (key) {
             case CoverManager.PREFERENCE_CACHE:
             case CoverManager.PREFERENCE_LASTFM:
@@ -905,8 +877,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
      */
     @Override
     public final void onTrackInfoUpdate(final Music updatedSong, final float trackRating,
-            final CharSequence album, final CharSequence artist, final CharSequence date,
-            final CharSequence title) {
+                                        final CharSequence album, final CharSequence artist, final CharSequence date,
+                                        final CharSequence title) {
         mCurrentSong = updatedSong;
         mAlbumNameText.setText(album);
         mArtistNameText.setText(artist);
@@ -964,17 +936,18 @@ abstract class NowPlayingFragmentBase extends Fragment implements
      */
     private void setButtonAttribute(@AttrRes final int attribute, final ImageButton button) {
         final Activity activity = getActivity();
-
-        if (activity != null) {
-            final int[] attrs = {attribute};
-
-            final TypedArray ta = activity.obtainStyledAttributes(attrs);
-            final Drawable drawableFromTheme = ta.getDrawable(0);
-
-            button.setImageDrawable(drawableFromTheme);
-            button.invalidate();
-            ta.recycle();
+        if (activity == null) {
+            return;
         }
+
+        final int[] attrs = {attribute};
+
+        final TypedArray ta = activity.obtainStyledAttributes(attrs);
+        final Drawable drawableFromTheme = ta.getDrawable(0);
+
+        button.setImageDrawable(drawableFromTheme);
+        button.invalidate();
+        ta.recycle();
     }
 
     private void setStickerVisibility() {
@@ -1213,15 +1186,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
      * @param totalTrackTime The current track total time.
      */
     private void updateTrackProgress(final long elapsed, final long totalTrackTime) {
-        /** In case the total track time is flawed. */
-        final long elapsedTime;
-
-        if (elapsed > totalTrackTime) {
-            elapsedTime = totalTrackTime;
-        } else {
-            elapsedTime = elapsed;
-        }
-
+        /* In case the total track time is flawed. */
+        final long elapsedTime = elapsed > totalTrackTime ? totalTrackTime : elapsed;
         mTrackSeekBar.setProgress((int) elapsedTime);
 
         mHandler.post(new Runnable() {
@@ -1277,7 +1243,6 @@ abstract class NowPlayingFragmentBase extends Fragment implements
         private long mTotalTrackTime = 0L;
 
         private PosTimerTask(final long start, final long total) {
-
             mStartTrackTime = start;
             mTotalTrackTime = total;
             mTimerStartTime = new Date().getTime();
@@ -1297,7 +1262,7 @@ abstract class NowPlayingFragmentBase extends Fragment implements
 
         @Override
         public void onRatingChanged(final RatingBar ratingBar, final float rating,
-                final boolean fromUser) {
+                                    final boolean fromUser) {
             final int trackRating = (int) rating * 2;
             if (fromUser && mCurrentSong != null) {
                 try {

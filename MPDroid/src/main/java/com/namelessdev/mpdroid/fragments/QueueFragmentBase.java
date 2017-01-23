@@ -203,14 +203,12 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
     }
 
     protected AbstractPlaylistMusic getPlaylistItemSong(final int songID) {
-        AbstractPlaylistMusic song = null;
         for (final AbstractPlaylistMusic music : mSongList) {
             if (music.getSongId() == songID) {
-                song = music;
-                break;
+                return music;
             }
         }
-        return song;
+        return null;
     }
 
     /**
@@ -253,14 +251,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
     }
 
     protected boolean isFiltered(final String item) {
-        final String processedItem;
-
-        if (item == null) {
-            processedItem = "";
-        } else {
-            processedItem = item.toLowerCase(Locale.getDefault());
-        }
-
+        final String processedItem = item != null ? item.toLowerCase(Locale.getDefault()) : "";
         return processedItem.contains(mFilter);
     }
 
@@ -273,21 +264,17 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
      * theme.
      */
     private void markRunningTrack() {
-        if (mSongList != null) {
-            // Mark running track...
-            for (final AbstractPlaylistMusic song : mSongList) {
-                final int newPlay;
+        if (mSongList == null) {
+            return;
+        }
+        // Mark running track...
+        for (final AbstractPlaylistMusic song : mSongList) {
+            final int newPlay = song.getSongId() == mMPDStatus.getSongId() ?
+                    getStateDrawable() : 0;
 
-                if (song.getSongId() == mMPDStatus.getSongId()) {
-                    newPlay = getStateDrawable();
-                } else {
-                    newPlay = 0;
-                }
-
-                if (song.getCurrentSongIconRefID() != newPlay) {
-                    song.setCurrentSongIconRefID(newPlay);
-                    refreshPlaylistItemView(song);
-                }
+            if (song.getCurrentSongIconRefID() != newPlay) {
+                song.setCurrentSongIconRefID(newPlay);
+                refreshPlaylistItemView(song);
             }
         }
     }
@@ -312,7 +299,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         mRootView = container;
@@ -444,7 +431,6 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
         super.onListItemClick(l, v, position, id);
 
         final Music song = (Music) l.getAdapter().getItem(position);
-
         QueueControl.run(QueueControl.SKIP_TO_ID, song);
     }
 
@@ -525,7 +511,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(final DialogInterface dialog,
-                                                final int which) {
+                                                            final int which) {
                                             savePlaylist(mPlaylistToSave);
                                         }
                                     }
@@ -567,7 +553,6 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
     @Override
     public void playlistChanged(final int oldPlaylistVersion) {
         update();
-
     }
 
     @Override
@@ -640,7 +625,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(final DialogInterface dialog,
-                                                final int which) {
+                                                            final int which) {
                                             final String name = input.getText().toString().trim();
                                             if (!name.isEmpty()) {
                                                 savePlaylist(name);
@@ -682,7 +667,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
      * @param parcelable the {@link Intent#putExtra(String, boolean)} parcelable.
      */
     private void startSimpleLibraryActivity(final Activity activity, final String extra,
-            final Parcelable parcelable) {
+                                            final Parcelable parcelable) {
         final Intent intent = new Intent(activity, SimpleLibraryActivity.class);
         intent.putExtra(extra, parcelable);
         startActivityForResult(intent, -1);
@@ -791,7 +776,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
      * @param listPlayingID The current playing playlist id.
      */
     protected void updateScrollbar(final ArrayList<AbstractPlaylistMusic> newSongList,
-            final int listPlayingID) {
+                                   final int listPlayingID) {
         mActivity.runOnUiThread(new Runnable() {
             /**
              * This is a helper method to workaround shortcomings of the fast scroll API.
@@ -800,7 +785,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
              * @param isAlwaysVisible The visibility of the scrollbar.
              */
             private void refreshFastScrollStyle(final int scrollbarStyle,
-                    final boolean isAlwaysVisible) {
+                                                final boolean isAlwaysVisible) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     mList.setFastScrollAlwaysVisible(isAlwaysVisible);
                     mList.setScrollBarStyle(scrollbarStyle);
@@ -870,7 +855,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
     private class QueueAdapter extends ArrayAdapter<AbstractPlaylistMusic> {
 
         QueueAdapter(final Context context, @LayoutRes final int resource,
-                final List<AbstractPlaylistMusic> data) {
+                     final List<AbstractPlaylistMusic> data) {
             super(context, resource, data);
         }
 

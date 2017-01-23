@@ -141,42 +141,28 @@ public class ArtistsFragment extends BrowseFragment<Artist> {
 
     @Override
     public String getTitle() {
-        final String title;
-
-        if (mGenresGroup == null) {
-            final Bundle bundle = getArguments();
-            String name = null;
-            if (bundle != null) {
-                final GenresGroup genresGroup = bundle.getParcelable(GenresGroup.EXTRA);
-
-                if (genresGroup != null) {
-                    name = genresGroup.getName();
-                }
-            }
-
-            if (name == null) {
-                title = super.getTitle();
-            } else {
-                title = name;
-            }
-        } else {
-            title = mGenresGroup.toString();
+        if (mGenresGroup != null) {
+            return mGenresGroup.toString();
         }
 
-        return title;
+        final Bundle bundle = getArguments();
+        String name = null;
+        if (bundle != null) {
+            final GenresGroup genresGroup = bundle.getParcelable(GenresGroup.EXTRA);
+
+            if (genresGroup != null) {
+                name = genresGroup.getName();
+            }
+        }
+
+        return name != null ? name : super.getTitle();
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Bundle bundle;
-        if (savedInstanceState == null) {
-            bundle = getArguments();
-        } else {
-            bundle = savedInstanceState;
-        }
-
+        final Bundle bundle = savedInstanceState != null ? savedInstanceState : getArguments();
         if (bundle != null) {
             mGenresGroup = bundle.getParcelable(GenresGroup.EXTRA);
         }
@@ -184,21 +170,18 @@ public class ArtistsFragment extends BrowseFragment<Artist> {
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         final SharedPreferences settings = PreferenceManager
                 .getDefaultSharedPreferences(mApp);
         final Activity activity = getActivity();
-        final Bundle bundle = new Bundle(2);
-        final Fragment fragment;
 
+        final Bundle bundle = new Bundle(2);
         bundle.putParcelable(Artist.EXTRA, mItems.get(position));
         bundle.putParcelable(GenresGroup.EXTRA, mGenresGroup);
 
-        if (settings.getBoolean(PREFERENCE_ALBUM_LIBRARY, true)) {
-            fragment = Fragment.instantiate(activity, AlbumsGridFragment.class.getName(), bundle);
-        } else {
-            fragment = Fragment.instantiate(activity, AlbumsFragment.class.getName(), bundle);
-        }
+        final Fragment fragment = settings.getBoolean(PREFERENCE_ALBUM_LIBRARY, true) ?
+                Fragment.instantiate(activity, AlbumsGridFragment.class.getName(), bundle) :
+                Fragment.instantiate(activity, AlbumsFragment.class.getName(), bundle);
 
         ((ILibraryFragmentActivity) getActivity()).pushLibraryFragment(fragment, Album.EXTRA);
     }

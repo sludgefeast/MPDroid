@@ -181,12 +181,11 @@ public class PlaylistsFragment extends BrowseFragment<PlaylistFile> {
         return false;
     }
 
-    class DialogClickListener implements OnClickListener {
+    private class DialogClickListener implements OnClickListener {
 
         private final int mItemIndex;
 
-        DialogClickListener(final int itemIndex) {
-
+        private DialogClickListener(final int itemIndex) {
             mItemIndex = itemIndex;
         }
 

@@ -74,10 +74,10 @@ public class StoredPlaylistFragment extends BrowseFragment<Music> {
 
     @Override
     public void asyncUpdate() {
+        if (getActivity() == null) {
+            return;
+        }
         try {
-            if (getActivity() == null) {
-                return;
-            }
             replaceItems(mApp.getMPD().getPlaylistSongs(mPlaylist));
         } catch (final IOException | MPDException e) {
             Log.e(TAG, "Failed to update.", e);
@@ -112,16 +112,8 @@ public class StoredPlaylistFragment extends BrowseFragment<Music> {
 
     @Override
     public String getTitle() {
-        final String title;
         final PlaylistFile parcelable = getArguments().getParcelable(PlaylistFile.EXTRA);
-
-        if (parcelable == null) {
-            title = super.getTitle();
-        } else {
-            title = parcelable.getName();
-        }
-
-        return title;
+        return parcelable != null ? parcelable.getName() : super.getTitle();
     }
 
     @Override
@@ -133,13 +125,7 @@ public class StoredPlaylistFragment extends BrowseFragment<Music> {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Bundle bundle;
-        if (savedInstanceState == null) {
-            bundle = getArguments();
-        } else {
-            bundle = savedInstanceState;
-        }
-
+        final Bundle bundle = savedInstanceState != null ? savedInstanceState : getArguments();
         if (bundle != null) {
             mPlaylist = bundle.getParcelable(PlaylistFile.EXTRA);
         }
@@ -157,7 +143,7 @@ public class StoredPlaylistFragment extends BrowseFragment<Music> {
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         addAdapterItem(parent, position);
     }
 
@@ -180,7 +166,6 @@ public class StoredPlaylistFragment extends BrowseFragment<Music> {
     @Override
     public void onResume() {
         super.onResume();
-
         updateList();
     }
 
@@ -192,10 +177,6 @@ public class StoredPlaylistFragment extends BrowseFragment<Music> {
 
     @Override
     public String toString() {
-        if (mPlaylist != null) {
-            return mPlaylist.getName();
-        } else {
-            return getString(R.string.playlist);
-        }
+        return mPlaylist != null ? mPlaylist.getName() :getString(R.string.playlist);
     }
 }

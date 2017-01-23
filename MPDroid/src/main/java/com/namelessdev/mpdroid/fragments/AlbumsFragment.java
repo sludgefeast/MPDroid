@@ -198,28 +198,14 @@ public class AlbumsFragment extends BrowseFragment<Album> {
 
     @Override
     public String getTitle() {
-        final String title;
-
-        if (mArtist == null) {
-            title = super.getTitle();
-        } else {
-            title = mArtist.toString();
-        }
-
-        return title;
+        return mArtist != null ? mArtist.toString() : super.getTitle();
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Bundle bundle;
-        if (savedInstanceState == null) {
-            bundle = getArguments();
-        } else {
-            bundle = savedInstanceState;
-        }
-
+        final Bundle bundle = savedInstanceState != null ? savedInstanceState : getArguments();
         if (bundle != null) {
             mArtist = bundle.getParcelable(Artist.EXTRA);
             mGenresGroups = bundle.getParcelable(GenresGroup.EXTRA);
@@ -310,7 +296,6 @@ public class AlbumsFragment extends BrowseFragment<Album> {
         if (mArtist != null) {
             outState.putParcelable(Artist.EXTRA, mArtist);
         }
-
         if (mGenresGroups != null) {
             outState.putParcelable(GenresGroup.EXTRA, mGenresGroups);
         }

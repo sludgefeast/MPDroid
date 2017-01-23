@@ -110,9 +110,7 @@ public class FSFragment extends BrowseFragment {
     private static <T extends AbstractEntry<T>> List<T> getOrderedEntries(
             final ObjectResponse<T> response) {
         final List<T> list = new ArrayList<>(response);
-
         Collections.sort(list, new EntryComparator<T>());
-
         return list;
     }
 
@@ -204,18 +202,19 @@ public class FSFragment extends BrowseFragment {
      */
     private void createFilesystemFragment(final String path, final boolean useBackStack) {
         final Activity activity = getActivity();
-
         if (activity != null) {
-            final Bundle bundle = new Bundle(2);
-            final Fragment fragment =
-                    Fragment.instantiate(activity, FSFragment.class.getName(), bundle);
-
-            bundle.putParcelable(Directory.EXTRA, Directory.byPath(path));
-            bundle.putBoolean(EXTRA_USE_BACK_STACK, useBackStack);
-
-            ((ILibraryFragmentActivity) activity)
-                    .pushLibraryFragment(fragment, "filesystem");
+            return;
         }
+
+        final Bundle bundle = new Bundle(2);
+        final Fragment fragment =
+                Fragment.instantiate(activity, FSFragment.class.getName(), bundle);
+
+        bundle.putParcelable(Directory.EXTRA, Directory.byPath(path));
+        bundle.putBoolean(EXTRA_USE_BACK_STACK, useBackStack);
+
+        ((ILibraryFragmentActivity) activity)
+                .pushLibraryFragment(fragment, "filesystem");
     }
 
     @Override
@@ -242,30 +241,16 @@ public class FSFragment extends BrowseFragment {
 
     @Override
     public String getTitle() {
-        final String title;
         final String fullPath = mDirectory.getFullPath();
-
-        /** If fullPath is empty, we're at the root directory. */
-        if (fullPath.isEmpty()) {
-            title = super.getTitle();
-        } else {
-            title = fullPath;
-        }
-
-        return title;
+        /* If fullPath is empty, we're at the root directory. */
+        return !fullPath.isEmpty() ? fullPath : super.getTitle();
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Bundle bundle;
-        if (savedInstanceState == null) {
-            bundle = getArguments();
-        } else {
-            bundle = savedInstanceState;
-        }
-
+        final Bundle bundle = savedInstanceState != null ? savedInstanceState : getArguments();
         if (bundle != null) {
             if (bundle.containsKey(Directory.EXTRA)) {
                 mDirectory = bundle.getParcelable(Directory.EXTRA);
@@ -277,12 +262,12 @@ public class FSFragment extends BrowseFragment {
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenu.ContextMenuInfo menuInfo) {
-            // Don't create a context menu if the child directory item is clicked.
-            if (mDirectory.getParent() == null ||
-                    ((AdapterView.AdapterContextMenuInfo) menuInfo).id != 0L) {
-                super.onCreateContextMenu(menu, v, menuInfo);
-            }
+                                    final ContextMenu.ContextMenuInfo menuInfo) {
+        // Don't create a context menu if the child directory item is clicked.
+        if (mDirectory.getParent() == null ||
+                ((AdapterView.AdapterContextMenuInfo) menuInfo).id != 0L) {
+            super.onCreateContextMenu(menu, v, menuInfo);
+        }
     }
 
     @Override
@@ -293,7 +278,7 @@ public class FSFragment extends BrowseFragment {
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         // click on a file, not dir
         if (position > mNumSubDirs - 1 || mNumSubDirs == 0) {
 
@@ -331,17 +316,12 @@ public class FSFragment extends BrowseFragment {
 
     @Override
     protected boolean onToolbarMenuItemClick(final MenuItem item) {
-        final boolean itemConsumed;
-
         // Menu actions...
         if (item.getItemId() == R.id.menu_update) {
             mApp.getAsyncHelper().execAsync(new RefreshDatabase(mDirectory));
-            itemConsumed = true;
-        } else {
-            itemConsumed = super.onToolbarMenuItemClick(item);
+            return true;
         }
-
-        return itemConsumed;
+        return super.onToolbarMenuItemClick(item);
     }
 
     /**
@@ -383,8 +363,6 @@ public class FSFragment extends BrowseFragment {
          * @param item Item to add.
          */
         private AddFSItem(final FilesystemTreeEntry item) {
-
-
             mItem = item;
         }
 
@@ -417,13 +395,6 @@ public class FSFragment extends BrowseFragment {
             implements Comparator<T> {
 
         /**
-         * Sole constructor.
-         */
-        private EntryComparator() {
-
-        }
-
-        /**
          * Compares two strings using the current locale's rules and comparing contained numbers
          * based on their numeric values.
          *
@@ -451,13 +422,13 @@ public class FSFragment extends BrowseFragment {
          * @param items    The items for this ArrayAdapter.
          */
         private FSTreeEntryArrayAdapter(final Activity activity,
-                final List<FilesystemTreeEntry> items) {
+                                        final List<FilesystemTreeEntry> items) {
             super(activity, R.layout.fs_list_item, R.id.name_metadata, items);
         }
 
         @Override
         public View getView(final int position, final View convertView,
-                final ViewGroup parent) {
+                            final ViewGroup parent) {
             final View v = super.getView(position, convertView, parent);
             final TextView subtext = (TextView) v.findViewById(R.id.full_path);
             final FilesystemTreeEntry item = getItem(position);
@@ -495,8 +466,6 @@ public class FSFragment extends BrowseFragment {
          * @param directory The directory to refresh.
          */
         private RefreshDatabase(final Directory directory) {
-
-
             mDirectory = directory;
         }
 
