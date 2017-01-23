@@ -72,7 +72,7 @@ android {
 
         crashlytics {
             versionName defaultConfig.versionName + "-c"
-            ext.enableCrashlytics = true;
+            ext.enableCrashlytics = false;
 
             dependencies {
                 compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
