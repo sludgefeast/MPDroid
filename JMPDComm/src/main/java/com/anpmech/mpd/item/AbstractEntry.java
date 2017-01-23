@@ -49,7 +49,7 @@ public abstract class AbstractEntry<T extends AbstractEntry<T>> extends Response
     /**
      * The media server response key returned for a last modified value.
      */
-    public static final String RESPONSE_LAST_MODIFIED = "Last-Modified";
+    private static final String RESPONSE_LAST_MODIFIED = "Last-Modified";
 
     /**
      * This is a static parser for the last modified time.

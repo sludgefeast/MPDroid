@@ -73,7 +73,7 @@ abstract class AbstractDirectory<T extends AbstractDirectory<T>> extends Abstrac
      * @param lsInfo The lsinfo CommandResult. If null, a {@link #refresh(MPDConnection)}
      *               will be required to initialize it.
      */
-    protected AbstractDirectory(@NotNull final ResponseObject object,
+    AbstractDirectory(@NotNull final ResponseObject object,
             @Nullable final CommandResult lsInfo) {
         super(object, lsInfo);
     }

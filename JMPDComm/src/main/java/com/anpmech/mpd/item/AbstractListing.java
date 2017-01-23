@@ -73,8 +73,8 @@ abstract class AbstractListing<T extends AbstractListing<T>> extends AbstractDir
      * @param listFiles The {@code listFiles} CommandResult. If null, a
      *                  {@link #refresh(MPDConnection)}
      */
-    protected AbstractListing(@NotNull final ResponseObject object,
-            @Nullable final CommandResult listFiles) {
+    AbstractListing(@NotNull final ResponseObject object,
+                    @Nullable final CommandResult listFiles) {
         super(object, listFiles);
     }
 

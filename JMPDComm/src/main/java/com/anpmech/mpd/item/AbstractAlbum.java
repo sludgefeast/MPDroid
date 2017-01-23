@@ -46,19 +46,19 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
 
     static final String TAG = AbstractMusic.RESPONSE_ALBUM;
 
-    final Artist mArtist;
+    private final Artist mArtist;
 
     final long mDate;
 
-    final long mDuration;
+    private final long mDuration;
 
-    final boolean mHasAlbumArtist;
+    private final boolean mHasAlbumArtist;
 
-    final String mName;
+    private final String mName;
 
-    final String mPath;
+    private final String mPath;
 
-    final long mSongCount;
+    private final long mSongCount;
 
     AbstractAlbum(final String name, final Artist artist, final boolean hasAlbumArtist,
             final long songCount, final long duration, final long date, final String path) {
@@ -93,7 +93,7 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
         if (isEqual == null || isEqual.equals(Boolean.TRUE)) {
             /** This has to be the same due to the class check above. */
             //noinspection unchecked
-            final T album = (T) o;
+            final AbstractAlbum<T> album = (AbstractAlbum<T>) o;
 
             final Object[][] equalsObjects = {
                     {mArtist, album.mArtist},

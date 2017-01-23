@@ -46,7 +46,7 @@ abstract class AbstractGenre extends ResponseItem<Genre> {
      *
      * @param object The prepared {@link ResponseObject}.
      */
-    protected AbstractGenre(@NotNull final ResponseObject object) {
+    AbstractGenre(@NotNull final ResponseObject object) {
         super(object);
     }
 

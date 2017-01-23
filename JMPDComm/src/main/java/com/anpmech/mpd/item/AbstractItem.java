@@ -45,7 +45,7 @@ abstract class AbstractItem<T extends AbstractItem<T>> implements Comparable<T> 
     /**
      * This {@link Collator} is used for comparison and sorting of {@code Item}s.
      */
-    static final Collator COLLATOR = Collator.getInstance();
+    private static final Collator COLLATOR = Collator.getInstance();
 
     /**
      * The ResourceBundle from which to retrieve any necessary translations.
