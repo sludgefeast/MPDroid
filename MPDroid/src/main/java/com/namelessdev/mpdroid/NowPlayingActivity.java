@@ -211,12 +211,7 @@ public class NowPlayingActivity extends MPDActivity {
         /** If in streamingMode or persistentNotification don't allow a checkbox in the menu. */
         final MenuItem notificationItem = menu.findItem(R.id.GMM_ShowNotification);
         if (notificationItem != null) {
-            if (isStreaming || mApp.isNotificationPersistent()) {
-                notificationItem.setVisible(false);
-            } else {
-                notificationItem.setVisible(true);
-            }
-
+            notificationItem.setVisible(!isStreaming && !mApp.isNotificationPersistent());
             notificationItem.setChecked(mApp.isNotificationActive());
         }
 
@@ -235,8 +230,6 @@ public class NowPlayingActivity extends MPDActivity {
         private final Activity mActivity;
 
         private NowPlayingPagerAdapter(final Activity activity) {
-
-
             mActivity = activity;
         }
 

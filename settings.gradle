@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-
-
 include "MPDroid", ':JMPDCommAndroid', ':JMPDCommJava'
 
 project(':JMPDCommAndroid').projectDir = new File('JMPDComm/backends/android')

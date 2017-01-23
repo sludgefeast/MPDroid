@@ -51,7 +51,7 @@ public final class ConnectionInfo implements Parcelable {
     /**
      * This is the ClassLoader for this class.
      */
-    public static final ClassLoader LOADER = ConnectionInfo.class.getClassLoader();
+    private static final ClassLoader LOADER = ConnectionInfo.class.getClassLoader();
 
     /**
      * The class log identifier.
@@ -130,17 +130,7 @@ public final class ConnectionInfo implements Parcelable {
      * @return True if the two parameters are not equal, false otherwise.
      */
     private static boolean isNotEqualNullSafe(final Object a, final Object b) {
-        final boolean isNotEqual;
-
-        if (a == null && b == null) {
-            isNotEqual = false;
-        } else if (a == null || b == null) {
-            isNotEqual = true;
-        } else {
-            isNotEqual = !a.equals(b);
-        }
-
-        return isNotEqual;
+        return !(a == null && b == null) && (a == null || b == null || !a.equals(b));
     }
 
     /**
@@ -203,7 +193,7 @@ public final class ConnectionInfo implements Parcelable {
             isEqual = Boolean.TRUE;
         }
 
-        return isEqual.booleanValue();
+        return isEqual;
     }
 
     /**
@@ -259,7 +249,7 @@ public final class ConnectionInfo implements Parcelable {
      *
      * @return True if the host password has changed, false otherwise.
      */
-    public boolean hasHostPasswordChanged() {
+    boolean hasHostPasswordChanged() {
         return isNotEqualNullSafe(mLastConnection.mPassword, mPassword);
     }
 
@@ -268,7 +258,7 @@ public final class ConnectionInfo implements Parcelable {
      *
      * @return True if the port has changed, false otherwise.
      */
-    public boolean hasHostPortChanged() {
+    boolean hasHostPortChanged() {
         return mLastConnection.mPort != mPort;
     }
 

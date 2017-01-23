@@ -154,26 +154,10 @@ public final class SettingsHelper {
 
     private static String getStringSetting(final String name) {
         final String value = SETTINGS.getString(name, "").trim();
-        final String result;
-
-        if (value.isEmpty()) {
-            result = null;
-        } else {
-            result = value;
-        }
-
-        return result;
+        return !value.isEmpty() ? value : null;
     }
 
     private static String getStringWithSSID(final String param, final String wifiSSID) {
-        final String stringWithSSID;
-
-        if (wifiSSID == null) {
-            stringWithSSID = param;
-        } else {
-            stringWithSSID = wifiSSID + param;
-        }
-
-        return stringWithSSID;
+        return wifiSSID == null ? param : wifiSSID + param;
     }
 }

@@ -87,7 +87,6 @@ public final class MPDControl {
     private static final int VOLUME_STEP = 5;
 
     private MPDControl() {
-
     }
 
     /**
@@ -229,7 +228,7 @@ public final class MPDControl {
             throw new IllegalStateException("setupConnection must be called with invalid status.");
         }
 
-        final Object token = Integer.valueOf(new Random().nextInt());
+        final Object token = new Random().nextInt();
 
         APP.addConnectionLock(token);
         boolean success = true;
@@ -262,6 +261,5 @@ public final class MPDControl {
             ACTION_TOGGLE_RANDOM, ACTION_TOGGLE_REPEAT, ACTION_VOLUME_SET, ACTION_VOLUME_STEP_DOWN,
             ACTION_VOLUME_STEP_UP})
     public @interface ControlType {
-
     }
 }

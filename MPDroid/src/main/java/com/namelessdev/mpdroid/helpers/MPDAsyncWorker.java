@@ -52,8 +52,6 @@ public class MPDAsyncWorker implements Handler.Callback,
     private ConnectionInfo mConnectionInfo = ConnectionInfo.EMPTY;
 
     MPDAsyncWorker(final Handler helperHandler) {
-
-
         final SharedPreferences settings = PreferenceManager
                 .getDefaultSharedPreferences(MPDApplication.getInstance());
         settings.registerOnSharedPreferenceChangeListener(this);
@@ -129,13 +127,11 @@ public class MPDAsyncWorker implements Handler.Callback,
      */
     final Handler startThread() {
         final HandlerThread handlerThread = new HandlerThread(TAG);
-
         handlerThread.start();
-
         return new Handler(handlerThread.getLooper(), this);
     }
 
-    public ConnectionInfo updateConnectionSettings() {
+    ConnectionInfo updateConnectionSettings() {
         final ConnectionInfo connectionInfo =
                 SettingsHelper.getConnectionSettings(mConnectionInfo);
 

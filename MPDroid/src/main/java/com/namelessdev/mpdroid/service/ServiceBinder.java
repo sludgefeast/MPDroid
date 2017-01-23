@@ -155,15 +155,7 @@ public class ServiceBinder implements
      * @return The what/bool pair message.
      */
     static Message getBoolMessage(final Handler handler, final int what, final boolean isTrue) {
-        final int active;
-
-        if (isTrue) {
-            active = TRUE;
-        } else {
-            active = FALSE;
-        }
-
-        return Message.obtain(handler, what, active, 0);
+        return Message.obtain(handler, what, isTrue ? TRUE : FALSE, 0);
     }
 
     /**

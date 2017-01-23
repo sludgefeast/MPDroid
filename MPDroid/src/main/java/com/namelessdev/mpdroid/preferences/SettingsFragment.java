@@ -79,7 +79,6 @@ public class SettingsFragment extends PreferenceFragment {
     private EditTextPreference mVersion;
 
     public SettingsFragment() {
-
         mPreferencesBound = false;
     }
 
@@ -271,5 +270,4 @@ public class SettingsFragment extends PreferenceFragment {
         mCacheUsage2.setSummary(usage);
         onConnectionStateChanged();
     }
-
 }

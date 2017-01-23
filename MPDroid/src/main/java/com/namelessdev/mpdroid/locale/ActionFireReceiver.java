@@ -41,42 +41,42 @@ public class ActionFireReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
         final Bundle bundle = intent.getBundleExtra(LocaleConstants.EXTRA_BUNDLE);
-
         if (bundle == null) {
             Log.e(TAG, "Received null bundle");
-        } else {
-            final String action = bundle.getString(EditActivity.BUNDLE_ACTION_STRING);
+            return;
+        }
 
-            if (action == null) {
-                Log.e(TAG, "No bundle action string received.");
-            } else {
-                switch (action) {
-                    case NotificationHandler.ACTION_START:
-                    case StreamHandler.ACTION_START:
-                        redirectIntentToService(true, intent, action);
-                        break;
-                    case NotificationHandler.ACTION_STOP:
-                    case StreamHandler.ACTION_STOP:
-                        redirectIntentToService(false, intent, action);
-                        break;
-                    default:
-                        int volume = MPDControl.INVALID_INT;
+        final String action = bundle.getString(EditActivity.BUNDLE_ACTION_STRING);
+        if (action == null) {
+            Log.e(TAG, "No bundle action string received.");
+            return;
+        }
 
-                        if (MPDControl.ACTION_VOLUME_SET.equals(action)) {
-                            final String volumeString = bundle
-                                    .getString(EditActivity.BUNDLE_ACTION_EXTRA);
-                            if (volumeString != null) {
-                                try {
-                                    volume = Integer.parseInt(volumeString);
-                                } catch (final NumberFormatException e) {
-                                    Log.e(TAG, "Invalid volume string : " + volumeString, e);
-                                }
-                            }
+        switch (action) {
+            case NotificationHandler.ACTION_START:
+            case StreamHandler.ACTION_START:
+                redirectIntentToService(true, intent, action);
+                break;
+            case NotificationHandler.ACTION_STOP:
+            case StreamHandler.ACTION_STOP:
+                redirectIntentToService(false, intent, action);
+                break;
+            default:
+                int volume = MPDControl.INVALID_INT;
+
+                if (MPDControl.ACTION_VOLUME_SET.equals(action)) {
+                    final String volumeString = bundle
+                            .getString(EditActivity.BUNDLE_ACTION_EXTRA);
+                    if (volumeString != null) {
+                        try {
+                            volume = Integer.parseInt(volumeString);
+                        } catch (final NumberFormatException e) {
+                            Log.e(TAG, "Invalid volume string : " + volumeString, e);
                         }
-                        Tools.runCommand(action, volume);
-                        break;
+                    }
                 }
-            }
+                Tools.runCommand(action, volume);
+                break;
         }
     }
 

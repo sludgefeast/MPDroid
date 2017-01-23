@@ -174,7 +174,7 @@ public final class CoverManager {
      * @throws IOException Upon error retrieving a response code.
      */
 
-    public static boolean doesUrlRedirect(final HttpURLConnection connection) throws IOException {
+    private static boolean doesUrlRedirect(final HttpURLConnection connection) throws IOException {
         boolean doesUrlRedirect;
 
         if (connection == null) {
@@ -226,15 +226,7 @@ public final class CoverManager {
     @Nullable
     private static String getCoverFolder() {
         final File cacheDir = APP.getExternalCacheDir();
-        final String coverFolder;
-
-        if (cacheDir == null) {
-            coverFolder = null;
-        } else {
-            coverFolder = cacheDir.getAbsolutePath() + FOLDER_SUFFIX;
-        }
-
-        return coverFolder;
+        return cacheDir != null ? cacheDir.getAbsolutePath() + FOLDER_SUFFIX : null;
     }
 
     /**
@@ -272,7 +264,6 @@ public final class CoverManager {
         if (sInstance == null) {
             sInstance = new CoverManager();
         }
-
         return sInstance;
     }
 
@@ -406,7 +397,7 @@ public final class CoverManager {
         valueList.add(value);
     }
 
-    public void addCoverRequest(final CoverInfo coverInfo) {
+    void addCoverRequest(final CoverInfo coverInfo) {
         if (DEBUG) {
             Log.d(TAG, "Looking for cover with artist=" + coverInfo.getArtistName() + ", album="
                     + coverInfo.getAlbumName());
@@ -462,41 +453,40 @@ public final class CoverManager {
     }
 
     public void markWrongCover(final AlbumInfo albumInfo) {
-        final CachedCover cacheCoverRetriever;
-        final String wrongUrl;
         if (DEBUG) {
             Log.d(TAG, "Blacklisting cover for " + albumInfo);
         }
 
-        if (albumInfo.isValid()) {
-            wrongUrl = mCoverUrlMap.get(albumInfo.getKey());
-            // Do not blacklist cover if from local storage (url starts with /...)
-            if (wrongUrl != null && !wrongUrl.startsWith("/")) {
+        if (!albumInfo.isValid()) {
+            Log.w(TAG, "Cannot blacklist cover, missing artist or album : " + albumInfo);
+            return;
+        }
+
+        final String wrongUrl = mCoverUrlMap.get(albumInfo.getKey());
+        // Do not blacklist cover if from local storage (url starts with /...)
+        if (wrongUrl != null && !wrongUrl.startsWith("/")) {
+            if (DEBUG) {
+                Log.d(TAG, "Cover URL to be blacklisted  " + wrongUrl);
+            }
+
+            mapCollectionValue(mWrongCoverUrlMap, albumInfo.getKey(), wrongUrl);
+
+            final CachedCover cacheCoverRetriever = getCacheRetriever();
+            if (cacheCoverRetriever != null) {
                 if (DEBUG) {
-                    Log.d(TAG, "Cover URL to be blacklisted  " + wrongUrl);
+                    Log.d(TAG, "Removing blacklisted cover from cache : ");
                 }
-
-                mapCollectionValue(mWrongCoverUrlMap, albumInfo.getKey(), wrongUrl);
-
-                cacheCoverRetriever = getCacheRetriever();
-                if (cacheCoverRetriever != null) {
-                    if (DEBUG) {
-                        Log.d(TAG, "Removing blacklisted cover from cache : ");
-                    }
-                    mCoverUrlMap.remove(albumInfo.getKey());
-                    cacheCoverRetriever.delete(albumInfo);
-                }
-            } else {
-                Log.w(TAG, "Cannot blacklist the cover for album : " + albumInfo
-                        + " because no cover URL has been recorded for it");
-
+                mCoverUrlMap.remove(albumInfo.getKey());
+                cacheCoverRetriever.delete(albumInfo);
             }
         } else {
-            Log.w(TAG, "Cannot blacklist cover, missing artist or album : " + albumInfo);
+            Log.w(TAG, "Cannot blacklist the cover for album : " + albumInfo
+                    + " because no cover URL has been recorded for it");
+
         }
     }
 
-    public void setCoverRetrieversFromPreferences() {
+    void setCoverRetrieversFromPreferences() {
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(APP);
         mCoverRetrievers.clear();
 
@@ -535,7 +525,6 @@ public final class CoverManager {
         } catch (final Exception ex) {
             Log.e(TAG, "Failed to shutdown cover executors.", ex);
         }
-
     }
 
     private final class CreateBitmapTask implements Runnable {
@@ -543,7 +532,6 @@ public final class CoverManager {
         private final CoverInfo mCoverInfo;
 
         private CreateBitmapTask(final CoverInfo coverInfo) {
-
             mCoverInfo = coverInfo;
         }
 
@@ -697,7 +685,6 @@ public final class CoverManager {
         private final CoverInfo mCoverInfo;
 
         private FetchCoverTask(final CoverInfo coverInfo) {
-
             mCoverInfo = coverInfo;
         }
 
@@ -962,16 +949,8 @@ public final class CoverManager {
         }
 
         private boolean isLastCoverRetriever(final ICoverRetriever retriever) {
-            final boolean isLast;
             final int size = mCoverRetrievers.size();
-
-            if (size > 0) {
-                isLast = mCoverRetrievers.get(size - 1).getName().equals(retriever.getName());
-            } else {
-                isLast = false;
-            }
-
-            return isLast;
+            return size > 0 && mCoverRetrievers.get(size - 1).getName().equals(retriever.getName());
         }
 
         private void logQueues() {
@@ -1174,7 +1153,6 @@ public final class CoverManager {
                         outputStream.flush();
                     } catch (final IOException e) {
                         Log.e(TAG, "Cannot flush cover file.", e);
-
                     }
 
                     try {

@@ -39,8 +39,7 @@ public class StreamFetcher {
 
     private final Collection<String> mHandlers = new LinkedList<>();
 
-    StreamFetcher() {
-
+    private StreamFetcher() {
         mHandlers.add("http");
         mHandlers.add("mms");
         mHandlers.add("mmsh");
@@ -85,17 +84,19 @@ public class StreamFetcher {
 
         for (final String line : lines) {
             final int ref = line.indexOf("<ref href=");
-            if (-1 != ref) {
-                for (final String handler : handlers) {
-                    final String protocol = handler + "://";
-                    final int prot = line.indexOf(protocol);
-                    if (-1 != prot) {
-                        final String[] parts = line.split("\"");
-                        for (final String part : parts) {
-                            if (part.startsWith(protocol)) {
-                                return part;
-                            }
-                        }
+            if (ref == -1) {
+                continue;
+            }
+            for (final String handler : handlers) {
+                final String protocol = handler + "://";
+                final int prot = line.indexOf(protocol);
+                if (prot == -1) {
+                    continue;
+                }
+                final String[] parts = line.split("\"");
+                for (final String part : parts) {
+                    if (part.startsWith(protocol)) {
+                        return part;
                     }
                 }
             }
@@ -222,7 +223,6 @@ public class StreamFetcher {
     }
 
     private static class LazyHolder {
-
         private static final StreamFetcher INSTANCE = new StreamFetcher();
     }
 }

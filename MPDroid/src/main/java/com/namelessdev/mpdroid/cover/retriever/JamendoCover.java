@@ -79,10 +79,6 @@ public class JamendoCover extends AbstractWebCover {
      */
     private static final String TAG = "JamendoCover";
 
-    public JamendoCover() {
-
-    }
-
     /**
      * This method is used to get the cover count from the results.
      *
@@ -149,30 +145,29 @@ public class JamendoCover extends AbstractWebCover {
         final URL query = getCoverQueryURL(albumInfo);
         final JSONObject root = new JSONObject(executeGetRequest(query));
         final int coverCount = getCoverCount(root, query);
-        final List<String> coverUrls;
 
-        if (coverCount > 0) {
-            coverUrls = new ArrayList<>(coverCount);
-            if (root.has(JSON_KEY_RESULTS)) {
-                final JSONArray results = root.getJSONArray(JSON_KEY_RESULTS);
-
-                for (int resultCount = 0; resultCount < results.length(); resultCount++) {
-                    final JSONObject result = results.getJSONObject(resultCount);
-
-                    if (result.has(JSON_KEY_IMAGE)) {
-                        final String imageURL = result.getString(JSON_KEY_IMAGE);
-                        coverUrls.add(imageURL);
-                    } else {
-                        logError(TAG, JSON_KEY_IMAGE, result, query);
-                    }
-                }
-            } else {
-                logError(TAG, JSON_KEY_RESULTS, root, query);
-            }
-        } else {
-            coverUrls = Collections.emptyList();
+        if (coverCount == 0) {
+            return Collections.emptyList();
         }
 
+        if (!root.has(JSON_KEY_RESULTS)) {
+            logError(TAG, JSON_KEY_RESULTS, root, query);
+            return Collections.emptyList();
+        }
+
+        final List<String> coverUrls = new ArrayList<>(coverCount);
+        final JSONArray results = root.getJSONArray(JSON_KEY_RESULTS);
+
+        for (int resultCount = 0; resultCount < results.length(); resultCount++) {
+            final JSONObject result = results.getJSONObject(resultCount);
+
+            if (result.has(JSON_KEY_IMAGE)) {
+                final String imageURL = result.getString(JSON_KEY_IMAGE);
+                coverUrls.add(imageURL);
+            } else {
+                logError(TAG, JSON_KEY_IMAGE, result, query);
+            }
+        }
         return coverUrls;
     }
 

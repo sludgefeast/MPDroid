@@ -25,7 +25,7 @@ import java.util.Arrays;
 
 class CoverInfo extends AlbumInfo {
 
-    public static final int MAX_SIZE = 0;
+    static final int MAX_SIZE = 0;
 
     private Bitmap[] mBitmap = new Bitmap[0];
 
@@ -45,7 +45,7 @@ class CoverInfo extends AlbumInfo {
 
     private STATE mState = STATE.NEW;
 
-    public CoverInfo(final AlbumInfo albumInfo) {
+    CoverInfo(final AlbumInfo albumInfo) {
         super(albumInfo);
     }
 

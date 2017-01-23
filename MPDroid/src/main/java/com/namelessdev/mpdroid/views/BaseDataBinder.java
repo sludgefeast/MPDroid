@@ -43,7 +43,7 @@ abstract class BaseDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
 
     final boolean mEnableCache;
 
-    protected BaseDataBinder() {
+    BaseDataBinder() {
 
         final MPDApplication app = MPDApplication.getInstance();
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(app);
@@ -51,8 +51,8 @@ abstract class BaseDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
         mEnableCache = settings.getBoolean(CoverManager.PREFERENCE_CACHE, true);
     }
 
-    protected static CoverAsyncHelper getCoverHelper(final AlbumCoverHolder holder,
-                                                     final int defaultSize) {
+    static CoverAsyncHelper getCoverHelper(final AlbumCoverHolder holder,
+                                           final int defaultSize) {
         final CoverAsyncHelper coverHelper = new CoverAsyncHelper();
         final int height = holder.mAlbumCover.getHeight();
 
@@ -69,13 +69,13 @@ abstract class BaseDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
         return coverHelper;
     }
 
-    protected static void loadArtwork(final CoverAsyncHelper coverHelper,
-                                      final AlbumInfo albumInfo) {
+    static void loadArtwork(final CoverAsyncHelper coverHelper,
+                            final AlbumInfo albumInfo) {
         coverHelper.downloadCover(albumInfo);
     }
 
-    protected static CoverDownloadListener setCoverListener(final AlbumCoverHolder holder,
-                                                            final CoverAsyncHelper coverHelper) {
+    static CoverDownloadListener setCoverListener(final AlbumCoverHolder holder,
+                                                  final CoverAsyncHelper coverHelper) {
         // listen for new artwork to be loaded
         final CoverDownloadListener acd =
                 new AlbumCoverDownloadListener(holder.mAlbumCover, holder.mCoverArtProgress, false);
@@ -108,13 +108,7 @@ abstract class BaseDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
     static View setViewVisible(final View targetView, @IdRes final int resource,
                                final boolean isVisible) {
         final View view = targetView.findViewById(resource);
-
-        if (isVisible) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
-
+        view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         return targetView;
     }
 

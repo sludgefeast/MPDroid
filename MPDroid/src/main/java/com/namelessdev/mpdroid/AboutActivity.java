@@ -86,12 +86,6 @@ public class AboutActivity extends Activity {
      */
     private static final class AboutDataBinder implements SeparatedListDataBinder<AboutListItem> {
 
-        /**
-         * Sole constructor.
-         */
-        private AboutDataBinder() {
-        }
-
         @Override
         public boolean isEnabled(final int position, final List<AboutListItem> items,
                                  final AboutListItem item) {

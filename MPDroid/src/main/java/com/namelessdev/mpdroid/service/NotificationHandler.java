@@ -78,8 +78,6 @@ public class NotificationHandler implements AlbumCoverHandler.NotificationCallba
     private boolean mIsMediaPlayerBuffering;
 
     NotificationHandler(final MPDroidService serviceContext) {
-
-
         mServiceContext = serviceContext;
 
         mNotificationManager = (NotificationManager) mServiceContext
@@ -130,7 +128,7 @@ public class NotificationHandler implements AlbumCoverHandler.NotificationCallba
      * @param what A 'what' field.
      * @return The literal field name.
      */
-    public static String getHandlerValue(final int what) {
+    static String getHandlerValue(final int what) {
         final String result;
 
         switch (what) {
@@ -293,29 +291,30 @@ public class NotificationHandler implements AlbumCoverHandler.NotificationCallba
      * @param currentTrack A current {@code Music} object.
      */
     final void setNewTrack(final Music currentTrack) {
-        if (mIsActive) {
-            mCurrentTrack = currentTrack;
-
-            if (mIsMediaPlayerBuffering) {
-                final String title = currentTrack.getTitle();
-
-                updateBufferingContent(mNotification.contentView, title);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    updateBufferingContent(mNotification.bigContentView, title);
-                    mNotification.bigContentView.setTextViewText(R.id.notificationAlbum,
-                            currentTrack.getArtistName());
-                }
-            } else {
-                updateNotBufferingContent(mNotification.contentView, currentTrack);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    updateNotBufferingContent(mNotification.bigContentView, currentTrack);
-                    mNotification.bigContentView.setTextViewText(R.id.notificationAlbum,
-                            currentTrack.getAlbumName());
-                }
-            }
-
-            updateNotification();
+        if (!mIsActive) {
+            return;
         }
+        mCurrentTrack = currentTrack;
+
+        if (mIsMediaPlayerBuffering) {
+            final String title = currentTrack.getTitle();
+
+            updateBufferingContent(mNotification.contentView, title);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                updateBufferingContent(mNotification.bigContentView, title);
+                mNotification.bigContentView.setTextViewText(R.id.notificationAlbum,
+                        currentTrack.getArtistName());
+            }
+        } else {
+            updateNotBufferingContent(mNotification.contentView, currentTrack);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                updateNotBufferingContent(mNotification.bigContentView, currentTrack);
+                mNotification.bigContentView.setTextViewText(R.id.notificationAlbum,
+                        currentTrack.getAlbumName());
+            }
+        }
+
+        updateNotification();
     }
 
     /**
@@ -323,7 +322,7 @@ public class NotificationHandler implements AlbumCoverHandler.NotificationCallba
      *
      * @param isPlaying True if playing, false otherwise.
      */
-    final void setPlayState(final boolean isPlaying) {
+    private void setPlayState(final boolean isPlaying) {
         if (mIsActive) {
             if (isPlaying) {
                 updateStatePlaying(mNotification.contentView);

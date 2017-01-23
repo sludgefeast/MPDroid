@@ -263,8 +263,6 @@ public class PhoneStateReceiver extends BroadcastReceiver {
          * @param result  The PendingResult used to finalize the parent BroadcastReceiver.
          */
         private PauseForCall(final Context context, final PendingResult result) {
-
-
             mContext = context;
             mResult = result;
             mSettings = PreferenceManager.getDefaultSharedPreferences(context);

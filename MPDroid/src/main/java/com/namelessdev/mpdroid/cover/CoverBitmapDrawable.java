@@ -20,19 +20,11 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
-import java.io.InputStream;
 
 public class CoverBitmapDrawable extends BitmapDrawable {
 
-    public CoverBitmapDrawable(final Resources resources, final Iterable<Bitmap> bitmaps) {
+    CoverBitmapDrawable(final Resources resources, final Iterable<Bitmap> bitmaps) {
         super(resources, bitmaps.iterator().next());
     }
 
-    public CoverBitmapDrawable(final Resources resources, final InputStream is) {
-        super(resources, is);
-    }
-
-    public CoverBitmapDrawable(final Resources resources, final String filePath) {
-        super(resources, filePath);
-    }
 }

@@ -41,7 +41,6 @@ public class EditActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public static final String BUNDLE_ACTION_EXTRA = "ACTION_EXTRA";
 
-    @SuppressWarnings("unused")
     public static final String BUNDLE_ACTION_LABEL = "ACTION_LABEL";
 
     public static final String BUNDLE_ACTION_STRING = "ACTION_STRING";
@@ -137,7 +136,6 @@ public class EditActivity extends AppCompatActivity implements AdapterView.OnIte
         private final String mLabel;
 
         private ActionItem(final String actionString, final String label) {
-
             mActionString = actionString;
             mLabel = label;
         }

@@ -110,18 +110,13 @@ public class ConnectionSettings extends PreferenceActivity {
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        final boolean result;
-
         if (item.getItemId() == MAIN) {
             final Intent intent = new Intent(this, MainMenuActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            result = true;
-        } else {
-            result = super.onOptionsItemSelected(item);
+            return true;
         }
-
-        return result;
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -150,10 +145,7 @@ public class ConnectionSettings extends PreferenceActivity {
 
     @Override
     public void setTheme(final int resid) {
-        if (MPDApplication.getInstance().isLightThemeSelected()) {
-            super.setTheme(R.style.AppTheme_Light);
-        } else {
-            super.setTheme(R.style.AppTheme);
-        }
+        super.setTheme(MPDApplication.getInstance().isLightThemeSelected() ?
+                            R.style.AppTheme_Light : R.style.AppTheme);
     }
 }

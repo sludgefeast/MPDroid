@@ -37,15 +37,7 @@ public class CachedCover implements ICoverRetriever {
     private final MPDApplication mApp = MPDApplication.getInstance();
 
     private static String getAbsoluteCoverFolderPath(final File cacheDir) {
-        final String folderPath;
-
-        if (cacheDir == null) {
-            folderPath = null;
-        } else {
-            folderPath = cacheDir.getAbsolutePath() + CoverManager.FOLDER_SUFFIX;
-        }
-
-        return folderPath;
+        return cacheDir != null ? cacheDir.getAbsolutePath() + CoverManager.FOLDER_SUFFIX : null;
     }
 
     private static String getCoverFileName(final AlbumInfo albumInfo) {
@@ -73,21 +65,14 @@ public class CachedCover implements ICoverRetriever {
         }
     }
 
-    public String getAbsoluteCoverFolderPath() {
+    private String getAbsoluteCoverFolderPath() {
         return getAbsoluteCoverFolderPath(mApp.getExternalCacheDir());
     }
 
-    public String getAbsolutePathForSong(final AlbumInfo albumInfo) {
+    private String getAbsolutePathForSong(final AlbumInfo albumInfo) {
         final File cacheDir = mApp.getExternalCacheDir();
-        final String absolutePath;
-
-        if (cacheDir == null) {
-            absolutePath = null;
-        } else {
-            absolutePath = getAbsoluteCoverFolderPath(cacheDir) + getCoverFileName(albumInfo);
-        }
-
-        return absolutePath;
+        return cacheDir != null ?
+                getAbsoluteCoverFolderPath(cacheDir) + getCoverFileName(albumInfo) : null;
     }
 
     /**

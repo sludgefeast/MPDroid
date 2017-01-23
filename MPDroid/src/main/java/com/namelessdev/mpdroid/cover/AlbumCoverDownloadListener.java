@@ -43,7 +43,6 @@ public class AlbumCoverDownloadListener implements CoverDownloadListener {
     private ProgressBar mCoverArtProgress;
 
     public AlbumCoverDownloadListener(final ImageView coverArt) {
-
         mCoverArt = coverArt;
         mCoverArt.setVisibility(View.VISIBLE);
         freeCoverDrawable();
@@ -52,7 +51,6 @@ public class AlbumCoverDownloadListener implements CoverDownloadListener {
     public AlbumCoverDownloadListener(final ImageView coverArt,
                                       final ProgressBar coverArtProgress,
                                       final boolean bigCoverNotFound) {
-
         mCoverArt = coverArt;
         mBigCoverNotFound = bigCoverNotFound;
         mCoverArt.setVisibility(View.VISIBLE);
@@ -80,23 +78,11 @@ public class AlbumCoverDownloadListener implements CoverDownloadListener {
      */
     @DrawableRes
     private static int getNoCoverResource(final boolean isLarge) {
-        final int newResource;
-
         if (sApp.isLightThemeSelected()) {
-            if (isLarge) {
-                newResource = R.drawable.no_cover_art_light_big;
-            } else {
-                newResource = R.drawable.no_cover_art_light;
-            }
+            return isLarge ? R.drawable.no_cover_art_light_big : R.drawable.no_cover_art_light;
         } else {
-            if (isLarge) {
-                newResource = R.drawable.no_cover_art_big;
-            } else {
-                newResource = R.drawable.no_cover_art;
-            }
+            return isLarge ? R.drawable.no_cover_art_big : R.drawable.no_cover_art;
         }
-
-        return newResource;
     }
 
     public void detach() {
@@ -109,23 +95,11 @@ public class AlbumCoverDownloadListener implements CoverDownloadListener {
     }
 
     private void freeCoverDrawable(final Drawable oldDrawable) {
-        final Drawable coverDrawable;
-
-        if (oldDrawable == null) {
-            coverDrawable = mCoverArt.getDrawable();
-        } else {
-            coverDrawable = oldDrawable;
-        }
-
+        final Drawable coverDrawable = oldDrawable != null ? oldDrawable : mCoverArt.getDrawable();
         if (coverDrawable instanceof CoverBitmapDrawable) {
             if (oldDrawable == null) {
-                final int noCoverDrawable;
-
-                if (mBigCoverNotFound) {
-                    noCoverDrawable = getLargeNoCoverResource();
-                } else {
-                    noCoverDrawable = getNoCoverResource();
-                }
+                final int noCoverDrawable = mBigCoverNotFound ?
+                        getLargeNoCoverResource() : getNoCoverResource();
                 mCoverArt.setImageResource(noCoverDrawable);
             }
 
@@ -138,15 +112,12 @@ public class AlbumCoverDownloadListener implements CoverDownloadListener {
     }
 
     private boolean isMatchingCover(final AlbumInfo coverInfo) {
-        boolean isMatchingCover = false;
-
         if (coverInfo != null && mCoverArt != null) {
             if (mCoverArt.getTag() == null || mCoverArt.getTag().equals(coverInfo.getKey())) {
-                isMatchingCover = true;
+                return true;
             }
         }
-
-        return isMatchingCover;
+        return false;
     }
 
     @Override

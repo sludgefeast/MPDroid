@@ -75,7 +75,6 @@ public class ToolbarHelper {
         });
     }
 
-    @SuppressWarnings("unused")
     public static void addStandardMenuItemClickListener(final Activity activity, Toolbar toolbar,
                                                         final Toolbar.OnMenuItemClickListener chainedListener) {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -125,7 +124,7 @@ public class ToolbarHelper {
      * @param activity The activity used to set the back button action.
      * @param toolbar  The toolbar to show the back button on.
      */
-    public static void showBackButton(final Activity activity, final Toolbar toolbar) {
+    private static void showBackButton(final Activity activity, final Toolbar toolbar) {
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

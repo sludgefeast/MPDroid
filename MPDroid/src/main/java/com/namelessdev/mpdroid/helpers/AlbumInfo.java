@@ -123,15 +123,8 @@ public class AlbumInfo {
      * @param album The {@link Album} item used to construct this AlbumInfo.
      */
     public AlbumInfo(final Album album) {
-
-
         final Artist artist = album.getArtist();
-        if (artist != null) {
-            mArtistName = artist.getName();
-        } else {
-            mArtistName = null;
-        }
-
+        mArtistName = artist != null ? artist.getName() : null;
         mAlbumName = album.getName();
         mParentDirectory = album.getPath();
         mFilename = null;
@@ -169,8 +162,6 @@ public class AlbumInfo {
      */
     private AlbumInfo(final String artistName, final String albumName, final String parentDirectory,
                       final String filename) {
-
-
         mArtistName = artistName;
         mAlbumName = albumName;
         mParentDirectory = parentDirectory;
@@ -274,7 +265,7 @@ public class AlbumInfo {
             isEqual = Boolean.TRUE;
         }
 
-        return isEqual.booleanValue();
+        return isEqual;
     }
 
     /**
@@ -374,12 +365,10 @@ public class AlbumInfo {
      */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("AlbumInfo{");
-        sb.append("mAlbumName='").append(mAlbumName).append('\'');
-        sb.append(", mArtistName='").append(mArtistName).append('\'');
-        sb.append(", mFilename='").append(mFilename).append('\'');
-        sb.append(", mParentDirectory='").append(mParentDirectory).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "AlbumInfo{" + "mAlbumName='" + mAlbumName + '\'' +
+                ", mArtistName='" + mArtistName + '\'' +
+                ", mFilename='" + mFilename + '\'' +
+                ", mParentDirectory='" + mParentDirectory + '\'' +
+                '}';
     }
 }

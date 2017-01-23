@@ -236,15 +236,7 @@ public abstract class MPDActivity extends AppCompatActivity implements IdleSubsy
      */
     @StyleRes
     protected int getThemeResId() {
-        final int themeResId;
-
-        if (isLightThemeSelected()) {
-            themeResId = R.style.AppTheme_Light;
-        } else {
-            themeResId = R.style.AppTheme;
-        }
-
-        return themeResId;
+        return isLightThemeSelected() ? R.style.AppTheme_Light : R.style.AppTheme;
     }
 
     /**
@@ -478,8 +470,6 @@ public abstract class MPDActivity extends AppCompatActivity implements IdleSubsy
          * @param activity The current activity.
          */
         DialogClickListener(final Activity activity) {
-
-
             mActivity = activity;
         }
 

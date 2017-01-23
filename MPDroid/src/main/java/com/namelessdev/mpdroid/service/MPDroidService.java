@@ -452,7 +452,6 @@ public final class MPDroidService extends Service implements
     public IBinder onBind(final Intent intent) {
         /** Target we publish for clients to send messages to IncomingHandler. */
         final Messenger serviceMessenger = new Messenger(mHandler);
-
         return serviceMessenger.getBinder();
     }
 
@@ -482,7 +481,6 @@ public final class MPDroidService extends Service implements
     @Override
     public void onCreate() {
         super.onCreate();
-
         mConnectionInfo = getApp().getConnectionSettings();
     }
 
@@ -1218,24 +1216,24 @@ public final class MPDroidService extends Service implements
                 if (DEBUG) {
                     Log.d(TAG, "No service clients. What: " + ServiceBinder.getHandlerValue(what));
                 }
-            } else {
-                for (int iterator = mServiceClients.size() - 1; iterator >= 0; iterator--) {
-                    try {
-                        /**
-                         * Obtain a new message each time, the message is freed by the Messenger
-                         * after sending.
-                         */
-                        final Message msg = ServiceBinder.getBoolMessage(mHandler, what, isActive);
+                return;
+            }
+            for (int iterator = mServiceClients.size() - 1; iterator >= 0; iterator--) {
+                try {
+                    /**
+                     * Obtain a new message each time, the message is freed by the Messenger
+                     * after sending.
+                     */
+                    final Message msg = ServiceBinder.getBoolMessage(mHandler, what, isActive);
 
-                        mServiceClients.get(iterator).send(msg);
-                    } catch (final RemoteException e) {
-                        /**
-                         * The client is dead.  Remove it from the list; we are going through
-                         * the list from back to front so this is safe to do inside the loop.
-                         */
-                        mServiceClients.remove(iterator);
-                        Log.w(TAG, "Client died.", e);
-                    }
+                    mServiceClients.get(iterator).send(msg);
+                } catch (final RemoteException e) {
+                    /**
+                     * The client is dead.  Remove it from the list; we are going through
+                     * the list from back to front so this is safe to do inside the loop.
+                     */
+                    mServiceClients.remove(iterator);
+                    Log.w(TAG, "Client died.", e);
                 }
             }
         }

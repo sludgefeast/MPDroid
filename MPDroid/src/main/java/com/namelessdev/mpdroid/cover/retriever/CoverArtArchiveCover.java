@@ -79,7 +79,6 @@ public class CoverArtArchiveCover extends AbstractWebCover {
      * Sole constructor.
      */
     public CoverArtArchiveCover() {
-
     }
 
     /**

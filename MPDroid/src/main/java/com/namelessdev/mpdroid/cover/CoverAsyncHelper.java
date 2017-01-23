@@ -14,6 +14,22 @@
  * limitations under the License.
  */
 
+/*
+ * Copyright (C) 2010-2016 The MPDroid Project (Stefan Agner)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.namelessdev.mpdroid.cover;
 
 import android.app.Activity;
@@ -31,8 +47,6 @@ import java.util.Collection;
 
 /**
  * Download Covers Asynchronous with Messages
- *
- * @author Stefan Agner
  */
 public class CoverAsyncHelper implements CoverDownloadListener, Handler.Callback {
 
@@ -56,13 +70,6 @@ public class CoverAsyncHelper implements CoverDownloadListener, Handler.Callback
     private int mCachedCoverMaxSize;
 
     private int mCoverMaxSize;
-
-    /**
-     * Sole constructor.
-     */
-    public CoverAsyncHelper() {
-
-    }
 
     private static void displayCoverRetrieverName(final CoverInfo coverInfo) {
 
@@ -89,15 +96,7 @@ public class CoverAsyncHelper implements CoverDownloadListener, Handler.Callback
      * fill the cache, download it at a bigger size.
      */
     private static int setMaxSize(final int size) {
-        final int result;
-
-        if (size < 0) {
-            result = MAX_SIZE;
-        } else {
-            result = size;
-        }
-
-        return result;
+        return size < 0 ? MAX_SIZE : size;
     }
 
     public void addCoverDownloadListener(final CoverDownloadListener listener) {
@@ -221,9 +220,11 @@ public class CoverAsyncHelper implements CoverDownloadListener, Handler.Callback
         // Nothing to do
     }
 
+    /*
     private void tagListenerCovers(final AlbumInfo albumInfo) {
         for (final CoverDownloadListener listener : mCoverDownloadListeners) {
             listener.tagAlbumCover(albumInfo);
         }
     }
+    */
 }

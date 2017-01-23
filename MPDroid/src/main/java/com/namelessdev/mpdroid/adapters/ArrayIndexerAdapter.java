@@ -61,14 +61,8 @@ public class ArrayIndexerAdapter<T extends Item<T>> extends ArrayAdapter<T>
 
     @Override
     public int getPositionForSection(final int sectionIndex) {
-        final String letter;
-
-        if (sectionIndex >= mSections.length) {
-            letter = mSections[mSections.length - 1];
-        } else {
-            letter = mSections[sectionIndex];
-        }
-
+        final String letter = sectionIndex >= mSections.length ?
+                mSections[mSections.length - 1] : mSections[sectionIndex];
         return mAlphaIndexer.get(letter);
     }
 
@@ -77,25 +71,25 @@ public class ArrayIndexerAdapter<T extends Item<T>> extends ArrayAdapter<T>
         Integer section = null;
 
         if (mSections.length == 0) {
-            section = Integer.valueOf(-1);
+            section = -1;
         } else if (mSections.length == 1) {
-            section = Integer.valueOf(1);
+            section = 1;
         } else {
             for (int i = 0; i < mSections.length - 1; i++) {
                 final int begin = mAlphaIndexer.get(mSections[i]);
                 final int end = mAlphaIndexer.get(mSections[i + 1]) - 1;
                 if (position >= begin && position <= end) {
-                    section = Integer.valueOf(i);
+                    section = i;
                     break;
                 }
             }
 
             if (section == null) {
-                section = Integer.valueOf(mSections.length - 1);
+                section = mSections.length - 1;
             }
         }
 
-        return section.intValue();
+        return section;
     }
 
     @Override
@@ -118,21 +112,15 @@ public class ArrayIndexerAdapter<T extends Item<T>> extends ArrayAdapter<T>
             } else {
                 mAlphaIndexer.put(sorted.substring(0, 1).toUpperCase(), i);
             }
-            /**
-             * We store the first letter of the word, and its index. The HashMap will replace the
-             * value for identical keys are putted in.
-             */
+            /* We store the first letter of the word, and its index. The HashMap will replace the
+             * value for identical keys are putted in. */
         }
 
-        /**
-         * Now we have an HashMap containing for each first-letter sections(key), the index(value)
-         * in where this sections begins
-         */
+        /* Now we have an HashMap containing for each first-letter sections(key), the index(value)
+         * in where this sections begins */
 
-        /**
-         * We have now to built the sections (letters to be displayed) array. This array must
-         * contain the keys, and must (I do so...) be ordered alphabetically.
-         */
+        /* We have now to built the sections (letters to be displayed) array. This array must
+         * contain the keys, and must (I do so...) be ordered alphabetically. */
         final ArrayList<String> keyList = new ArrayList<>(mAlphaIndexer.keySet());
         // list can be sorted
         Collections.sort(keyList, LOCALE_COMPARATOR);

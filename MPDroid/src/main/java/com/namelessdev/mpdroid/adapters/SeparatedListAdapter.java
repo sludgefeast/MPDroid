@@ -97,15 +97,11 @@ public class SeparatedListAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(final int position) {
-        final int viewType;
-
         if (mItems.get(position) instanceof String) {
-            viewType = TYPE_SEPARATOR;
+            return TYPE_SEPARATOR;
         } else {
-            viewType = TYPE_CONTENT;
+            return TYPE_CONTENT;
         }
-
-        return viewType;
     }
 
     @Override
@@ -141,10 +137,8 @@ public class SeparatedListAdapter extends BaseAdapter {
 
     @Override
     public boolean isEnabled(final int position) {
-        if (getItemViewType(position) == TYPE_SEPARATOR) {
-            return false;
-        }
-        return mBinder.isEnabled(position, mItems, getItem(position));
+        return getItemViewType(position) != TYPE_SEPARATOR &&
+                mBinder.isEnabled(position, mItems, getItem(position));
     }
 
 }

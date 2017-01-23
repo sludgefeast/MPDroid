@@ -122,13 +122,6 @@ public class LastFMCover extends AbstractWebCover {
     private static final String TAG = "LastFMCover";
 
     /**
-     * The default constructor.
-     */
-    public LastFMCover() {
-
-    }
-
-    /**
      * This method is used to compare a value against an extra large image size.
      *
      * @param sizeB The value to compare.
@@ -393,6 +386,5 @@ public class LastFMCover extends AbstractWebCover {
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({EQUAL, GREATER_THAN, LESS_THAN})
     private @interface ComparatorInt {
-
     }
 }

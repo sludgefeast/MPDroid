@@ -197,7 +197,6 @@ public final class LocaleConstants {
      * @see LocaleConstants#ACTION_QUERY_CONDITION
      */
     public static final int RESULT_CONDITION_UNKNOWN = 18;
-    //$NON-NLS-1$
 
     /**
      * Ordered broadcast result code indicating that a plug-in condition's state is not satisfied
@@ -206,7 +205,6 @@ public final class LocaleConstants {
      * @see LocaleConstants#ACTION_QUERY_CONDITION
      */
     public static final int RESULT_CONDITION_UNSATISFIED = 17;
-    //$NON-NLS-1$
 
     /**
      * Private constructor prevents instantiation.
@@ -214,8 +212,6 @@ public final class LocaleConstants {
      * @throws UnsupportedOperationException because this class cannot be instantiated.
      */
     private LocaleConstants() {
-
         throw new UnsupportedOperationException("This class is non-instantiable"); //$NON-NLS-1$
     }
-    //$NON-NLS-1$
 }

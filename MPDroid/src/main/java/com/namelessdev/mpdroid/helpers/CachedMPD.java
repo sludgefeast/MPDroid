@@ -56,15 +56,7 @@ public class CachedMPD extends MPD {
      * @return The artist name, if it's available, blank otherwise.
      */
     private static String getArtistName(final Artist artist) {
-        final String artistName;
-
-        if (artist == null) {
-            artistName = "";
-        } else {
-            artistName = artist.getName();
-        }
-
-        return artistName;
+        return artist != null ? artist.getName() : "";
     }
 
     /*
@@ -92,9 +84,7 @@ public class CachedMPD extends MPD {
             final String artistName = getArtistName(artist);
             final AlbumCache.AlbumDetails details;
 
-            details =
-                    mCache.getAlbumDetails(artistName, album.getName(), album.hasAlbumArtist());
-
+            details = mCache.getAlbumDetails(artistName, album.getName(), album.hasAlbumArtist());
             if (details != null) {
                 albumBuilder.setAlbumDetails(details.mNumTracks, details.mTotalTime);
                 albumBuilder.setSongDetails(details.mDate, details.mPath);

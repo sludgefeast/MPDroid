@@ -62,8 +62,7 @@ abstract class AbstractWebCover implements ICoverRetriever {
     /**
      * Sole constructor.
      */
-    protected AbstractWebCover() {
-
+    AbstractWebCover() {
     }
 
     /**
@@ -74,16 +73,12 @@ abstract class AbstractWebCover implements ICoverRetriever {
      * @param query The query string requiring ampersand encoding.
      * @return The query string with ampersand encoding.
      */
-    protected static String encodeQuery(final String query) {
-        final String tokenAdded;
-
+    static String encodeQuery(final String query) {
         if (query.indexOf('&') == -1) {
-            tokenAdded = query;
+            return query;
         } else {
-            tokenAdded = AMPERSAND.matcher(query).replaceAll(AMPERSAND_TOKEN);
+            return AMPERSAND.matcher(query).replaceAll(AMPERSAND_TOKEN);
         }
-
-        return tokenAdded;
     }
 
     /**
@@ -97,8 +92,8 @@ abstract class AbstractWebCover implements ICoverRetriever {
      * @throws URISyntaxException    Upon syntax error.
      * @throws MalformedURLException Upon incorrect input for the URI to ASCII conversion.
      */
-    protected static URL encodeUrl(final String host, final String path,
-                                   final String query) throws URISyntaxException, MalformedURLException {
+    static URL encodeUrl(final String host, final String path,
+                         final String query) throws URISyntaxException, MalformedURLException {
         String uri = new URI("https", host, path, query, null).toASCIIString();
 
         if (uri.contains(AMPERSAND_TOKEN)) {
@@ -142,8 +137,8 @@ abstract class AbstractWebCover implements ICoverRetriever {
      * @param response The full response parsed for the key.
      * @param url      The query URL.
      */
-    protected static void logError(final String tag, final String key, final Object response,
-                                   final URL url) {
+    static void logError(final String tag, final String key, final Object response,
+                         final URL url) {
         if (CoverManager.DEBUG) {
             Log.d(tag, "No items of key " + key + " in response " + response + " for url " + url);
         }
@@ -259,7 +254,7 @@ abstract class AbstractWebCover implements ICoverRetriever {
      * @throws IOException Upon connection error.
      * @see #executeGetRequestIfExists(URL)
      */
-    protected String executeGetRequest(final URL request) throws IOException {
+    String executeGetRequest(final URL request) throws IOException {
         return executeGetRequest(request, false);
     }
 
@@ -273,7 +268,7 @@ abstract class AbstractWebCover implements ICoverRetriever {
      * @throws IOException Upon connection error.
      * @see #executeGetRequest(URL)
      */
-    protected String executeGetRequestIfExists(final URL request) throws IOException {
+    String executeGetRequestIfExists(final URL request) throws IOException {
         return executeGetRequest(request, true);
     }
 
@@ -285,7 +280,7 @@ abstract class AbstractWebCover implements ICoverRetriever {
      * @return The POST response.
      * @throws IOException Upon connection error.
      */
-    protected String executePostRequest(final URL url, final String request)
+    String executePostRequest(final URL url, final String request)
             throws IOException {
         final HttpURLConnection connection = preparePostConnection(url,
                 request.getBytes("UTF-8").length);

@@ -29,6 +29,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -81,13 +82,6 @@ public class SpotifyCover extends AbstractWebCover {
     private static final String TAG = "SpotifyCover";
 
     /**
-     * The default constructor.
-     */
-    public SpotifyCover() {
-
-    }
-
-    /**
      * This method returns a URL for a cover query for the
      * <A HREF="https://developer.spotify.com/web-api">Spotify Web API</A>.
      *
@@ -122,24 +116,17 @@ public class SpotifyCover extends AbstractWebCover {
      */
     private static String getImageURLFromJSON(final JSONArray images, final URL query)
             throws JSONException {
-        String url = null;
-
-        /**
-         * We only care about the first image, it will be the highest quality.
-         */
+        /* We only care about the first image, it will be the highest quality. */
         if (images.isNull(0)) {
             Log.e(TAG, "JSON key: " + JSON_KEY_IMAGES + " has no images");
-        } else {
-            final JSONObject image = images.getJSONObject(0);
-
-            if (image.has(JSON_KEY_URL)) {
-                url = image.getString(JSON_KEY_URL);
-            } else {
-                logError(TAG, JSON_KEY_URL, image, query);
-            }
+            return null;
         }
-
-        return url;
+        final JSONObject image = images.getJSONObject(0);
+        if (image.has(JSON_KEY_URL)) {
+            return image.getString(JSON_KEY_URL);
+        }
+        logError(TAG, JSON_KEY_URL, image, query);
+        return null;
     }
 
     /**
@@ -160,35 +147,35 @@ public class SpotifyCover extends AbstractWebCover {
     @Override
     public List<String> getCoverUrls(final AlbumInfo albumInfo)
             throws JSONException, URISyntaxException, IOException {
-        final List<String> coverUrls = new ArrayList<>();
         final URL query = getCoverQueryURL(albumInfo);
         final JSONObject root = new JSONObject(executeGetRequest(query));
+        if (!root.has(JSON_KEY_ALBUMS)) {
+            logError(TAG, JSON_KEY_ALBUMS, root, query);
+            return Collections.emptyList();
+        }
 
-        if (root.has(JSON_KEY_ALBUMS)) {
-            final JSONObject albums = root.getJSONObject(JSON_KEY_ALBUMS);
+        final JSONObject albums = root.getJSONObject(JSON_KEY_ALBUMS);
+        if (!albums.has(JSON_KEY_ITEMS)) {
+            logError(TAG, JSON_KEY_ITEMS, albums, query);
+            return Collections.emptyList();
+        }
 
-            if (albums.has(JSON_KEY_ITEMS)) {
-                final JSONArray items = albums.getJSONArray(JSON_KEY_ITEMS);
+        final List<String> coverUrls = new ArrayList<>();
+        final JSONArray items = albums.getJSONArray(JSON_KEY_ITEMS);
 
-                for (int itemCount = 0; itemCount < items.length(); itemCount++) {
-                    final JSONObject item = items.getJSONObject(itemCount);
+        for (int itemCount = 0; itemCount < items.length(); itemCount++) {
+            final JSONObject item = items.getJSONObject(itemCount);
 
-                    if (item.has(JSON_KEY_IMAGES)) {
-                        final JSONArray images = item.getJSONArray(JSON_KEY_IMAGES);
-                        final String imageUrl = getImageURLFromJSON(images, query);
+            if (item.has(JSON_KEY_IMAGES)) {
+                final JSONArray images = item.getJSONArray(JSON_KEY_IMAGES);
+                final String imageUrl = getImageURLFromJSON(images, query);
 
-                        if (imageUrl != null) {
-                            coverUrls.add(imageUrl);
-                        }
-                    } else {
-                        logError(TAG, JSON_KEY_IMAGES, item, query);
-                    }
+                if (imageUrl != null) {
+                    coverUrls.add(imageUrl);
                 }
             } else {
-                logError(TAG, JSON_KEY_ITEMS, albums, query);
+                logError(TAG, JSON_KEY_IMAGES, item, query);
             }
-        } else {
-            logError(TAG, JSON_KEY_ALBUMS, root, query);
         }
 
         return coverUrls;

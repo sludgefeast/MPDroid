@@ -48,8 +48,6 @@ public class MPDAsyncHelper implements Handler.Callback {
     private Handler mWorkerHandler;
 
     public MPDAsyncHelper() {
-
-
         mHelperHandler = new Handler(this);
         mMPDAsyncWorker = new MPDAsyncWorker(mHelperHandler);
         mConnectionInfoListeners = new ArrayList<>();
@@ -143,12 +141,10 @@ public class MPDAsyncHelper implements Handler.Callback {
     }
 
     public interface AsyncExecListener {
-
         void asyncComplete(final CharSequence token);
     }
 
     public interface ConnectionInfoListener {
-
         void onConnectionConfigChange(ConnectionInfo connectionInfo);
     }
 }

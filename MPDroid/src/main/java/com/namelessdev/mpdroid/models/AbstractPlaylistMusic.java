@@ -24,7 +24,7 @@ public abstract class AbstractPlaylistMusic extends Music {
 
     private boolean mForceCoverRefresh = false;
 
-    protected AbstractPlaylistMusic(final Music music) {
+    AbstractPlaylistMusic(final Music music) {
         super(music);
     }
 

@@ -30,6 +30,7 @@ public interface CoverDownloadListener {
 
     void onCoverNotFound(final AlbumInfo albumInfo);
 
+    @Deprecated
     void tagAlbumCover(final AlbumInfo albumInfo);
 
 }

@@ -139,7 +139,6 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
     private ActionBar.Tab mTabSongs;
 
     public SearchActivity() {
-
         mAddString = R.string.addSong;
         mAddedString = R.string.songAdded;
         mArtistResults = new ArrayList<>();
@@ -209,7 +208,6 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
             Collections.sort(arrayMusic);
         } catch (final IOException | MPDException e) {
             Log.e(TAG, "MPD search failure.", e);
-
         }
 
         if (arrayMusic == null) {

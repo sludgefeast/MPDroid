@@ -92,7 +92,6 @@ public class ConnectionChooser extends PreferenceFragment {
     private static Preference getWifiCategory(final Context context) {
         final Preference category = new PreferenceCategory(context);
         category.setTitle(R.string.preferredConnection);
-
         return category;
     }
 
@@ -102,27 +101,24 @@ public class ConnectionChooser extends PreferenceFragment {
      * @param context The current context.
      * @return A Collection of Wi-Fi entries.
      */
-    private static Collection<WifiConfiguration> getWifiCollection(final Context context) {
-        final List<WifiConfiguration> wifiList;
+    private static List<WifiConfiguration> getWifiList(final Context context) {
         final WifiManager wifiManager =
                 (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
         if (wifiManager == null) {
             Log.e(TAG, "Failed to retrieve the WifiManager service.");
-            wifiList = Collections.emptyList();
-        } else {
-            final Collection<WifiConfiguration> networks = wifiManager.getConfiguredNetworks();
-
-            if (networks == null) {
-                Log.e(TAG, "Failed to retrieve a list of configured networks.");
-                wifiList = Collections.emptyList();
-            } else {
-                wifiList = new ArrayList<>(networks);
-                Collections.sort(wifiList, new WifiComparator());
-            }
+            return Collections.emptyList();
         }
+        final Collection<WifiConfiguration> networks = wifiManager.getConfiguredNetworks();
 
-        return wifiList;
+        if (networks == null) {
+            Log.e(TAG, "Failed to retrieve a list of configured networks.");
+            return Collections.emptyList();
+        } else {
+            final List<WifiConfiguration> wifiList = new ArrayList<>(networks);
+            Collections.sort(wifiList, new WifiComparator());
+            return wifiList;
+        }
     }
 
     /**
@@ -134,27 +130,28 @@ public class ConnectionChooser extends PreferenceFragment {
     private static void getWifiEntries(final PreferenceScreen screen,
                                        final Iterable<WifiConfiguration> wifiList) {
         for (final WifiConfiguration wifi : wifiList) {
-            if (wifi != null && wifi.SSID != null) {
-                // Friendly SSID-Name
-                final Matcher matcher = QUOTATION_DELIMITER.matcher(wifi.SSID);
-                final String ssid = matcher.replaceAll("");
-
-                final Preference ssidItem = new Preference(screen.getContext());
-
-                ssidItem.setPersistent(false);
-                ssidItem.setKey("wifiNetwork" + ssid);
-                ssidItem.setTitle(ssid);
-                ssidItem.getExtras().putString(ConnectionModifier.EXTRA_SERVICE_SET_ID, ssid);
-                ssidItem.setFragment(ConnectionSettings.FRAGMENT_MODIFIER_NAME);
-
-                if (WifiConfiguration.Status.CURRENT == wifi.status) {
-                    ssidItem.setSummary(R.string.connected);
-                } else {
-                    ssidItem.setSummary(R.string.notInRange);
-                }
-
-                screen.addPreference(ssidItem);
+            if (wifi == null || wifi.SSID == null) {
+                continue;
             }
+            // Friendly SSID-Name
+            final Matcher matcher = QUOTATION_DELIMITER.matcher(wifi.SSID);
+            final String ssid = matcher.replaceAll("");
+
+            final Preference ssidItem = new Preference(screen.getContext());
+
+            ssidItem.setPersistent(false);
+            ssidItem.setKey("wifiNetwork" + ssid);
+            ssidItem.setTitle(ssid);
+            ssidItem.getExtras().putString(ConnectionModifier.EXTRA_SERVICE_SET_ID, ssid);
+            ssidItem.setFragment(ConnectionSettings.FRAGMENT_MODIFIER_NAME);
+
+            if (WifiConfiguration.Status.CURRENT == wifi.status) {
+                ssidItem.setSummary(R.string.connected);
+            } else {
+                ssidItem.setSummary(R.string.notInRange);
+            }
+
+            screen.addPreference(ssidItem);
         }
     }
 
@@ -165,7 +162,7 @@ public class ConnectionChooser extends PreferenceFragment {
         final PreferenceScreen screen =
                 getPreferenceManager().createPreferenceScreen(getActivity());
         final Context context = screen.getContext();
-        final Collection<WifiConfiguration> wifiList = getWifiCollection(context);
+        final List<WifiConfiguration> wifiList = getWifiList(context);
 
         screen.addPreference(getDefaultCategory(context));
         screen.addPreference(getDefaultItem(context));
@@ -189,13 +186,6 @@ public class ConnectionChooser extends PreferenceFragment {
      * </ol>
      */
     private static final class WifiComparator implements Comparator<WifiConfiguration> {
-
-        /**
-         * Sole constructor.
-         */
-        private WifiComparator() {
-
-        }
 
         /**
          * Compares the two specified objects to determine their relative ordering. The ordering

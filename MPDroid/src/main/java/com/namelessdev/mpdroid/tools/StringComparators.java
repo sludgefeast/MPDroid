@@ -84,7 +84,7 @@ public final class StringComparators {
      * lexicographically precedes {@code t} and a value larger than zero iff {@code s}
      * lexicographically follows {@code t}
      */
-    public static int compareNatural(final Collator collator, final String s, final String t) {
+    private static int compareNatural(final Collator collator, final String s, final String t) {
         return compareNatural(s, t, true, collator);
     }
 
@@ -291,7 +291,7 @@ public final class StringComparators {
      * lexicographically precedes {@code t} and a value larger than zero iff {@code s}
      * lexicographically follows {@code t}
      */
-    public static int compareNaturalAscii(final String s, final String t) {
+    private static int compareNaturalAscii(final String s, final String t) {
         return compareNatural(s, t, true, null);
     }
 
@@ -306,7 +306,7 @@ public final class StringComparators {
      * lexicographically precedes {@code t} and a value larger than zero iff {@code s}
      * lexicographically follows {@code t}
      */
-    public static int compareNaturalIgnoreCaseAscii(final String s, final String t) {
+    private static int compareNaturalIgnoreCaseAscii(final String s, final String t) {
         return compareNatural(s, t, false, null);
     }
 
@@ -320,7 +320,7 @@ public final class StringComparators {
      * embedded numbers correctly. </p>
      * @see #getNaturalComparator(Collator)
      */
-    public static Comparator<String> getNaturalComparator() {
+    private static Comparator<String> getNaturalComparator() {
         final Collator collator = Collator.getInstance();
         return getNaturalComparator(collator);
     }
@@ -335,7 +335,7 @@ public final class StringComparators {
      * embedded numbers correctly. </p>
      * @see #getNaturalComparator()
      */
-    public static Comparator<String> getNaturalComparator(final Collator collator) {
+    private static Comparator<String> getNaturalComparator(final Collator collator) {
         if (collator == null) {
             // it's important to explicitly handle this here - else the bug will
             // manifest anytime later in possibly

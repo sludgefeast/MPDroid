@@ -127,7 +127,7 @@ public class GracenoteCover extends AbstractWebCover {
         }
     }
 
-    public List<String> getCoverUrl(final String artist, final String album)
+    private List<String> getCoverUrl(final String artist, final String album)
             throws IOException, XmlPullParserException {
         // Make sure user doesn't try to register again if they already have a
         // userID in the ctor.
@@ -147,32 +147,24 @@ public class GracenoteCover extends AbstractWebCover {
                 "</QUERIES>";
 
         final String response = executePostRequest(mApiUrl, request);
-        final List<String> coverUrls;
-
         if (response == null) {
-            coverUrls = Collections.emptyList();
+            return Collections.emptyList();
         } else {
-            coverUrls = extractCoverUrl(response);
+            return extractCoverUrl(response);
         }
-
-        return coverUrls;
     }
 
     @Override
     public List<String> getCoverUrls(final AlbumInfo albumInfo) throws Exception {
-        final List<String> coverUrls;
-
         if (mUserId == null) {
             initializeUserId();
         }
 
         if (mUserId == null) {
-            coverUrls = Collections.emptyList();
+            return Collections.emptyList();
         } else {
-            coverUrls = getCoverUrl(albumInfo.getArtistName(), albumInfo.getAlbumName());
+            return getCoverUrl(albumInfo.getArtistName(), albumInfo.getAlbumName());
         }
-
-        return coverUrls;
     }
 
     @Override
@@ -197,7 +189,7 @@ public class GracenoteCover extends AbstractWebCover {
 
                 if (mUserId == null) {
                     mUserId = register();
-                    if (SETTINGS != null && mUserId != null) {
+                    if (mUserId != null) {
                         final SharedPreferences.Editor editor;
                         editor = SETTINGS.edit();
                         editor.putString(USER_ID, mUserId);
@@ -216,15 +208,15 @@ public class GracenoteCover extends AbstractWebCover {
         }
     }
 
-    // Will register your clientID and Tag in order to get a userID. The userID
-    // should be stored
-    // in a persistent form (filesystem, db, etc) otherwise you will hit your
-    // user limit.
-    public String register() throws IOException, XmlPullParserException {
+    /**
+     * Will register your clientID and Tag in order to get a userID. The userID should be stored
+     * in a persistent form (filesystem, db, etc) otherwise you will hit your user limit.
+     */
+    private String register() throws IOException, XmlPullParserException {
         return register(mClientId);
     }
 
-    public String register(final String clientID) throws IOException, XmlPullParserException {
+    private String register(final String clientID) throws IOException, XmlPullParserException {
         final String request = "<QUERIES><QUERY CMD=\"REGISTER\"><CLIENT>" + clientID
                 + "</CLIENT></QUERY></QUERIES>";
         final String response = executePostRequest(mApiUrl, request);

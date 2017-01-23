@@ -33,7 +33,7 @@ import java.util.Date;
  * higher).
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-public class RemoteControlSeekBarHandler implements
+class RemoteControlSeekBarHandler implements
         RemoteControlClient.OnPlaybackPositionUpdateListener,
         RemoteControlClient.OnGetPlaybackPositionListener, TrackPositionListener {
 

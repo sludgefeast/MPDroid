@@ -110,12 +110,6 @@ public class SongDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
      */
     private static final class CommentClickListener implements View.OnClickListener {
 
-        /**
-         * Sole constructor.
-         */
-        private CommentClickListener() {
-        }
-
         @Override
         public void onClick(final View v) {
             final Object tag = v.getTag();

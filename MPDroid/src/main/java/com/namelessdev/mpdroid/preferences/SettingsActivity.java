@@ -37,7 +37,6 @@ public class SettingsActivity extends MPDActivity implements StatusChangeListene
     @Override
     public void connectionConnected(final int commandErrorCode) {
         super.connectionConnected(commandErrorCode);
-
         mSettingsFragment.onConnectionStateChanged();
     }
 
@@ -49,7 +48,6 @@ public class SettingsActivity extends MPDActivity implements StatusChangeListene
     @Override
     public void connectionDisconnected(final String reason) {
         super.connectionDisconnected(reason);
-
         mSettingsFragment.onConnectionStateChanged();
     }
 
@@ -68,7 +66,6 @@ public class SettingsActivity extends MPDActivity implements StatusChangeListene
 
     @Override
     public void libraryStateChanged(final boolean updating, final boolean dbChanged) {
-
     }
 
     @Override
@@ -94,52 +91,39 @@ public class SettingsActivity extends MPDActivity implements StatusChangeListene
         mApp.getMPD().getConnectionStatus().addListener(this);
     }
 
-    /**
-     * Called upon a change in the Output idle subsystem.
-     */
     @Override
     public void outputsChanged() {
     }
 
     @Override
     public void playlistChanged(final int oldPlaylistVersion) {
-
     }
 
     @Override
     public void randomChanged() {
-
     }
 
     @Override
     public void repeatChanged() {
-
     }
 
     @Override
     public void stateChanged(final int oldState) {
-
     }
 
     @Override
     public void stickerChanged() {
-
     }
 
-    /**
-     * Called when a stored playlist has been modified, renamed, created or deleted.
-     */
     @Override
     public void storedPlaylistChanged() {
     }
 
     @Override
     public void trackChanged(final int oldTrack) {
-
     }
 
     @Override
     public void volumeChanged(final int oldVolume) {
-
     }
 }

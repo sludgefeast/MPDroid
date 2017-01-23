@@ -164,26 +164,26 @@ class MPDApplicationBase extends Application implements
     private void checkConnectionNeeded() {
         if (mConnectionLocks.isEmpty()) {
             disconnect();
-        } else {
-            if (mIdleSubsystemMonitor.isStopped()) {
-                mIdleSubsystemMonitor.setSupportedSubsystems(
-                        IdleSubsystemMonitor.IDLE_DATABASE,
-                        IdleSubsystemMonitor.IDLE_MIXER,
-                        IdleSubsystemMonitor.IDLE_OPTIONS,
-                        IdleSubsystemMonitor.IDLE_OUTPUT,
-                        IdleSubsystemMonitor.IDLE_PLAYER,
-                        IdleSubsystemMonitor.IDLE_PLAYLIST,
-                        IdleSubsystemMonitor.IDLE_STICKER,
-                        IdleSubsystemMonitor.IDLE_STORED_PLAYLIST,
-                        IdleSubsystemMonitor.IDLE_UPDATE);
-                mIdleSubsystemMonitor.start();
-            }
-            if (!mMPD.isConnected()) {
-                try {
-                    connect();
-                } catch (final UnknownHostException e) {
-                    Log.e(TAG, "Failed to connect due to unknown host.");
-                }
+            return;
+        }
+        if (mIdleSubsystemMonitor.isStopped()) {
+            mIdleSubsystemMonitor.setSupportedSubsystems(
+                    IdleSubsystemMonitor.IDLE_DATABASE,
+                    IdleSubsystemMonitor.IDLE_MIXER,
+                    IdleSubsystemMonitor.IDLE_OPTIONS,
+                    IdleSubsystemMonitor.IDLE_OUTPUT,
+                    IdleSubsystemMonitor.IDLE_PLAYER,
+                    IdleSubsystemMonitor.IDLE_PLAYLIST,
+                    IdleSubsystemMonitor.IDLE_STICKER,
+                    IdleSubsystemMonitor.IDLE_STORED_PLAYLIST,
+                    IdleSubsystemMonitor.IDLE_UPDATE);
+            mIdleSubsystemMonitor.start();
+        }
+        if (!mMPD.isConnected()) {
+            try {
+                connect();
+            } catch (final UnknownHostException e) {
+                Log.e(TAG, "Failed to connect due to unknown host.");
             }
         }
     }
@@ -325,14 +325,8 @@ class MPDApplicationBase extends Application implements
      * otherwise.
      */
     public final boolean isNotificationPersistent() {
-        final boolean result;
-
-        if (mConnectionInfo.isNotificationPersistent() && !mIsNotificationOverridden) {
-            result = true;
-        } else {
-            result = false;
-        }
-
+        final boolean result = mConnectionInfo.isNotificationPersistent() &&
+                !mIsNotificationOverridden;
         debug("Notification is persistent: " + result);
         return result;
     }

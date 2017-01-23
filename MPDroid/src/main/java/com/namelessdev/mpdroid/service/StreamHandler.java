@@ -185,7 +185,6 @@ public final class StreamHandler implements
      */
     StreamHandler(final MPDroidService serviceContext, final Handler serviceHandler,
                   final AudioManager audioManager) {
-
         if (DEBUG) {
             Log.d(TAG, "StreamHandler constructor.");
         }
@@ -232,7 +231,7 @@ public final class StreamHandler implements
      * @param what A 'what' field.
      * @return The literal field name.
      */
-    public static String getHandlerValue(final int what) {
+    static String getHandlerValue(final int what) {
         final String result;
 
         switch (what) {
@@ -703,11 +702,8 @@ public final class StreamHandler implements
         }
 
         mHandler.removeMessages(PREPARE_ASYNC);
-
         mAudioManager.abandonAudioFocus(this);
-
         windDownResources(REQUEST_NOTIFICATION_STOP);
-
         mIsActive = false;
     }
 

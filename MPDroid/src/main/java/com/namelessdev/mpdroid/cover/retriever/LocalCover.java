@@ -55,7 +55,7 @@ public class LocalCover implements ICoverRetriever {
 
     private final SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(mApp);
 
-    public static void appendPathString(final Uri.Builder builder, final String baseString) {
+    private static void appendPathString(final Uri.Builder builder, final String baseString) {
         if (baseString != null && !baseString.isEmpty()) {
             final String[] components = baseString.split("/");
             for (final String component : components) {
@@ -64,8 +64,8 @@ public class LocalCover implements ICoverRetriever {
         }
     }
 
-    public static String buildCoverUrl(String serverName, String musicPath, final String path,
-                                       final String fileName) {
+    private static String buildCoverUrl(String serverName, String musicPath, final String path,
+                                        final String fileName) {
 
         if (musicPath.startsWith(URL_PREFIX)) {
             int hostPortEnd = musicPath.indexOf(URL_PREFIX.length(), '/');
@@ -86,52 +86,49 @@ public class LocalCover implements ICoverRetriever {
 
     @Override
     public List<String> getCoverUrls(final AlbumInfo albumInfo) throws Exception {
-        final List<String> coverUrls;
-
         if (isEmpty(albumInfo.getParentDirectory())) {
-            coverUrls = Collections.emptyList();
-        } else {
-            String lfilename;
-            // load URL parts from settings
-            final String musicPath = mSettings.getString("musicPath", "music/");
-            FILENAMES[0] = mSettings.getString("coverFileName", null);
-            final String serverName = mApp.getConnectionSettings().getServer();
+            return Collections.emptyList();
+        }
 
-            String url;
-            coverUrls = new ArrayList<>();
-            for (final String subfolder : SUB_FOLDERS) {
-                for (String baseFilename : FILENAMES) {
-                    for (final String ext : EXT) {
+        // load URL parts from settings
+        final String musicPath = mSettings.getString("musicPath", "music/");
+        FILENAMES[0] = mSettings.getString("coverFileName", null);
+        final String serverName = mApp.getConnectionSettings().getServer();
 
-                        if (baseFilename == null
-                                || (baseFilename.startsWith("%") && !baseFilename
-                                .equals(PLACEHOLDER_FILENAME))) {
+        String lfilename, url;
+        final List<String> coverUrls = new ArrayList<>();
+        for (final String subfolder : SUB_FOLDERS) {
+            for (String baseFilename : FILENAMES) {
+                for (final String ext : EXT) {
+
+                    if (baseFilename == null
+                            || (baseFilename.startsWith("%") && !baseFilename
+                            .equals(PLACEHOLDER_FILENAME))) {
+                        continue;
+                    }
+                    if (baseFilename.equals(PLACEHOLDER_FILENAME)
+                            && albumInfo.getFilename() != null) {
+                        final int dotIndex = albumInfo.getFilename().lastIndexOf('.');
+                        if (dotIndex == -1) {
                             continue;
                         }
-                        if (baseFilename.equals(PLACEHOLDER_FILENAME)
-                                && albumInfo.getFilename() != null) {
-                            final int dotIndex = albumInfo.getFilename().lastIndexOf('.');
-                            if (dotIndex == -1) {
-                                continue;
-                            }
-                            baseFilename = albumInfo.getFilename().substring(0, dotIndex);
-                        }
+                        baseFilename = albumInfo.getFilename().substring(0, dotIndex);
+                    }
 
-                        // Add file extension except for the filename coming
-                        // from settings
-                        if (baseFilename.equals(FILENAMES[0])) {
-                            lfilename = baseFilename;
-                        } else {
-                            lfilename = subfolder + '/' + baseFilename + '.' + ext;
-                        }
+                    // Add file extension except for the filename coming
+                    // from settings
+                    if (baseFilename.equals(FILENAMES[0])) {
+                        lfilename = baseFilename;
+                    } else {
+                        lfilename = subfolder + '/' + baseFilename + '.' + ext;
+                    }
 
-                        url = buildCoverUrl(serverName, musicPath,
-                                albumInfo.getParentDirectory(),
-                                lfilename);
+                    url = buildCoverUrl(serverName, musicPath,
+                            albumInfo.getParentDirectory(),
+                            lfilename);
 
-                        if (!coverUrls.contains(url)) {
-                            coverUrls.add(url);
-                        }
+                    if (!coverUrls.contains(url)) {
+                        coverUrls.add(url);
                     }
                 }
             }

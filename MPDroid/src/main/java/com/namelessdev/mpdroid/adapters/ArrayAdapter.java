@@ -60,8 +60,8 @@ public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter
         }
     }
 
-    public ArrayAdapter(final Context context, @LayoutRes final int textViewResourceId,
-                        final List<T> items) {
+    ArrayAdapter(final Context context, @LayoutRes final int textViewResourceId,
+                 final List<T> items) {
         super(context, textViewResourceId, items);
         mDataBinder = null;
 
@@ -87,29 +87,28 @@ public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter
 
     @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
-        View resultView;
-
         if (mDataBinder == null) {
-            resultView = super.getView(position, convertView, parent);
-        } else {
-            // cache all inner view references with ViewHolder pattern
-            final AbstractViewHolder holder;
-
-            if (convertView == null) {
-                resultView = mInflater.inflate(mDataBinder.getLayoutId(), parent, false);
-                resultView = mDataBinder.onLayoutInflation(mContext, resultView, mItems);
-
-                // use the data binder to look up all references to inner views
-                holder = mDataBinder.findInnerViews(resultView);
-                resultView.setTag(holder);
-            } else {
-                resultView = convertView;
-                holder = (AbstractViewHolder) resultView.getTag();
-            }
-
-            mDataBinder.onDataBind(mContext, resultView, holder, mItems, mItems.get(position),
-                    position);
+            return super.getView(position, convertView, parent);
         }
+
+        View resultView;
+        // cache all inner view references with ViewHolder pattern
+        final AbstractViewHolder holder;
+
+        if (convertView == null) {
+            resultView = mInflater.inflate(mDataBinder.getLayoutId(), parent, false);
+            resultView = mDataBinder.onLayoutInflation(mContext, resultView, mItems);
+
+            // use the data binder to look up all references to inner views
+            holder = mDataBinder.findInnerViews(resultView);
+            resultView.setTag(holder);
+        } else {
+            resultView = convertView;
+            holder = (AbstractViewHolder) resultView.getTag();
+        }
+
+        mDataBinder.onDataBind(mContext, resultView, holder, mItems, mItems.get(position),
+                position);
         return resultView;
     }
 
@@ -120,14 +119,7 @@ public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter
 
     @Override
     public boolean isEnabled(final int position) {
-        final boolean isEnabled;
-
-        if (mDataBinder == null) {
-            isEnabled = super.isEnabled(position);
-        } else {
-            isEnabled = mDataBinder.isEnabled(position, mItems, getItem(position));
-        }
-
-        return isEnabled;
+        return mDataBinder != null ? mDataBinder.isEnabled(position, mItems, getItem(position)) :
+                super.isEnabled(position);
     }
 }

@@ -124,7 +124,6 @@ public class ConnectionModifier extends PreferenceFragment {
      * @param keyPrefix The key prefix used for these stream settings.
      * @return A string conversion to the new Stream URL style.
      */
-    @SuppressWarnings("deprecation")
     @Nullable
     private static String convertStreamSettings(final Context context, final String keyPrefix) {
         final String result;
@@ -206,13 +205,8 @@ public class ConnectionModifier extends PreferenceFragment {
      */
     private static Preference getMasterCategory(final Context context, final String keyPrefix) {
         final PreferenceCategory masterCategory = new PreferenceCategory(context);
-
-        if (keyPrefix.isEmpty()) {
-            masterCategory.setTitle(R.string.defaultSettings);
-        } else {
-            masterCategory.setTitle(R.string.wlanBasedSettings);
-        }
-
+        masterCategory.setTitle(keyPrefix.isEmpty() ?
+                R.string.defaultSettings : R.string.wlanBasedSettings);
         return masterCategory;
     }
 
@@ -342,16 +336,14 @@ public class ConnectionModifier extends PreferenceFragment {
         /**
          * The Stream URL EditTextPreference to validate.
          */
-        protected final EditTextPreference mPreferenceTextEdit;
+        final EditTextPreference mPreferenceTextEdit;
 
         /**
          * Sole constructor.
          *
          * @param editTextPreference The stream URL EditTextPreference to validate.
          */
-        protected CommonValidator(final EditTextPreference editTextPreference) {
-
-
+        CommonValidator(final EditTextPreference editTextPreference) {
             mPreferenceTextEdit = editTextPreference;
         }
 
