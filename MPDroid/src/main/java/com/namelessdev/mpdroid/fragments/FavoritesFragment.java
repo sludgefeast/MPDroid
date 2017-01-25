@@ -26,7 +26,7 @@ import java.util.List;
 public class FavoritesFragment extends AlbumsGridFragment {
 
     @Override
-    protected List<Album> loadAlbums(boolean sortByYear) throws IOException, MPDException {
+    protected List<Album> loadAlbums() throws IOException, MPDException {
         return new ArrayList<>(mApp.getFavorites().getAlbums());
     }
 

@@ -464,15 +464,7 @@ public abstract class MPDConnection implements MPDConnectionListener {
      * otherwise.
      */
     public boolean isProtocolVersionSupported(final int major, final int minor) {
-        final boolean result;
-
-        if (mMPDVersion == null || mMPDVersion[0] <= major && mMPDVersion[1] < minor) {
-            result = false;
-        } else {
-            result = true;
-        }
-
-        return result;
+        return !(mMPDVersion == null || mMPDVersion[0] <= major && mMPDVersion[1] < minor);
     }
 
     /**

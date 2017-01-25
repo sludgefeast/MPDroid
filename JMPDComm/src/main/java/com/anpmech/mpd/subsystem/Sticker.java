@@ -273,12 +273,11 @@ public class Sticker {
      * @return A map of entries from the media server.
      * @throws IOException  Thrown upon a communication error with the server.
      * @throws MPDException Thrown if an error occurs as a result of command execution.
-     * @deprecated Use {@link #find(String, String)} instead.
+     * @deprecated Since January 2017. Use {@link #find(String, String)} instead.
      */
     @Deprecated
     public Map<Music, Map<String, String>> find(final FilesystemTreeEntry entry,
                                                 final String name) throws IOException, MPDException {
-        //TODO: why are only music entries supported? Directories are generally the URI to find stickers
         onlyMusicSupported(entry);
 
         final Map<Music, String> foundStickers = find(entry.getFullPath(), name);

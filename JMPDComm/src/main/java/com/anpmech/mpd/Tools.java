@@ -246,23 +246,10 @@ public final class Tools {
      * @return False if objects are both null or are equal, true otherwise.
      */
     public static boolean isNotEqual(final Object objectA, final Object objectB) {
-        final boolean isEqual;
-
         if (objectA == null) {
-            if (objectB == null) {
-                isEqual = true;
-            } else {
-                isEqual = false;
-            }
-        } else {
-            if (objectA.equals(objectB)) {
-                isEqual = true;
-            } else {
-                isEqual = false;
-            }
+            return objectB != null;
         }
-
-        return !isEqual;
+        return !objectA.equals(objectB);
     }
 
     /**

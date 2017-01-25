@@ -322,16 +322,9 @@ public final class CoverManager {
      * @return True if this device is connected or connecting to a WIFI network, false otherwise.
      */
     private static boolean isWifi(final NetworkInfo networkInfo) {
-        final boolean isWifiAndConnected;
-
-        if (networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_WIFI &&
-                networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-            isWifiAndConnected = true;
-        } else {
-            isWifiAndConnected = false;
-        }
-
-        return isWifiAndConnected;
+        return networkInfo != null &&
+                networkInfo.getType() == ConnectivityManager.TYPE_WIFI &&
+                networkInfo.getState() == NetworkInfo.State.CONNECTED;
     }
 
     /**

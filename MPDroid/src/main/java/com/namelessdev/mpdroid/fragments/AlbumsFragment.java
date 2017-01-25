@@ -110,8 +110,7 @@ public class AlbumsFragment extends BrowseFragment<Album> {
         final boolean sortByYear = settings.getBoolean(ALBUM_YEAR_SORT_KEY, false);
 
         try {
-            //TODO: Why load albums sorted? They become sorted by the following code.
-            replaceItems(loadAlbums(sortByYear));
+            replaceItems(loadAlbums());
 
             if (sortByYear) {
                 Collections.sort(mItems, Album.SORT_BY_DATE);
@@ -140,8 +139,8 @@ public class AlbumsFragment extends BrowseFragment<Album> {
         return false;
     }
 
-    protected List<Album> loadAlbums(final boolean sortByYear) throws IOException, MPDException {
-        return mApp.getMPD().getAlbums(mArtist, sortByYear, mIsCountDisplayed);
+    protected List<Album> loadAlbums() throws IOException, MPDException {
+        return mApp.getMPD().getAlbums(mArtist, false, mIsCountDisplayed);
     }
 
     /**
