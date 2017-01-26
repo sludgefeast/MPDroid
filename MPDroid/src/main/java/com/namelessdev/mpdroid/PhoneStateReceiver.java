@@ -222,7 +222,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
      */
     private void unsetMarker(final String marker) {
         if (get(marker)) {
-            mSettings.edit().remove(marker).commit();
+            mSettings.edit().remove(marker).apply();
         }
     }
 
@@ -311,7 +311,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
          */
         private void setMarker(final String marker) {
             if (!get(marker)) {
-                mSettings.edit().putBoolean(marker, true).commit();
+                mSettings.edit().putBoolean(marker, true).apply();
             }
         }
 
@@ -366,7 +366,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
          */
         private void unsetMarker(final String marker) {
             if (get(marker)) {
-                mSettings.edit().remove(marker).commit();
+                mSettings.edit().remove(marker).apply();
             }
         }
     }

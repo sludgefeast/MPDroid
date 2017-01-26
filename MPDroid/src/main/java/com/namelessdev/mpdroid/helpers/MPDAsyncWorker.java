@@ -112,7 +112,7 @@ public class MPDAsyncWorker implements Handler.Callback,
                 case GracenoteCover.CUSTOM_CLIENT_ID_KEY:
                     final SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.remove(GracenoteCover.USER_ID);
-                    editor.commit();
+                    editor.apply();
                     break;
                 default:
                     break;

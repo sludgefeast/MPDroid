@@ -360,7 +360,7 @@ class MPDApplicationBase extends Application implements
 
     @SuppressLint("CommitPrefEdits")
     public final void markGooglePlayThankYouAsRead() {
-        mSettings.edit().putBoolean("googlePlayThankYouShown", true).commit();
+        mSettings.edit().putBoolean("googlePlayThankYouShown", true).apply();
     }
 
     /**

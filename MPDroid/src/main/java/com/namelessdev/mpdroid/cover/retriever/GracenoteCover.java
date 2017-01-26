@@ -193,7 +193,7 @@ public class GracenoteCover extends AbstractWebCover {
                         final SharedPreferences.Editor editor;
                         editor = SETTINGS.edit();
                         editor.putString(USER_ID, mUserId);
-                        editor.commit();
+                        editor.apply();
                     }
                 }
             } catch (final Exception e) {
@@ -202,7 +202,7 @@ public class GracenoteCover extends AbstractWebCover {
                     final SharedPreferences.Editor editor;
                     editor = SETTINGS.edit();
                     editor.remove(USER_ID);
-                    editor.commit();
+                    editor.apply();
                 }
             }
         }

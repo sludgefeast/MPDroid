@@ -161,7 +161,7 @@ public final class LibraryTabsUtil {
 
     private static void saveLibraryTabsString(final String tabsString) {
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(APP);
-        settings.edit().putString(LIBRARY_TABS_SETTINGS_KEY, tabsString).commit();
+        settings.edit().putString(LIBRARY_TABS_SETTINGS_KEY, tabsString).apply();
         CURRENT_TABS = null;
     }
 
