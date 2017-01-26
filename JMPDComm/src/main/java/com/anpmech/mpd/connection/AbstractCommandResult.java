@@ -66,8 +66,6 @@ public class AbstractCommandResult {
      * @param result           The MPD protocol command result.
      */
     protected AbstractCommandResult(@Nullable final String connectionResult, final String result) {
-
-
         mConnectionResult = connectionResult;
         mResult = result;
     }

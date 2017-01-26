@@ -67,8 +67,6 @@ final class MusicList implements Iterable<Music> {
     private final List<Integer> mSongID;
 
     MusicList() {
-
-
         mList = Collections.synchronizedList(new ArrayList<Music>());
         mSongID = Collections.synchronizedList(new ArrayList<Integer>());
     }
@@ -221,7 +219,6 @@ final class MusicList implements Iterable<Music> {
      * @param collection The {@code Music} collection to replace the {@code MusicList} with.
      */
     void replace(final Collection<Music> collection) {
-
         synchronized (mList) {
             mList.clear();
             mList.addAll(collection);

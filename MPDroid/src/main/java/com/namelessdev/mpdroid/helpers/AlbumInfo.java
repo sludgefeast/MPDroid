@@ -102,8 +102,6 @@ public class AlbumInfo {
      * @param music The {@link Music} item used to construct this AlbumInfo.
      */
     public AlbumInfo(final Music music) {
-
-
         String artist = music.getAlbumArtistName();
 
         if (artist == null) {
@@ -181,7 +179,6 @@ public class AlbumInfo {
             final char[] charBuffer = new char[data.length << 1];
 
             for (int byteIndex = 0; byteIndex < data.length; byteIndex++) {
-
                 /** Store the upper and lower nibble with padding, respectively. */
                 charBuffer[byteIndex << 1] = getPaddedNibble(data[byteIndex] >>> 4 & HEX_BYTE);
                 charBuffer[(byteIndex << 1) + 1] = getPaddedNibble(data[byteIndex] & HEX_BYTE);

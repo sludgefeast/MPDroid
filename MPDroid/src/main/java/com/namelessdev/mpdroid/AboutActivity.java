@@ -108,7 +108,6 @@ public class AboutActivity extends Activity {
         private final String mText;
 
         private AboutListItem(final String text) {
-
             mText = text;
         }
 

@@ -43,13 +43,6 @@ import static org.junit.Assert.assertEquals;
 public class StreamResponseTest extends ObjectResponseTest<Stream, StreamResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public StreamResponseTest() {
-
-    }
-
-    /**
      * This returns a empty ObjectResponse for the ObjectResponse subclass.
      *
      * @return A empty ObjectResponse.

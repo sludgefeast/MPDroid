@@ -127,7 +127,6 @@ abstract class AbstractDirectoryBase<T extends AbstractDirectoryBase<T>> extends
         final String parentDirectory;
 
         if (baseNameIndex == -1) {
-
             /**
              * If the path is empty, we're already at the root directory.
              */

@@ -135,8 +135,6 @@ public class ServiceBinder implements
      * @param clientHandler The handler where service messages will be delivered.
      */
     public ServiceBinder(final Context clientContext, final Handler clientHandler) {
-
-
         mClientContext = clientContext;
         mClientHandler = clientHandler;
         mClientMessenger = new Messenger(clientHandler);

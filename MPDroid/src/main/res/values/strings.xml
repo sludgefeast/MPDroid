@@ -111,6 +111,9 @@
     <string name="playlistAdded">Playlist %s added</string>
     <string name="addedDirectoryToPlaylist">Added %s to playlist</string>
     <string name="artistAdded">Artist %s added</string>
+    <string name="ServerName">Name</string>
+    <string name="ServerNameDescription">Name of MPD server</string>
+    <string name="ServerNameDefault">Default</string>
     <string name="host">Host</string>
     <string name="hostDescription">MPD server hostname or IP address</string>
     <string name="port">Port</string>

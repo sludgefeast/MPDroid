@@ -59,8 +59,6 @@ class RemoteControlSeekBarHandler implements
     RemoteControlSeekBarHandler(final Context serviceContext,
                                 final RemoteControlClient remoteControlClient,
                                 final int controlFlags) {
-
-
         mApp = (MPDApplication) serviceContext.getApplicationContext();
         mRemoteControlClient = remoteControlClient;
 

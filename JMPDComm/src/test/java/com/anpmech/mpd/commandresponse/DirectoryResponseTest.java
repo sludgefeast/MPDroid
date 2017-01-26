@@ -37,13 +37,6 @@ import com.anpmech.mpd.item.Directory;
 public class DirectoryResponseTest extends ObjectResponseTest<Directory, DirectoryResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public DirectoryResponseTest() {
-
-    }
-
-    /**
      * This returns a empty ObjectResponse for the ObjectResponse subclass.
      *
      * @return A empty ObjectResponse.

@@ -101,7 +101,6 @@ public class MPD {
      * Constructs a new MPD server controller without connection.
      */
     public MPD() {
-
         mConnection = new MultiIOMPDConnection(5000);
         mIdleConnection = new MonoIOMPDConnection(0);
 

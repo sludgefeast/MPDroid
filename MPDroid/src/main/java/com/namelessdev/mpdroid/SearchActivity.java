@@ -602,7 +602,6 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
 
         @Override
         public Object instantiateItem(final ViewGroup container, final int position) {
-
             final View v;
             switch (position) {
                 case RESULT_ALBUM:

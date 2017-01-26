@@ -86,13 +86,6 @@ public abstract class ObjectResponseTest<T, S extends ObjectResponse<T>> {
     public final Timeout mTimeout = new Timeout(10L, TimeUnit.SECONDS);
 
     /**
-     * Sole constructor.
-     */
-    protected ObjectResponseTest() {
-
-    }
-
-    /**
      * This method sets the {@code e} parameter to throw an exception of the class type in the
      * {@code exceptionClass} class.
      *

@@ -209,7 +209,6 @@ abstract class AbstractMusic<T extends AbstractMusic<T>> extends AbstractEntry<T
         int result = 0;
 
         if (lhs != rhs) {
-
             /** Compare the two integers against the primitive undefined integer for this class. */
             if (compUndefined) {
                 if (lhs == UNDEFINED_INT) {
@@ -726,7 +725,6 @@ abstract class AbstractMusic<T extends AbstractMusic<T>> extends AbstractEntry<T
          * Sole constructor.
          */
         protected ComparatorWithoutTrackNumber() {
-
         }
 
         /**

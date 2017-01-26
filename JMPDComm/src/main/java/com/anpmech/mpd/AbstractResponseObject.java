@@ -57,8 +57,6 @@ public class AbstractResponseObject {
      * @param response The response for the object.
      */
     AbstractResponseObject(@Nullable final String name, @Nullable final String response) {
-
-
         if (name == null && response == null) {
             throw new IllegalArgumentException(
                     "Name and response cannot be null in the same constructor.");

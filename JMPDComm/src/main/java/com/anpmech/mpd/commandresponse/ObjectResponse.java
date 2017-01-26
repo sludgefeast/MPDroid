@@ -70,8 +70,6 @@ public abstract class ObjectResponse<T> implements Collection<T> {
      * @param response The MPD protocol command response.
      */
     protected ObjectResponse(final String response) {
-
-
         mResult = response;
     }
 

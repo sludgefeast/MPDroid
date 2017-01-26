@@ -57,13 +57,6 @@ public class SeparatedResponseTest
             = "Singular response failed size consistency test.";
 
     /**
-     * Sole constructor.
-     */
-    public SeparatedResponseTest() {
-
-    }
-
-    /**
      * This returns a empty ObjectResponse for the ObjectResponse subclass.
      *
      * @return A empty ObjectResponse.

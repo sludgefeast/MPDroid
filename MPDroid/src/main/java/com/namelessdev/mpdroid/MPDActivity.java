@@ -205,7 +205,6 @@ public abstract class MPDActivity extends AppCompatActivity implements IdleSubsy
     public void connectionDisconnected(final String reason) {
         debug("connectionDisconnected()");
         if (sAlertDialog instanceof ProgressDialog) {
-
             // dismiss possible dialog
             debug("Dismissing in connectionDisconnected");
             dismissAlertDialog();

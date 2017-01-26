@@ -107,7 +107,6 @@ public class SettingsFragment extends PreferenceFragment {
                     final MPDStatistics mpdStatistics = mpd.getStatistics();
 
                     mHandler.post(new Runnable() {
-
                         @Override
                         public void run() {
                             mVersion.setSummary(versionText);

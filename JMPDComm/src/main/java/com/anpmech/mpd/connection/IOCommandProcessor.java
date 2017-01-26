@@ -104,8 +104,6 @@ abstract class IOCommandProcessor implements Callable<CommandResult> {
      */
     IOCommandProcessor(final MPDConnectionStatus connectionStatus, final String commandString,
                        final int[] excludeResponses) {
-
-
         mConnectionStatus = connectionStatus;
         mCommandString = commandString;
         mExcludeResponses = excludeResponses;
@@ -366,7 +364,6 @@ abstract class IOCommandProcessor implements Callable<CommandResult> {
              */
             shouldReconnect = true;
         } else if (mConnectionStatus.isConnecting() || mConnectionStatus.isBlocked()) {
-
             /**
              * If we're connecting or the connection is blocked, interrupt through reconnection.
              * Arbitrarily interrupting a blocked connection is probably not the best thing to do,

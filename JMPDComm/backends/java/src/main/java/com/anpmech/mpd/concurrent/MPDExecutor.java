@@ -48,7 +48,6 @@ public final class MPDExecutor {
      * This is a utility class, no instantiation.
      */
     private MPDExecutor() {
-
     }
 
     /**

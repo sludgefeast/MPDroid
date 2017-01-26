@@ -1093,7 +1093,6 @@ abstract class NowPlayingFragmentBase extends Fragment implements
 
         if (mCurrentSong != null && mIsAudioNameTextEnabled &&
                 !mMPDStatus.isState(MPDStatusMap.STATE_STOPPED)) {
-
             final char[] separator = {' ', '|', ' '};
             final long bitRate = mMPDStatus.getBitrate();
             final int bitsPerSample = mMPDStatus.getBitsPerSample();

@@ -45,13 +45,6 @@ import static org.junit.Assert.assertEquals;
 public class GenreResponseTest extends ObjectResponseTest<Genre, GenreResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public GenreResponseTest() {
-
-    }
-
-    /**
      * This returns a empty ObjectResponse for the ObjectResponse subclass.
      *
      * @return A empty ObjectResponse.

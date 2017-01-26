@@ -55,7 +55,6 @@ public class ArtistResponse extends ObjectResponse<Artist> {
      * This constructor builds this class from an empty MPD protocol result.
      */
     public ArtistResponse() {
-
     }
 
     /**

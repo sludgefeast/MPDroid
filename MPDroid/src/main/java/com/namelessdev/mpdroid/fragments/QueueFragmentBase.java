@@ -350,7 +350,6 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
 
             @Override
             public boolean onActionItemClicked(final ActionMode mode, final MenuItem item) {
-
                 final SparseBooleanArray checkedItems = mList.getCheckedItemPositions();
                 final int count = mList.getCount();
                 final ListAdapter adapter = mList.getAdapter();
@@ -754,7 +753,6 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
     }
 
     public void updateCover(final AlbumInfo albumInfo) {
-
         final List<AbstractPlaylistMusic> musicsToBeUpdated = new ArrayList<>(mSongList.size());
 
         for (final AbstractPlaylistMusic playlistMusic : mSongList) {

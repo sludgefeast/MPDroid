@@ -126,11 +126,8 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
 
     protected void performUpdate(final RemoteViews views, final WidgetHelperService service) {
         // Set correct drawable for pause state
-        if (service.isPlaying()) {
-            views.setImageViewResource(R.id.control_play, R.drawable.ic_appwidget_music_pause);
-        } else {
-            views.setImageViewResource(R.id.control_play, R.drawable.ic_appwidget_music_play);
-        }
+        views.setImageViewResource(R.id.control_play, service.isPlaying() ?
+                R.drawable.ic_appwidget_music_pause : R.drawable.ic_appwidget_music_play);
 
         // Link actions buttons to intents
         linkButtons(service, views);

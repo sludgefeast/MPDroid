@@ -66,7 +66,6 @@ public class LocalCover implements ICoverRetriever {
 
     private static String buildCoverUrl(String serverName, String musicPath, final String path,
                                         final String fileName) {
-
         if (musicPath.startsWith(URL_PREFIX)) {
             int hostPortEnd = musicPath.indexOf(URL_PREFIX.length(), '/');
             if (hostPortEnd == -1) {

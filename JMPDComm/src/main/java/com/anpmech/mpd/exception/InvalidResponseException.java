@@ -40,7 +40,6 @@ public class InvalidResponseException extends RuntimeException {
      * Constructor.
      */
     public InvalidResponseException() {
-
     }
 
     /**

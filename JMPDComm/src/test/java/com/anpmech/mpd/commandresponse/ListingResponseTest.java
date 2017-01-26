@@ -37,13 +37,6 @@ import com.anpmech.mpd.item.Listing;
 public class ListingResponseTest extends ObjectResponseTest<Listing, ListingResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public ListingResponseTest() {
-
-    }
-
-    /**
      * This returns a empty ObjectResponse for the ObjectResponse subclass.
      *
      * @return A empty ObjectResponse.

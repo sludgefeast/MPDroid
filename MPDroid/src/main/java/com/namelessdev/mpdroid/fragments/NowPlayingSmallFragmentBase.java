@@ -264,7 +264,6 @@ abstract class NowPlayingSmallFragmentBase extends Fragment implements
 
     @Override
     public void randomChanged() {
-
     }
 
     @Override

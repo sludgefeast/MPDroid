@@ -39,13 +39,6 @@ public class KeyValueResponseTest
         extends ObjectResponseTest<Map.Entry<String, String>, KeyValueResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public KeyValueResponseTest() {
-
-    }
-
-    /**
      * This returns a empty ObjectResponse for the ObjectResponse subclass.
      *
      * @return A empty ObjectResponse.

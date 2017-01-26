@@ -43,13 +43,6 @@ import static org.junit.Assert.assertEquals;
 public class EntryResponseTest extends ObjectResponseTest<Entry, EntryResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public EntryResponseTest() {
-
-    }
-
-    /**
      * This method test iteration consistency of a lsinfo {@link EntryResponse} result against a
      * known value.
      *

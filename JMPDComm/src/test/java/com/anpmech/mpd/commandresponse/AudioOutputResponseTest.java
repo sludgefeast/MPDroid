@@ -44,13 +44,6 @@ public class AudioOutputResponseTest extends
         ObjectResponseTest<AudioOutput, AudioOutputResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public AudioOutputResponseTest() {
-
-    }
-
-    /**
      * This method tests the known fixed size of the sample 'outputs' result.
      *
      * @throws IOException Thrown if there is a issue retrieving the result file.

@@ -36,13 +36,6 @@ import com.anpmech.mpd.connection.CommandResult;
 public class CommandResponseTest extends ObjectResponseTest<String, CommandResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public CommandResponseTest() {
-
-    }
-
-    /**
      * This returns a empty ObjectResponse for the ObjectResponse subclass.
      *
      * @return A empty ObjectResponse.

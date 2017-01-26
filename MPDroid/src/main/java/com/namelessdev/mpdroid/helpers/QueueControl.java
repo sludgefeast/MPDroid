@@ -64,7 +64,6 @@ public final class QueueControl {
 
 
     private QueueControl() {
-
     }
 
     /**

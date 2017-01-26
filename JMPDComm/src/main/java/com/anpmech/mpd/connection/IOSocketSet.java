@@ -193,8 +193,6 @@ class IOSocketSet {
          * @param ioSocketSet This is "this" IOSocketSet.
          */
         private Timeout(final IOSocketSet ioSocketSet) {
-
-
             mSocketSet = ioSocketSet;
         }
 

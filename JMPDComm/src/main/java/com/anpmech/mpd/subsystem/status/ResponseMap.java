@@ -98,7 +98,6 @@ class ResponseMap {
      */
     protected ResponseMap(final int defaultEntryCount) {
 
-
         /**
          * It is unlikely that more than one thread would write to the map at one time.
          */
@@ -120,8 +119,6 @@ class ResponseMap {
      * @param map The alternate mapping to use for backend storage.
      */
     protected ResponseMap(final Map<String, String> map) {
-
-
         //noinspection AssignmentToCollectionOrArrayFieldFromParameter
         mResponseMap = Collections.unmodifiableMap(map);
     }

@@ -72,7 +72,6 @@ public class CoverAsyncHelper implements CoverDownloadListener, Handler.Callback
     private int mCoverMaxSize;
 
     private static void displayCoverRetrieverName(final CoverInfo coverInfo) {
-
         try {
             if (!coverInfo.getCoverRetriever().isCoverLocal()) {
                 final String message = '\u0022' + coverInfo.getAlbumName() + '\u0022' +

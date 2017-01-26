@@ -93,8 +93,6 @@ public class KeyValueIterator extends FullBlockResult<Map.Entry<String, String>>
          * @param entry The line to make a Map.Entry&lt;CharSequence, String&gt;.
          */
         private SimplerImmutableEntry(final String entry) {
-
-
             mEntry = entry;
             mDelimiter = entry.indexOf(MPD_KV_DELIMITER);
 

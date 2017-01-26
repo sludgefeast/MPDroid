@@ -97,8 +97,6 @@ public class MPDPlaylist {
      * @param mpdConnection The connection to use to retrieve playlist queue information.
      */
     MPDPlaylist(final MPDConnection mpdConnection) {
-
-
         mList = new MusicList();
         mConnection = mpdConnection;
     }

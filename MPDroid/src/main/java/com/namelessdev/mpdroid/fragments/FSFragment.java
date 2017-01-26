@@ -281,7 +281,6 @@ public class FSFragment extends BrowseFragment {
                             final long id) {
         // click on a file, not dir
         if (position > mNumSubDirs - 1 || mNumSubDirs == 0) {
-
             final FilesystemTreeEntry item = (FilesystemTreeEntry) mItems.get(position);
             mApp.getAsyncHelper().execAsync(new AddFSItem(item));
         } else {

@@ -45,13 +45,6 @@ public class PlaylistFileResponseTest extends
         ObjectResponseTest<PlaylistFile, PlaylistFileResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public PlaylistFileResponseTest() {
-
-    }
-
-    /**
      * This returns a empty ObjectResponse for the ObjectResponse subclass.
      *
      * @return A empty ObjectResponse.

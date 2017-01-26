@@ -37,13 +37,6 @@ import com.anpmech.mpd.item.Artist;
 public class ArtistResponseTest extends ObjectResponseTest<Artist, ArtistResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public ArtistResponseTest() {
-
-    }
-
-    /**
      * This returns a empty ObjectResponse for the ObjectResponse subclass.
      *
      * @return A empty ObjectResponse.

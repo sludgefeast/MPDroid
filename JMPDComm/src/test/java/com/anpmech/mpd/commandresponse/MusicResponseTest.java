@@ -50,13 +50,6 @@ import static org.junit.Assert.assertTrue;
 public class MusicResponseTest extends ObjectResponseTest<Music, MusicResponse> {
 
     /**
-     * Sole constructor.
-     */
-    public MusicResponseTest() {
-
-    }
-
-    /**
      * Builds a {@code Music} object from a media server response to a music listing command.
      *
      * @param response A music listing command response.

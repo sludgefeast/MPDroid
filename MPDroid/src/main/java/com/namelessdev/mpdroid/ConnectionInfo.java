@@ -110,8 +110,6 @@ public final class ConnectionInfo implements Parcelable {
     private ConnectionInfo(@NotNull final String server, final int port, final String password,
                            @NonNull final Uri stream, final boolean isNotificationPersistent,
                            final ConnectionInfo lastConnection) {
-
-
         mServer = server;
         mPort = port;
         mPassword = password;
@@ -407,8 +405,6 @@ public final class ConnectionInfo implements Parcelable {
          * This is an empty ConnectionInfo object.
          */
         private Builder() {
-
-
             mPreviousRunFirst = true;
             mPersistentRunFirst = true;
 
@@ -429,8 +425,6 @@ public final class ConnectionInfo implements Parcelable {
          * @param password The MPD server host password.
          */
         public Builder(final String server, final int port, final String password) {
-
-
             if (server == null) {
                 throw new IllegalArgumentException("Server must not be null.");
             }
@@ -520,7 +514,6 @@ public final class ConnectionInfo implements Parcelable {
          * Sole constructor.
          */
         private ConnectionInfoCreator() {
-
         }
 
         /**

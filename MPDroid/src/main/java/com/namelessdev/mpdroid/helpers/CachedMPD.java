@@ -44,8 +44,6 @@ public class CachedMPD extends MPD {
     private final AlbumCache mCache;
 
     public CachedMPD() {
-
-
         mCache = AlbumCache.getInstance(this);
     }
 

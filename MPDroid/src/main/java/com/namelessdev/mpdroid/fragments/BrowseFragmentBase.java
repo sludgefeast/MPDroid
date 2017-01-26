@@ -178,8 +178,6 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
     private long mLastDBUpdate;
 
     protected BrowseFragmentBase(@StringRes final int rAdd, @StringRes final int rAdded) {
-
-
         mIrAdd = rAdd;
         mIrAdded = rAdded;
 
@@ -507,7 +505,6 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
      * Override this to add custom items to the Toolbar.
      */
     protected void onCreateToolbarMenu() {
-
     }
 
     @Override
@@ -923,8 +920,6 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
          */
         private UpdatePlaylistList(final Collection<PlaylistFile> playlistFiles,
                                    final Context context) {
-
-
             mApp = (MPDApplication) context.getApplicationContext();
             mPlaylistFiles = playlistFiles;
         }

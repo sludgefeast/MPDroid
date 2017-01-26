@@ -65,7 +65,6 @@ public class KeyValueResponse extends ObjectResponse<Map.Entry<String, String>> 
      * This constructor builds this class from an empty MPD protocol result.
      */
     public KeyValueResponse() {
-
     }
 
     /**

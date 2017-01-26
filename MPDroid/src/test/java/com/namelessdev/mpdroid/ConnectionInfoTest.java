@@ -82,7 +82,6 @@ public class ConnectionInfoTest {
      * Sole constructor.
      */
     public ConnectionInfoTest() {
-
     }
 
     /**

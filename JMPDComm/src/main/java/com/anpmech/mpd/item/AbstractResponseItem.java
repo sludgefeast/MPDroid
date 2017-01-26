@@ -58,8 +58,6 @@ public abstract class AbstractResponseItem<T extends AbstractResponseItem<T>> ex
      * @param object The prepared ResponseObject.
      */
     AbstractResponseItem(@NotNull final ResponseObject object) {
-
-
         mResponseObject = object;
     }
 

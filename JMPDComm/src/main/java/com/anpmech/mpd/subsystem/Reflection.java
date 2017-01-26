@@ -146,8 +146,6 @@ public class Reflection {
      * @param connection The connection to use to query the media server for reflection handling.
      */
     public Reflection(final MPDConnection connection) {
-
-
         mConnection = connection;
     }
 

@@ -132,8 +132,6 @@ public final class CoverManager {
     private boolean mActive = true;
 
     private CoverManager() {
-
-
         mRequestExecutor.submit(new RequestProcessorTask());
         setCoverRetrieversFromPreferences();
         initializeCoverData();
@@ -407,7 +405,6 @@ public final class CoverManager {
     }
 
     public void clear(final AlbumInfo albumInfo) {
-
         final CachedCover cachedCover = getCacheRetriever();
         if (cachedCover != null) {
             cachedCover.delete(albumInfo);
@@ -958,7 +955,6 @@ public final class CoverManager {
         }
 
         private void notifyListeners(CoverInfo coverInfo) {
-
             if (mHelpersByCoverInfo.containsKey(coverInfo)) {
                 final Iterator<CoverDownloadListener> listenerIterator = mHelpersByCoverInfo
                         .get(coverInfo)

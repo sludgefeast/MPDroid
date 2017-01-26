@@ -104,21 +104,20 @@ public class ConnectionChooser extends PreferenceFragment {
     private static List<WifiConfiguration> getWifiList(final Context context) {
         final WifiManager wifiManager =
                 (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-
         if (wifiManager == null) {
             Log.e(TAG, "Failed to retrieve the WifiManager service.");
             return Collections.emptyList();
         }
-        final Collection<WifiConfiguration> networks = wifiManager.getConfiguredNetworks();
 
+        final Collection<WifiConfiguration> networks = wifiManager.getConfiguredNetworks();
         if (networks == null) {
             Log.e(TAG, "Failed to retrieve a list of configured networks.");
             return Collections.emptyList();
-        } else {
-            final List<WifiConfiguration> wifiList = new ArrayList<>(networks);
-            Collections.sort(wifiList, new WifiComparator());
-            return wifiList;
         }
+
+        final List<WifiConfiguration> wifiList = new ArrayList<>(networks);
+        Collections.sort(wifiList, new WifiComparator());
+        return wifiList;
     }
 
     /**
@@ -144,12 +143,8 @@ public class ConnectionChooser extends PreferenceFragment {
             ssidItem.setTitle(ssid);
             ssidItem.getExtras().putString(ConnectionModifier.EXTRA_SERVICE_SET_ID, ssid);
             ssidItem.setFragment(ConnectionSettings.FRAGMENT_MODIFIER_NAME);
-
-            if (WifiConfiguration.Status.CURRENT == wifi.status) {
-                ssidItem.setSummary(R.string.connected);
-            } else {
-                ssidItem.setSummary(R.string.notInRange);
-            }
+            ssidItem.setSummary(WifiConfiguration.Status.CURRENT == wifi.status ?
+                    R.string.connected : R.string.notInRange);
 
             screen.addPreference(ssidItem);
         }

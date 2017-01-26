@@ -61,6 +61,11 @@ public class ConnectionModifier extends PreferenceFragment {
     public static final String EXTRA_SERVICE_SET_ID = "SSID";
 
     /**
+     * This is the settings key used to store the MPD server name.
+     */
+    public static final String KEY_SERVERNAME = "servername";
+
+    /**
      * This is the settings key used to store the MPD hostname or IP address.
      */
     public static final String KEY_HOSTNAME = "hostname";
@@ -174,6 +179,26 @@ public class ConnectionModifier extends PreferenceFragment {
         }
 
         return result;
+    }
+
+    /**
+     * This method is the Preference for modifying the MPD server name.
+     *
+     * @param context   The current context.
+     * @param keyPrefix The Wi-Fi Set Service ID.
+     * @return The server name Preference.
+     */
+    private static Preference getServerName(final Context context, final String keyPrefix) {
+        final EditTextPreference prefServername = new EditTextPreference(context);
+        prefServername.getEditText().setInputType(
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
+        prefServername.setDialogTitle(R.string.ServerName);
+        prefServername.setTitle(R.string.ServerName);
+        prefServername.setSummary(R.string.ServerNameDescription);
+        prefServername.setDefaultValue("Default" /* R.string.ServerNameDefault */); //TODO
+        prefServername.setKey(keyPrefix + KEY_SERVERNAME);
+
+        return prefServername;
     }
 
     /**
@@ -315,6 +340,7 @@ public class ConnectionModifier extends PreferenceFragment {
 
         screen.setKey(KEY_CONNECTION_CATEGORY);
         screen.addPreference(getMasterCategory(context, serviceSetId));
+        screen.addPreference(getServerName(context, serviceSetId));
         screen.addPreference(getHost(context, serviceSetId));
         screen.addPreference(getPort(context, serviceSetId));
         screen.addPreference(getPassword(context, serviceSetId));
@@ -373,7 +399,7 @@ public class ConnectionModifier extends PreferenceFragment {
          * @return An error message upon error, null otherwise.
          */
         @StringRes
-        protected static int validatePort(final String hostPort) {
+        static int validatePort(final String hostPort) {
             int error = Integer.MIN_VALUE;
 
             try {
@@ -458,7 +484,6 @@ public class ConnectionModifier extends PreferenceFragment {
         @Override
         public void beforeTextChanged(final CharSequence s, final int start, final int count,
                                       final int after) {
-
         }
 
         /**
@@ -470,7 +495,6 @@ public class ConnectionModifier extends PreferenceFragment {
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before,
                                   final int count) {
-
         }
     }
 

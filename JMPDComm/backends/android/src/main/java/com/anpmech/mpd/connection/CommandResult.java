@@ -82,7 +82,6 @@ public class CommandResult extends AbstractCommandResult implements Parcelable {
      * @see #EMPTY
      */
     private CommandResult() {
-
     }
 
     /**
