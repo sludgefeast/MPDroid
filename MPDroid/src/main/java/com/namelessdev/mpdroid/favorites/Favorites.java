@@ -24,6 +24,7 @@ import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.item.Album;
 import com.anpmech.mpd.item.Music;
 import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.MPDProvider;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.tools.Tools;
 
@@ -53,10 +54,10 @@ public class Favorites {
     /**
      * MPD server
      */
-    private final MPD mMPD;
+    private final MPDProvider mMPDProvider;
 
-    public Favorites(final MPD mpd) {
-        this.mMPD = mpd;
+    public Favorites(final MPDProvider mpdProvider) {
+        this.mMPDProvider = mpdProvider;
     }
 
     /**
@@ -67,7 +68,7 @@ public class Favorites {
      * @throws MPDException
      */
     public void addAlbum(final Album album) throws IOException, MPDException {
-        mMPD.getStickerManager().set(computeFavoriteStickerKey(), "Y", mMPD.getSongs(album));
+        mMPDProvider.getMPD().getStickerManager().set(computeFavoriteStickerKey(), "Y", mMPDProvider.getMPD().getSongs(album));
         Tools.notifyUser(R.string.addToFavorites, album.getName());
     }
 
@@ -79,7 +80,7 @@ public class Favorites {
      * @throws MPDException
      */
     public void removeAlbum(final Album album) throws IOException, MPDException {
-        mMPD.getStickerManager().delete(computeFavoriteStickerKey(), mMPD.getSongs(album));
+        mMPDProvider.getMPD().getStickerManager().delete(computeFavoriteStickerKey(), mMPDProvider.getMPD().getSongs(album));
         Tools.notifyUser(R.string.removeFromFavorites, album.getName());
     }
 
@@ -92,11 +93,11 @@ public class Favorites {
      * @throws MPDException
      */
     public boolean isFavorite(final Album album) throws IOException, MPDException {
-        final List<Music> songs = mMPD.getSongs(album);
+        final List<Music> songs = mMPDProvider.getMPD().getSongs(album);
         if (songs.isEmpty()) {
             return false;
         }
-        final String favorite = mMPD.getStickerManager().get(songs.get(0),
+        final String favorite = mMPDProvider.getMPD().getStickerManager().get(songs.get(0),
                 computeFavoriteStickerKey());
         return favorite != null && favorite.length() > 0;
     }
@@ -110,7 +111,7 @@ public class Favorites {
      */
     public Collection<Album> getAlbums() throws IOException, MPDException {
         final Set<Music> songs =
-                mMPD.getStickerManager().find("", computeFavoriteStickerKey()).keySet();
+                mMPDProvider.getMPD().getStickerManager().find("", computeFavoriteStickerKey()).keySet();
         final Set<Album> albums = new HashSet<>();
         for (final Music song : songs) {
             albums.add(song.getAlbum());

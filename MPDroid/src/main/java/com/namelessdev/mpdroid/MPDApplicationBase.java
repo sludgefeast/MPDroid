@@ -50,7 +50,8 @@ import java.util.TimerTask;
 
 class MPDApplicationBase extends Application implements
         Handler.Callback,
-        MPDAsyncHelper.ConnectionInfoListener {
+        MPDAsyncHelper.ConnectionInfoListener,
+        MPDProvider {
 
     public static final String INTENT_ACTION_REFRESH = "com.namelessdev.mpdroid.action.ui.refresh";
 
@@ -226,16 +227,15 @@ class MPDApplicationBase extends Application implements
         return mConnectionInfo;
     }
 
-    /**
-     * Get the Application MPD instance.
-     *
-     * @return The Application class MPD instance.
-     */
+    @Override
     public MPD getMPD() {
         return mMPD;
     }
 
     public Favorites getFavorites() {
+        if (mFavorites == null) {
+            mFavorites = new Favorites(this);
+        }
         return mFavorites;
     }
 
@@ -395,8 +395,6 @@ class MPDApplicationBase extends Application implements
         } else {
             mMPD = new MPD();
         }
-
-        mFavorites = new Favorites(mMPD);
 
         mIdleSubsystemMonitor = new IdleSubsystemMonitor(mMPD);
     }
