@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -28,7 +27,6 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.annotation.StringRes;
 import android.text.Editable;
@@ -40,10 +38,9 @@ import android.widget.EditText;
 
 import com.namelessdev.mpdroid.R;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * This class is the Fragment used to configure a specific connection.
@@ -61,22 +58,9 @@ public class ConnectionModifier extends PreferenceFragment {
     public static final String EXTRA_SERVICE_SET_ID = "SSID";
 
     /**
-     * This is the settings key used to store the MPD server name.
-     */
-    public static final String KEY_SERVERNAME = "servername";
-
-    /**
      * This is the settings key used to store the MPD hostname or IP address.
      */
     public static final String KEY_HOSTNAME = "hostname";
-
-    /**
-     * This settings key used to store the stream hostname.
-     *
-     * @deprecated Use {@link #KEY_STREAM_URL}
-     */
-    @Deprecated
-    public static final String KEY_HOSTNAME_STREAMING = "hostnameStreaming";
 
     /**
      * This is the settings key used to store the MPD host password.
@@ -95,111 +79,11 @@ public class ConnectionModifier extends PreferenceFragment {
     public static final String KEY_PORT = "port";
 
     /**
-     * This settings key used to store the stream host port.
-     *
-     * @deprecated Use {@link #KEY_STREAM_URL}
-     */
-    @Deprecated
-    public static final String KEY_PORT_STREAMING = "portStreaming";
-
-    /**
      * This settings key stores the stream URL.
      */
     public static final String KEY_STREAM_URL = "streamUrl";
 
-    /**
-     * This settings key used to store the stream host path.
-     *
-     * @deprecated Use {@link #KEY_STREAM_URL}
-     */
-    @Deprecated
-    public static final String KEY_SUFFIX_STREAMING = "suffixStreaming";
-
     private static final String KEY_CONNECTION_CATEGORY = "connectionCategory";
-
-    /**
-     * The class log identifier.
-     */
-    private static final String TAG = "ConnectionSettings";
-
-    /**
-     * This method converts the older streaming settings to the new key.
-     *
-     * @param context   The current context.
-     * @param keyPrefix The key prefix used for these stream settings.
-     * @return A string conversion to the new Stream URL style.
-     */
-    @Nullable
-    private static String convertStreamSettings(final Context context, final String keyPrefix) {
-        final String result;
-        final SharedPreferences settings =
-                PreferenceManager.getDefaultSharedPreferences(context);
-        final String host = settings.getString(keyPrefix + KEY_HOSTNAME_STREAMING, null);
-
-        if (host == null || host.isEmpty()) {
-            result = null;
-        } else {
-            final StringBuilder stringBuilder = new StringBuilder();
-            final String port = settings.getString(keyPrefix + KEY_PORT_STREAMING, null);
-            final String suffix = settings.getString(keyPrefix + KEY_SUFFIX_STREAMING, null);
-
-            /**
-             * Assume not rtsp://
-             */
-            stringBuilder.append("http://");
-
-            stringBuilder.append(host);
-            stringBuilder.append(':');
-            if (port != null && !port.isEmpty()) {
-                stringBuilder.append(port);
-            } else {
-                stringBuilder.append(DEFAULT_STREAMING_PORT);
-            }
-
-            if (suffix != null && !suffix.isEmpty()) {
-                stringBuilder.append('/');
-                stringBuilder.append(suffix);
-            }
-
-            result = stringBuilder.toString();
-        }
-
-        /**
-         * The results of this method are only retrieved one time. If the user doesn't use them
-         * at that time, they'll reinput after.
-         */
-        if (result != null) {
-            final SharedPreferences.Editor editor = settings.edit();
-
-            editor.remove(keyPrefix + KEY_HOSTNAME_STREAMING);
-            editor.remove(keyPrefix + KEY_PORT_STREAMING);
-            editor.remove(keyPrefix + KEY_SUFFIX_STREAMING);
-
-            editor.apply();
-        }
-
-        return result;
-    }
-
-    /**
-     * This method is the Preference for modifying the MPD server name.
-     *
-     * @param context   The current context.
-     * @param keyPrefix The Wi-Fi Set Service ID.
-     * @return The server name Preference.
-     */
-    private static Preference getServerName(final Context context, final String keyPrefix) {
-        final EditTextPreference prefServername = new EditTextPreference(context);
-        prefServername.getEditText().setInputType(
-                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
-        prefServername.setDialogTitle(R.string.ServerName);
-        prefServername.setTitle(R.string.ServerName);
-        prefServername.setSummary(R.string.ServerNameDescription);
-        prefServername.setDefaultValue("Default" /* R.string.ServerNameDefault */); //TODO
-        prefServername.setKey(keyPrefix + KEY_SERVERNAME);
-
-        return prefServername;
-    }
 
     /**
      * This method is the Preference for modifying the MPD hostname.
@@ -317,11 +201,6 @@ public class ConnectionModifier extends PreferenceFragment {
         result.setSummary(R.string.streamingUrlDescription);
         result.setKey(keyPrefix + KEY_STREAM_URL);
 
-        final String currentValue = result.getText();
-        if (currentValue == null) {
-            result.setDefaultValue(convertStreamSettings(context, keyPrefix));
-        }
-
         return result;
     }
 
@@ -340,7 +219,6 @@ public class ConnectionModifier extends PreferenceFragment {
 
         screen.setKey(KEY_CONNECTION_CATEGORY);
         screen.addPreference(getMasterCategory(context, serviceSetId));
-        screen.addPreference(getServerName(context, serviceSetId));
         screen.addPreference(getHost(context, serviceSetId));
         screen.addPreference(getPort(context, serviceSetId));
         screen.addPreference(getPassword(context, serviceSetId));
@@ -439,21 +317,8 @@ public class ConnectionModifier extends PreferenceFragment {
             enablePositiveButton(mPreferenceTextEdit, error == null);
             mPreferenceTextEdit.getEditText().setError(error);
         }
-    }
 
-    /**
-     * This class implements a {@link TextWatcher} to validate the MPD host port user input.
-     */
-    private static final class ValidatePort extends CommonValidator {
-
-        /**
-         * Sole constructor.
-         *
-         * @param editTextPreference The stream URL EditTextPreference to validate.
-         */
-        private ValidatePort(final EditTextPreference editTextPreference) {
-            super(editTextPreference);
-        }
+        protected abstract int validate(final Editable s);
 
         /**
          * This method is called to notify you that, somewhere within {@code s}, the text has been
@@ -465,13 +330,7 @@ public class ConnectionModifier extends PreferenceFragment {
          */
         @Override
         public void afterTextChanged(final Editable s) {
-            int error = Integer.MIN_VALUE;
-
-            if (s.length() > 0) {
-                error = validatePort(s.toString());
-            }
-
-            setError(error);
+            setError(validate(s));
         }
 
         /**
@@ -496,6 +355,28 @@ public class ConnectionModifier extends PreferenceFragment {
         public void onTextChanged(final CharSequence s, final int start, final int before,
                                   final int count) {
         }
+
+    }
+
+    /**
+     * This class implements a {@link TextWatcher} to validate the MPD host port user input.
+     */
+    private static final class ValidatePort extends CommonValidator {
+
+        /**
+         * Sole constructor.
+         *
+         * @param editTextPreference The stream URL EditTextPreference to validate.
+         */
+        private ValidatePort(final EditTextPreference editTextPreference) {
+            super(editTextPreference);
+        }
+
+        @Override
+        protected int validate(final Editable s) {
+            return s.length() > 0 ? validatePort(s.toString()) : Integer.MIN_VALUE;
+        }
+
     }
 
     /**
@@ -514,6 +395,19 @@ public class ConnectionModifier extends PreferenceFragment {
          * If the user removes it from here, they will be warned, but it won't be reinserted.
          */
         private boolean mPortInserted;
+
+        private static final Pattern URL_PATTERN;
+
+        static {
+            final String iri = "[" + Patterns.GOOD_IRI_CHAR + "]([" + Patterns.GOOD_IRI_CHAR +
+                    "\\-]{0,61}[" + Patterns.GOOD_IRI_CHAR + "]){0,1}";
+            final String goodGtldChar =
+                    "a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF";
+            final String gtld = "[" + goodGtldChar + "]{2,63}";
+            final String urlHostname = iri + "(\\." + iri + ")*" + "[\\." + gtld + "]";
+            URL_PATTERN = Pattern.compile("(http|Http|rtsp|Rtsp):\\/\\/" + urlHostname +
+                    "(?:\\:\\d{1,5})?(\\/)?");
+        }
 
         /**
          * Sole constructor.
@@ -543,15 +437,7 @@ public class ConnectionModifier extends PreferenceFragment {
                 intString = text.substring(portColonIndex + 1, authorityEndIndex);
             }
 
-            final int error;
-
-            if (intString.isEmpty()) {
-                error = Integer.MIN_VALUE;
-            } else {
-                error = validatePort(intString);
-            }
-
-            return error;
+            return intString.isEmpty() ? Integer.MIN_VALUE : validatePort(intString);
         }
 
         /**
@@ -576,7 +462,7 @@ public class ConnectionModifier extends PreferenceFragment {
             /**
              * This should not be invalid, this is a double-check.
              */
-            if (!Patterns.WEB_URL.matcher(s).matches()) {
+            if (!URL_PATTERN.matcher(s).matches()) {
                 throw new ParseException("Failed to parse after insertion.", -1);
             }
         }
@@ -605,75 +491,43 @@ public class ConnectionModifier extends PreferenceFragment {
             return isValidScheme;
         }
 
-        /**
-         * This method is called to notify you that, somewhere within {@code s}, the text has been
-         * changed.
-         * <p>
-         * <p>It is legitimate to make further changes to {@code s} from this callback, but be
-         * careful not to get yourself into an infinite loop, because any changes you make will
-         * cause this method to be called again recursively.</p>
-         */
         @Override
-        public void afterTextChanged(final Editable s) {
-            int error = Integer.MIN_VALUE;
-
-            if (s.length() != 0) {
-                final String text = s.toString();
-
-                if (isValidScheme(text)) {
-                    if (Patterns.WEB_URL.matcher(s).matches()) {
-                        final int authorityColonIndex = text.indexOf(':');
-                        final int httpAuthIndex = text.indexOf('@');
-                        final int portColonIndex;
-
-                        if (httpAuthIndex == -1) {
-                            portColonIndex = text.indexOf(':', authorityColonIndex + 1);
-                        } else {
-                            portColonIndex = text.indexOf(':', httpAuthIndex + 1);
-                        }
-
-                        if (portColonIndex == -1 && !mPortInserted) {
-                            try {
-                                insertDefaultPort(s, text, authorityColonIndex);
-                            } catch (final ParseException ignored) {
-                                error = R.string.errorParsingURL;
-                            }
-                            mPortInserted = true;
-                        } else {
-                            error = getPort(text, authorityColonIndex, portColonIndex);
-                        }
-                    } else {
-                        error = R.string.invalidUrl;
-                    }
-                } else {
-                    error = R.string.invalidStreamScheme;
-                }
+        protected int validate(final Editable s) {
+            if (s.length() == 0) {
+                return Integer.MIN_VALUE;
             }
 
-            setError(error);
-        }
+            final String text = s.toString();
+            if (!isValidScheme(text)) {
+                return R.string.invalidStreamScheme;
+            }
 
-        /**
-         * This method is called to notify you that, within {@code s}, the {@code count} characters
-         * beginning at {@code start} are about to be replaced by new text with length {@code
-         * after}.
-         * <p>
-         * <p>It is an error to attempt to make changes to {@code s} from this callback.</p>
-         */
-        @Override
-        public void beforeTextChanged(final CharSequence s, final int start, final int count,
-                                      final int after) {
-        }
+            if (!URL_PATTERN.matcher(s).matches()) {
+                return R.string.invalidUrl;
+            }
 
-        /**
-         * This method is called to notify you that, within {@code s}, the {@code count} characters
-         * beginning at {@code start} have just replaced old text that had length {@code before}.
-         * <p>
-         * <p>It is an error to attempt to make changes to {@code s} from this callback.</p>
-         */
-        @Override
-        public void onTextChanged(final CharSequence s, final int start, final int before,
-                                  final int count) {
+            final int authorityColonIndex = text.indexOf(':');
+            final int httpAuthIndex = text.indexOf('@');
+            final int portColonIndex;
+
+            if (httpAuthIndex == -1) {
+                portColonIndex = text.indexOf(':', authorityColonIndex + 1);
+            } else {
+                portColonIndex = text.indexOf(':', httpAuthIndex + 1);
+            }
+
+            if (portColonIndex != -1 || mPortInserted) {
+                return getPort(text, authorityColonIndex, portColonIndex);
+            }
+
+            try {
+                mPortInserted = true;
+                insertDefaultPort(s, text, authorityColonIndex);
+            } catch (final ParseException ignored) {
+                return R.string.errorParsingURL;
+            }
+
+            return Integer.MIN_VALUE;
         }
     }
 }
