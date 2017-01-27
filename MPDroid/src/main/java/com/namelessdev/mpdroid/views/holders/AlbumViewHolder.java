@@ -17,7 +17,8 @@
 package com.namelessdev.mpdroid.views.holders;
 
 import android.widget.TextView;
-import android.widget.ToggleButton;
+
+import com.namelessdev.mpdroid.views.FavoriteButton;
 
 public class AlbumViewHolder extends AlbumCoverHolder {
 
@@ -25,6 +26,6 @@ public class AlbumViewHolder extends AlbumCoverHolder {
 
     public TextView mAlbumName;
 
-    public ToggleButton mFavoriteButton;
+    public FavoriteButton mFavoriteButton;
 
 }

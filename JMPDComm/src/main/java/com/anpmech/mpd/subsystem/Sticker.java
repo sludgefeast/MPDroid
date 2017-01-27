@@ -44,6 +44,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * This class manages the <A HREF="http://www.musicpd.org/doc/protocol/stickers.html">sticker</A>
@@ -140,6 +141,12 @@ public class Sticker {
      * This is a sticker {@code NAME} argument for the home grown ratings.
      */
     private static final String RATING_STICKER = "rating";
+
+    /**
+     * Sticker name for favorites or just its prefix, if a personalization key is available.
+     */
+    private static final String FAVORITE_STICKER = "favorite";
+
 
     private static final String STICKERS_NOT_AVAILABLE =
             "Stickers are not available on this server.";
@@ -570,6 +577,101 @@ public class Sticker {
         final int maximumRating = Math.min(MAX_RATING, rating);
         final int boundedRating = Math.max(MIN_RATING, maximumRating);
 
-        set(entry, RATING_STICKER, Integer.toString(boundedRating));
+        set(RATING_STICKER, Integer.toString(boundedRating), entry);
     }
+
+    /**
+     * Marks given entry as a favorite.
+     *
+     * @param entry              Favored entry
+     * @param personalizationKey key to personalize favorites
+     * @throws IOException
+     * @throws MPDException
+     */
+    public void addFavorite(final FilesystemTreeEntry entry, final String personalizationKey)
+            throws IOException, MPDException {
+        addFavorites(Collections.singleton(entry), personalizationKey);
+    }
+
+    /**
+     * Marks given entries as a favorites.
+     *
+     * @param entries            Favored entries
+     * @param personalizationKey key to personalize favorites
+     * @throws IOException
+     * @throws MPDException
+     */
+    public void addFavorites(final Collection<? extends FilesystemTreeEntry> entries,
+                             final String personalizationKey)
+            throws IOException, MPDException {
+        set(computeFavoriteStickerKey(personalizationKey), "Y", entries);
+    }
+
+    /**
+     * Removes given entry from favorites.
+     *
+     * @param entry              Entry to remove from favorites
+     * @param personalizationKey key to personalize favorites
+     * @throws IOException
+     * @throws MPDException
+     */
+    public void removeFavorite(final FilesystemTreeEntry entry, final String personalizationKey)
+            throws IOException, MPDException {
+        removeFavorites(Collections.singleton(entry), personalizationKey);
+    }
+
+    /**
+     * Removes given entries from favorites.
+     *
+     * @param entries            Entries to remove from favorites
+     * @param personalizationKey key to personalize favorites
+     * @throws IOException
+     * @throws MPDException
+     */
+    public void removeFavorites(final Collection<? extends FilesystemTreeEntry> entries,
+                                final String personalizationKey)
+            throws IOException, MPDException {
+        delete(computeFavoriteStickerKey(personalizationKey), entries);
+    }
+
+    /**
+     * Determines if given entry is favored.
+     *
+     * @param entry              Entry to check
+     * @param personalizationKey key to personalize favorites
+     * @return true, if entry is favored
+     * @throws IOException
+     * @throws MPDException
+     */
+    public boolean isFavorite(final FilesystemTreeEntry entry, final String personalizationKey)
+            throws IOException, MPDException {
+        final String favorite = get(entry, computeFavoriteStickerKey(personalizationKey));
+        return favorite != null && favorite.length() > 0;
+    }
+
+    /**
+     * Determine all favored music.
+     *
+     * @param personalizationKey key to personalize favorites
+     * @return all favored music
+     * @throws IOException
+     * @throws MPDException
+     */
+    public Set<Music> getFavoredMusic(final String personalizationKey)
+            throws IOException, MPDException {
+        return find("", computeFavoriteStickerKey(personalizationKey)).keySet();
+    }
+
+    /**
+     * Computes the sticker name for favorites incl. the personalization key.
+     *
+     * @param personalizationKey key to personalize favorites
+     * @return Sticker name for favorites
+     */
+    private static String computeFavoriteStickerKey(final String personalizationKey) {
+        return FAVORITE_STICKER +
+                (personalizationKey != null && !personalizationKey.trim().isEmpty() ?
+                        "-" + personalizationKey.trim() : "");
+    }
+
 }

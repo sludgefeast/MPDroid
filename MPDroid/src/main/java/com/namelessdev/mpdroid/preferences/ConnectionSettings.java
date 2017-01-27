@@ -61,7 +61,6 @@ public class ConnectionSettings extends PreferenceActivity {
      */
     private boolean hasEmptyPreferences() {
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         return preferences.getString(ConnectionModifier.KEY_HOSTNAME, "").isEmpty();
     }
 

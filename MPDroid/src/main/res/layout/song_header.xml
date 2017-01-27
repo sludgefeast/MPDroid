@@ -112,17 +112,12 @@
         android:src="@drawable/ic_media_play"
         app:borderWidth="0dp" />
 
-    <ToggleButton
+    <com.namelessdev.mpdroid.views.FavoriteButton
         android:id="@+id/favoriteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:button="@drawable/favorite"
         android:layout_alignBottom="@+id/albumCoverFrame"
         android:layout_marginLeft="5dp"
-        android:background="@android:color/transparent"
-        android:focusable="false"
-        android:textOn=""
-        android:textOff=""
-        android:text="" />
+        android:focusable="false" />
 
 </RelativeLayout>

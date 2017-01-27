@@ -59,6 +59,7 @@ public class ConnectionChooser extends PreferenceFragment {
      */
     private static Preference getDefaultCategory(final Context context) {
         final Preference category = new PreferenceCategory(context);
+
         category.setKey("defaultCategory");
         category.setTitle(R.string.defaultConnection);
 
@@ -126,7 +127,7 @@ public class ConnectionChooser extends PreferenceFragment {
      * @param screen   The PreferenceScreen to modify.
      * @param wifiList The Wi-Fi entries to add to the PreferenceScreen parameter.
      */
-    private static void getWifiEntries(final PreferenceScreen screen,
+    private static void addWifiEntries(final PreferenceScreen screen,
                                        final Iterable<WifiConfiguration> wifiList) {
         for (final WifiConfiguration wifi : wifiList) {
             if (wifi == null || wifi.SSID == null) {
@@ -164,7 +165,7 @@ public class ConnectionChooser extends PreferenceFragment {
 
         if (!wifiList.isEmpty()) {
             screen.addPreference(getWifiCategory(context));
-            getWifiEntries(screen, wifiList);
+            addWifiEntries(screen, wifiList);
         }
 
         setPreferenceScreen(screen);

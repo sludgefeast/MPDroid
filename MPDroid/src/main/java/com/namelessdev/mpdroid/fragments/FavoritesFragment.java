@@ -18,16 +18,26 @@ package com.namelessdev.mpdroid.fragments;
 
 import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.item.Album;
+import com.anpmech.mpd.item.Music;
+import com.namelessdev.mpdroid.preferences.Preferences;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FavoritesFragment extends AlbumsGridFragment {
 
     @Override
     protected List<Album> loadAlbums() throws IOException, MPDException {
-        return new ArrayList<>(mApp.getFavorites().getAlbums());
+        final Set<Music> songs = mApp.getMPD().getStickerManager().
+                getFavoredMusic(Preferences.favoritesPersonalizationKey());
+        final Set<Album> albums = new HashSet<>();
+        for (final Music song : songs) {
+            albums.add(song.getAlbum());
+        }
+        return new ArrayList<>(albums);
     }
 
 }

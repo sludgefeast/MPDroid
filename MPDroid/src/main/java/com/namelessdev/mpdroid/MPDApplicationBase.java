@@ -30,7 +30,6 @@ import com.anpmech.mpd.MPD;
 import com.anpmech.mpd.subsystem.status.IdleSubsystemMonitor;
 import com.anpmech.mpd.subsystem.status.StatusChangeListener;
 import com.anpmech.mpd.subsystem.status.TrackPositionListener;
-import com.namelessdev.mpdroid.favorites.Favorites;
 import com.namelessdev.mpdroid.helpers.CachedMPD;
 import com.namelessdev.mpdroid.helpers.MPDAsyncHelper;
 import com.namelessdev.mpdroid.helpers.UpdateTrackInfo;
@@ -50,8 +49,7 @@ import java.util.TimerTask;
 
 class MPDApplicationBase extends Application implements
         Handler.Callback,
-        MPDAsyncHelper.ConnectionInfoListener,
-        MPDProvider {
+        MPDAsyncHelper.ConnectionInfoListener {
 
     public static final String INTENT_ACTION_REFRESH = "com.namelessdev.mpdroid.action.ui.refresh";
 
@@ -83,8 +81,6 @@ class MPDApplicationBase extends Application implements
     private boolean mIsStreamActive;
 
     private MPD mMPD;
-
-    private Favorites mFavorites;
 
     private MPDAsyncHelper mMPDAsyncHelper;
 
@@ -227,16 +223,8 @@ class MPDApplicationBase extends Application implements
         return mConnectionInfo;
     }
 
-    @Override
     public MPD getMPD() {
         return mMPD;
-    }
-
-    public Favorites getFavorites() {
-        if (mFavorites == null) {
-            mFavorites = new Favorites(this);
-        }
-        return mFavorites;
     }
 
     /**

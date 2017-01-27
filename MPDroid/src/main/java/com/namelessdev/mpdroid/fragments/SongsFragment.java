@@ -39,7 +39,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -47,7 +46,6 @@ import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.anpmech.mpd.MPD;
 import com.anpmech.mpd.exception.MPDException;
@@ -62,11 +60,12 @@ import com.namelessdev.mpdroid.adapters.ArrayAdapter;
 import com.namelessdev.mpdroid.cover.AlbumCoverDownloadListener;
 import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 import com.namelessdev.mpdroid.cover.CoverManager;
-import com.namelessdev.mpdroid.favorites.Favorites;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
+import com.namelessdev.mpdroid.preferences.Preferences;
 import com.namelessdev.mpdroid.tools.Tools;
 import com.namelessdev.mpdroid.ui.ToolbarHelper;
+import com.namelessdev.mpdroid.views.FavoriteButton;
 import com.namelessdev.mpdroid.views.SongDataBinder;
 
 import java.io.IOException;
@@ -92,9 +91,7 @@ public class SongsFragment extends BrowseFragment<Music> implements
 
     private ImageView mCoverArt;
 
-    private ToggleButton mFavoriteButton;
-
-    private CompoundButton.OnCheckedChangeListener mFavoriteButtonChangeListener;
+    private FavoriteButton mFavoriteButton;
 
     private ProgressBar mCoverArtProgress;
 
@@ -287,7 +284,8 @@ public class SongsFragment extends BrowseFragment<Music> implements
             return mAlbum.toString();
         }
         final Bundle bundle = getArguments();
-        return bundle != null ? bundle.getParcelable(Album.EXTRA).toString() : super.getTitle();
+        final Album album = bundle != null ? (Album) bundle.getParcelable(Album.EXTRA) : null;
+        return album != null ? album.toString() : super.getTitle();
     }
 
     private CharSequence getTotalTimeForTrackList() {
@@ -514,23 +512,8 @@ public class SongsFragment extends BrowseFragment<Music> implements
             }
         });
 
-        mFavoriteButton.setVisibility(Favorites.areFavoritesActivated() ? View.VISIBLE : View.GONE);
-
-        mFavoriteButtonChangeListener = new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                try {
-                    if (isChecked) {
-                        mApp.getFavorites().addAlbum(mAlbum);
-                    } else {
-                        mApp.getFavorites().removeAlbum(mAlbum);
-                    }
-                } catch (final IOException | MPDException e) {
-                    Log.e(TAG, "Unable to change favorite state of album.", e);
-                }
-            }
-        };
-        mFavoriteButton.setOnCheckedChangeListener(mFavoriteButtonChangeListener);
+        mFavoriteButton.setVisibility(Preferences.areFavoritesActivated() ?
+                View.VISIBLE : View.GONE);
 
         updateFromItems();
 
@@ -609,7 +592,7 @@ public class SongsFragment extends BrowseFragment<Music> implements
         mHeaderToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         mCoverArtProgress = (ProgressBar) view.findViewById(R.id.albumCoverProgress);
         mAlbumMenu = (FloatingActionButton) view.findViewById(R.id.album_menu);
-        mFavoriteButton = (ToggleButton) view.findViewById(R.id.favoriteButton);
+        mFavoriteButton = (FavoriteButton) view.findViewById(R.id.favoriteButton);
     }
 
     @Override
@@ -678,14 +661,8 @@ public class SongsFragment extends BrowseFragment<Music> implements
             mTracksInfoContainer.invalidate();
         }
 
-        if (Favorites.areFavoritesActivated()) {
-            try {
-                mFavoriteButton.setOnCheckedChangeListener(null); // disable change listening
-                mFavoriteButton.setChecked(mApp.getFavorites().isFavorite(mAlbum));
-                mFavoriteButton.setOnCheckedChangeListener(mFavoriteButtonChangeListener); // re-enable change listening
-            } catch (final IOException | MPDException e) {
-                Log.e(TAG, "Unable to determine if album is a favorite.", e);
-            }
+        if (Preferences.areFavoritesActivated()) {
+            mFavoriteButton.setAlbum(mAlbum);
         }
     }
 
