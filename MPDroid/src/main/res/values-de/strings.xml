@@ -321,7 +321,7 @@
     <string name="favorites">Favoriten</string>
     <string name="addToFavorites">%s als Favorit hinzugefügt</string>
     <string name="favoriteKey">Favoritenschlüssel</string>
-    <string name="favoriteKeyDescription">Identifikation um Favoriten zu personalisieren</string>
+    <string name="favoriteKeyDescription">Identifikation für (personalisierte) Favoriten</string>
     <string name="removeFromFavorites">%s von den Favoriten entfernt</string>
     <string name="useFavorites">Verwende Favoriten</string>
     <string name="genreSeparators">Genre Trennzeichen</string>

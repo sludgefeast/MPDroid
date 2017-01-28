@@ -210,7 +210,7 @@ public class Sticker {
      *                will be removed.
      * @throws IOException  Thrown upon a communication error with the server.
      * @throws MPDException Thrown if an error occurs as a result of command execution.
-     * @deprecated Use {@link #delete(String, FilesystemTreeEntry...)}
+     * @deprecated since January 2017. Use {@link #delete(String, FilesystemTreeEntry...)}  instead.
      */
     @Deprecated
     public void delete(final FilesystemTreeEntry entry, final String sticker)
@@ -280,7 +280,7 @@ public class Sticker {
      * @return A map of entries from the media server.
      * @throws IOException  Thrown upon a communication error with the server.
      * @throws MPDException Thrown if an error occurs as a result of command execution.
-     * @deprecated Since January 2017. Use {@link #find(String, String)} instead.
+     * @deprecated since January 2017. Use {@link #find(String, String)} instead.
      */
     @Deprecated
     public Map<Music, Map<String, String>> find(final FilesystemTreeEntry entry,
@@ -583,95 +583,86 @@ public class Sticker {
     /**
      * Marks given entry as a favorite.
      *
-     * @param entry              Favored entry
-     * @param personalizationKey key to personalize favorites
+     * @param entry Favored entry
+     * @param stickerName favorite sticker name
      * @throws IOException
      * @throws MPDException
      */
-    public void addFavorite(final FilesystemTreeEntry entry, final String personalizationKey)
+    public void addFavorite(final FilesystemTreeEntry entry, final String stickerName)
             throws IOException, MPDException {
-        addFavorites(Collections.singleton(entry), personalizationKey);
+        addFavorites(Collections.singleton(entry), stickerName);
     }
 
     /**
      * Marks given entries as a favorites.
      *
-     * @param entries            Favored entries
-     * @param personalizationKey key to personalize favorites
+     * @param entries Favored entries
+     * @param stickerName favorite sticker name
      * @throws IOException
      * @throws MPDException
      */
     public void addFavorites(final Collection<? extends FilesystemTreeEntry> entries,
-                             final String personalizationKey)
+                             final String stickerName)
             throws IOException, MPDException {
-        set(computeFavoriteStickerKey(personalizationKey), "Y", entries);
+        set(stickerName(stickerName, FAVORITE_STICKER), "Y", entries);
     }
 
     /**
      * Removes given entry from favorites.
      *
-     * @param entry              Entry to remove from favorites
-     * @param personalizationKey key to personalize favorites
+     * @param entry Entry to remove from favorites
+     * @param stickerName favorite sticker name
      * @throws IOException
      * @throws MPDException
      */
-    public void removeFavorite(final FilesystemTreeEntry entry, final String personalizationKey)
+    public void removeFavorite(final FilesystemTreeEntry entry, final String stickerName)
             throws IOException, MPDException {
-        removeFavorites(Collections.singleton(entry), personalizationKey);
+        removeFavorites(Collections.singleton(entry), stickerName);
     }
 
     /**
      * Removes given entries from favorites.
      *
-     * @param entries            Entries to remove from favorites
-     * @param personalizationKey key to personalize favorites
+     * @param entries Entries to remove from favorites
+     * @param stickerName favorite sticker name
      * @throws IOException
      * @throws MPDException
      */
     public void removeFavorites(final Collection<? extends FilesystemTreeEntry> entries,
-                                final String personalizationKey)
+                                final String stickerName)
             throws IOException, MPDException {
-        delete(computeFavoriteStickerKey(personalizationKey), entries);
+        delete(stickerName(stickerName, FAVORITE_STICKER), entries);
     }
 
     /**
      * Determines if given entry is favored.
      *
-     * @param entry              Entry to check
-     * @param personalizationKey key to personalize favorites
+     * @param entry Entry to check
+     * @param stickerName favorite sticker name
      * @return true, if entry is favored
      * @throws IOException
      * @throws MPDException
      */
-    public boolean isFavorite(final FilesystemTreeEntry entry, final String personalizationKey)
+    public boolean isFavorite(final FilesystemTreeEntry entry, final String stickerName)
             throws IOException, MPDException {
-        final String favorite = get(entry, computeFavoriteStickerKey(personalizationKey));
+        final String favorite = get(entry, stickerName(stickerName, FAVORITE_STICKER));
         return favorite != null && favorite.length() > 0;
     }
 
     /**
      * Determine all favored music.
      *
-     * @param personalizationKey key to personalize favorites
+     * @param stickerName favorite sticker name
      * @return all favored music
      * @throws IOException
      * @throws MPDException
      */
-    public Set<Music> getFavoredMusic(final String personalizationKey)
+    public Set<Music> getFavoredMusic(final String stickerName)
             throws IOException, MPDException {
-        return find("", computeFavoriteStickerKey(personalizationKey)).keySet();
+        return find("", stickerName(stickerName, FAVORITE_STICKER)).keySet();
     }
 
-    /**
-     * Computes the sticker name for favorites incl. the personalization key.
-     *
-     * @param personalizationKey key to personalize favorites
-     * @return Sticker name for favorites
-     */
-    private static String computeFavoriteStickerKey(final String personalizationKey) {
-        return FAVORITE_STICKER +
-                (personalizationKey != null && !personalizationKey.trim().isEmpty() ?
-                        "-" + personalizationKey.trim() : "");
+    private static String stickerName(final String value, final String def) {
+        return value != null && !value.trim().isEmpty() ? value.trim() : def;
     }
-
 }

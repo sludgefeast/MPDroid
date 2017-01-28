@@ -208,7 +208,7 @@
                 android:title="@string/useFavorites" />
 
             <EditTextPreference
-                android:defaultValue=""
+                android:defaultValue="albumfav"
                 android:key="favoriteKey"
                 android:dependency="useFavorites"
                 android:persistent="true"
