@@ -418,7 +418,21 @@ public class Sticker {
      * @throws MPDException Thrown if an error occurs as a result of command execution.
      */
     public int getRating(final FilesystemTreeEntry entry) throws IOException, MPDException {
-        final String rating = get(entry, RATING_STICKER);
+        return getRating(entry, null);
+    }
+
+    /**
+     * Retrieves rating of a entry.
+     *
+     * @param entry       The entry to get the rating for.
+     * @param stickerName Specific rating sticker name
+     * @return rating of entry.
+     * @throws IOException  Thrown upon a communication error with the server.
+     * @throws MPDException Thrown if an error occurs as a result of command execution.
+     */
+    public int getRating(final FilesystemTreeEntry entry, final String stickerName)
+            throws IOException, MPDException {
+        final String rating = get(entry, stickerName(stickerName, RATING_STICKER));
         int resultRating;
 
         try {
@@ -574,17 +588,31 @@ public class Sticker {
      */
     public void setRating(final FilesystemTreeEntry entry, final int rating)
             throws IOException, MPDException {
+        setRating(entry, rating, null);
+    }
+
+    /**
+     * Sets the rating for the given entry.
+     *
+     * @param entry       The entry to rate.
+     * @param rating      The rating to set the entry to, from {@code MIN_RATING} to {@code MAX_RATING}.
+     * @param stickerName Specific rating sticker name
+     * @throws IOException  Thrown upon a communication error with the server.
+     * @throws MPDException Thrown if an error occurs as a result of command execution.
+     */
+    public void setRating(final FilesystemTreeEntry entry, final int rating,
+                          final String stickerName) throws IOException, MPDException {
         final int maximumRating = Math.min(MAX_RATING, rating);
         final int boundedRating = Math.max(MIN_RATING, maximumRating);
 
-        set(RATING_STICKER, Integer.toString(boundedRating), entry);
+        set(stickerName(stickerName, RATING_STICKER), Integer.toString(boundedRating), entry);
     }
 
     /**
      * Marks given entry as a favorite.
      *
-     * @param entry Favored entry
-     * @param stickerName favorite sticker name
+     * @param entry       Favored entry
+     * @param stickerName Specific favorite sticker name
      * @throws IOException
      * @throws MPDException
      */
@@ -596,8 +624,8 @@ public class Sticker {
     /**
      * Marks given entries as a favorites.
      *
-     * @param entries Favored entries
-     * @param stickerName favorite sticker name
+     * @param entries     Favored entries
+     * @param stickerName Specific favorite sticker name
      * @throws IOException
      * @throws MPDException
      */
@@ -610,8 +638,8 @@ public class Sticker {
     /**
      * Removes given entry from favorites.
      *
-     * @param entry Entry to remove from favorites
-     * @param stickerName favorite sticker name
+     * @param entry       Entry to remove from favorites
+     * @param stickerName Specific favorite sticker name
      * @throws IOException
      * @throws MPDException
      */
@@ -623,8 +651,8 @@ public class Sticker {
     /**
      * Removes given entries from favorites.
      *
-     * @param entries Entries to remove from favorites
-     * @param stickerName favorite sticker name
+     * @param entries     Entries to remove from favorites
+     * @param stickerName Specific favorite sticker name
      * @throws IOException
      * @throws MPDException
      */
@@ -637,8 +665,8 @@ public class Sticker {
     /**
      * Determines if given entry is favored.
      *
-     * @param entry Entry to check
-     * @param stickerName favorite sticker name
+     * @param entry       Entry to check
+     * @param stickerName Specific favorite sticker name
      * @return true, if entry is favored
      * @throws IOException
      * @throws MPDException
@@ -652,7 +680,7 @@ public class Sticker {
     /**
      * Determine all favored music.
      *
-     * @param stickerName favorite sticker name
+     * @param stickerName Specific favorite sticker name
      * @return all favored music
      * @throws IOException
      * @throws MPDException
