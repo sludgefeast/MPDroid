@@ -37,8 +37,6 @@ public class MPDAsyncHelper implements Handler.Callback {
 
     static final int EVENT_SET_USE_CACHE = LOCAL_UID + 1;
 
-    private static final String TAG = "MPDAsyncHelper";
-
     private final Collection<ConnectionInfoListener> mConnectionInfoListeners;
 
     private final Handler mHelperHandler;

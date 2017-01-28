@@ -29,6 +29,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,10 @@ import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.tools.LibraryTabsUtil;
 import com.namelessdev.mpdroid.ui.ToolbarHelper;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 abstract class LibraryFragmentBase extends Fragment {
@@ -74,14 +78,6 @@ abstract class LibraryFragmentBase extends Fragment {
         if (mSectionsPagerAdapter != null) {
             mViewPager.setAdapter(mSectionsPagerAdapter);
         }
-        /*mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(final int position) {
-                if (mActivity != null) {
-                    mActivity.pageChanged(position);
-                }
-            }
-        });*/
 
         final Resources resources = getResources();
         final TabLayout tabs = (TabLayout) view.findViewById(R.id.tabs);
@@ -100,32 +96,44 @@ abstract class LibraryFragmentBase extends Fragment {
         return view;
     }
 
-    /*
-    public void setCurrentItem(final int item, final boolean smoothScroll) {
-        if (mViewPager != null) {
-            mViewPager.setCurrentItem(item, smoothScroll);
-        }
-    }
-    */
-
     /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the primary
-     * sections of the app.
+     * A {@link FragmentStatePagerAdapter} that returns a fragment corresponding to one of the
+     * primary sections of the app.
      */
     private static final class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
+        private static final String TAG = "SectionsPagerAdapter";
+
         private final Context mContext;
 
+        /**
+         * Mapping from Fragment Class name to tab name to achieve reordering tabs.
+         */
         private final Map<Class<?>, String> mFragmentTabs = new HashMap<>();
+
+        /**
+         * Access to private field {@link FragmentStatePagerAdapter#mFragments} to achieve
+         * reordering tabs.
+         */
+        private final List<Fragment> mFragments;
+
+        /**
+         * Access to private field {@link FragmentStatePagerAdapter#mSavedState} to achieve
+         * reordering tabs.
+         */
+        private final List<Fragment.SavedState> mSavedState;
 
         /**
          * Sole constructor.
          *
          * @param context The current context for context.
-         * @param fm      The fragment manager as required by the {@link FragmentPagerAdapter}.
+         * @param fm      The fragment manager as required by the {@link FragmentStatePagerAdapter}.
          */
         private SectionsPagerAdapter(final Context context, final FragmentManager fm) {
             super(fm);
+
+            mFragments = acquireField("mFragments");
+            mSavedState = acquireField("mSavedState");
 
             mContext = context;
 
@@ -135,6 +143,25 @@ abstract class LibraryFragmentBase extends Fragment {
                     SectionsPagerAdapter.this.notifyDataSetChanged();
                 }
             });
+        }
+
+        /**
+         * Acquires a private field of super class {@link FragmentStatePagerAdapter}.
+         * @param fieldName field name
+         * @param <T> field type
+         * @return field
+         */
+        private <T> T acquireField(final String fieldName) {
+            try {
+                final Field field = FragmentStatePagerAdapter.class.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                return (T) field.get(this);
+            } catch (final NoSuchFieldException e) {
+                Log.e(TAG, "Unable to acquire fragments list", e);
+            } catch (final IllegalAccessException e) {
+                Log.e(TAG, "Unable to acquire fragments list", e);
+            }
+            return null;
         }
 
         @Override
@@ -213,6 +240,50 @@ abstract class LibraryFragmentBase extends Fragment {
         public CharSequence getPageTitle(final int position) {
             final String tab = LibraryTabsUtil.getCurrentLibraryTabs().get(position);
             return mContext.getString(LibraryTabsUtil.getTabTitleResId(tab));
+        }
+
+        @Override
+        public void notifyDataSetChanged() {
+            if (mFragments == null || mSavedState == null) {
+                super.notifyDataSetChanged();
+                return;
+            }
+
+            // reorder tabs
+
+            final List<Fragment> oldFragments = new ArrayList<>(mFragments);
+            final List<Fragment.SavedState> oldSavedStates = new ArrayList<>(mSavedState);
+
+            mFragments.clear();
+            mSavedState.clear();
+
+            for (int i = 0; i < oldFragments.size(); i++) {
+                final Fragment fragment = oldFragments.get(i);
+                if (fragment == null) {
+                    continue;
+                }
+                int newPos = getItemPosition(fragment);
+                if (newPos == POSITION_NONE) {
+                    continue;
+                }
+                if (newPos == POSITION_UNCHANGED) {
+                    newPos = i;
+                }
+                while (mFragments.size() <= newPos) {
+                    mFragments.add(null);
+                }
+                mFragments.set(newPos, fragment);
+
+                if (i < oldSavedStates.size()) {
+                    while (mSavedState.size() <= newPos) {
+                        mSavedState.add(null);
+                    }
+                    mSavedState.set(newPos, oldSavedStates.get(i));
+                }
+            }
+            saveState();
+
+            super.notifyDataSetChanged();
         }
     }
 }

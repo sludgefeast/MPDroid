@@ -34,8 +34,6 @@ import java.util.List;
 
 public class AboutActivity extends Activity {
 
-    private static final String TAG = "AboutActivity";
-
     /**
      * This wraps all the strings of an array in a {@link AboutListItem}.
      *

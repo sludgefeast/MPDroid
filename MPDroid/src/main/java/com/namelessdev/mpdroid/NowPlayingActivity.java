@@ -55,19 +55,12 @@ public class NowPlayingActivity extends MPDActivity {
     @Override
     protected int getThemeResId() {
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        final int themeID;
-
         if (settings.getBoolean("smallSeekbars", true)) {
-            if (isLightThemeSelected()) {
-                themeID = R.style.AppTheme_Light_SmallSeekBars;
-            } else {
-                themeID = R.style.AppTheme_SmallSeekBars;
-            }
-        } else {
-            themeID = super.getThemeResId();
+            return isLightThemeSelected() ?
+                R.style.AppTheme_Light_SmallSeekBars : R.style.AppTheme_SmallSeekBars;
         }
 
-        return themeID;
+        return super.getThemeResId();
     }
 
     private ViewPager initializeNowPlayingPager() {
@@ -109,11 +102,8 @@ public class NowPlayingActivity extends MPDActivity {
             window.setExitTransition(ts);
         }*/
 
-        if (mApp.isTabletUiEnabled()) {
-            setContentView(R.layout.activity_now_playing_tablet);
-        } else {
-            setContentView(R.layout.activity_now_playing);
-        }
+        setContentView(mApp.isTabletUiEnabled() ?
+                R.layout.activity_now_playing_tablet : R.layout.activity_now_playing);
 
         mIsDualPaneMode = findViewById(R.id.nowplaying_dual_pane) != null;
         mNowPlayingPager = initializeNowPlayingPager();
