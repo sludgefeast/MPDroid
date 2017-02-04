@@ -72,6 +72,7 @@ import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.helpers.MPDControl;
 import com.namelessdev.mpdroid.helpers.UpdateTrackInfo;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
+import com.namelessdev.mpdroid.preferences.Preferences;
 
 import java.io.IOException;
 import java.util.Date;
@@ -544,7 +545,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
         float rating = 0.0f;
 
         try {
-            rating = (float) mApp.getMPD().getStickerManager().getRating(mCurrentSong);
+            rating = (float) mApp.getMPD().getStickerManager().getRating(mCurrentSong,
+                    Preferences.ratingsPersonalizationKey());
         } catch (final IOException | MPDException e) {
             Log.e(TAG, "Failed to get the current track rating.", e);
         }
@@ -1265,7 +1267,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
             final int trackRating = (int) rating * 2;
             if (fromUser && mCurrentSong != null) {
                 try {
-                    mApp.getMPD().getStickerManager().setRating(mCurrentSong, trackRating);
+                    mApp.getMPD().getStickerManager().setRating(mCurrentSong, trackRating,
+                            Preferences.ratingsPersonalizationKey());
                 } catch (final IOException | MPDException e) {
                     Log.e(TAG, "Failed to set the rating.", e);
                 }

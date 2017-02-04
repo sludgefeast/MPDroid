@@ -199,7 +199,14 @@
 
         </PreferenceCategory>
 
-        <PreferenceCategory android:title="@string/favorites">
+        <PreferenceCategory android:title="@string/ratings_favorites">
+
+            <EditTextPreference
+                android:defaultValue="rating"
+                android:key="ratingKey"
+                android:persistent="true"
+                android:summary="@string/ratingKeyDescription"
+                android:title="@string/ratingKey" />
 
             <CheckBoxPreference
                 android:defaultValue="true"

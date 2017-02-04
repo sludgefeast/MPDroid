@@ -28,6 +28,7 @@ import com.anpmech.mpd.subsystem.Sticker;
 import com.anpmech.mpd.subsystem.status.MPDStatus;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.preferences.Preferences;
 
 import java.io.IOException;
 
@@ -214,7 +215,8 @@ public class UpdateTrackInfo {
             if (currentTrack != null && mSticker.isAvailable() &&
                     mSettings.getBoolean("enableRating", false)) {
                 try {
-                    rating = (float) mSticker.getRating(currentTrack) / 2.0f;
+                    rating = (float) mSticker.getRating(currentTrack,
+                            Preferences.ratingsPersonalizationKey()) / 2.0f;
                 } catch (final IOException | MPDException e) {
                     Log.e(TAG, "Failed to get the current track rating.", e);
                 }

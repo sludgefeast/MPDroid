@@ -24,6 +24,11 @@ import com.namelessdev.mpdroid.MPDApplication;
 public final class Preferences {
 
     /**
+     * Preference key of the personalization key.
+     */
+    private static final String PREFERENCE_RATING_KEY = "ratingKey";
+
+    /**
      * Preference key of the activation of favorites.
      */
     private static final String PREFERENCE_USE_FAVORITE = "useFavorites";
@@ -34,6 +39,12 @@ public final class Preferences {
     private static final String PREFERENCE_FAVORITE_KEY = "favoriteKey";
 
     private Preferences() {
+    }
+
+    public static String ratingsPersonalizationKey() {
+        final SharedPreferences settings =
+                PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
+        return settings.getString(PREFERENCE_RATING_KEY, "").trim();
     }
 
     /**

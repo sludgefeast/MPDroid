@@ -319,7 +319,10 @@
     <string name="shufflePlaylist">Wiedergabeliste mischen</string>
     <string name="playlistShuffled">Wiedergabeliste wurde zufällig gemischt</string>
     <string name="favorites">Favoriten</string>
+    <string name="ratings_favorites">Bewertungen &amp; Favoriten</string>
     <string name="addToFavorites">%s als Favorit hinzugefügt</string>
+    <string name="ratingKey">Bewertungsschlüssel</string>
+    <string name="ratingKeyDescription">Identifikation für (personalisierte) Bewertungen</string>
     <string name="favoriteKey">Favoritenschlüssel</string>
     <string name="favoriteKeyDescription">Identifikation für (personalisierte) Favoriten</string>
     <string name="removeFromFavorites">%s von den Favoriten entfernt</string>
