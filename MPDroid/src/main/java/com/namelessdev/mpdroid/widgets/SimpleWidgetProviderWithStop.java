@@ -17,7 +17,6 @@
 package com.namelessdev.mpdroid.widgets;
 
 import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
@@ -34,35 +33,18 @@ public class SimpleWidgetProviderWithStop extends SimpleWidgetProvider {
      */
     @Override
     protected void linkButtons(final Context context, final RemoteViews views) {
-        final Intent intent;
-        final PendingIntent pendingIntent;
-
         super.linkButtons(context, views);
 
         // stop button
-        intent = new Intent(context, WidgetHelperService.class);
+        final Intent intent = new Intent(context, WidgetHelperService.class);
         intent.setAction(MPDControl.ACTION_STOP);
-        pendingIntent = PendingIntent.getService(context, 0, intent, 0);
+        final PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.control_stop, pendingIntent);
     }
 
     @Override
-    public void onUpdate(final Context context, final AppWidgetManager appWidgetManager,
-                         final int[] appWidgetIds) {
-        final RemoteViews views = new RemoteViews(context.getPackageName(),
-                R.layout.widget_simple_with_stop);
-
-        onUpdate(views, context, appWidgetManager);
+    protected int getLayoutResId() {
+        return R.layout.widget_simple_with_stop;
     }
 
-    /**
-     * Update all active widget instances by pushing changes
-     */
-    @Override
-    protected void performUpdate(final WidgetHelperService service) {
-        final RemoteViews views = new RemoteViews(service.getPackageName(),
-                R.layout.widget_simple_with_stop);
-
-        performUpdate(views, service);
-    }
 }

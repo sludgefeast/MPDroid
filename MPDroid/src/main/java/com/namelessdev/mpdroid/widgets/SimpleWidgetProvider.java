@@ -22,6 +22,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.LayoutRes;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -100,9 +101,19 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
         }
     }
 
-    public void onUpdate(final RemoteViews views, final Context context,
-                         final AppWidgetManager appWidgetManager) {
+    @LayoutRes
+    protected int getLayoutResId() {
+        return R.layout.widget_simple;
+    }
+
+    @Override
+    public void onUpdate(final Context context, final AppWidgetManager appWidgetManager,
+                         final int[] appWidgetIds) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
+
         Log.v(TAG, "Enter onUpdate");
+
+        final RemoteViews views = new RemoteViews(context.getPackageName(), getLayoutResId());
 
         // Initialise given widgets to default state, where we launch MPDroid on
         // default click and hide actions if service not running.
@@ -116,15 +127,14 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
         context.startService(updateIntent);
     }
 
-    @Override
-    public void onUpdate(final Context context, final AppWidgetManager appWidgetManager,
-                         final int[] appWidgetIds) {
-        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_simple);
+    /**
+     * Update all active widget instances by pushing changes
+     *
+     * @param service The WidgetHelperService related to this provider.
+     */
+    private void performUpdate(final WidgetHelperService service) {
+        final RemoteViews views = new RemoteViews(service.getPackageName(), getLayoutResId());
 
-        onUpdate(views, context, appWidgetManager);
-    }
-
-    protected void performUpdate(final RemoteViews views, final WidgetHelperService service) {
         // Set correct drawable for pause state
         views.setImageViewResource(R.id.control_play, service.isPlaying() ?
                 R.drawable.ic_appwidget_music_pause : R.drawable.ic_appwidget_music_play);
@@ -135,23 +145,12 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
     }
 
     /**
-     * Update all active widget instances by pushing changes
-     *
-     * @param service The WidgetHelperService related to this provider.
-     */
-    protected void performUpdate(final WidgetHelperService service) {
-        final RemoteViews views = new RemoteViews(service.getPackageName(), R.layout.widget_simple);
-
-        performUpdate(views, service);
-    }
-
-    /**
      * Set the RemoteViews to use for all AppWidget instances
      *
      * @param context The current context.
      * @param views   The button views.
      */
-    protected void pushUpdate(final Context context, final RemoteViews views) {
+    private void pushUpdate(final Context context, final RemoteViews views) {
         final AppWidgetManager gm = AppWidgetManager.getInstance(context);
         gm.updateAppWidget(new ComponentName(context, getClass()), views);
     }
