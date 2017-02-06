@@ -823,11 +823,6 @@ abstract class NowPlayingFragmentBase extends Fragment implements
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences,
                                           final String key) {
         switch (key) {
-            case CoverManager.PREFERENCE_CACHE:
-            case CoverManager.PREFERENCE_LASTFM:
-            case CoverManager.PREFERENCE_LOCALSERVER:
-                CoverAsyncHelper.setCoverRetrieversFromPreferences();
-                break;
             case "enableStopButton":
                 applyViewVisibility(mStopButton, key);
                 break;

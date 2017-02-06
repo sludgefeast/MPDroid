@@ -196,13 +196,14 @@
     <string name="favoriteKeyDescription">Key to identify (personal) favorites</string>
     <string name="addToFavorites">%s added to favorites</string>
     <string name="removeFromFavorites">%s removed from favorites</string>
+    <string name="localCover">Local cover art</string>
     <string name="enableLocalCover">Download local cover art</string>
     <string name="enableLocalCoverDescription">Get cover art from the server running MPD (requires a web server, read the wiki!)</string>
     <string name="musicPath">Path to music</string>
     <string name="musicPathDescriptionNew">Path to your music directory on the MPD server IE, files/mp3 (music/ for vortexbox users). For complex setups, absolute paths (IE “http://ip:port/music”) are accepted.</string>
     <string name="coverFileName">Cover filename</string>
     <string name="coverFileNameDescription">Standard filename for your album artwork IE, folder.jpg (cover.jpg for vortexbox users)</string>
-    <string name="cacheUsage">Cache usage</string>
+    <string name="cacheUsage">Local cover cache usage</string>
     <string name="aboutIcon">Original app icon by Asher (http://kyo-tux.deviantart.com/) and brsev (http://brsev.deviantart.com/), modified for MPDroid.</string>
     <string name="connectionFailedMessageSetting">Connection failed, check your connection settings. (%s)</string>
     <string name="no_result">No results</string>
@@ -259,15 +260,13 @@
 
     <string name="coverArtTitle">Cover art settings</string>
     <string name="coverArtDescription">Change how cover art is downloaded and stored</string>
+    <string name="localCoverCache">Cover art cache</string>
     <string name="enableLocalCoverCache">Cache cover art</string>
     <string name="enableLocalCoverCacheDescription">Saves downloaded cover art on the device for faster retrieval</string>
     <string name="clearLocalCoverCache">Clear cover art cache</string>
     <string name="clearLocalCoverCacheDescription">Free the storage space used by the cover art cache</string>
     <string name="clearLocalCoverCachePrompt">Delete all cached cover art ?</string>
     <string name="updatingLocalAlbumCacheNote">Updating local album cache</string>
-
-    <string name="enableAlbumArtLibrary">Album cover art listing in library</string>
-    <string name="enableAlbumArtLibraryDescription">Use large cover art tiles for the albums listing in the library. This feature is experimental! You may experience lag and/or crashes. (Requires cache cover art)</string>
 
     <string name="goToAlbum">Go to album</string>
     <string name="goToArtist">Go to artist</string>
@@ -293,6 +292,7 @@
     <string name="enableTabletUI">Use tablet UI</string>
     <string name="enableInternetCover">Download cover art</string>
     <string name="enableInternetCoverDescription">Get cover art using various internet services (sends them your song information)</string>
+    <string name="enableGracenoteCover">Download GraceNote cover art</string>
     <string name="gracenoteClientId">GraceNote Client ID</string>
     <string name="gracenoteClientIdDescription">GraceNote Client ID (XXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)</string>
 
@@ -355,4 +355,13 @@
     <string name="songComments">Comments</string>
 
     <string name="activityReload">"Changes occurred, reloading."</string>
+    <string name="LastFM" translatable="false">LastFM</string>
+    <string name="iTunes">iTunes</string>
+    <string name="Deezer" translatable="false">Deezer</string>
+    <string name="Spotify" translatable="false">Spotify</string>
+    <string name="CoverArtArchive" translatable="false">Cover Art Archive</string>
+    <string name="Gracenote" translatable="false">GraceNote</string>
+    <string name="Jamendo" translatable="false">Jamendo</string>
+    <string name="coverSources">Cover sources</string>
+    <string name="coverSourcesDescription">Enable, disable &amp; configure cover sources</string>
 </resources>

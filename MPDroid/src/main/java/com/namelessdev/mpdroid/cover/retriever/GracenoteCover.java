@@ -38,7 +38,7 @@ import static android.text.TextUtils.isEmpty;
 
 public class GracenoteCover extends AbstractWebCover {
 
-    public static final String CUSTOM_CLIENT_ID_KEY = "gracenoteClientId";
+    public static final String PREFERENCE_CUSTOM_CLIENT_ID_KEY = "gracenoteClientId";
 
     public static final String URL_PREFIX = "web.content.cddbp.net";
 
@@ -113,7 +113,7 @@ public class GracenoteCover extends AbstractWebCover {
     }
 
     public static boolean isClientIdAvailable() {
-        return !SETTINGS.getString(CUSTOM_CLIENT_ID_KEY, "").isEmpty();
+        return !SETTINGS.getString(PREFERENCE_CUSTOM_CLIENT_ID_KEY, "").isEmpty();
     }
 
     private String getClientIdPrefix() {
@@ -178,7 +178,7 @@ public class GracenoteCover extends AbstractWebCover {
                     "https://c" + getClientIdPrefix() + ".web.cddbp.net/webapi/xml/1.0/";
 
             try {
-                final String customClientId = SETTINGS.getString(CUSTOM_CLIENT_ID_KEY, null);
+                final String customClientId = SETTINGS.getString(PREFERENCE_CUSTOM_CLIENT_ID_KEY, null);
                 if (!isEmpty(customClientId)) {
                     mClientId = customClientId;
                     mApiUrl = new URL(url);

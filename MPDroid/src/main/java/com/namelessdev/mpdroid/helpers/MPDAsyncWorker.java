@@ -109,7 +109,7 @@ public class MPDAsyncWorker implements Handler.Callback,
 
                     mHelperHandler.obtainMessage(MPDAsyncHelper.EVENT_SET_USE_CACHE, useAlbumCache);
                     break;
-                case GracenoteCover.CUSTOM_CLIENT_ID_KEY:
+                case GracenoteCover.PREFERENCE_CUSTOM_CLIENT_ID_KEY:
                     final SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.remove(GracenoteCover.USER_ID);
                     editor.apply();

@@ -50,37 +50,23 @@ public class SettingsFragment extends PreferenceFragment {
 
     private final MPDApplication mApp = MPDApplication.getInstance();
 
-    private CheckBoxPreference mAlbumArtLibrary;
-
     private EditTextPreference mAlbums;
 
     private EditTextPreference mArtists;
-
-    private EditTextPreference mCacheUsage1;
-
-    private EditTextPreference mCacheUsage2;
-
-    private CheckBoxPreference mCheckBoxPreference;
-
-    private Preference mCoverFilename;
-
-    private Handler mHandler;
-
-    private PreferenceScreen mInformationScreen;
-
-    private CheckBoxPreference mLocalCoverCheckbox;
-
-    private Preference mMusicPath;
-
-    private boolean mPreferencesBound;
 
     private EditTextPreference mSongs;
 
     private EditTextPreference mVersion;
 
-    public SettingsFragment() {
-        mPreferencesBound = false;
-    }
+    private EditTextPreference mCacheUsage1;
+
+    private EditTextPreference mCacheUsage2;
+
+    private Handler mHandler;
+
+    private PreferenceScreen mInformationScreen;
+
+    private boolean mPreferencesBound = false;
 
     @Override
     public void onAttach(final Context context) {
@@ -92,6 +78,7 @@ public class SettingsFragment extends PreferenceFragment {
         final MPD mpd = mApp.getMPD();
         final boolean isConnected = mpd.isConnected();
 
+        //FIXME: This also enables all statistic preferences!
         mInformationScreen.setEnabled(isConnected);
 
         if (isConnected) {
@@ -113,6 +100,7 @@ public class SettingsFragment extends PreferenceFragment {
                             mArtists.setSummary(String.valueOf(mpdStatistics.getArtists()));
                             mAlbums.setSummary(String.valueOf(mpdStatistics.getAlbums()));
                             mSongs.setSummary(String.valueOf(mpdStatistics.getSongs()));
+                            //TODO: display all statistics
                         }
                     });
                 }
@@ -140,18 +128,6 @@ public class SettingsFragment extends PreferenceFragment {
         mAlbums = (EditTextPreference) findPreference("albums");
         mSongs = (EditTextPreference) findPreference("songs");
 
-        mLocalCoverCheckbox = (CheckBoxPreference) findPreference(
-                "enableLocalCover");
-        mMusicPath = findPreference("musicPath");
-        mCoverFilename = findPreference("coverFileName");
-        if (mLocalCoverCheckbox.isChecked()) {
-            mMusicPath.setEnabled(true);
-            mCoverFilename.setEnabled(true);
-        } else {
-            mMusicPath.setEnabled(false);
-            mCoverFilename.setEnabled(false);
-        }
-
         // Small seekbars don't work on lollipop
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             findPreference("smallSeekbars").setEnabled(false);
@@ -160,19 +136,11 @@ public class SettingsFragment extends PreferenceFragment {
         mCacheUsage1 = (EditTextPreference) findPreference("cacheUsage1");
         mCacheUsage2 = (EditTextPreference) findPreference("cacheUsage2");
 
-        // Album art library listing requires cover art cache
-        mCheckBoxPreference = (CheckBoxPreference) findPreference(
-                "enableLocalCoverCache");
-        mAlbumArtLibrary = (CheckBoxPreference) findPreference(
-                "enableAlbumArtLibrary");
-        mAlbumArtLibrary.setEnabled(mCheckBoxPreference.isChecked());
-
         final CheckBoxPreference lightTheme = (CheckBoxPreference) findPreference("lightTheme");
         lightTheme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
                 Tools.resetActivity(getActivity());
-
                 return true;
             }
         });
@@ -184,13 +152,13 @@ public class SettingsFragment extends PreferenceFragment {
                 "playOnPhoneStateChange");
 
         mPreferencesBound = true;
-        refreshDynamicFields();
+        refreshDynamicFields(); //TODO: called also by onAttach() - see fragment lifecycle!
     }
 
     @Override
     public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen,
                                          @NonNull final Preference preference) {
-        // Is it the connectionscreen which is called?
+        // Is it the connection screen which is called?
         if (preference.getKey() == null) {
             return false;
         }
@@ -202,7 +170,9 @@ public class SettingsFragment extends PreferenceFragment {
                 Log.e(TAG, "Failed to refresh the database.", e);
             }
             return true;
-        } else if ("clearLocalCoverCache".equals(preference.getKey())) {
+        }
+
+        if ("clearLocalCoverCache".equals(preference.getKey())) {
             new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.clearLocalCoverCache)
                     .setMessage(R.string.clearLocalCoverCachePrompt)
@@ -219,27 +189,9 @@ public class SettingsFragment extends PreferenceFragment {
                     .setNegativeButton(R.string.cancel, Tools.NOOP_CLICK_LISTENER)
                     .show();
             return true;
+        }
 
-        } else if ("enableLocalCover".equals(preference.getKey())) {
-            if (mLocalCoverCheckbox.isChecked()) {
-                mMusicPath.setEnabled(true);
-                mCoverFilename.setEnabled(true);
-            } else {
-                mMusicPath.setEnabled(false);
-                mCoverFilename.setEnabled(false);
-            }
-            return true;
-        } else if ("enableLocalCoverCache".equals(preference.getKey())) {
-            // album art library listing requires cover art cache
-            if (mCheckBoxPreference.isChecked()) {
-                mAlbumArtLibrary.setEnabled(true);
-            } else {
-                mAlbumArtLibrary.setEnabled(false);
-                mAlbumArtLibrary.setChecked(false);
-            }
-            return true;
-
-        } else if ("pauseOnPhoneStateChange".equals(preference.getKey())) {
+        if ("pauseOnPhoneStateChange".equals(preference.getKey())) {
             /**
              * Allow these to be changed individually,
              * pauseOnPhoneStateChange might be overridden.
@@ -256,10 +208,9 @@ public class SettingsFragment extends PreferenceFragment {
         }
 
         return false;
-
     }
 
-    public void refreshDynamicFields() {
+    private void refreshDynamicFields() {
         if (getActivity() == null || !mPreferencesBound) {
             return;
         }

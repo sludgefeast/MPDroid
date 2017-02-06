@@ -234,9 +234,6 @@
     <string name="clearLocalCoverCachePrompt">¿Borrar todas las carátulas del caché?</string>
     <string name="updatingLocalAlbumCacheNote">Actualizando el caché local de carátulas</string>
 
-    <string name="enableAlbumArtLibrary">Listar por carátula del álbum en la librería</string>
-    <string name="enableAlbumArtLibraryDescription">Usar mosaicos grandes de las carátulas para listar los álbumes en la librería. Esta característica es experimental! Podrías experimentar lag y/o cierres repentinos. (Requiere el caché de carátulas)</string>
-
     <string name="goToAlbum">Ir al álbum</string>
     <string name="goToArtist">Ir al artista</string>
     <string name="goToAlbumArtist">Ir al artista del álbum</string>

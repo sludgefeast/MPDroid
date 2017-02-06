@@ -75,7 +75,7 @@ import static com.namelessdev.mpdroid.cover.CoverInfo.STATE.CACHE_COVER_FETCH;
 import static com.namelessdev.mpdroid.cover.CoverInfo.STATE.CREATE_BITMAP;
 import static com.namelessdev.mpdroid.cover.CoverInfo.STATE.WEB_COVER_FETCH;
 
-public final class CoverManager {
+public final class CoverManager implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final boolean DEBUG = false;
 
@@ -83,9 +83,21 @@ public final class CoverManager {
 
     public static final String PREFERENCE_CACHE = "enableLocalCoverCache";
 
-    public static final String PREFERENCE_LASTFM = "enableLastFM";
+    private static final String PREFERENCE_ENABLE_LASTFM = "enableLastFM";
 
-    public static final String PREFERENCE_LOCALSERVER = "enableLocalCover";
+    private static final String PREFERENCE_ENABLE_ITUNES = "enableItunesCover";
+
+    private static final String PREFERENCE_ENABLE_DEEZER = "enableDeezerCover";
+
+    private static final String PREFERENCE_ENABLE_SPOTIFY = "enableSpotifyCover";
+
+    private static final String PREFERENCE_ENABLE_COVERARTARCHIVE = "enableCoverArtArchiveCover";
+
+    private static final String PREFERENCE_ENABLE_JAMENDO = "enableJamendoCover";
+
+    private static final String PREFERENCE_ENABLE_GRACENOTE = "enableGracenoteCover";
+
+    private static final String PREFERENCE_ENABLE_LOCALSERVER = "enableLocalCover";
 
     private static final MPDApplication APP = MPDApplication.getInstance();
 
@@ -135,6 +147,8 @@ public final class CoverManager {
         mRequestExecutor.submit(new RequestProcessorTask());
         setCoverRetrieversFromPreferences();
         initializeCoverData();
+        PreferenceManager.getDefaultSharedPreferences(APP).
+                registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -409,7 +423,7 @@ public final class CoverManager {
         if (cachedCover != null) {
             cachedCover.delete(albumInfo);
         }
-        mCoverUrlMap.remove(albumInfo);
+        mCoverUrlMap.remove(albumInfo.getKey());
         mWrongCoverUrlMap.remove(albumInfo.getKey());
         mNotFoundAlbumKeys.remove(albumInfo.getKey());
     }
@@ -476,30 +490,64 @@ public final class CoverManager {
         }
     }
 
+    @Override
+    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences,
+                                          final String key) {
+        //TODO: switch with String Object?????
+        switch (key) {
+            case CoverManager.PREFERENCE_CACHE:
+            case CoverManager.PREFERENCE_ENABLE_LASTFM:
+            case CoverManager.PREFERENCE_ENABLE_ITUNES:
+            case CoverManager.PREFERENCE_ENABLE_DEEZER:
+            case CoverManager.PREFERENCE_ENABLE_SPOTIFY:
+            case CoverManager.PREFERENCE_ENABLE_COVERARTARCHIVE:
+            case CoverManager.PREFERENCE_ENABLE_JAMENDO:
+            case CoverManager.PREFERENCE_ENABLE_GRACENOTE:
+            case CoverManager.PREFERENCE_ENABLE_LOCALSERVER:
+                setCoverRetrieversFromPreferences();
+                break;
+            default:
+                break;
+        }
+    }
+
     void setCoverRetrieversFromPreferences() {
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(APP);
         mCoverRetrievers.clear();
 
         // There is a cover provider order, respect it.
-        // Cache -> MPD Server -> LastFM
+
         if (settings.getBoolean(PREFERENCE_CACHE, true)) {
             mCoverRetrievers.add(new CachedCover());
         }
-        if (!settings.getBoolean(PREFERENCE_ONLY_WIFI, false) || isWifi()) {
-            if (settings.getBoolean(PREFERENCE_LOCALSERVER, false)) {
-                mCoverRetrievers.add(new LocalCover());
-            }
-            if (settings.getBoolean(PREFERENCE_LASTFM, true)) {
-                mCoverRetrievers.add(new LastFMCover());
-                mCoverRetrievers.add(new ItunesCover());
-                mCoverRetrievers.add(new DeezerCover());
-                mCoverRetrievers.add(new SpotifyCover());
-                if (GracenoteCover.isClientIdAvailable()) {
-                    mCoverRetrievers.add(new GracenoteCover());
-                }
-                mCoverRetrievers.add(new CoverArtArchiveCover());
-                mCoverRetrievers.add(new JamendoCover());
-            }
+        if (settings.getBoolean(PREFERENCE_ONLY_WIFI, false) && !isWifi()) {
+            return;
+        }
+
+        if (settings.getBoolean(PREFERENCE_ENABLE_LOCALSERVER, false)) {
+            mCoverRetrievers.add(new LocalCover());
+        }
+        if (settings.getBoolean(PREFERENCE_ENABLE_LASTFM, true)) {
+            mCoverRetrievers.add(new LastFMCover());
+        }
+        if (settings.getBoolean(PREFERENCE_ENABLE_ITUNES, true)) {
+            mCoverRetrievers.add(new ItunesCover());
+        }
+        if (settings.getBoolean(PREFERENCE_ENABLE_DEEZER, true)) {
+            mCoverRetrievers.add(new DeezerCover());
+        }
+        if (settings.getBoolean(PREFERENCE_ENABLE_SPOTIFY, true)) {
+            mCoverRetrievers.add(new SpotifyCover());
+        }
+        if (settings.getBoolean(PREFERENCE_ENABLE_GRACENOTE, false) &&
+                GracenoteCover.isClientIdAvailable()) {
+            mCoverRetrievers.add(new GracenoteCover());
+        }
+        if (settings.getBoolean(PREFERENCE_ENABLE_COVERARTARCHIVE, true)) {
+            mCoverRetrievers.add(new CoverArtArchiveCover());
+        }
+        if (settings.getBoolean(PREFERENCE_ENABLE_JAMENDO, true)) {
+            mCoverRetrievers.add(new JamendoCover());
         }
     }
 

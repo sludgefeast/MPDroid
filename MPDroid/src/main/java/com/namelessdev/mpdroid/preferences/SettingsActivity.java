@@ -53,15 +53,7 @@ public class SettingsActivity extends MPDActivity implements StatusChangeListene
 
     @Override
     protected int getThemeResId() {
-        final int themeResId;
-
-        if (isLightThemeSelected()) {
-            themeResId = R.style.AppTheme_Light;
-        } else {
-            themeResId = R.style.AppTheme;
-        }
-
-        return themeResId;
+        return isLightThemeSelected() ? R.style.AppTheme_Light : R.style.AppTheme;
     }
 
     @Override

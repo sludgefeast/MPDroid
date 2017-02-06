@@ -175,7 +175,7 @@
     <string name="musicPathDescriptionNew">Musikverzeichnis auf dem MPD-Server z.B. files/mp3 (music/ für Vortexbox-Benutzer). Für aufwendige Einstellungen können auch absolute Pfade (z.B. "http://ip:port/music") verwendet werden.</string>
     <string name="coverFileName">Albencover-Datei</string>
     <string name="coverFileNameDescription">Dateiname der Albencover z.B. folder.jpg (cover.jpg für Vortexbox-Benutzer)</string>
-    <string name="cacheUsage">Belegter Cache-Speicher</string>
+    <string name="cacheUsage">Belegter Cover-Cachespeicher</string>
     <string name="aboutIcon">Original App-Logo von Asher (http://kyo-tux.deviantart.com/) und brsev (http://brsev.deviantart.com/), bearbeitet für MPDroid.</string>
     <string name="connectionFailedMessageSetting">Die Verbindung zum MPD-Server ist fehlgeschlagen! Prüfen Sie die Verbindungseinstellungen. (%s)</string>
     <string name="no_result">Keine Ergebnisse</string>
@@ -237,9 +237,6 @@
     <string name="clearLocalCoverCacheDescription">Lösche alle gespeicherten Albencover von der SD-Karte</string>
     <string name="clearLocalCoverCachePrompt">Alle Albencover löschen?</string>
     <string name="updatingLocalAlbumCacheNote">Erneuere lokalen Alben-Cache</string>
-
-    <string name="enableAlbumArtLibrary">Große Albencoveransicht der Bibliothek</string>
-    <string name="enableAlbumArtLibraryDescription">Experimentell, Programmabsturz möglich. Setzt Albencover-Cache voraus.</string>
 
     <string name="goToAlbum">Gehe zum Album</string>
     <string name="goToArtist">Gehe zum Künstler</string>

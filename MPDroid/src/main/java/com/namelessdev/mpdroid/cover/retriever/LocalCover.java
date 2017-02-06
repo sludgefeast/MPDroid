@@ -31,6 +31,10 @@ import static android.text.TextUtils.isEmpty;
 
 public class LocalCover implements ICoverRetriever {
 
+    private static final String PREFERENCE_MUSIC_PATH = "musicPath";
+
+    private static final String PREFERENCE_COVER_FILENAME = "coverFileName";
+
     private static final String[] EXT = {
             "jpg", "png", "jpeg",
     };
@@ -90,8 +94,8 @@ public class LocalCover implements ICoverRetriever {
         }
 
         // load URL parts from settings
-        final String musicPath = mSettings.getString("musicPath", "music/");
-        FILENAMES[0] = mSettings.getString("coverFileName", null);
+        final String musicPath = mSettings.getString(PREFERENCE_MUSIC_PATH, "music/");
+        FILENAMES[0] = mSettings.getString(PREFERENCE_COVER_FILENAME, null);
         final String serverName = mApp.getConnectionSettings().getServer();
 
         String lfilename, url;
