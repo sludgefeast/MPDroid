@@ -493,7 +493,6 @@ public final class CoverManager implements SharedPreferences.OnSharedPreferenceC
     @Override
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences,
                                           final String key) {
-        //TODO: switch with String Object?????
         switch (key) {
             case CoverManager.PREFERENCE_CACHE:
             case CoverManager.PREFERENCE_ENABLE_LASTFM:

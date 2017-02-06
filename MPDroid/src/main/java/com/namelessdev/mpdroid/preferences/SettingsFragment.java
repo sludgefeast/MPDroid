@@ -17,13 +17,11 @@
 package com.namelessdev.mpdroid.preferences;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
@@ -50,35 +48,26 @@ public class SettingsFragment extends PreferenceFragment {
 
     private final MPDApplication mApp = MPDApplication.getInstance();
 
-    private EditTextPreference mAlbums;
+    private Preference mAlbums;
 
-    private EditTextPreference mArtists;
+    private Preference mArtists;
 
-    private EditTextPreference mSongs;
+    private Preference mSongs;
 
-    private EditTextPreference mVersion;
+    private Preference mVersion;
 
-    private EditTextPreference mCacheUsage1;
+    private Preference mCacheUsage1;
 
-    private EditTextPreference mCacheUsage2;
+    private Preference mCacheUsage2;
 
     private Handler mHandler;
 
     private PreferenceScreen mInformationScreen;
 
-    private boolean mPreferencesBound = false;
-
-    @Override
-    public void onAttach(final Context context) {
-        super.onAttach(context);
-        refreshDynamicFields();
-    }
-
     public void onConnectionStateChanged() {
         final MPD mpd = mApp.getMPD();
         final boolean isConnected = mpd.isConnected();
 
-        //FIXME: This also enables all statistic preferences!
         mInformationScreen.setEnabled(isConnected);
 
         if (isConnected) {
@@ -123,18 +112,18 @@ public class SettingsFragment extends PreferenceFragment {
             interfaceCategory.removePreference(findPreference("tabletUI"));
         }
 
-        mVersion = (EditTextPreference) findPreference("version");
-        mArtists = (EditTextPreference) findPreference("artists");
-        mAlbums = (EditTextPreference) findPreference("albums");
-        mSongs = (EditTextPreference) findPreference("songs");
+        mVersion = findPreference("version");
+        mArtists = findPreference("artists");
+        mAlbums = findPreference("albums");
+        mSongs = findPreference("songs");
 
         // Small seekbars don't work on lollipop
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             findPreference("smallSeekbars").setEnabled(false);
         }
 
-        mCacheUsage1 = (EditTextPreference) findPreference("cacheUsage1");
-        mCacheUsage2 = (EditTextPreference) findPreference("cacheUsage2");
+        mCacheUsage1 = findPreference("cacheUsage1");
+        mCacheUsage2 = findPreference("cacheUsage2");
 
         final CheckBoxPreference lightTheme = (CheckBoxPreference) findPreference("lightTheme");
         lightTheme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -151,8 +140,7 @@ public class SettingsFragment extends PreferenceFragment {
         final CheckBoxPreference phoneStateChange = (CheckBoxPreference) findPreference(
                 "playOnPhoneStateChange");
 
-        mPreferencesBound = true;
-        refreshDynamicFields(); //TODO: called also by onAttach() - see fragment lifecycle!
+        refreshDynamicFields();
     }
 
     @Override
@@ -211,7 +199,7 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private void refreshDynamicFields() {
-        if (getActivity() == null || !mPreferencesBound) {
+        if (getActivity() == null) {
             return;
         }
         final long size = new CachedCover().getCacheUsage();

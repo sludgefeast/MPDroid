@@ -24,41 +24,32 @@
         android:summary="@string/serverInformationDescription"
         android:title="@string/serverInformation">
 
+        <PreferenceScreen
+            android:key="refreshMPDDatabase"
+            android:title="@string/updateDBDetails" />
+
         <PreferenceCategory android:title="@string/serverInformation">
 
-            <EditTextPreference
-                android:defaultValue=""
-                android:enabled="false"
+            <Preference
                 android:key="version"
                 android:title="@string/version" />
 
-            <EditTextPreference
-                android:defaultValue=""
-                android:enabled="false"
+            <Preference
                 android:key="artists"
                 android:title="@string/artists" />
 
-            <EditTextPreference
-                android:defaultValue=""
-                android:enabled="false"
+            <Preference
                 android:key="albums"
                 android:title="@string/albums" />
 
-            <EditTextPreference
-                android:defaultValue=""
-                android:enabled="false"
+            <Preference
                 android:key="songs"
                 android:title="@string/songs" />
 
-            <EditTextPreference
-                android:defaultValue=""
-                android:enabled="false"
+            <Preference
                 android:key="cacheUsage1"
                 android:title="@string/cacheUsage" />
 
-            <PreferenceScreen
-                android:key="refreshMPDDatabase"
-                android:title="@string/updateDBDetails" />
         </PreferenceCategory>
     </PreferenceScreen>
 
@@ -182,10 +173,8 @@
                 android:summary="@string/enableLocalCoverCacheDescription"
                 android:title="@string/enableLocalCoverCache" />
 
-            <EditTextPreference
+            <Preference
                 android:key="cacheUsage2"
-                android:defaultValue=""
-                android:enabled="false"
                 android:title="@string/cacheUsage" />
 
             <PreferenceScreen
