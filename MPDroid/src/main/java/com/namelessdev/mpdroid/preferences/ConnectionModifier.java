@@ -68,6 +68,16 @@ public class ConnectionModifier extends PreferenceFragment {
     public static final String KEY_PASSWORD = "password";
 
     /**
+     * This is the settings key used to store the MPD music path.
+     */
+    public static final String KEY_MUSIC_PATH = "musicPath";
+
+    /**
+     * This is the settings key used to store the MPD local cover filename.
+     */
+    public static final String KEY_COVER_FILENAME = "coverFileName";
+
+    /**
      * This is the settings key used to store whether a persistent notification is required for
      * this connection.
      */
@@ -137,6 +147,44 @@ public class ConnectionModifier extends PreferenceFragment {
         prefPassword.setKey(keyPrefix + KEY_PASSWORD);
 
         return prefPassword;
+    }
+
+    /**
+     * This method is the Preference for modifying the MPD music path.
+     *
+     * @param context   The current context.
+     * @param keyPrefix The Wi-Fi Set Service ID.
+     * @return The music path Preference.
+     */
+    private static Preference getMusicPath(final Context context, final String keyPrefix) {
+        final EditTextPreference prefMusicPath = new EditTextPreference(context);
+        prefMusicPath.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
+        prefMusicPath.setDialogTitle(R.string.musicPath);
+        prefMusicPath.setTitle(R.string.musicPath);
+        prefMusicPath.setSummary(R.string.musicPathDescriptionNew);
+        prefMusicPath.setDefaultValue("music/");
+        prefMusicPath.setKey(keyPrefix + KEY_MUSIC_PATH);
+
+        return prefMusicPath;
+    }
+
+    /**
+     * This method is the Preference for modifying the MPD local cover filename.
+     *
+     * @param context   The current context.
+     * @param keyPrefix The Wi-Fi Set Service ID.
+     * @return The cover filename Preference.
+     */
+    private static Preference getCoverFilename(final Context context, final String keyPrefix) {
+        final EditTextPreference prefCoverFilename = new EditTextPreference(context);
+        prefCoverFilename.getEditText().setInputType(InputType.TYPE_CLASS_TEXT);
+        prefCoverFilename.setDialogTitle(R.string.coverFileName);
+        prefCoverFilename.setTitle(R.string.coverFileName);
+        prefCoverFilename.setSummary(R.string.coverFileNameDescription);
+        prefCoverFilename.setDefaultValue("folder.jpg");
+        prefCoverFilename.setKey(keyPrefix + KEY_COVER_FILENAME);
+
+        return prefCoverFilename;
     }
 
     /**
@@ -224,6 +272,9 @@ public class ConnectionModifier extends PreferenceFragment {
         screen.addPreference(getPassword(context, serviceSetId));
         screen.addPreference(getStreamURL(context, serviceSetId));
         screen.addPreference(getPersistentNotification(context, serviceSetId));
+        screen.addPreference(getMusicPath(context, serviceSetId));
+        screen.addPreference(getCoverFilename(context, serviceSetId));
+
         setPreferenceScreen(screen);
     }
 

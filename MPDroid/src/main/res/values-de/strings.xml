@@ -169,7 +169,6 @@
     <string name="sortAlbumsByYearDescription">Sortiere Alben nach Erscheinungsjahr</string>
     <string name="showAlbumTrackCount">Titelanzahl anzeigen</string>
     <string name="showAlbumTrackCountDescription">Zeige Titelanzahl der Alben</string>
-    <string name="enableLocalCover">Lokale Albencover laden</string>
     <string name="enableLocalCoverDescription">Albencover vom MPD-Server laden (Erfordert einen Webserver, siehe Wiki)</string>
     <string name="musicPath">Musikverzeichnis</string>
     <string name="musicPathDescriptionNew">Musikverzeichnis auf dem MPD-Server z.B. files/mp3 (music/ für Vortexbox-Benutzer). Für aufwendige Einstellungen können auch absolute Pfade (z.B. "http://ip:port/music") verwendet werden.</string>
@@ -260,8 +259,7 @@
     <string name="enableTabletUI">Tablet-Ansicht</string>
     <string name="enableInternetCover">Albencover</string>
     <string name="enableInternetCoverDescription">Cover über verschiedene Anbieter herunterladen (sendet Titel-Informationen)</string>
-    <string name="gracenoteClientId">GraceNote-Client-ID</string>
-    <string name="gracenoteClientIdDescription">GraceNote-Client-ID (XXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)</string>
+    <string name="gracenoteClientIdDescription">Aktivieren durch Client-ID (XXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)</string>
 
     <string name="nowPlayingSettingsTitle">"Du hörst"-Einstellungen</string>
     <string name="enableSmallSeekbars">Kleine Schieberegler</string>

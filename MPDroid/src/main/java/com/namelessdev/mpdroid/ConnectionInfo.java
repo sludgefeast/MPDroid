@@ -96,6 +96,16 @@ public final class ConnectionInfo implements Parcelable {
     private final Uri mStream;
 
     /**
+     * This field stores the music path for this connection.
+     */
+    private final String mMusicPath;
+
+    /**
+     * This field stores the cover filename for this connection.
+     */
+    private final String mCoverFilename;
+
+    /**
      * This constructor is used to build this immutable class. To build this class, see the {@link
      * Builder}
      *
@@ -109,6 +119,7 @@ public final class ConnectionInfo implements Parcelable {
      */
     private ConnectionInfo(@NotNull final String server, final int port, final String password,
                            @NonNull final Uri stream, final boolean isNotificationPersistent,
+                           final String musicPath, final String coverFilename,
                            final ConnectionInfo lastConnection) {
         mServer = server;
         mPort = port;
@@ -117,6 +128,10 @@ public final class ConnectionInfo implements Parcelable {
         mStream = stream;
 
         mIsNotificationPersistent = isNotificationPersistent;
+
+        mMusicPath = musicPath;
+        mCoverFilename = coverFilename;
+
         mLastConnection = lastConnection;
     }
 
@@ -243,6 +258,26 @@ public final class ConnectionInfo implements Parcelable {
     }
 
     /**
+     * This method returns the MPD music path for this ConnectionInfo.
+     *
+     * @return The MPD music path.
+     */
+    @Nullable
+    public String getMusicPath() {
+        return mMusicPath;
+    }
+
+    /**
+     * This method returns the MPD local cover filename for this ConnectionInfo.
+     *
+     * @return The MPD local cover filename.
+     */
+    @Nullable
+    public String getCoverFilename() {
+        return mCoverFilename;
+    }
+
+    /**
      * This method checks for changes in the password.
      *
      * @return True if the host password has changed, false otherwise.
@@ -351,6 +386,8 @@ public final class ConnectionInfo implements Parcelable {
         dest.writeString(mPassword);
         dest.writeParcelable(mStream, 0);
         dest.writeBooleanArray(boolArray);
+        dest.writeString(mMusicPath);
+        dest.writeString(mCoverFilename);
         dest.writeParcelable(mLastConnection, 0);
     }
 
@@ -400,6 +437,16 @@ public final class ConnectionInfo implements Parcelable {
          * This is the Uri for the stream host built by the UI.
          */
         private Uri mStream;
+
+        /**
+         * This is the music path for this builder.
+         */
+        private String mMusicPath;
+
+        /**
+         * This is the cover filename for this builder.
+         */
+        private String mCoverFilename;
 
         /**
          * This is an empty ConnectionInfo object.
@@ -457,7 +504,8 @@ public final class ConnectionInfo implements Parcelable {
             }
 
             return new ConnectionInfo(mServer, mPort, mPassword, mStream,
-                    mIsNotificationPersistent, mLastConnection);
+                    mIsNotificationPersistent, mMusicPath, mCoverFilename,
+                    mLastConnection);
         }
 
         /**
@@ -465,7 +513,6 @@ public final class ConnectionInfo implements Parcelable {
          */
         public void setNotificationNotPersistent() {
             mIsNotificationPersistent = false;
-
             mPersistentRunFirst = true;
         }
 
@@ -474,7 +521,6 @@ public final class ConnectionInfo implements Parcelable {
          */
         public void setNotificationPersistent() {
             mPersistentRunFirst = true;
-
             mIsNotificationPersistent = true;
         }
 
@@ -503,6 +549,14 @@ public final class ConnectionInfo implements Parcelable {
                 throw new IllegalStateException("Stream must have a port: " + mStream);
             }
         }
+
+        public void setMusicPath(final String musicPath) {
+            mMusicPath = musicPath;
+        }
+
+        public void setCoverFilename(final String coverFilename) {
+            mCoverFilename = coverFilename;
+        }
     }
 
     /**
@@ -529,10 +583,12 @@ public final class ConnectionInfo implements Parcelable {
             final String password = source.readString();
             final Uri stream = source.readParcelable(Uri.class.getClassLoader());
             final boolean[] boolArray = source.createBooleanArray();
+            final String musicPath = source.readString();
+            final String coverFilename = source.readString();
             final ConnectionInfo lastConnection = source.readParcelable(LOADER);
 
             return new ConnectionInfo(server, port, password, stream, boolArray[0],
-                    lastConnection);
+                    musicPath, coverFilename, lastConnection);
         }
 
         /**

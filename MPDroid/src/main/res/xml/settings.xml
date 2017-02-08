@@ -75,6 +75,13 @@
             android:title="@string/coverSources">
 
             <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="enableLocalCover"
+                android:persistent="true"
+                android:summary="@string/enableLocalCoverDescription"
+                android:title="@string/localCover" />
+
+            <CheckBoxPreference
                 android:defaultValue="true"
                 android:key="enableLastFMCover"
                 android:persistent="true"
@@ -98,6 +105,13 @@
                 android:persistent="true"
                 android:title="@string/Spotify" />
 
+            <EditTextPreference
+                android:defaultValue=""
+                android:key="gracenoteClientId"
+                android:persistent="true"
+                android:summary="@string/gracenoteClientIdDescription"
+                android:title="@string/Gracenote" />
+
             <CheckBoxPreference
                 android:defaultValue="true"
                 android:key="enableCoverArtArchiveCover"
@@ -109,51 +123,6 @@
                 android:key="enableJamendoCover"
                 android:persistent="true"
                 android:title="@string/Jamendo" />
-
-            <PreferenceCategory android:title="@string/Gracenote">
-
-                <CheckBoxPreference
-                    android:defaultValue="false"
-                    android:key="enableGracenoteCover"
-                    android:persistent="true"
-                    android:title="@string/enableGracenoteCover" />
-
-                <EditTextPreference
-                    android:defaultValue=""
-                    android:dependency="enableGracenoteCover"
-                    android:key="gracenoteClientId"
-                    android:persistent="true"
-                    android:summary="@string/gracenoteClientIdDescription"
-                    android:title="@string/gracenoteClientId" />
-
-            </PreferenceCategory>
-
-            <PreferenceCategory android:title="@string/localCover">
-
-                <CheckBoxPreference
-                    android:defaultValue="false"
-                    android:key="enableLocalCover"
-                    android:persistent="true"
-                    android:summary="@string/enableLocalCoverDescription"
-                    android:title="@string/enableLocalCover" />
-
-                <EditTextPreference
-                    android:defaultValue=""
-                    android:dependency="enableLocalCover"
-                    android:key="musicPath"
-                    android:persistent="true"
-                    android:summary="@string/musicPathDescriptionNew"
-                    android:title="@string/musicPath" />
-
-                <EditTextPreference
-                    android:defaultValue="folder.jpg"
-                    android:dependency="enableLocalCover"
-                    android:key="coverFileName"
-                    android:persistent="true"
-                    android:summary="@string/coverFileNameDescription"
-                    android:title="@string/coverFileName" />
-
-            </PreferenceCategory>
 
         </PreferenceScreen>
 

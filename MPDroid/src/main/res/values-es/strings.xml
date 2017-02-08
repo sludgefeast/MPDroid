@@ -166,7 +166,6 @@
     <string name="sortAlbumsByYearDescription">Ordenar álbumes por año</string>
     <string name="showAlbumTrackCount">Conteo de pistas del álbum</string>
     <string name="showAlbumTrackCountDescription">Mostrar el número de pistas del álbum</string>
-    <string name="enableLocalCover">Descargar carátulas localmente</string>
     <string name="enableLocalCoverDescription">Descargar carátulas desde el servidor que corre MPD (requiere un servidor web, lea la Wiki!)</string>
     <string name="musicPath">Directorio de la música</string>
     <string name="coverFileName">Nombre de las carátulas</string>
@@ -256,8 +255,7 @@
     <string name="enableTabletUI">Usar la interfaz de usuario para tablets</string>
     <string name="enableInternetCover">Descargar carátulas</string>
     <string name="enableInternetCoverDescription">Obtener carátulas usando varios servicios de internet (enviando la información de la canción)</string>
-    <string name="gracenoteClientId">ID de Cliente de GraceNote</string>
-    <string name="gracenoteClientIdDescription">ID de Cliente de GraceNote (XXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)</string>
+    <string name="gracenoteClientIdDescription">ID de Cliente (XXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)</string>
 
     <string name="nowPlayingSettingsTitle">Ajustes de Reproducción en curso</string>
     <string name="enableSmallSeekbars">Utilizar una barra de búsqueda más pequeña</string>

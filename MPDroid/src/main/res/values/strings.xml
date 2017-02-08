@@ -197,7 +197,6 @@
     <string name="addToFavorites">%s added to favorites</string>
     <string name="removeFromFavorites">%s removed from favorites</string>
     <string name="localCover">Local cover art</string>
-    <string name="enableLocalCover">Download local cover art</string>
     <string name="enableLocalCoverDescription">Get cover art from the server running MPD (requires a web server, read the wiki!)</string>
     <string name="musicPath">Path to music</string>
     <string name="musicPathDescriptionNew">Path to your music directory on the MPD server IE, files/mp3 (music/ for vortexbox users). For complex setups, absolute paths (IE “http://ip:port/music”) are accepted.</string>
@@ -292,9 +291,7 @@
     <string name="enableTabletUI">Use tablet UI</string>
     <string name="enableInternetCover">Download cover art</string>
     <string name="enableInternetCoverDescription">Get cover art using various internet services (sends them your song information)</string>
-    <string name="enableGracenoteCover">Download GraceNote cover art</string>
-    <string name="gracenoteClientId">GraceNote Client ID</string>
-    <string name="gracenoteClientIdDescription">GraceNote Client ID (XXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)</string>
+    <string name="gracenoteClientIdDescription">Enable by Client ID (XXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)</string>
 
     <string name="nowPlayingSettingsTitle">Now Playing settings</string>
     <string name="enableSmallSeekbars">Use small seekbars</string>

@@ -164,7 +164,6 @@
     <string name="sortAlbumsByYearDescription">음반을 연도로 정리합니다</string>
     <string name="showAlbumTrackCount">음반 곡 수</string>
     <string name="showAlbumTrackCountDescription">음반의 곡 수를 보여줍니다</string>
-    <string name="enableLocalCover">로컬 음반표지 내려받기</string>
     <string name="enableLocalCoverDescription">MPD 서버에서 음반표지를 내려받습니다 (웹서버가 필요하며, 위키를 보시기 바랍니다!)</string>
     <string name="musicPath">음악 경로</string>
     <string name="musicPathDescriptionNew">MPD 서버의 음악 디렉터리, 예) files/mp3 (vortexbox 사용자들은 music/). 복잡한 설정에서는 절대 경로를 써도 됩니다, 예) "http://ip:port/music".</string>
@@ -255,8 +254,7 @@
     <string name="enableTabletUI">태블릿 UI 사용</string>
     <string name="enableInternetCover">음반표지 내려받기</string>
     <string name="enableInternetCoverDescription">인터넷으로 음반표지를 내려받습니다 (음악정보 보냄)</string>
-    <string name="gracenoteClientId">GraceNote 클라이언트 ID</string>
-    <string name="gracenoteClientIdDescription">GraceNote 클라이언트 ID (XXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)</string>
+    <string name="gracenoteClientIdDescription">클라이언트 ID (XXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)</string>
 
     <string name="nowPlayingSettingsTitle">지금 연주 중 설정</string>
     <string name="enableSmallSeekbars">작은 찾기 사용</string>

@@ -16,9 +16,7 @@
 
 package com.namelessdev.mpdroid.cover.retriever;
 
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
@@ -30,10 +28,6 @@ import java.util.List;
 import static android.text.TextUtils.isEmpty;
 
 public class LocalCover implements ICoverRetriever {
-
-    private static final String PREFERENCE_MUSIC_PATH = "musicPath";
-
-    private static final String PREFERENCE_COVER_FILENAME = "coverFileName";
 
     private static final String[] EXT = {
             "jpg", "png", "jpeg",
@@ -56,8 +50,6 @@ public class LocalCover implements ICoverRetriever {
     private static final String URL_PREFIX = "http://";
 
     private final MPDApplication mApp = MPDApplication.getInstance();
-
-    private final SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(mApp);
 
     private static void appendPathString(final Uri.Builder builder, final String baseString) {
         if (baseString != null && !baseString.isEmpty()) {
@@ -93,9 +85,8 @@ public class LocalCover implements ICoverRetriever {
             return Collections.emptyList();
         }
 
-        // load URL parts from settings
-        final String musicPath = mSettings.getString(PREFERENCE_MUSIC_PATH, "music/");
-        FILENAMES[0] = mSettings.getString(PREFERENCE_COVER_FILENAME, null);
+        final String musicPath = mApp.getConnectionSettings().getMusicPath();
+        FILENAMES[0] = mApp.getConnectionSettings().getCoverFilename();
         final String serverName = mApp.getConnectionSettings().getServer();
 
         String lfilename, url;

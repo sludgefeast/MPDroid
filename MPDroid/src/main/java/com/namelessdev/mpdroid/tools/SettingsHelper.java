@@ -74,6 +74,11 @@ public final class SettingsHelper {
             connectionInfo.setNotificationNotPersistent();
         }
 
+        connectionInfo.setMusicPath(getStringSetting(
+                getStringWithSSID(ConnectionModifier.KEY_MUSIC_PATH, wifiSSID)));
+        connectionInfo.setCoverFilename(getStringSetting(
+                getStringWithSSID(ConnectionModifier.KEY_COVER_FILENAME, wifiSSID)));
+
         connectionInfo.setPreviousConnectionInfo(previousInfo);
 
         return connectionInfo.build();
@@ -82,42 +87,33 @@ public final class SettingsHelper {
     @NotNull
     public static ConnectionInfo getConnectionSettings(final ConnectionInfo previousInfo) {
         final String wifiSSID = getCurrentSSID();
-        final ConnectionInfo connectionInfo;
 
         if (getStringSetting(getStringWithSSID(ConnectionModifier.KEY_HOSTNAME, wifiSSID))
                 != null) {
             // an empty SSID should be null
-            if (wifiSSID != null && wifiSSID.isEmpty()) {
-                connectionInfo = getConnectionSettings(null, previousInfo);
-            } else {
-                connectionInfo = getConnectionSettings(wifiSSID, previousInfo);
-            }
-        } else if (getStringSetting(ConnectionModifier.KEY_HOSTNAME) != null) {
-            connectionInfo = getConnectionSettings(null, previousInfo);
-        } else {
-            connectionInfo = ConnectionInfo.EMPTY;
+            return wifiSSID != null && wifiSSID.isEmpty() ?
+                    getConnectionSettings(null, previousInfo) :
+                    getConnectionSettings(wifiSSID, previousInfo);
         }
-
-        return connectionInfo;
+        if (getStringSetting(ConnectionModifier.KEY_HOSTNAME) != null) {
+            return getConnectionSettings(null, previousInfo);
+        }
+        return ConnectionInfo.EMPTY;
     }
 
     public static String getCurrentSSID() {
         final WifiManager wifiManager = (WifiManager) APP.getSystemService(Context.WIFI_SERVICE);
-        String result = null;
-
-        if (wifiManager != null) {
-            final WifiInfo info = wifiManager.getConnectionInfo();
-
-            if (info != null) {
-                final String ssid = info.getSSID();
-
-                if (ssid != null && !ssid.equals(NONE)) {
-                    result = COMPILE.matcher(ssid).replaceAll("");
-                }
-            }
+        if (wifiManager == null) {
+            return null;
         }
 
-        return result;
+        final WifiInfo info = wifiManager.getConnectionInfo();
+        if (info == null) {
+            return null;
+        }
+
+        final String ssid = info.getSSID();
+        return ssid != null && !ssid.equals(NONE) ? COMPILE.matcher(ssid).replaceAll("") : null;
     }
 
     private static int getIntegerSetting(final String name, final int defaultValue) {
@@ -130,7 +126,6 @@ public final class SettingsHelper {
                 setting = Integer.parseInt(settingString);
             } catch (final NumberFormatException e) {
                 Log.e(TAG, "Received a bad integer during processing", e);
-
             }
         }
 

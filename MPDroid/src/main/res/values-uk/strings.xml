@@ -158,7 +158,6 @@
     <string name="sortAlbumsByYearDescription">Сортувати альбоми за роком</string>
     <string name="showAlbumTrackCount">Кількість треків в альбомі</string>
     <string name="showAlbumTrackCountDescription">Показувати номер трека в альбомі</string>
-    <string name="enableLocalCover">Використовувати локальну обкладмнку альбома</string>
     <string name="enableLocalCoverDescription">Отримати обкладинку альбома з сервера MPD (потребує веб-сервео, читайте wiki!)</string>
     <string name="musicPath">Шлях до музики</string>
     <string name="coverFileName">Ім’я обкладенки</string>

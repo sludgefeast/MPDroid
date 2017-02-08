@@ -95,8 +95,6 @@ public final class CoverManager implements SharedPreferences.OnSharedPreferenceC
 
     private static final String PREFERENCE_ENABLE_JAMENDO = "enableJamendoCover";
 
-    private static final String PREFERENCE_ENABLE_GRACENOTE = "enableGracenoteCover";
-
     private static final String PREFERENCE_ENABLE_LOCALSERVER = "enableLocalCover";
 
     private static final MPDApplication APP = MPDApplication.getInstance();
@@ -495,19 +493,21 @@ public final class CoverManager implements SharedPreferences.OnSharedPreferenceC
                                           final String key) {
         switch (key) {
             case CoverManager.PREFERENCE_CACHE:
+            case CoverManager.PREFERENCE_ONLY_WIFI:
+            case CoverManager.PREFERENCE_ENABLE_LOCALSERVER:
             case CoverManager.PREFERENCE_ENABLE_LASTFM:
             case CoverManager.PREFERENCE_ENABLE_ITUNES:
             case CoverManager.PREFERENCE_ENABLE_DEEZER:
             case CoverManager.PREFERENCE_ENABLE_SPOTIFY:
+            case GracenoteCover.PREFERENCE_CUSTOM_CLIENT_ID_KEY:
             case CoverManager.PREFERENCE_ENABLE_COVERARTARCHIVE:
             case CoverManager.PREFERENCE_ENABLE_JAMENDO:
-            case CoverManager.PREFERENCE_ENABLE_GRACENOTE:
-            case CoverManager.PREFERENCE_ENABLE_LOCALSERVER:
                 setCoverRetrieversFromPreferences();
                 break;
             default:
                 break;
         }
+
     }
 
     void setCoverRetrieversFromPreferences() {
@@ -538,8 +538,7 @@ public final class CoverManager implements SharedPreferences.OnSharedPreferenceC
         if (settings.getBoolean(PREFERENCE_ENABLE_SPOTIFY, true)) {
             mCoverRetrievers.add(new SpotifyCover());
         }
-        if (settings.getBoolean(PREFERENCE_ENABLE_GRACENOTE, false) &&
-                GracenoteCover.isClientIdAvailable()) {
+        if (GracenoteCover.isClientIdAvailable()) {
             mCoverRetrievers.add(new GracenoteCover());
         }
         if (settings.getBoolean(PREFERENCE_ENABLE_COVERARTARCHIVE, true)) {
