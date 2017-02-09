@@ -62,7 +62,7 @@
         android:background="@drawable/appwidget_button_center"
         android:contentDescription="@string/play"
         android:scaleType="center"
-        android:src="@drawable/ic_appwidget_music_pause" />
+        android:src="@drawable/ic_appwidget_music_play" />
 
     <ImageView
         android:layout_width="1dip"
