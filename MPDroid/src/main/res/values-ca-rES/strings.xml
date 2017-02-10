@@ -77,7 +77,7 @@
     <string name="playlistCleared">Llista de reproducció buidada</string>
     <string name="deletedSongFromPlaylist">Esborrada de la llista de reproducció</string>
     <string name="albumAdded">Àlbum %s afegit</string>
-    <string name="playlistAdded">Llista de reproducció% s afegida</string>
+    <string name="playlistAdded">Llista de reproducció %s afegida</string>
     <string name="addedDirectoryToPlaylist">%s afegida a la llista de reproducció</string>
     <string name="artistAdded">Artista %s afegit</string>
     <string name="host">Servidor</string>
