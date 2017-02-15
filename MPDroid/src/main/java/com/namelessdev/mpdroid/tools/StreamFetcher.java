@@ -170,7 +170,7 @@ public class StreamFetcher {
 
     private String check(final String url) {
         HttpURLConnection connection = null;
-        String checkedUrl = null;
+        InputStream in = null;
 
         try {
             final URL u = new URL(url);
@@ -178,31 +178,38 @@ public class StreamFetcher {
 
             if (connection == null) {
                 Log.e(TAG, "Failed to open a connection to the stream due to null connection.");
-            } else if (connection.getResponseCode() == HttpURLConnection.HTTP_ACCEPTED) {
-                final InputStream in = new BufferedInputStream(connection.getInputStream(), 8192);
-                final byte[] buffer = new byte[8192];
-                final int read = in.read(buffer);
+                return null;
+            }
 
-                if (read != -1) {
-                    if (read < buffer.length) {
-                        buffer[read] = (byte) '\0';
-                    }
-
-                    checkedUrl = parse(new String(buffer), mHandlers);
-                }
-            } else {
+            if (connection.getResponseCode() != HttpURLConnection.HTTP_ACCEPTED &&
+                    connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 Log.e(TAG, "URL did not accept a connection. Code: " + connection.getResponseCode()
                         + " Message: " + connection.getResponseMessage());
+                return null;
+            }
+
+            in = new BufferedInputStream(connection.getInputStream(), 8192);
+            final byte[] buffer = new byte[8192];
+            final int read = in.read(buffer);
+
+            if (read != -1) {
+                return parse(new String(buffer, 0, read), mHandlers);
             }
         } catch (final IOException e) {
             Log.e(TAG, "Failed to check and parse an incoming playlist.", e);
         } finally {
-            if (null != connection) {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (final IOException ignore) {
+                }
+            }
+            if (connection != null) {
                 connection.disconnect();
             }
         }
 
-        return checkedUrl;
+        return null;
     }
 
     public String get(final String url, final String name) throws MalformedURLException {

@@ -47,9 +47,6 @@ import com.anpmech.mpd.item.PlaylistFile;
 import com.anpmech.mpd.item.Stream;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.playlists.Playlist;
-import com.namelessdev.mpdroid.playlists.PlaylistEntry;
-import com.namelessdev.mpdroid.playlists.Playlists;
 import com.namelessdev.mpdroid.tools.StreamFetcher;
 import com.namelessdev.mpdroid.tools.Tools;
 
@@ -397,16 +394,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
             final String name = getText(mNameEdit);
-            String url = getText(mUrlEdit);
-
-            // if URL is a playlist, use first entry as stream URL
-            final Playlist playlist = Playlists.create(url);
-            if (playlist != null) {
-                final List<PlaylistEntry> playlistEntries = playlist.getEntries();
-                if (playlistEntries != null && playlistEntries.size() > 0) {
-                    url = playlistEntries.get(0).getUrl();
-                }
-            }
+            final String url = getText(mUrlEdit);
 
             mApp.addConnectionLock(this);
 
