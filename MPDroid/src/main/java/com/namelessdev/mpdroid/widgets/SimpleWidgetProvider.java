@@ -26,34 +26,37 @@ import android.support.annotation.LayoutRes;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.anpmech.mpd.subsystem.status.MPDStatusMap;
+import com.anpmech.mpd.subsystem.status.StatusChangeListenerBase;
+import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.MainMenuActivity;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.helpers.MPDControl;
+import com.namelessdev.mpdroid.tools.Tools;
 
 public class SimpleWidgetProvider extends AppWidgetProvider {
 
     private static final String TAG = "WidgetProvider";
 
-    private static SimpleWidgetProvider sInstance;
+    private static String WIDGET_ACTION = "com.namelessdev.mpdroid.widgets.ACTION";
 
-    static synchronized SimpleWidgetProvider getInstance() {
-        if (sInstance == null) {
-            sInstance = new SimpleWidgetProvider();
-        }
-        return sInstance;
+    public SimpleWidgetProvider() {
+        MPDApplication.getInstance().addStatusChangeListener(new StatusChangeListenerBase() {
+            @Override
+            public void stateChanged(final int oldState) {
+                updateWidget(MPDApplication.getInstance());
+            }
+        });
     }
 
-    /**
-     * Check against {@link AppWidgetManager} if there are any instances of this widget.
-     *
-     * @param context The current context.
-     * @return True if an instance already exists, false otherwise.
-     */
-    private boolean hasInstances(final Context context) {
-        final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context,
-                getClass()));
-        return appWidgetIds.length > 0;
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+
+        if (intent.getCategories() != null &&
+                intent.getCategories().contains(WIDGET_ACTION)) {
+            Tools.runCommand(intent.getAction());
+        }
     }
 
     /**
@@ -71,34 +74,20 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
         pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.control_app, pendingIntent);
 
-        // prev button
-        intent = new Intent(context, WidgetHelperService.class);
-        intent.setAction(MPDControl.ACTION_PREVIOUS);
-        pendingIntent = PendingIntent.getService(context, 0, intent, 0);
-        views.setOnClickPendingIntent(R.id.control_prev, pendingIntent);
-
-        // play/pause button
-        intent = new Intent(context, WidgetHelperService.class);
-        intent.setAction(MPDControl.ACTION_TOGGLE_PLAYBACK);
-        pendingIntent = PendingIntent.getService(context, 0, intent, 0);
-        views.setOnClickPendingIntent(R.id.control_play, pendingIntent);
-
-        // next button
-        intent = new Intent(context, WidgetHelperService.class);
-        intent.setAction(MPDControl.ACTION_NEXT);
-        pendingIntent = PendingIntent.getService(context, 0, intent, 0);
-        views.setOnClickPendingIntent(R.id.control_next, pendingIntent);
+        // media buttons
+        addButtonAction(context, views, R.id.control_prev, MPDControl.ACTION_PREVIOUS);
+        addButtonAction(context, views, R.id.control_play, MPDControl.ACTION_TOGGLE_PLAYBACK);
+        addButtonAction(context, views, R.id.control_next, MPDControl.ACTION_NEXT);
     }
 
-    /**
-     * Handle a change notification coming over from {@link android.media.RemoteControlClient}
-     *
-     * @param service The WidgetHelperService related to this provider.
-     */
-    void notifyChange(final WidgetHelperService service) {
-        if (hasInstances(service)) {
-            performUpdate(service);
-        }
+    protected void addButtonAction(final Context context, final RemoteViews views,
+                                 final int viewId, final String action) {
+        final Intent intent = new Intent(context, getClass());
+        intent.addCategory(WIDGET_ACTION);
+        intent.setAction(action);
+        final PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setOnClickPendingIntent(viewId, pendingIntent);
     }
 
     @LayoutRes
@@ -110,38 +99,23 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager,
                          final int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-
         Log.v(TAG, "Enter onUpdate");
+        updateWidget(context);
+    }
 
+    private void updateWidget(final Context context) {
         final RemoteViews views = new RemoteViews(context.getPackageName(), getLayoutResId());
+
+        // Set correct drawable for pause state
+        final boolean isPlaying =
+                MPDApplication.getInstance().getMPD().getStatus().isState(MPDStatusMap.STATE_PLAYING);
+        views.setImageViewResource(R.id.control_play, isPlaying ?
+                R.drawable.ic_appwidget_music_pause : R.drawable.ic_appwidget_music_play);
 
         // Initialise given widgets to default state, where we launch MPDroid on
         // default click and hide actions if service not running.
         linkButtons(context, views);
         pushUpdate(context, views);
-
-        // Start service intent to WidgetHelperService so it can wrap around
-        // with an immediate update
-        final Intent updateIntent = new Intent(context, WidgetHelperService.class);
-        updateIntent.setAction(WidgetHelperService.CMD_UPDATE_WIDGET);
-        context.startService(updateIntent);
-    }
-
-    /**
-     * Update all active widget instances by pushing changes
-     *
-     * @param service The WidgetHelperService related to this provider.
-     */
-    private void performUpdate(final WidgetHelperService service) {
-        final RemoteViews views = new RemoteViews(service.getPackageName(), getLayoutResId());
-
-        // Set correct drawable for pause state
-        views.setImageViewResource(R.id.control_play, service.isPlaying() ?
-                R.drawable.ic_appwidget_music_pause : R.drawable.ic_appwidget_music_play);
-
-        // Link actions buttons to intents
-        linkButtons(service, views);
-        pushUpdate(service, views);
     }
 
     /**
@@ -154,4 +128,5 @@ public class SimpleWidgetProvider extends AppWidgetProvider {
         final AppWidgetManager gm = AppWidgetManager.getInstance(context);
         gm.updateAppWidget(new ComponentName(context, getClass()), views);
     }
+
 }

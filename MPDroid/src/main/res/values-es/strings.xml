@@ -148,7 +148,7 @@
     <string name="search_label">MPDroid</string>
     <string name="search_hint">Buscar…</string>
     <string name="warningTitle">Por favor, leer</string>
-    <string name="warningText1">Bienvenido a MPDroid 1.0 !\nEste mensaje se mostrará solo la primera vez.\n\nPrimero que todo, si no sabes lo que es un servidor MPD, deberías desinstalar esta aplicación, no está hecha para tí.\n\nFallo importante conocido : El widget a veces se cierra o agota la batería.\n\nA usuarios previos, un montón de gracias por su soporte y contribuciones.</string>
+    <string name="warningText1">Bienvenido a MPDroid 1.0 !\nEste mensaje se mostrará solo la primera vez.\n\nPrimero que todo, si no sabes lo que es un servidor MPD, deberías desinstalar esta aplicación, no está hecha para tí.\n\nA usuarios previos, un montón de gracias por su soporte y contribuciones.</string>
     <string name="editPlaylist">Editar</string>
     <string name="nowPlaying">Reproducción en curso</string>
     <string name="cancel">Cancelar</string>

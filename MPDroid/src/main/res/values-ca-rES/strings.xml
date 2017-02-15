@@ -130,7 +130,7 @@
     <string name="search_hint">Cercar…</string>
     <string name="libraryTabActivity">Llibreria</string>
     <string name="warningTitle">Si us plau, llegir</string>
-    <string name="warningText1">Benvingut a MPDroid 1.0 !\nAquest missatge es mostrarà només la primera vegada.\n\nPrimer que tot, si no saps el que és un servidor MPD, hauries desinstal·lar aquesta aplicació, no està feta per a tu.\n\nnFallo important conegut: El giny de vegades es tanca o s\'esgota la bateria.\nA usuaris previs, un munt de gràcies pel seu suport i contribucions.</string>
+    <string name="warningText1">Benvingut a MPDroid 1.0 !\nAquest missatge es mostrarà només la primera vegada.\n\nPrimer que tot, si no saps el que és un servidor MPD, hauries desinstal·lar aquesta aplicació, no està feta per a tu.\n\nA usuaris previs, un munt de gràcies pel seu suport i contribucions.</string>
     <string name="editPlaylist">Editar</string>
     <string name="nowPlaying">Reproducció en curs</string>
     <string name="cancel">Anul·lar</string>

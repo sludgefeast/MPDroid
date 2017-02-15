@@ -18,7 +18,6 @@ package com.namelessdev.mpdroid.widgets;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.namelessdev.mpdroid.R;
@@ -36,10 +35,7 @@ public class SimpleWidgetProviderWithStop extends SimpleWidgetProvider {
         super.linkButtons(context, views);
 
         // stop button
-        final Intent intent = new Intent(context, WidgetHelperService.class);
-        intent.setAction(MPDControl.ACTION_STOP);
-        final PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
-        views.setOnClickPendingIntent(R.id.control_stop, pendingIntent);
+        addButtonAction(context, views, R.id.control_stop, MPDControl.ACTION_STOP);
     }
 
     @Override
