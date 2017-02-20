@@ -267,6 +267,14 @@ public final class ConnectionInfo implements Parcelable {
         return mMusicPath;
     }
 
+    public boolean hasMusicPath() {
+        return mMusicPath != null && !mMusicPath.trim().isEmpty();
+    }
+
+    public LocalWebServer getLocalWebServer() {
+        return new LocalWebServer(getMusicPath(), getServer());
+    }
+
     /**
      * This method returns the MPD local cover filename for this ConnectionInfo.
      *
@@ -600,6 +608,56 @@ public final class ConnectionInfo implements Parcelable {
         @Override
         public ConnectionInfo[] newArray(final int size) {
             return new ConnectionInfo[size];
+        }
+    }
+
+    public static class LocalWebServer {
+
+        private static final String URL_PREFIX = "http://";
+
+        private final String mMusicPath;
+
+        private final String mServerName;
+
+        private LocalWebServer(final String musicPath, final String serverName) {
+            mMusicPath = musicPath;
+            mServerName = serverName;
+        }
+
+        public String buildUrl(final String path, final String fileName) {
+            return buildUrl(mServerName, mMusicPath, path, fileName);
+        }
+
+        public String buildUrl(final String pathFileName) {
+            return buildUrl(mServerName, mMusicPath, pathFileName, null);
+        }
+
+        private static String buildUrl(String serverName, String musicPath, final String path,
+                                       final String fileName) {
+            if (musicPath.startsWith(URL_PREFIX)) {
+                int hostPortEnd = musicPath.indexOf(URL_PREFIX.length(), '/');
+                if (hostPortEnd == -1) {
+                    hostPortEnd = musicPath.length();
+                }
+                serverName = musicPath.substring(URL_PREFIX.length(), hostPortEnd);
+                musicPath = musicPath.substring(hostPortEnd);
+            }
+            final Uri.Builder uriBuilder = Uri.parse(URL_PREFIX + serverName).buildUpon();
+            appendPathString(uriBuilder, musicPath);
+            appendPathString(uriBuilder, path);
+            appendPathString(uriBuilder, fileName);
+
+            final Uri uri = uriBuilder.build();
+            return uri.toString();
+        }
+
+        private static void appendPathString(final Uri.Builder builder, final String baseString) {
+            if (baseString != null && !baseString.isEmpty()) {
+                final String[] components = baseString.split("/");
+                for (final String component : components) {
+                    builder.appendPath(component);
+                }
+            }
         }
     }
 }

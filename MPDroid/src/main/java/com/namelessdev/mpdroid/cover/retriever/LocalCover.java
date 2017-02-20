@@ -16,8 +16,7 @@
 
 package com.namelessdev.mpdroid.cover.retriever;
 
-import android.net.Uri;
-
+import com.namelessdev.mpdroid.ConnectionInfo;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 
@@ -46,38 +45,7 @@ public class LocalCover implements ICoverRetriever {
 
     private static final String TAG = "LocalCover";
 
-    // private final static String URL = "%s/%s/%s";
-    private static final String URL_PREFIX = "http://";
-
     private final MPDApplication mApp = MPDApplication.getInstance();
-
-    private static void appendPathString(final Uri.Builder builder, final String baseString) {
-        if (baseString != null && !baseString.isEmpty()) {
-            final String[] components = baseString.split("/");
-            for (final String component : components) {
-                builder.appendPath(component);
-            }
-        }
-    }
-
-    private static String buildCoverUrl(String serverName, String musicPath, final String path,
-                                        final String fileName) {
-        if (musicPath.startsWith(URL_PREFIX)) {
-            int hostPortEnd = musicPath.indexOf(URL_PREFIX.length(), '/');
-            if (hostPortEnd == -1) {
-                hostPortEnd = musicPath.length();
-            }
-            serverName = musicPath.substring(URL_PREFIX.length(), hostPortEnd);
-            musicPath = musicPath.substring(hostPortEnd);
-        }
-        final Uri.Builder uriBuilder = Uri.parse(URL_PREFIX + serverName).buildUpon();
-        appendPathString(uriBuilder, musicPath);
-        appendPathString(uriBuilder, path);
-        appendPathString(uriBuilder, fileName);
-
-        final Uri uri = uriBuilder.build();
-        return uri.toString();
-    }
 
     @Override
     public List<String> getCoverUrls(final AlbumInfo albumInfo) throws Exception {
@@ -85,9 +53,10 @@ public class LocalCover implements ICoverRetriever {
             return Collections.emptyList();
         }
 
-        final String musicPath = mApp.getConnectionSettings().getMusicPath();
         FILENAMES[0] = mApp.getConnectionSettings().getCoverFilename();
-        final String serverName = mApp.getConnectionSettings().getServer();
+
+        final ConnectionInfo.LocalWebServer localWebServer =
+                mApp.getConnectionSettings().getLocalWebServer();
 
         String lfilename, url;
         final List<String> coverUrls = new ArrayList<>();
@@ -117,9 +86,7 @@ public class LocalCover implements ICoverRetriever {
                         lfilename = subfolder + '/' + baseFilename + '.' + ext;
                     }
 
-                    url = buildCoverUrl(serverName, musicPath,
-                            albumInfo.getParentDirectory(),
-                            lfilename);
+                    url = localWebServer.buildUrl(albumInfo.getParentDirectory(), lfilename);
 
                     if (!coverUrls.contains(url)) {
                         coverUrls.add(url);
