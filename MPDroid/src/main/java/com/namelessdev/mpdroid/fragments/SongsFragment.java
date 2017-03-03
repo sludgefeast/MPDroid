@@ -126,23 +126,22 @@ public class SongsFragment extends BrowseFragment<Music> implements
     }
 
     @Override
-    protected void add(final Music item, final boolean replace, final boolean play) {
-        try {
-            mApp.getMPD().add(item, replace, play);
-            Tools.notifyUser(R.string.songAdded, item.getTitle(), item.getName());
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add, remove, play.", e);
-        }
+    protected void add(final Music item, final boolean replace, final boolean play)
+            throws IOException, MPDException {
+        mApp.getMPD().add(item, replace, play);
+        Tools.notifyUser(R.string.songAdded, item.getTitle(), item.getName());
     }
 
     @Override
-    protected void add(final Music item, final PlaylistFile playlist) {
-        try {
-            mApp.getMPD().addToPlaylist(playlist, item);
-            Tools.notifyUser(mIrAdded, item);
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add to playlist.", e);
-        }
+    protected void add(final Music item, final PlaylistFile playlist)
+            throws IOException, MPDException {
+        mApp.getMPD().addToPlaylist(playlist, item);
+        Tools.notifyUser(mIrAdded, item);
+    }
+
+    @Override
+    protected Collection<Music> collectSongs(final Music item) throws IOException, MPDException {
+        return Collections.singleton(item);
     }
 
     private void applyPaletteWithBitmapAsync(final Bitmap bitmap) {

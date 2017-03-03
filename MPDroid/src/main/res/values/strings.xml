@@ -95,6 +95,11 @@
     <string name="addAlbum">Add album</string>
     <string name="addPlaylist">Add playlist</string>
     <string name="addAndPlay">Add and play</string>
+    <string name="deviceDownload">Download to device</string>
+    <string name="downloadItem">Download %s</string>
+    <string name="downloadInProgress">In Progress</string>
+    <string name="downloadCompleted">Completed</string>
+    <string name="downloadCancelled">Cancelled</string>
     <string name="addArtist">Add artist</string>
     <string name="addGenre">Add genre</string>
     <string name="addDirectory">Add</string>

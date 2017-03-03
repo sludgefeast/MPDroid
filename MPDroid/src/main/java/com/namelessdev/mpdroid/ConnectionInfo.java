@@ -27,6 +27,7 @@ import com.anpmech.mpd.Tools;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -258,21 +259,13 @@ public final class ConnectionInfo implements Parcelable {
     }
 
     /**
-     * This method returns the MPD music path for this ConnectionInfo.
+     * This method returns the MPD local web server for this ConnectionInfo.
      *
-     * @return The MPD music path.
+     * @return The MPD local web server.
      */
-    @Nullable
-    public String getMusicPath() {
-        return mMusicPath;
-    }
-
-    public boolean hasMusicPath() {
-        return mMusicPath != null && !mMusicPath.trim().isEmpty();
-    }
-
+    @NotNull
     public LocalWebServer getLocalWebServer() {
-        return new LocalWebServer(getMusicPath(), getServer());
+        return new LocalWebServer(mMusicPath, getServer());
     }
 
     /**
@@ -308,7 +301,7 @@ public final class ConnectionInfo implements Parcelable {
      *
      * @return True if the hostname has changed since the prior connection, false otherwise.
      */
-    public boolean hasHostnameChanged() {
+    boolean hasHostnameChanged() {
         return !mServer.equals(mLastConnection.mServer);
     }
 
@@ -573,12 +566,6 @@ public final class ConnectionInfo implements Parcelable {
     private static final class ConnectionInfoCreator implements Creator<ConnectionInfo> {
 
         /**
-         * Sole constructor.
-         */
-        private ConnectionInfoCreator() {
-        }
-
-        /**
          * This creates the object instance from the Parcel.
          *
          * @param source The source Parcel.
@@ -611,36 +598,41 @@ public final class ConnectionInfo implements Parcelable {
         }
     }
 
-    public static class LocalWebServer {
+    public static class LocalWebServer implements Serializable {
 
         private static final String URL_PREFIX = "http://";
 
-        private final String mMusicPath;
+        private final String mWebserverPath;
 
-        private final String mServerName;
+        private final String mMpdServerName;
 
-        private LocalWebServer(final String musicPath, final String serverName) {
-            mMusicPath = musicPath;
-            mServerName = serverName;
+        private LocalWebServer(final String webserverPath, final String mpdServerName) {
+            mWebserverPath = webserverPath;
+            mMpdServerName = mpdServerName;
         }
 
         public String buildUrl(final String path, final String fileName) {
-            return buildUrl(mServerName, mMusicPath, path, fileName);
+            return buildUrl(mMpdServerName, mWebserverPath, path, fileName);
         }
 
         public String buildUrl(final String pathFileName) {
-            return buildUrl(mServerName, mMusicPath, pathFileName, null);
+            return buildUrl(mMpdServerName, mWebserverPath, pathFileName, null);
         }
 
-        private static String buildUrl(String serverName, String musicPath, final String path,
-                                       final String fileName) {
-            if (musicPath.startsWith(URL_PREFIX)) {
-                int hostPortEnd = musicPath.indexOf(URL_PREFIX.length(), '/');
+        private static String buildUrl(final String mpdServerName, final String webserverPath,
+                                       final String path, final String fileName) {
+            final String serverName;
+            final String musicPath;
+            if (webserverPath.startsWith(URL_PREFIX)) {
+                int hostPortEnd = webserverPath.indexOf(URL_PREFIX.length(), '/');
                 if (hostPortEnd == -1) {
-                    hostPortEnd = musicPath.length();
+                    hostPortEnd = webserverPath.length();
                 }
-                serverName = musicPath.substring(URL_PREFIX.length(), hostPortEnd);
-                musicPath = musicPath.substring(hostPortEnd);
+                serverName = webserverPath.substring(URL_PREFIX.length(), hostPortEnd);
+                musicPath = webserverPath.substring(hostPortEnd);
+            } else {
+                serverName = mpdServerName;
+                musicPath = webserverPath;
             }
             final Uri.Builder uriBuilder = Uri.parse(URL_PREFIX + serverName).buildUpon();
             appendPathString(uriBuilder, musicPath);

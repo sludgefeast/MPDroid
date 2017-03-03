@@ -325,5 +325,10 @@
     <string name="genreSeparators">Genre Trennzeichen</string>
     <string name="optimizeGenres">Genre optimieren</string>
     <string name="optimizeGenresDescription">Trenne und formatiere Genre</string>
+    <string name="deviceDownload">Download auf Gerät</string>
+    <string name="downloadCancelled">Abgebrochen</string>
+    <string name="downloadCompleted">Abgeschlossen</string>
+    <string name="downloadInProgress">Läuft...</string>
+    <string name="downloadItem">Download %s</string>
     <!-- End MediaPlayer Error Strings -->
 </resources>

@@ -115,47 +115,41 @@ public class FSFragment extends BrowseFragment {
     }
 
     @Override
-    protected void add(final Item item, final boolean replace, final boolean play) {
-        try {
-            final String name = item.getName();
+    protected void add(final Item item, final boolean replace, final boolean play)
+            throws IOException, MPDException {
+        final String name = item.getName();
 
-            if (mDirectory.containsPath(name)) {
-                // Valid directory
-                mApp.getMPD().add(Directory.byPath(name), replace, play);
-                Tools.notifyUser(R.string.addedDirectoryToPlaylist, item);
+        if (mDirectory.containsPath(name)) {
+            // Valid directory
+            mApp.getMPD().add(Directory.byPath(name), replace, play);
+            Tools.notifyUser(R.string.addedDirectoryToPlaylist, item);
+        } else {
+            mApp.getMPD().add((FilesystemTreeEntry) item, replace, play);
+            if (item instanceof PlaylistFile) {
+                Tools.notifyUser(R.string.playlistAdded, item);
             } else {
-                mApp.getMPD().add((FilesystemTreeEntry) item, replace, play);
-                if (item instanceof PlaylistFile) {
-                    Tools.notifyUser(R.string.playlistAdded, item);
-                } else {
-                    Tools.notifyUser(R.string.songAdded, item);
-                }
+                Tools.notifyUser(R.string.songAdded, item);
             }
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add.", e);
         }
     }
 
     @Override
-    protected void add(final Item item, final PlaylistFile playlist) {
-        try {
-            final String name = item.getName();
+    protected void add(final Item item, final PlaylistFile playlist)
+            throws IOException, MPDException {
+        final String name = item.getName();
 
-            if (mDirectory.containsPath(name)) {
-                // Valid directory
-                mApp.getMPD().addToPlaylist(playlist, Directory.byPath(name));
-                Tools.notifyUser(R.string.addedDirectoryToPlaylist, item);
-            } else {
-                if (item instanceof Music) {
-                    mApp.getMPD().addToPlaylist(playlist, (Music) item);
-                    Tools.notifyUser(R.string.songAdded, item);
-                } else if (item instanceof PlaylistFile) {
-                    mApp.getMPD().getPlaylist()
-                            .load(((FilesystemTreeEntry) item).getFullPath());
-                }
+        if (mDirectory.containsPath(name)) {
+            // Valid directory
+            mApp.getMPD().addToPlaylist(playlist, Directory.byPath(name));
+            Tools.notifyUser(R.string.addedDirectoryToPlaylist, item);
+        } else {
+            if (item instanceof Music) {
+                mApp.getMPD().addToPlaylist(playlist, (Music) item);
+                Tools.notifyUser(R.string.songAdded, item);
+            } else if (item instanceof PlaylistFile) {
+                mApp.getMPD().getPlaylist()
+                        .load(((FilesystemTreeEntry) item).getFullPath());
             }
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add.", e);
         }
     }
 
@@ -267,6 +261,7 @@ public class FSFragment extends BrowseFragment {
         if (mDirectory.getParent() == null ||
                 ((AdapterView.AdapterContextMenuInfo) menuInfo).id != 0L) {
             super.onCreateContextMenu(menu, v, menuInfo);
+            menu.removeItem(DEVICE_DOWNLOAD);
         }
     }
 

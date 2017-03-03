@@ -154,9 +154,12 @@ public final class Tools {
         return "127.0.0.1".equals(APP.getConnectionSettings().getServer());
     }
 
+    public static String getString(@StringRes final int resId, final Object... format) {
+        return APP.getResources().getString(resId, format);
+    }
+
     public static void notifyUser(@StringRes final int resId, final Object... format) {
-        final String formattedString = APP.getResources().getString(resId, format);
-        Toast.makeText(APP, formattedString, Toast.LENGTH_SHORT).show();
+        Toast.makeText(APP, getString(resId, format), Toast.LENGTH_SHORT).show();
     }
 
     public static void notifyUser(@StringRes final int resId) {

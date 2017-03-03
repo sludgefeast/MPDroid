@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,25 +52,26 @@ public class StoredPlaylistFragment extends BrowseFragment<Music> {
     }
 
     @Override
-    protected void add(final Music item, final boolean replace, final boolean play) {
-        try {
-            mApp.getMPD().add(item, replace, play);
-            if (!play) {
-                Tools.notifyUser(R.string.songAdded, item.getTitle(), item.getName());
-            }
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add.", e);
+    protected void add(final Music item, final boolean replace, final boolean play)
+            throws IOException, MPDException {
+        mApp.getMPD().add(item, replace, play);
+        if (!play) {
+            Tools.notifyUser(R.string.songAdded, item.getTitle(), item.getName());
         }
     }
 
     @Override
-    protected void add(final Music item, final PlaylistFile playlist) {
-        try {
-            mApp.getMPD().addToPlaylist(playlist, item);
-            Tools.notifyUser(mIrAdded, item);
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add.", e);
-        }
+    protected void add(final Music item, final PlaylistFile playlist)
+            throws IOException, MPDException {
+        mApp.getMPD().addToPlaylist(playlist, item);
+        Tools.notifyUser(mIrAdded, item);
+    }
+
+    @Override
+    public void onCreateContextMenu(final ContextMenu menu, final View v,
+                                    final ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.removeItem(DEVICE_DOWNLOAD);
     }
 
     @Override

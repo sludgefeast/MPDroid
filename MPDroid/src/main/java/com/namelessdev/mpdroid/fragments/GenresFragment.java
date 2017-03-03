@@ -23,6 +23,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -57,23 +58,24 @@ public class GenresFragment extends BrowseFragment<GenresGroup> {
     }
 
     @Override
-    protected void add(final GenresGroup item, final boolean replace, final boolean play) {
-        try {
-            mApp.getMPD().add(item.getGenres(), replace, play);
-            Tools.notifyUser(mIrAdded, item);
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add all from playlist.", e);
-        }
+    protected void add(final GenresGroup item, final boolean replace, final boolean play)
+            throws IOException, MPDException {
+        mApp.getMPD().add(item.getGenres(), replace, play);
+        Tools.notifyUser(mIrAdded, item);
     }
 
     @Override
-    protected void add(final GenresGroup item, final PlaylistFile playlist) {
-        try {
-            mApp.getMPD().addToPlaylist(playlist, item.getGenres());
-            Tools.notifyUser(mIrAdded, item);
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add all genre to playlist.", e);
-        }
+    protected void add(final GenresGroup item, final PlaylistFile playlist)
+            throws IOException, MPDException {
+        mApp.getMPD().addToPlaylist(playlist, item.getGenres());
+        Tools.notifyUser(mIrAdded, item);
+    }
+
+    @Override
+    public void onCreateContextMenu(final ContextMenu menu, final View v,
+                                    final ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.removeItem(DEVICE_DOWNLOAD);
     }
 
     @Override

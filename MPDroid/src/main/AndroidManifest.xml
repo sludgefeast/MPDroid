@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- Used to start the service upon boot if the service requires persistence. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <!-- Cover art cache -->
+    <!-- Cover art cache & download music files -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Wake Lock for Streaming -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -119,6 +119,13 @@
             android:exported="false"
             android:icon="@drawable/icon"
             android:process=":MPDroidService" />
+
+        <service android:name="com.namelessdev.mpdroid.helpers.SongDownloadService" />
+        <receiver android:name="com.namelessdev.mpdroid.helpers.SongDownloadService$CancelActionReceiver">
+            <intent-filter>
+                <action android:name="com.namelessdev.mpdroid.helpers.SongDownloadService.CANCEL" />
+            </intent-filter>
+        </receiver>
 
         <receiver android:name="com.namelessdev.mpdroid.RemoteControlReceiver">
             <intent-filter android:priority="500">

@@ -37,6 +37,7 @@ import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.item.Album;
 import com.anpmech.mpd.item.Artist;
 import com.anpmech.mpd.item.Genre;
+import com.anpmech.mpd.item.Music;
 import com.anpmech.mpd.item.PlaylistFile;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.adapters.ArrayIndexerAdapter;
@@ -50,6 +51,7 @@ import com.namelessdev.mpdroid.views.AlbumDataBinder;
 import com.namelessdev.mpdroid.views.holders.AlbumViewHolder;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -85,23 +87,22 @@ public class AlbumsFragment extends BrowseFragment<Album> {
     }
 
     @Override
-    protected void add(final Album item, final boolean replace, final boolean play) {
-        try {
-            mApp.getMPD().add(item, replace, play);
-            Tools.notifyUser(mIrAdded, item);
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add.", e);
-        }
+    protected void add(final Album item, final boolean replace, final boolean play)
+            throws IOException, MPDException {
+        mApp.getMPD().add(item, replace, play);
+        Tools.notifyUser(mIrAdded, item);
     }
 
     @Override
-    protected void add(final Album item, final PlaylistFile playlist) {
-        try {
-            mApp.getMPD().addToPlaylist(playlist, item);
-            Tools.notifyUser(mIrAdded, item);
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add.", e);
-        }
+    protected void add(final Album item, final PlaylistFile playlist)
+            throws IOException, MPDException {
+        mApp.getMPD().addToPlaylist(playlist, item);
+        Tools.notifyUser(mIrAdded, item);
+    }
+
+    @Override
+    protected Collection<Music> collectSongs(final Album item) throws IOException, MPDException {
+        return mApp.getMPD().getSongs(item);
     }
 
     @Override
@@ -215,12 +216,8 @@ public class AlbumsFragment extends BrowseFragment<Album> {
     public void onCreateContextMenu(final ContextMenu menu, final View v,
                                     final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        final MenuItem otherCoverItem = menu.add(POPUP_COVER_BLACKLIST,
-                POPUP_COVER_BLACKLIST, 0, R.string.otherCover);
-        otherCoverItem.setOnMenuItemClickListener(this);
-        final MenuItem resetCoverItem = menu.add(POPUP_COVER_SELECTIVE_CLEAN,
-                POPUP_COVER_SELECTIVE_CLEAN, 0, R.string.resetCover);
-        resetCoverItem.setOnMenuItemClickListener(this);
+        addMenuItem(menu, POPUP_COVER_BLACKLIST, R.string.otherCover);
+        addMenuItem(menu, POPUP_COVER_SELECTIVE_CLEAN, R.string.resetCover);
     }
 
     @Override
@@ -266,20 +263,16 @@ public class AlbumsFragment extends BrowseFragment<Album> {
 
     @Override
     public boolean onMenuItemClick(final MenuItem item) {
-        boolean result = false;
-
-        switch (item.getGroupId()) {
+        switch (item.getItemId()) {
             case POPUP_COVER_BLACKLIST:
                 cleanupCover(item, true);
-                break;
+                return false;
             case POPUP_COVER_SELECTIVE_CLEAN:
                 cleanupCover(item, false);
-                break;
+                return false;
             default:
-                result = super.onMenuItemClick(item);
-                break;
+                return super.onMenuItemClick(item);
         }
-        return result;
     }
 
     @Override

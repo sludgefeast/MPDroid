@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -64,15 +63,11 @@ public class PlaylistsFragment extends BrowseFragment<PlaylistFile> {
     }
 
     @Override
-    protected void add(final PlaylistFile item, final boolean replace, final boolean play) {
-        try {
-            mApp.getMPD().add(item, replace, play);
-            if (isAdded()) {
-                Tools.notifyUser(mIrAdded, item);
-            }
-
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add.", e);
+    protected void add(final PlaylistFile item, final boolean replace, final boolean play)
+            throws IOException, MPDException {
+        mApp.getMPD().add(item, replace, play);
+        if (isAdded()) {
+            Tools.notifyUser(mIrAdded, item);
         }
     }
 
@@ -122,12 +117,10 @@ public class PlaylistsFragment extends BrowseFragment<PlaylistFile> {
     public void onCreateContextMenu(final ContextMenu menu, final View v,
                                     final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        final MenuItem editItem = menu
-                .add(Menu.NONE, EDIT, 0, R.string.editPlaylist);
-        editItem.setOnMenuItemClickListener(this);
-        final MenuItem addAndReplaceItem = menu.add(Menu.NONE, DELETE, 0,
-                R.string.deletePlaylist);
-        addAndReplaceItem.setOnMenuItemClickListener(this);
+        menu.removeItem(DEVICE_DOWNLOAD);
+
+        addMenuItem(menu, Menu.NONE, EDIT, 0, R.string.editPlaylist);
+        addMenuItem(menu, Menu.NONE, DELETE, 0, R.string.deletePlaylist);
 
         menu.setGroupEnabled(PLAYLIST_ADD_GROUP, false);
     }

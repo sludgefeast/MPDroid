@@ -83,14 +83,11 @@ public class StreamsFragment extends BrowseFragment<Stream> {
     }
 
     @Override
-    protected void add(final Stream item, final boolean replace, final boolean play) {
-        try {
-            mApp.getMPD().addStream(
-                    StreamFetcher.instance().get(item.getUrl(), item.getName()), replace, play);
-            Tools.notifyUser(mIrAdded, item);
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add stream.", e);
-        }
+    protected void add(final Stream item, final boolean replace, final boolean play)
+            throws IOException, MPDException {
+        mApp.getMPD().addStream(
+                StreamFetcher.instance().get(item.getUrl(), item.getName()), replace, play);
+        Tools.notifyUser(mIrAdded, item);
     }
 
     @Override
@@ -214,13 +211,12 @@ public class StreamsFragment extends BrowseFragment<Stream> {
     public void onCreateContextMenu(final ContextMenu menu, final View v,
                                     final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
+        menu.removeItem(DEVICE_DOWNLOAD);
+
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         if (info.id >= 0L && info.id < (long) mItems.size()) {
-            final MenuItem editItem = menu.add(Menu.NONE, EDIT, 0, R.string.editStream);
-            editItem.setOnMenuItemClickListener(this);
-            final MenuItem addAndReplaceItem =
-                    menu.add(Menu.NONE, DELETE, 0, R.string.deleteStream);
-            addAndReplaceItem.setOnMenuItemClickListener(this);
+            addMenuItem(menu, Menu.NONE, EDIT, 0, R.string.editStream);
+            addMenuItem(menu, Menu.NONE, DELETE, 0, R.string.deleteStream);
         }
 
         menu.setGroupEnabled(PLAYLIST_ADD_GROUP, false);

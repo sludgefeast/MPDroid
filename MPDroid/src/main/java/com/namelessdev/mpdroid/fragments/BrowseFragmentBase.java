@@ -57,8 +57,10 @@ import com.anpmech.mpd.MPDCommand;
 import com.anpmech.mpd.commandresponse.PlaylistFileResponse;
 import com.anpmech.mpd.connection.MPDConnectionListener;
 import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Album;
 import com.anpmech.mpd.item.Artist;
 import com.anpmech.mpd.item.Item;
+import com.anpmech.mpd.item.Music;
 import com.anpmech.mpd.item.PlaylistFile;
 import com.anpmech.mpd.subsystem.status.MPDStatus;
 import com.anpmech.mpd.subsystem.status.MPDStatusMap;
@@ -69,6 +71,7 @@ import com.namelessdev.mpdroid.adapters.ArrayIndexerAdapter;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.helpers.MPDAsyncHelper.AsyncExecListener;
 import com.namelessdev.mpdroid.helpers.MPDAsyncWorker;
+import com.namelessdev.mpdroid.helpers.SongDownloadService;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
 import com.namelessdev.mpdroid.tools.Tools;
 import com.namelessdev.mpdroid.ui.ToolbarHelper;
@@ -84,25 +87,23 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
         OnMenuItemClickListener, AsyncExecListener, OnItemClickListener, StatusChangeListener,
         MPDConnectionListener {
 
-    public static final int ADD = 0;
+    protected static final int ADD = 0;
 
-    public static final int ADD_PLAY = 2;
+    protected static final int ADD_REPLACE = 1;
 
-    public static final int ADD_REPLACE = 1;
+    protected static final int ADD_PLAY = 2;
 
-    public static final int ADD_REPLACE_PLAY = 4;
+    protected static final int ADD_TO_PLAYLIST = 3;
 
-    public static final int ADD_TO_PLAYLIST = 3;
+    protected static final int ADD_REPLACE_PLAY = 4;
 
-    public static final int GOTO_ARTIST = 5;
+    protected static final int GOTO_ARTIST = 5;
 
-//    public static final int MAIN = 0;
+    protected static final int DEVICE_DOWNLOAD = 6;
 
-//    public static final int PLAYLIST = 3;
+    protected static final int POPUP_COVER_BLACKLIST = 10;
 
-    public static final int POPUP_COVER_BLACKLIST = 10;
-
-    public static final int POPUP_COVER_SELECTIVE_CLEAN = 11;
+    protected static final int POPUP_COVER_SELECTIVE_CLEAN = 11;
 
     /**
      * This is the group number used to enable or disable the playlist add group.
@@ -184,9 +185,15 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
         setHasOptionsMenu(false);
     }
 
-    protected abstract void add(final T item, final boolean replace, final boolean play);
+    protected abstract void add(final T item, final boolean replace, final boolean play)
+            throws IOException, MPDException;
 
-    protected abstract void add(final T item, final PlaylistFile playlist);
+    protected abstract void add(final T item, final PlaylistFile playlist)
+            throws IOException, MPDException;
+
+    protected Collection<Music> collectSongs(final T item) throws IOException, MPDException {
+        return null;
+    }
 
     /**
      * This returns a runnable for adding from the parent adapter view adapter, used for clickable
@@ -197,7 +204,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
      */
     protected void addAdapterItem(final AdapterView<?> parent, final int position) {
         final boolean simpleMode = mApp.isInSimpleMode();
-        final T track; /** final required for runnable. */
+        final T track;
         Adapter adapter = null;
 
         if (parent == null) {
@@ -217,7 +224,11 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
             mApp.getAsyncHelper().execAsync(new Runnable() {
                 @Override
                 public void run() {
-                    add(track, simpleMode, simpleMode);
+                    try {
+                        add(track, simpleMode, simpleMode);
+                    } catch (final IOException | MPDException e) {
+                        Log.e(TAG, "Failed to add to queue.", e);
+                    }
                 }
             });
         }
@@ -254,7 +265,11 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
                     default:
                         break;
                 }
-                add(mItems.get((int) info.id), replace, play);
+                try {
+                    add(mItems.get((int) info.id), replace, play);
+                } catch (final IOException | MPDException e) {
+                    Log.e(TAG, "Failed to add to queue.", e);
+                }
             }
         });
     }
@@ -281,7 +296,11 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
                     .setNegativeButton(android.R.string.cancel, Tools.NOOP_CLICK_LISTENER)
                     .show();
         } else {
-            add(mItems.get(id), PlaylistFile.byPath(item.getTitle().toString()));
+            try {
+                add(mItems.get(id), PlaylistFile.byPath(item.getTitle().toString()));
+            } catch (final IOException | MPDException e) {
+                Log.e(TAG, "Failed to add to playlist.", e);
+            }
         }
     }
 
@@ -289,9 +308,37 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
         mApp.getAsyncHelper().execAsync(new Runnable() {
             @Override
             public void run() {
-                add(mItems.get(id), playlistFile);
+                try {
+                    add(mItems.get(id), playlistFile);
+                } catch (final IOException | MPDException e) {
+                    Log.e(TAG, "Failed to add to playlist.", e);
+                }
             }
         });
+    }
+
+    private void downloadToDevice(final MenuItem menuItem) {
+        final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuItem.getMenuInfo();
+        final T item = mItems.get((int) info.id);
+        if (!(item instanceof Album)) {
+            return;
+        }
+
+        SongDownloadService.download(
+                getContext(),
+                mApp.getConnectionSettings().getLocalWebServer(),
+                item,
+                new SongDownloadService.SongProvider<T>() {
+                    @Override
+                    public Collection<Music> provideSongs(final T item) {
+                        try {
+                            return collectSongs(item);
+                        } catch (final IOException | MPDException e) {
+                            Log.e(TAG, "Error while providing songs", e);
+                            return null;
+                        }
+                    }
+                });
     }
 
     @Override
@@ -459,37 +506,23 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
             menu.setHeaderTitle(item.toString());
             // If in simple mode, show "Play" (add, replace & play), "Add to queue" and "Add to playlist"
             if (mApp.isInSimpleMode()) {
-                final MenuItem playItem = menu.add(ADD_REPLACE_PLAY,
-                        ADD_REPLACE_PLAY, 0, R.string.play);
-                playItem.setOnMenuItemClickListener(this);
-                final MenuItem addItem = menu.add(ADD, ADD, 0, R.string.addToQueue);
-                addItem.setOnMenuItemClickListener(this);
+                addMenuItem(menu, ADD_REPLACE_PLAY, R.string.play);
+                addMenuItem(menu, ADD, R.string.addToQueue);
             } else {
-                final MenuItem addItem = menu.add(ADD, ADD, 0, mIrAdd);
-                addItem.setOnMenuItemClickListener(this);
-                final MenuItem addAndReplaceItem = menu
-                        .add(ADD_REPLACE, ADD_REPLACE, 0,
-                                R.string.addAndReplace);
-                addAndReplaceItem.setOnMenuItemClickListener(this);
-                final MenuItem addAndReplacePlayItem = menu.add(ADD_REPLACE_PLAY,
-                        ADD_REPLACE_PLAY, 0, R.string.addAndReplacePlay);
-                addAndReplacePlayItem.setOnMenuItemClickListener(this);
-                final MenuItem addAndPlayItem = menu.add(ADD_PLAY, ADD_PLAY, 0,
-                        R.string.addAndPlay);
-                addAndPlayItem.setOnMenuItemClickListener(this);
+                addMenuItem(menu, ADD, mIrAdd);
+                addMenuItem(menu, ADD_REPLACE, R.string.addAndReplace);
+                addMenuItem(menu, ADD_REPLACE_PLAY, R.string.addAndReplacePlay);
+                addMenuItem(menu, ADD_PLAY, R.string.addAndPlay);
             }
 
             if (mApp.getMPD().isCommandAvailable(MPDCommand.MPD_CMD_LISTPLAYLISTS)) {
-                int id = 0;
                 final SubMenu playlistMenu = menu.addSubMenu(PLAYLIST_ADD_GROUP, Menu.NONE,
                         Menu.NONE, R.string.addToPlaylist);
-                MenuItem menuItem = playlistMenu.add(ADD_TO_PLAYLIST, id++, index,
-                        R.string.newPlaylist);
-                menuItem.setOnMenuItemClickListener(this);
 
+                int id = 0;
+                addMenuItem(playlistMenu, ADD_TO_PLAYLIST, id++, index, R.string.newPlaylist);
                 for (final PlaylistFile pl : PLAYLIST_FILES) {
-                    menuItem = playlistMenu.add(ADD_TO_PLAYLIST, id++, index, pl.getName());
-                    menuItem.setOnMenuItemClickListener(this);
+                    addMenuItem(playlistMenu, ADD_TO_PLAYLIST, id++, index, pl.getName());
                 }
             }
 
@@ -498,7 +531,26 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
             //            menu.add(GOTO_ARTIST, GOTO_ARTIST, 0, R.string.goToArtist);
             //    gotoArtistItem.setOnMenuItemClickListener(this);
             //}
+
+            addMenuItem(menu, DEVICE_DOWNLOAD, R.string.deviceDownload);
         }
+    }
+
+    protected MenuItem addMenuItem(final Menu menu, final int itemID,
+                                   @StringRes final int titleResId) {
+        return addMenuItem(menu, Menu.NONE, itemID, 0, titleResId);
+    }
+
+    protected MenuItem addMenuItem(final Menu menu, final int groupID, final int itemID,
+                                   final int order, @StringRes final int titleResId) {
+        return addMenuItem(menu, groupID, itemID, order, Tools.getString(titleResId));
+    }
+
+    protected MenuItem addMenuItem(final Menu menu, final int groupID, final int itemID,
+                                   final int order, final CharSequence title) {
+        final MenuItem item = menu.add(groupID, itemID, order, title);
+        item.setOnMenuItemClickListener(this);
+        return item;
     }
 
     /**
@@ -540,13 +592,12 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
     @Override
     public void onDestroyView() {
         mList.setOnItemClickListener(null);
-
         super.onDestroyView();
     }
 
     @Override
     public boolean onMenuItemClick(final MenuItem item) {
-        switch (item.getGroupId()) {
+        switch (item.getItemId()) {
             case ADD_REPLACE_PLAY:
             case ADD_REPLACE:
             case ADD:
@@ -565,6 +616,9 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
                     intent.putExtra(Artist.EXTRA, artist);
                     startActivityForResult(intent, -1);
                 }
+                break;
+            case DEVICE_DOWNLOAD:
+                downloadToDevice(item);
                 break;
             default:
                 final PlaylistFile playlist = PlaylistFile.byPath(item.getTitle().toString());

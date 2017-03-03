@@ -62,27 +62,26 @@ public class ArtistsFragment extends BrowseFragment<Artist> {
     }
 
     @Override
-    protected void add(final Artist item, final boolean replace, final boolean play) {
-        try {
-            mApp.getMPD().add(item, replace, play);
-            if (isAdded()) {
-                Tools.notifyUser(mIrAdded, item);
-            }
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add to queue.", e);
+    protected void add(final Artist item, final boolean replace, final boolean play)
+            throws IOException, MPDException {
+        mApp.getMPD().add(item, replace, play);
+        if (isAdded()) {
+            Tools.notifyUser(mIrAdded, item);
         }
     }
 
     @Override
-    protected void add(final Artist item, final PlaylistFile playlist) {
-        try {
-            mApp.getMPD().addToPlaylist(playlist, item);
-            if (isAdded()) {
-                Tools.notifyUser(mIrAdded, item);
-            }
-        } catch (final IOException | MPDException e) {
-            Log.e(TAG, "Failed to add to playlist.", e);
+    protected void add(final Artist item, final PlaylistFile playlist)
+            throws IOException, MPDException {
+        mApp.getMPD().addToPlaylist(playlist, item);
+        if (isAdded()) {
+            Tools.notifyUser(mIrAdded, item);
         }
+    }
+
+    @Override
+    protected Collection<Music> collectSongs(final Artist item) throws IOException, MPDException {
+        return mApp.getMPD().getSongs(item);
     }
 
     @Override
