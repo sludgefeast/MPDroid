@@ -120,10 +120,10 @@
             android:icon="@drawable/icon"
             android:process=":MPDroidService" />
 
-        <service android:name="com.namelessdev.mpdroid.helpers.SongDownloadService" />
-        <receiver android:name="com.namelessdev.mpdroid.helpers.SongDownloadService$CancelActionReceiver">
+        <service android:name="com.namelessdev.mpdroid.service.SongDownloadService" />
+        <receiver android:name="com.namelessdev.mpdroid.service.SongDownloadService$CancelActionReceiver">
             <intent-filter>
-                <action android:name="com.namelessdev.mpdroid.helpers.SongDownloadService.CANCEL" />
+                <action android:name="com.namelessdev.mpdroid.service.SongDownloadService.CANCEL" />
             </intent-filter>
         </receiver>
 

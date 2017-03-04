@@ -71,7 +71,7 @@ import com.namelessdev.mpdroid.adapters.ArrayIndexerAdapter;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.helpers.MPDAsyncHelper.AsyncExecListener;
 import com.namelessdev.mpdroid.helpers.MPDAsyncWorker;
-import com.namelessdev.mpdroid.helpers.SongDownloadService;
+import com.namelessdev.mpdroid.service.SongDownloadService;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
 import com.namelessdev.mpdroid.tools.Tools;
 import com.namelessdev.mpdroid.ui.ToolbarHelper;

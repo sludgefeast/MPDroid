@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.namelessdev.mpdroid.helpers;
+package com.namelessdev.mpdroid.service;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
@@ -64,7 +64,7 @@ public class SongDownloadService extends IntentService {
     private static final String SONG_PATHS = "SONG_PATHS";
 
     private static final String CANCEL =
-            "com.namelessdev.mpdroid.helpers.SongDownloadService.CANCEL";
+            "com.namelessdev.mpdroid.service.SongDownloadService.CANCEL";
 
     private static final String DOWNLOAD_ID = "DOWNLOAD_ID";
 
@@ -113,7 +113,7 @@ public class SongDownloadService extends IntentService {
         mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         INSTANCE = this;
-   }
+    }
 
     @Override
     public void onDestroy() {
@@ -160,11 +160,11 @@ public class SongDownloadService extends IntentService {
                             Tools.getString(R.string.downloadCancelled));
                     return;
                 }
-                    final String errorMessage = downloadSong(downloadID, localWebServer, songPath);
-                    if (errorMessage != null) {
-                        notificationCompatBuilder.setContentText(errorMessage);
-                        return;
-                    }
+                final String errorMessage = downloadSong(downloadID, localWebServer, songPath);
+                if (errorMessage != null) {
+                    notificationCompatBuilder.setContentText(errorMessage);
+                    return;
+                }
             }
 
             notificationCompatBuilder.setContentText(Tools.getString(R.string.downloadCompleted));
@@ -213,7 +213,7 @@ public class SongDownloadService extends IntentService {
             while ((count = input.read(data)) != -1) {
                 if (isCancelled(downloadID)) {
                     downloadDestination.delete();
-                    return null;
+                    return Tools.getString(R.string.downloadCancelled);
                 }
                 output.write(data, 0, count);
             }
