@@ -26,17 +26,22 @@ public final class Preferences {
     /**
      * Preference key of the personalization key.
      */
-    private static final String PREFERENCE_RATING_KEY = "ratingKey";
-
-    /**
-     * Preference key of the activation of favorites.
-     */
-    private static final String PREFERENCE_USE_FAVORITE = "useFavorites";
+    public static final String PREFERENCE_KEY_SORT_STREAMS = "sortStreams";
 
     /**
      * Preference key of the personalization key.
      */
-    private static final String PREFERENCE_FAVORITE_KEY = "favoriteKey";
+    private static final String PREFERENCE_KEY_RATING_KEY = "ratingKey";
+
+    /**
+     * Preference key of the activation of favorites.
+     */
+    private static final String PREFERENCE_KEY_USE_FAVORITE = "useFavorites";
+
+    /**
+     * Preference key of the personalization key.
+     */
+    private static final String PREFERENCE_KEY_FAVORITE_KEY = "favoriteKey";
 
     private Preferences() {
     }
@@ -44,7 +49,7 @@ public final class Preferences {
     public static String ratingsPersonalizationKey() {
         final SharedPreferences settings =
                 PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
-        return settings.getString(PREFERENCE_RATING_KEY, "").trim();
+        return settings.getString(PREFERENCE_KEY_RATING_KEY, "").trim();
     }
 
     /**
@@ -55,13 +60,19 @@ public final class Preferences {
     public static boolean areFavoritesActivated() {
         final SharedPreferences settings =
                 PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
-        return settings.getBoolean(PREFERENCE_USE_FAVORITE, false);
+        return settings.getBoolean(PREFERENCE_KEY_USE_FAVORITE, false);
     }
 
     public static String favoritesPersonalizationKey() {
         final SharedPreferences settings =
                 PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
-        return settings.getString(PREFERENCE_FAVORITE_KEY, "").trim();
+        return settings.getString(PREFERENCE_KEY_FAVORITE_KEY, "").trim();
+    }
+
+    public static boolean readBoolean(final String key, final boolean defaultValue) {
+        final SharedPreferences settings =
+                PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
+        return settings.getBoolean(key, defaultValue);
     }
 
 }

@@ -16,6 +16,18 @@
 
 package com.namelessdev.mpdroid.fragments;
 
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.MPDCommand;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.item.Artist;
+import com.anpmech.mpd.item.PlaylistFile;
+import com.anpmech.mpd.item.Stream;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.preferences.Preferences;
+import com.namelessdev.mpdroid.tools.StreamFetcher;
+import com.namelessdev.mpdroid.tools.Tools;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,18 +49,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.MPDCommand;
-import com.anpmech.mpd.commandresponse.StreamResponse;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.item.Artist;
-import com.anpmech.mpd.item.PlaylistFile;
-import com.anpmech.mpd.item.Stream;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.tools.StreamFetcher;
-import com.namelessdev.mpdroid.tools.Tools;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -146,12 +146,17 @@ public class StreamsFragment extends BrowseFragment<Stream> {
 
     @Override
     protected void asyncUpdate() {
-        StreamResponse streamResponse = new StreamResponse();
+        final List<Stream> streams = new ArrayList<>();
+        mUnordered.clear();
 
         /** Many users have playlist support disabled, no need for an exception. */
         if (mApp.getMPD().isCommandAvailable(MPDCommand.MPD_CMD_LISTPLAYLISTS)) {
             try {
-                streamResponse = mApp.getMPD().getSavedStreams();
+                streams.addAll(mApp.getMPD().getSavedStreams());
+                mUnordered.addAll(streams);
+                if (Preferences.readBoolean(Preferences.PREFERENCE_KEY_SORT_STREAMS, true)) {
+                    Collections.sort(streams);
+                }
             } catch (final IOException | MPDException e) {
                 Log.e(TAG, "Failed to retrieve saved streams.", e);
             }
@@ -159,10 +164,6 @@ public class StreamsFragment extends BrowseFragment<Stream> {
             Log.w(TAG, "Streams fragment can't load streams, playlist support not enabled.");
         }
 
-        final List<Stream> streams = new ArrayList<>(streamResponse);
-        mUnordered.clear();
-        mUnordered.addAll(streams);
-        Collections.sort(streams);
         replaceItems(streams);
     }
 
@@ -209,7 +210,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-                                    final ContextMenu.ContextMenuInfo menuInfo) {
+            final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.removeItem(DEVICE_DOWNLOAD);
 
@@ -230,7 +231,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-                             final Bundle savedInstanceState) {
+            final Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
 
         view.findViewById(R.id.streamAddButton).setOnClickListener(new View.OnClickListener() {
@@ -245,7 +246,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-                            final long id) {
+            final long id) {
         addAdapterItem(parent, position);
     }
 
@@ -340,7 +341,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
          * @param streams   The current list of streams.
          */
         private DeleteDialogClickListener(final Context context, final int itemIndex,
-                                          final List<Stream> streams) {
+                final List<Stream> streams) {
             mApp = (MPDApplication) context.getApplicationContext();
             mItemIndex = itemIndex;
             mStreamName = streams.get(itemIndex).getName();
@@ -370,7 +371,7 @@ public class StreamsFragment extends BrowseFragment<Stream> {
         private final EditText mUrlEdit;
 
         private AddEditOnClickListener(final EditText nameEdit, final EditText urlEdit,
-                                       final int index, final CharSequence streamUrlToAdd) {
+                final int index, final CharSequence streamUrlToAdd) {
             mNameEdit = nameEdit;
             mUrlEdit = urlEdit;
             mIndex = index;

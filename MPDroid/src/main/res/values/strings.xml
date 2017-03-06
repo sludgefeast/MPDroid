@@ -366,4 +366,7 @@
     <string name="Jamendo" translatable="false">Jamendo</string>
     <string name="coverSources">Cover sources</string>
     <string name="coverSourcesDescription">Enable, disable &amp; configure cover sources</string>
+
+    <string name="sortStreams">Sort streams</string>
+    <string name="sortStreamsDescription">Alphabetically sort streams. Otherwise list them in order of addition.</string>
 </resources>
