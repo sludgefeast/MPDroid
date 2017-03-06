@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.anpmech.mpd.subsystem.AudioOutput;
+import com.namelessdev.mpdroid.AboutActivity;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
@@ -54,7 +55,7 @@ public class ToolbarHelper {
     }
 
     public static void addStandardMenuItemClickListener(final Fragment fragment, Toolbar toolbar,
-                                                        final Toolbar.OnMenuItemClickListener chainedListener) {
+            final Toolbar.OnMenuItemClickListener chainedListener) {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final MenuItem menuItem) {
@@ -76,7 +77,7 @@ public class ToolbarHelper {
     }
 
     public static void addStandardMenuItemClickListener(final Activity activity, Toolbar toolbar,
-                                                        final Toolbar.OnMenuItemClickListener chainedListener) {
+            final Toolbar.OnMenuItemClickListener chainedListener) {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final MenuItem menuItem) {
@@ -151,9 +152,10 @@ public class ToolbarHelper {
                         new Intent(MPDApplication.INTENT_ACTION_REFRESH));
                 break;
             case R.id.menu_settings:
-                final Intent settingsIntent = new Intent(context,
-                        SettingsActivity.class);
-                context.startActivity(settingsIntent);
+                context.startActivity(new Intent(context, SettingsActivity.class));
+                break;
+            case R.id.menu_about:
+                context.startActivity(new Intent(context, AboutActivity.class));
                 break;
             default:
                 isConsumed = false;

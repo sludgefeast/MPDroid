@@ -333,14 +333,4 @@
             android:title="@string/playOnPhoneStateChange" />
     </PreferenceScreen>
 
-    <PreferenceScreen
-        android:key="aboutScreen"
-        android:title="@string/about">
-
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetClass="com.namelessdev.mpdroid.AboutActivity"
-            android:targetPackage="com.namelessdev.mpdroid" />
-    </PreferenceScreen>
-
 </PreferenceScreen>
