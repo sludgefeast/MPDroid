@@ -22,6 +22,7 @@ import android.view.View;
 
 import com.anpmech.mpd.item.Album;
 import com.anpmech.mpd.item.Artist;
+import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
@@ -77,7 +78,8 @@ public class AlbumGridDataBinder extends AlbumDataBinder<Album> {
 
         final AlbumViewHolder holder = (AlbumViewHolder) viewHolder;
         holder.mFavoriteButton.setAlbum((Album) item);
-        holder.mFavoriteButton.setVisibility(
-                Preferences.areFavoritesActivated() ? View.VISIBLE : View.GONE);
+        holder.mFavoriteButton.setVisibility(Preferences.areFavoritesActivated() &&
+                        MPDApplication.getInstance().getMPD().getStickerManager().isAvailable() ?
+                        View.VISIBLE : View.GONE);
     }
 }

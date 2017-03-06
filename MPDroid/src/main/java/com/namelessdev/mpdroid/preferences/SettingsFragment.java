@@ -141,6 +141,9 @@ public class SettingsFragment extends PreferenceFragment {
                 "playOnPhoneStateChange");
 
         refreshDynamicFields();
+
+        findPreference("ratings_favorites").setEnabled(
+                mApp.getMPD().getStickerManager().isAvailable());
     }
 
     @Override

@@ -511,8 +511,9 @@ public class SongsFragment extends BrowseFragment<Music> implements
             }
         });
 
-        mFavoriteButton.setVisibility(Preferences.areFavoritesActivated() ?
-                View.VISIBLE : View.GONE);
+        mFavoriteButton.setVisibility(Preferences.areFavoritesActivated() &&
+                        mApp.getMPD().getStickerManager().isAvailable()?
+                        View.VISIBLE : View.GONE);
 
         updateFromItems();
 

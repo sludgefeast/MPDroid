@@ -208,7 +208,9 @@
 
         </PreferenceCategory>
 
-        <PreferenceCategory android:title="@string/ratings_favorites">
+        <PreferenceCategory
+            android:key="ratings_favorites"
+            android:title="@string/ratings_favorites">
 
             <EditTextPreference
                 android:defaultValue="rating"
