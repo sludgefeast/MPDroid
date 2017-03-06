@@ -16,11 +16,14 @@
 
 package com.namelessdev.mpdroid.fragments;
 
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.preferences.Preferences;
+import com.namelessdev.mpdroid.tools.LibraryTabsUtil;
+import com.namelessdev.mpdroid.ui.ToolbarHelper;
+
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -33,10 +36,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.tools.LibraryTabsUtil;
-import com.namelessdev.mpdroid.ui.ToolbarHelper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -190,14 +189,9 @@ abstract class LibraryFragmentBase extends Fragment {
 
             switch (tab) {
                 case LibraryTabsUtil.TAB_ALBUMS:
-                    final SharedPreferences settings =
-                            PreferenceManager.getDefaultSharedPreferences(mContext);
-
-                    if (settings.getBoolean(ArtistsFragment.PREFERENCE_ALBUM_LIBRARY, true)) {
-                        fragment = createFragment(AlbumsGridFragment.class);
-                    } else {
-                        fragment = createFragment(AlbumsFragment.class);
-                    }
+                    fragment = Preferences.isAlbumArtLibraryEnabled() ?
+                            createFragment(AlbumsGridFragment.class) :
+                            createFragment(AlbumsFragment.class);
                     break;
                 case LibraryTabsUtil.TAB_ARTISTS:
                     fragment = createFragment(ArtistsFragment.class);

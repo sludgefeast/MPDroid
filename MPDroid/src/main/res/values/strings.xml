@@ -269,7 +269,7 @@
     <string name="enableLocalCoverCacheDescription">Saves downloaded cover art on the device for faster retrieval</string>
     <string name="clearLocalCoverCache">Clear cover art cache</string>
     <string name="clearLocalCoverCacheDescription">Free the storage space used by the cover art cache</string>
-    <string name="clearLocalCoverCachePrompt">Delete all cached cover art ?</string>
+    <string name="clearLocalCoverCachePrompt">Delete all cached cover art?</string>
     <string name="updatingLocalAlbumCacheNote">Updating local album cache</string>
 
     <string name="goToAlbum">Go to album</string>

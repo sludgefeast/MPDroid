@@ -35,6 +35,7 @@ import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
 import com.namelessdev.mpdroid.models.GenresGroup;
+import com.namelessdev.mpdroid.preferences.Preferences;
 import com.namelessdev.mpdroid.tools.Tools;
 
 import java.io.IOException;
@@ -42,8 +43,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class ArtistsFragment extends BrowseFragment<Artist> {
-
-    public static final String PREFERENCE_ALBUM_LIBRARY = "enableAlbumArtLibrary";
 
     public static final String PREFERENCE_ARTIST_TAG_TO_USE = "artistTagToUse";
 
@@ -170,15 +169,13 @@ public class ArtistsFragment extends BrowseFragment<Artist> {
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
                             final long id) {
-        final SharedPreferences settings = PreferenceManager
-                .getDefaultSharedPreferences(mApp);
         final Activity activity = getActivity();
 
         final Bundle bundle = new Bundle(2);
         bundle.putParcelable(Artist.EXTRA, mItems.get(position));
         bundle.putParcelable(GenresGroup.EXTRA, mGenresGroup);
 
-        final Fragment fragment = settings.getBoolean(PREFERENCE_ALBUM_LIBRARY, true) ?
+        final Fragment fragment = Preferences.isAlbumArtLibraryEnabled() ?
                 Fragment.instantiate(activity, AlbumsGridFragment.class.getName(), bundle) :
                 Fragment.instantiate(activity, AlbumsFragment.class.getName(), bundle);
 

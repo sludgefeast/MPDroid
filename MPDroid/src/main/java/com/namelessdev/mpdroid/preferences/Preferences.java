@@ -23,6 +23,8 @@ import com.namelessdev.mpdroid.MPDApplication;
 
 public final class Preferences {
 
+    private static final String PREFERENCE_KEY_ENABLE_ALBUM_ART_LIBRARY = "enableAlbumArtLibrary";
+
     /**
      * Preference key of the personalization key.
      */
@@ -44,6 +46,10 @@ public final class Preferences {
     private static final String PREFERENCE_KEY_FAVORITE_KEY = "favoriteKey";
 
     private Preferences() {
+    }
+
+    public static boolean isAlbumArtLibraryEnabled() {
+        return readBoolean(PREFERENCE_KEY_ENABLE_ALBUM_ART_LIBRARY, true);
     }
 
     public static String ratingsPersonalizationKey() {

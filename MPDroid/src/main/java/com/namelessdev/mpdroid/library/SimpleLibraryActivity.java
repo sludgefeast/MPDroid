@@ -49,6 +49,7 @@ import com.namelessdev.mpdroid.fragments.OutputsFragment;
 import com.namelessdev.mpdroid.fragments.SongsFragment;
 import com.namelessdev.mpdroid.fragments.StreamsFragment;
 import com.namelessdev.mpdroid.helpers.MPDControl;
+import com.namelessdev.mpdroid.preferences.Preferences;
 import com.namelessdev.mpdroid.tools.Tools;
 
 public class SimpleLibraryActivity extends MPDActivity implements ILibraryFragmentActivity,
@@ -91,14 +92,9 @@ public class SimpleLibraryActivity extends MPDActivity implements ILibraryFragme
         if (intent.hasExtra(Album.EXTRA)) {
             rootFragment = getFragment(SongsFragment.class, intent);
         } else if (intent.hasExtra(Artist.EXTRA)) {
-            final SharedPreferences settings = PreferenceManager
-                    .getDefaultSharedPreferences(mApp);
-
-            if (settings.getBoolean(ArtistsFragment.PREFERENCE_ALBUM_LIBRARY, true)) {
-                rootFragment = getFragment(AlbumsGridFragment.class, intent);
-            } else {
-                rootFragment = getFragment(AlbumsFragment.class, intent);
-            }
+            rootFragment = Preferences.isAlbumArtLibraryEnabled() ?
+                    getFragment(AlbumsGridFragment.class, intent) :
+                    getFragment(AlbumsFragment.class, intent);
         } else if (intent.hasExtra(Directory.EXTRA)) {
             rootFragment = getFragment(FSFragment.class, intent);
         } else if (intent.hasExtra(Stream.EXTRA)) {
