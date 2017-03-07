@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:ellipsize="marquee"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/nowplaying_songinfo_body1_text_color" />
 

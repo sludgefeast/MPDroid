@@ -44,7 +44,6 @@
             android:ellipsize="marquee"
             android:fontFamily="sans-serif-light"
             android:maxLines="1"
-            android:singleLine="true"
             android:textAppearance="?android:textAppearanceMedium" />
 
         <TextView
@@ -53,7 +52,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:maxLines="1"
-            android:singleLine="true"
             android:text="@string/artist"
             android:textAppearance="?android:textAppearanceSmall" />
     </LinearLayout>

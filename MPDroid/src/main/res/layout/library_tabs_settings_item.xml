@@ -22,6 +22,6 @@
     android:drawablePadding="8dp"
     android:gravity="center_vertical"
     android:paddingLeft="10dp"
-    android:singleLine="true"
+    android:maxLines="1"
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:textSize="20sp" />

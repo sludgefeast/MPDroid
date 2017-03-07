@@ -48,7 +48,6 @@
             android:ellipsize="marquee"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:singleLine="true"
             android:textColor="@android:color/white" />
         <!-- Move the Artist & Title close to each other -->
         <TextView
@@ -60,7 +59,6 @@
             android:ellipsize="marquee"
             android:gravity="bottom"
             android:maxLines="1"
-            android:singleLine="true"
             android:textAppearance="?android:textAppearanceSmall" />
 
         <TextView
@@ -72,7 +70,6 @@
             android:ellipsize="marquee"
             android:gravity="top"
             android:maxLines="1"
-            android:singleLine="true"
             android:textAppearance="?android:textAppearanceSmall" />
     </LinearLayout>
 

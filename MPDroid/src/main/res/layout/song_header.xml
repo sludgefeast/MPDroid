@@ -69,9 +69,9 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            tools:text="Album Name" />
+            tools:text="Album Name"
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/tracks_artist"
@@ -81,9 +81,9 @@
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            tools:text="Artist Name" />
+            tools:text="Artist Name"
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/tracks_info"
@@ -94,10 +94,10 @@
             android:alpha="60"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textSize="12sp"
-            tools:text="Tracks" />
+            tools:text="Tracks"
+            android:maxLines="1" />
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

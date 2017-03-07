@@ -58,8 +58,8 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="10dp"
-            android:singleLine="true"
-            android:textColor="?attr/cardPrimaryTextColor" />
+            android:textColor="?attr/cardPrimaryTextColor"
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/album_info"
@@ -71,7 +71,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:singleLine="true" />
+            android:maxLines="1" />
 
         <com.namelessdev.mpdroid.views.FavoriteButton
             android:id="@+id/favoriteButton"
