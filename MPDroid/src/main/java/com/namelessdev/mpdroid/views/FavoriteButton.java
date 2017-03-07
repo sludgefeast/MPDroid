@@ -56,11 +56,13 @@ public class FavoriteButton extends ToggleButton implements CompoundButton.OnChe
     }
 
     public FavoriteButton(final Context context, final AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        init();
     }
 
     public FavoriteButton(final Context context) {
-        this(context, null);
+        super(context);
+        init();
     }
 
     private void init() {
