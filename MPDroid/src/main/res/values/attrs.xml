@@ -41,6 +41,8 @@
         <attr name="prevIcon" format="reference" />
         <attr name="nextIcon" format="reference" />
         <attr name="volumeIcon" format="reference" />
+        <attr name="rewindIcon" format="reference" />
+        <attr name="forwardIcon" format="reference" />
         <attr name="playQueueIcon" format="reference" />
         <attr name="overflowButton" format="reference" />
         <attr name="listItemSecondaryTextColor" format="color" />

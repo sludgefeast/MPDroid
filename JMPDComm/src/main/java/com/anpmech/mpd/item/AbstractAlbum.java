@@ -50,6 +50,29 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
 
     final long mDate;
 
+    public static final Comparator<Album> SORT_BY_LASTMOD =
+        new Comparator<Album>() {
+            /**
+             * Compares albums by last modification date, newest first
+             */
+            @Override
+            public int compare(final Album lhs, final Album rhs) {
+                int compare = 0;
+
+                if (lhs.mLastMod < rhs.mLastMod) {
+                    compare = 1;
+                } else if (lhs.mLastMod > rhs.mLastMod) {
+                    compare = -1;
+                }
+
+                if (compare == 0) {
+                    compare = lhs.compareTo(rhs);
+                }
+
+                return compare;
+            }
+        };
+
     private final long mDuration;
 
     private final boolean mHasAlbumArtist;
@@ -60,8 +83,12 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
 
     private final long mSongCount;
 
+    final long mLastMod; /* last modified, latest lastMod of all tracks */
+
     AbstractAlbum(final String name, final Artist artist, final boolean hasAlbumArtist,
-                  final long songCount, final long duration, final long date, final String path) {
+                  final long songCount, final long duration, final long date, final String path,
+                  final long lastMod) {
+        super();
         mName = name;
         mSongCount = songCount;
         mDuration = duration;
@@ -69,6 +96,7 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
         mArtist = artist;
         mHasAlbumArtist = hasAlbumArtist;
         mPath = path;
+        mLastMod = lastMod;
     }
 
     /**
@@ -146,6 +174,10 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
 
     public boolean hasAlbumArtist() {
         return mHasAlbumArtist;
+    }
+
+    public long getLastMod() {
+        return mLastMod;
     }
 
     /**

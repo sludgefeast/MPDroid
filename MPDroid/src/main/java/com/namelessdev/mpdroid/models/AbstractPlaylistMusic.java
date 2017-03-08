@@ -18,6 +18,8 @@ package com.namelessdev.mpdroid.models;
 
 import com.anpmech.mpd.item.Music;
 
+import java.util.Locale;
+
 public abstract class AbstractPlaylistMusic extends Music {
 
     private int mCurrentSongIconRefID;
@@ -47,4 +49,21 @@ public abstract class AbstractPlaylistMusic extends Music {
     public void setForceCoverRefresh(final boolean forceCoverRefresh) {
         mForceCoverRefresh = forceCoverRefresh;
     }
+
+    /*
+     * default is 1
+     */
+    public long size() {
+        return 1;
+    }
+
+    public boolean hasText(String filter) {
+        return ((getAlbumArtistOrArtist() != null ? getAlbumArtistOrArtist() : "")
+                .toLowerCase(Locale.getDefault()).contains(filter) ||
+                (getAlbumName() != null ? getAlbumName() : "")
+                .toLowerCase(Locale.getDefault()).contains(filter) ||
+                (getTitle() != null ? getTitle() : "")
+                .toLowerCase(Locale.getDefault()).contains(filter));
+    }
+
 }

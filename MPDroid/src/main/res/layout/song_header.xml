@@ -26,7 +26,7 @@
     <FrameLayout
         android:id="@+id/albumCoverFrame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
 
         <com.namelessdev.mpdroid.ui.SquareImageView
             android:id="@+id/albumCover"
@@ -52,7 +52,10 @@
         android:background="@android:color/transparent"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:ellipsize="marquee"
+        android:scrollHorizontally="true"
+        android:maxLines="1" />
 
     <RelativeLayout
         android:id="@+id/tracks_info_container"
@@ -61,7 +64,12 @@
         android:layout_below="@+id/albumCoverFrame"
         android:paddingBottom="10dp"
         android:paddingLeft="@dimen/material_list_item_element_horizontal_padding"
-        android:paddingTop="10dp">
+        android:paddingTop="10dp"
+        android:ellipsize="marquee"
+        android:scrollHorizontally="true"
+        android:gravity="center_vertical"
+        android:maxLines="1">
+
 
         <TextView
             android:id="@+id/tracks_album"
@@ -110,7 +118,8 @@
         android:layout_marginTop="-32dp"
         android:paddingRight="8dp"
         android:src="@drawable/ic_media_play"
-        app:borderWidth="0dp" />
+        app:borderWidth="0dp"
+        android:alpha="0.8" />
 
     <com.namelessdev.mpdroid.views.FavoriteButton
         android:id="@+id/favoriteButton"

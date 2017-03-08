@@ -85,6 +85,7 @@ public class CachedMPD extends MPD {
             details = mCache.getAlbumDetails(artistName, album.getName(), album.hasAlbumArtist());
             if (details != null) {
                 albumBuilder.setAlbumDetails(details.mNumTracks, details.mTotalTime);
+                albumBuilder.setLastMod(details.mLastMod);
                 albumBuilder.setSongDetails(details.mDate, details.mPath);
                 iterator.set(albumBuilder.build());
             }

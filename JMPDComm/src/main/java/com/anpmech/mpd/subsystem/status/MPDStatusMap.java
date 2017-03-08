@@ -385,7 +385,15 @@ public class MPDStatusMap extends ResponseMap implements MPDStatus {
      */
     @Override
     public final float getDuration() {
-        return parseMapFloat(RESPONSE_DURATION);
+        float duration = parseMapFloat(RESPONSE_DURATION);  // oldstyle response? ("duration")
+        if (Float.isNaN(duration)) {
+            // duration is the value after ":" in "time"
+            final String value = getMapValue(RESPONSE_TIME);
+            if (value != null) {
+                duration = (float)(Tools.parseInteger(value.substring(value.indexOf(':')+1))) * 1000f; // millisecs don't make sense here but are returned by definition
+            }
+        }
+        return duration;
     }
 
     /**

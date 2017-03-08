@@ -169,6 +169,19 @@
             android:summary="@string/useLocalAlbumCacheDescription"
             android:title="@string/useLocalAlbumCache" />
 
+        <PreferenceScreen
+            android:key="clearLocalAlbumCache"
+            android:summary="@string/clearLocalAlbumCacheDescription"
+            android:title="@string/clearLocalAlbumCache" />
+
+        <ListPreference
+            android:defaultValue="alphabet"
+            android:entries="@array/setting_albumsort_array"
+            android:entryValues="@array/setting_albumsort_array_values"
+            android:key="sortAlbumsBy"
+            android:summary="@string/sortAlbumsByDescription"
+            android:title="@string/sortAlbumsBy" />
+
         <ListPreference
             android:defaultValue="both"
             android:entries="@array/setting_artist_tag_array"
@@ -177,11 +190,11 @@
             android:summary="@string/artistTagToUseDescription"
             android:title="@string/artistTagToUse" />
 
-        <CheckBoxPreference
+        <!-- CheckBoxPreference
             android:key="sortAlbumsByYear"
             android:persistent="true"
             android:summary="@string/sortAlbumsByYearDescription"
-            android:title="@string/sortAlbumsByYear" />
+            android:title="@string/sortAlbumsByYear" / -->
 
         <CheckBoxPreference
             android:defaultValue="true"
@@ -277,6 +290,12 @@
 
             <CheckBoxPreference
                 android:defaultValue="true"
+                android:key="enableRepeatAndShuffleButton"
+                android:persistent="true"
+                android:title="@string/enableRepeatAndShuffleButton" />
+
+            <CheckBoxPreference
+                android:defaultValue="true"
                 android:key="tabletUI"
                 android:persistent="true"
                 android:title="@string/enableTabletUI" />
@@ -304,6 +323,13 @@
                 android:key="enableRating"
                 android:persistent="true"
                 android:title="@string/enableRating" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="collapseAlbums"
+                android:persistent="true"
+                android:title="@string/collapseAlbums" />
+
         </PreferenceScreen>
 
         <CheckBoxPreference

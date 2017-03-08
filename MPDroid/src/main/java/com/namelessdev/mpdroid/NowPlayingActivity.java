@@ -25,6 +25,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -178,6 +179,21 @@ public class NowPlayingActivity extends MPDActivity {
         }
 
         return itemHandled;
+    }
+
+    @Override
+    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+        final boolean result;
+
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+            // For onKeyLongPress to work
+            event.startTracking();
+            result = !mApp.isLocalAudible();
+        } else {
+            result = super.onKeyDown(keyCode, event);
+        }
+
+        return result;
     }
 
     @Override

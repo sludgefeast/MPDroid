@@ -635,6 +635,8 @@ public class SongsFragment extends BrowseFragment<Music> implements
             headerInfos = mAlbum.getDate() + ", " + headerInfos;
         }
         mHeaderInfo.setText(headerInfos);
+        mHeaderArtist.setSelected(true);
+        mHeaderInfo.setSelected(true);
         if (mCoverHelper != null) {
             // Delay the cover art download for Lollipop transition
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && mFirstRefresh) {

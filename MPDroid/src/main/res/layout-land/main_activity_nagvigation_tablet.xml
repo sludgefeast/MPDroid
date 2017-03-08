@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (C) 2010-2016 The MPDroid Project
+  ~ Copyright (C) 2010-2015 The MPDroid Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,7 +14,8 @@
   ~ limitations under the License.
   -->
 
-<android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -74,6 +75,7 @@
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:paddingLeft="10dip"
+                            android:singleLine="true"
                             android:text=""
                             android:textColor="?android:textColorPrimary"
                             android:textSize="18sp" />

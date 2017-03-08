@@ -137,6 +137,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
 
     private Music mCurrentSong = null;
 
+    private ImageButton mFFButton = null;
+
     private Handler mHandler;
 
     private boolean mIsAudioNameTextEnabled = false;
@@ -148,6 +150,8 @@ abstract class NowPlayingFragmentBase extends Fragment implements
     private View.OnTouchListener mPopupMenuTouchListener = null;
 
     private Timer mPosTimer = null;
+
+    private ImageButton mREWButton = null;
 
     private ImageButton mRepeatButton = null;
 
@@ -565,40 +569,19 @@ abstract class NowPlayingFragmentBase extends Fragment implements
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(final SeekBar seekBar, final int progress,
-                                                  final boolean fromUser) {
+                            final boolean fromUser) {
+
+                        if (fromUser) {
+                            MPDControl.run(MPDControl.ACTION_VOLUME_SET, progress);
+                        }
                     }
 
                     @Override
                     public void onStartTrackingTouch(final SeekBar seekBar) {
-                        mVolTimerTask = new TimerTask() {
-                            private int mLastSentVol = -1;
-
-                            private SeekBar mProgress;
-
-                            @Override
-                            public void run() {
-                                final int progress = mProgress.getProgress();
-
-                                if (mLastSentVol != progress) {
-                                    mLastSentVol = progress;
-                                    MPDControl.run(MPDControl.ACTION_VOLUME_SET, progress);
-                                }
-                            }
-
-                            TimerTask setProgress(final SeekBar prg) {
-                                mProgress = prg;
-                                return this;
-                            }
-                        }.setProgress(seekBar);
-
-                        mVolTimer.scheduleAtFixedRate(mVolTimerTask, (long) MPDStatusMap.VOLUME_MIN,
-                                (long) MPDStatusMap.VOLUME_MAX);
                     }
 
                     @Override
                     public void onStopTrackingTouch(final SeekBar seekBar) {
-                        mVolTimerTask.cancel();
-                        mVolTimerTask.run();
                     }
                 };
 
@@ -718,6 +701,20 @@ abstract class NowPlayingFragmentBase extends Fragment implements
         mPlayPauseButton = getEventButton(view, R.id.playpause, true);
         mRepeatButton = getEventButton(view, R.id.repeat, false);
         mShuffleButton = getEventButton(view, R.id.shuffle, false);
+        mFFButton = getEventButton(view, R.id.forward, false);
+        mREWButton = getEventButton(view, R.id.rewind, false);
+        if (mSharedPreferences.getBoolean("enableRepeatAndShuffleButton", false)) {
+            mFFButton.setVisibility(View.GONE);
+            mREWButton.setVisibility(View.GONE);
+            mRepeatButton.setVisibility(View.VISIBLE);
+            mShuffleButton.setVisibility(View.VISIBLE);
+        } else {
+            mRepeatButton.setVisibility(View.GONE);
+            mShuffleButton.setVisibility(View.GONE);
+            mFFButton.setVisibility(View.VISIBLE);
+            mREWButton.setVisibility(View.VISIBLE);
+        }
+
         mStopButton = getEventButton(view, R.id.stop, true);
         applyViewVisibility(mStopButton, "enableStopButton");
 
@@ -1198,7 +1195,6 @@ abstract class NowPlayingFragmentBase extends Fragment implements
     @Override
     public void volumeChanged(final int oldVolume) {
         final int volume = mMPDStatus.getVolume();
-
         toggleVolumeBar(volume);
         mVolumeSeekBar.setProgress(volume);
     }

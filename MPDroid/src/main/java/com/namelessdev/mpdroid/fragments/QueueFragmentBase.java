@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -910,9 +911,17 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
             }
 
             final AbstractPlaylistMusic music = getItem(position);
-
+            String mainline = music.getPlayListMainLine();
+            if (mainline.startsWith("PLA (")) { // is an album line
+                mainline = mainline.substring(4);
+                viewHolder.mTitle.setTypeface(viewHolder.mTitle.getTypeface(), Typeface.ITALIC);
+                viewHolder.mArtist.setTypeface(viewHolder.mArtist.getTypeface(), Typeface.ITALIC);
+            } else {
+                viewHolder.mTitle.setTypeface(viewHolder.mTitle.getTypeface(), Typeface.NORMAL);
+                viewHolder.mArtist.setTypeface(viewHolder.mArtist.getTypeface(), Typeface.NORMAL);
+            }
             viewHolder.mArtist.setText(music.getPlaylistSubLine());
-            viewHolder.mTitle.setText(music.getPlayListMainLine());
+            viewHolder.mTitle.setText(mainline);
             viewHolder.mMenuButton.setTag(music.getSongId());
             viewHolder.mPlay.setImageResource(music.getCurrentSongIconRefID());
 

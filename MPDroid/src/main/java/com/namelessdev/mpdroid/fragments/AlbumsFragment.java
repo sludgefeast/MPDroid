@@ -57,7 +57,11 @@ import java.util.List;
 
 public class AlbumsFragment extends BrowseFragment<Album> {
 
-    private static final String ALBUM_YEAR_SORT_KEY = "sortAlbumsByYear";
+    private static final String PREFERENCE_ALBUM_SORT = "sortAlbumsBy";
+
+    private static final String PREFERENCE_ALBUM_SORT_ALPHA   = "alphabetically";
+    private static final String PREFERENCE_ALBUM_SORT_YEAR    = "albumyear";
+    private static final String PREFERENCE_ALBUM_SORT_LASTMOD = "lastmodified";
 
     private static final String SHOW_ALBUM_TRACK_COUNT_KEY = "showAlbumTrackCount";
 
@@ -108,15 +112,22 @@ public class AlbumsFragment extends BrowseFragment<Album> {
     @Override
     protected void asyncUpdate() {
         final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mApp);
-        final boolean sortByYear = settings.getBoolean(ALBUM_YEAR_SORT_KEY, false);
+        final String sortBy = settings.getString(PREFERENCE_ALBUM_SORT,
+                                                 PREFERENCE_ALBUM_SORT_ALPHA);
 
         try {
             replaceItems(loadAlbums());
 
-            if (sortByYear) {
-                Collections.sort(mItems, Album.SORT_BY_DATE);
-            } else {
-                Collections.sort(mItems);
+            switch (sortBy) {
+                case PREFERENCE_ALBUM_SORT_YEAR:
+                    Collections.sort(mItems, Album.SORT_BY_DATE);
+                    break;
+                case PREFERENCE_ALBUM_SORT_LASTMOD:
+                    Collections.sort(mItems, Album.SORT_BY_LASTMOD);
+                    break;
+                default:
+                    Collections.sort(mItems);
+                    break;
             }
 
             if (mGenresGroups != null) { // filter albums not in genre

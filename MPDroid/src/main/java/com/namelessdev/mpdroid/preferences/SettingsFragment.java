@@ -39,6 +39,7 @@ import com.namelessdev.mpdroid.SearchRecentProvider;
 import com.namelessdev.mpdroid.cover.CoverManager;
 import com.namelessdev.mpdroid.cover.retriever.CachedCover;
 import com.namelessdev.mpdroid.tools.Tools;
+import com.namelessdev.mpdroid.helpers.CachedMPD;
 
 import java.io.IOException;
 
@@ -179,6 +180,16 @@ public class SettingsFragment extends PreferenceFragment {
                     })
                     .setNegativeButton(R.string.cancel, Tools.NOOP_CLICK_LISTENER)
                     .show();
+            return true;
+        }
+
+        if ("clearLocalAlbumCache".equals(preference.getKey())) {
+            try {
+                CachedMPD cMPD = (CachedMPD) mApp.getMPD();
+                cMPD.clearCache();
+            } catch (ClassCastException e) {
+                // not album-cached
+            }
             return true;
         }
 

@@ -226,25 +226,19 @@ public class SearchActivity extends MPDActivity implements OnMenuItemClickListen
             }
             valueFound = false;
 
-            String artistName = music.getAlbumArtistName();
-            if (TextUtils.isEmpty(artistName)) {
-                artistName = music.getArtistName();
-            }
-
-            if (artistName != null) {
-                final Artist artist = Artist.byName(artistName);
-
-                tmpValue = artistName.toLowerCase();
-                if (tmpValue.contains(finalSearch)) {
-                    for (final Artist artistItem : mArtistResults) {
-                        final String artistItemName = artistItem.getName();
-                        if (artistItemName != null &&
-                                artistItemName.equalsIgnoreCase(tmpValue)) {
-                            valueFound = true;
-                        }
+            Artist artists[] = new Artist[2];
+            artists[0] = music.getAlbumArtist();
+            artists[1] = music.getArtist();
+            for (Artist artist : artists) {
+                if (artist != null && !artist.isUnknown()) {
+                    final String name = artist.getName();
+                    if (name != null) {
+                        tmpValue = name.toLowerCase();
+                        if (tmpValue.contains(finalSearch)) {
+                            if (!mArtistResults.contains(artist)) {
+                                mArtistResults.add(artist);
+                            }
                     }
-                    if (!valueFound) {
-                        mArtistResults.add(artist);
                     }
                 }
             }

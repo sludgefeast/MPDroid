@@ -123,6 +123,11 @@ abstract class AbstractMusic<T extends AbstractMusic<T>> extends AbstractEntry<T
     public static final String RESPONSE_TRACK = "Track";
 
     /**
+     * The media server response key returned for a LastMod value.
+     */
+    public static final String RESPONSE_LASTMOD = "Last-Modified";
+
+    /**
      * The string used to refer to an album tag.
      */
     public static final String TAG_ALBUM = "album";
@@ -362,7 +367,9 @@ abstract class AbstractMusic<T extends AbstractMusic<T>> extends AbstractEntry<T
     }
 
     public Artist getAlbumArtist() {
-        return Artist.byName(getAlbumArtistName());
+        final String name = getAlbumArtistName();
+        if (name == null) return null;
+        return Artist.byName(name);
     }
 
     /**
@@ -681,6 +688,21 @@ abstract class AbstractMusic<T extends AbstractMusic<T>> extends AbstractEntry<T
 
         return track;
     }
+
+    /*
+     * get last modification date
+     */
+    public long getLastMod() {
+        final String value = findValue(RESPONSE_LASTMOD);
+        long lastMod = Long.MIN_VALUE;
+        try {
+            lastMod = parseDate(value);
+        } catch (final NumberFormatException e) {
+            Log.warning(TAG, value + " is not a valid last-mod date value.", e);
+        }
+        return lastMod;
+    }
+
 
     /**
      * Returns the URI fragment if it exists.
