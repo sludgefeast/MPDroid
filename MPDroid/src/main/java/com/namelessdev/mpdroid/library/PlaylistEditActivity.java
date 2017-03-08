@@ -54,7 +54,7 @@ public class PlaylistEditActivity extends MPDActivity implements StatusChangeLis
 
     private static final String TAG = "PlaylistEditActivity";
 
-    private final MPD mMPD = mApp.getMPD();
+    private MPD mMPD;
 
     private boolean mIsFirstRefresh = true;
 
@@ -151,6 +151,9 @@ public class PlaylistEditActivity extends MPDActivity implements StatusChangeLis
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mMPD = mApp.getMPD();
+
         mPlaylist = getIntent().getParcelableExtra(PlaylistFile.EXTRA);
         if (null != mPlaylist) {
             mIsPlayQueue = false;
