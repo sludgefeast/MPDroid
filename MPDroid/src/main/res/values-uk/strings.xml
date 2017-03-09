@@ -173,7 +173,7 @@
     <string name="tracksInfoHeader">%1$s треків, %2$s</string>
     <string name="tracksInfoHeaderPlural">%1$s треків, %2$s</string>
     <string name="audioFocusFailed">Неможливо почати поток: Інша програма відтворює музику.</string>
-    <string name="addToPlaylist">Додати до плейлиста</string>
+    <string name="addToPlaylist">Додати до плейлиста…</string>
     <string name="newPlaylist">(Новий плейлист)</string>
     <string name="playlistName">Назва плейлиста</string>
     <string name="newPlaylistPrompt">Введіть назву для плейлиста:</string>

@@ -192,7 +192,7 @@
     <string name="variousArtists">Verschiedene Interpreten</string>
     <string name="tracksInfoHeader">%1$s Titel, %2$s</string>
     <string name="tracksInfoHeaderPlural">%1$s Titel, %2$s</string>
-    <string name="addToPlaylist">Zu einer Wiedergabeliste hinzufügen</string>
+    <string name="addToPlaylist">Zu einer Wiedergabeliste hinzufügen…</string>
     <string name="newPlaylist">(Neue Wiedergabeliste)</string>
     <string name="playlistName">Wiedergabeliste</string>
     <string name="newPlaylistPrompt">Name der neuen Wiedergabeliste:</string>

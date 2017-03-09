@@ -286,7 +286,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(final DialogInterface dialog,
-                                                    final int which) {
+                                        final int which) {
                                     final String name = input.getText().toString().trim();
                                     if (!name.isEmpty()) {
                                         addToPlaylistFile(PlaylistFile.byPath(name), id);
@@ -497,7 +497,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-                                    final ContextMenu.ContextMenuInfo menuInfo) {
+            final ContextMenu.ContextMenuInfo menuInfo) {
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
         final int index = (int) info.id;
         final T item = mItems.get(index);
@@ -537,17 +537,17 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
     }
 
     protected MenuItem addMenuItem(final Menu menu, final int itemID,
-                                   @StringRes final int titleResId) {
+            @StringRes final int titleResId) {
         return addMenuItem(menu, Menu.NONE, itemID, 0, titleResId);
     }
 
     protected MenuItem addMenuItem(final Menu menu, final int groupID, final int itemID,
-                                   final int order, @StringRes final int titleResId) {
+            final int order, @StringRes final int titleResId) {
         return addMenuItem(menu, groupID, itemID, order, Tools.getString(titleResId));
     }
 
     protected MenuItem addMenuItem(final Menu menu, final int groupID, final int itemID,
-                                   final int order, final CharSequence title) {
+            final int order, final CharSequence title) {
         final MenuItem item = menu.add(groupID, itemID, order, title);
         item.setOnMenuItemClickListener(this);
         return item;
@@ -561,7 +561,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-                             final Bundle savedInstanceState) {
+            final Bundle savedInstanceState) {
         final View view = inflater.inflate(getLayoutResId(), container, false);
         mList = (AbsListView) view.findViewById(R.id.list);
         registerForContextMenu(mList);
@@ -597,32 +597,33 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
 
     @Override
     public boolean onMenuItemClick(final MenuItem item) {
-        switch (item.getItemId()) {
-            case ADD_REPLACE_PLAY:
-            case ADD_REPLACE:
-            case ADD:
-            case ADD_PLAY:
-                addAndReplace(item);
-                break;
+        switch (item.getGroupId()) {
+            case Menu.NONE:
+                switch (item.getItemId()) {
+                    case ADD_REPLACE_PLAY:
+                    case ADD_REPLACE:
+                    case ADD:
+                    case ADD_PLAY:
+                        addAndReplace(item);
+                        break;
+                    case GOTO_ARTIST:
+                        final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+                                .getMenuInfo();
+                        final Intent intent = new Intent(getActivity(),
+                                SimpleLibraryActivity.class);
+                        final Artist artist = getArtist(mItems.get((int) info.id));
+
+                        if (artist != null) {
+                            intent.putExtra(Artist.EXTRA, artist);
+                            startActivityForResult(intent, -1);
+                        }
+                        break;
+                    case DEVICE_DOWNLOAD:
+                        downloadToDevice(item);
+                        break;
+                }
             case ADD_TO_PLAYLIST:
                 addToPlaylist(item);
-                break;
-            case GOTO_ARTIST:
-                final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-                final Intent intent = new Intent(getActivity(), SimpleLibraryActivity.class);
-                final Artist artist = getArtist(mItems.get((int) info.id));
-
-                if (artist != null) {
-                    intent.putExtra(Artist.EXTRA, artist);
-                    startActivityForResult(intent, -1);
-                }
-                break;
-            case DEVICE_DOWNLOAD:
-                downloadToDevice(item);
-                break;
-            default:
-                final PlaylistFile playlist = PlaylistFile.byPath(item.getTitle().toString());
-                addToPlaylistFile(playlist, item.getOrder());
                 break;
         }
         return false;
@@ -973,7 +974,7 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
          * @param context       The current context.
          */
         private UpdatePlaylistList(final Collection<PlaylistFile> playlistFiles,
-                                   final Context context) {
+                final Context context) {
             mApp = (MPDApplication) context.getApplicationContext();
             mPlaylistFiles = playlistFiles;
         }

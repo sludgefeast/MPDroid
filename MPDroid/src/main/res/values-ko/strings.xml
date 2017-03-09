@@ -180,7 +180,7 @@
     <string name="variousArtists">여러 연주자</string>
     <string name="tracksInfoHeader">%1$s 곡, %2$s</string>
     <string name="tracksInfoHeaderPlural">%1$s 곡, %2$s</string>
-    <string name="addToPlaylist">연주목록에 추가</string>
+    <string name="addToPlaylist">연주목록에 추가…</string>
     <string name="newPlaylist">(새로운 연주목록)</string>
     <string name="playlistName">연주목록 이름</string>
     <string name="newPlaylistPrompt">새로운 연주목록 이름을 입력합니다:</string>

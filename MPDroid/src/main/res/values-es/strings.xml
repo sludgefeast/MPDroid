@@ -182,7 +182,7 @@
     <string name="tracksInfoHeader">%1$s Pistas, %2$s</string>
     <string name="tracksInfoHeaderPlural">%1$s Pistas, %2$s</string>
     <string name="audioFocusFailed">No se puede iniciar la transmisión : Otra aplicación está reproduciendo música.</string>
-    <string name="addToPlaylist">Añadir a la lista de reproducción</string>
+    <string name="addToPlaylist">Añadir a la lista de reproducción…</string>
     <string name="newPlaylist">(Nueva lista de reproducción)</string>
     <string name="playlistName">Nombre de la lista de reproducción</string>
     <string name="newPlaylistPrompt">Introduzca el nombre de la nueva lista de reproducción:</string>
