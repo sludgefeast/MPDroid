@@ -16,42 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.SubMenu;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-
 import com.anpmech.mpd.MPD;
 import com.anpmech.mpd.MPDCommand;
 import com.anpmech.mpd.commandresponse.PlaylistFileResponse;
@@ -71,10 +35,45 @@ import com.namelessdev.mpdroid.adapters.ArrayIndexerAdapter;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.helpers.MPDAsyncHelper.AsyncExecListener;
 import com.namelessdev.mpdroid.helpers.MPDAsyncWorker;
-import com.namelessdev.mpdroid.service.SongDownloadService;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
+import com.namelessdev.mpdroid.service.SongDownloadService;
 import com.namelessdev.mpdroid.tools.Tools;
-import com.namelessdev.mpdroid.ui.ToolbarHelper;
+import com.namelessdev.mpdroid.ui.Toolbar;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.SubMenu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -805,10 +804,10 @@ abstract class BrowseFragmentBase<T extends Item<T>> extends Fragment implements
     protected void setupStandardToolbar(final View rootView) {
         mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
 
-        ToolbarHelper.showBackButton(this, mToolbar);
-        ToolbarHelper.addSearchView(getActivity(), mToolbar);
-        ToolbarHelper.addRefresh(mToolbar);
-        ToolbarHelper.addStandardMenuItemClickListener(this, mToolbar,
+        mToolbar.showBackButton(this);
+        mToolbar.addSearchView(getActivity());
+        mToolbar.addRefresh();
+        mToolbar.addStandardMenuItemClickListener(this,
                 new Toolbar.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(final MenuItem menuItem) {

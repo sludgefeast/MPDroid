@@ -16,16 +16,6 @@
 
 package com.namelessdev.mpdroid.ui;
 
-import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
 
 import com.anpmech.mpd.subsystem.AudioOutput;
 import com.namelessdev.mpdroid.AboutActivity;
@@ -34,29 +24,49 @@ import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
 import com.namelessdev.mpdroid.preferences.SettingsActivity;
 
-/**
- * Class that is meant to help standard Toolbars (and ActionBars)
- */
-public class ToolbarHelper {
+import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.SearchView;
+import android.util.AttributeSet;
+import android.view.MenuItem;
+import android.view.View;
 
-    private ToolbarHelper() {
+public class Toolbar extends android.support.v7.widget.Toolbar {
+
+    public Toolbar(final Context context) {
+        super(context);
     }
 
-    public static void addRefresh(Toolbar toolbar) {
-        toolbar.inflateMenu(R.menu.mpd_refreshmenu);
+    public Toolbar(final Context context,
+            @Nullable final AttributeSet attrs) {
+        super(context, attrs);
     }
 
-    public static void addSearchView(Activity activity, Toolbar toolbar) {
-        toolbar.inflateMenu(R.menu.mpd_searchmenu);
+    public Toolbar(final Context context, @Nullable final AttributeSet attrs,
+            final int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public void addRefresh() {
+        inflateMenu(R.menu.mpd_refreshmenu);
+    }
+
+    public void addSearchView(final Activity activity) {
+        inflateMenu(R.menu.mpd_searchmenu);
         // Don't catch everything, we'd rather have a crash than an unusuable search field
-        SearchView searchView = (SearchView) toolbar.getMenu().findItem(R.id.menu_search)
+        SearchView searchView = (SearchView) getMenu().findItem(R.id.menu_search)
                 .getActionView();
         manuallySetupSearchView(activity, searchView);
     }
 
-    public static void addStandardMenuItemClickListener(final Fragment fragment, Toolbar toolbar,
-            final Toolbar.OnMenuItemClickListener chainedListener) {
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+    public void addStandardMenuItemClickListener(final Fragment fragment,
+            final android.support.v7.widget.Toolbar.OnMenuItemClickListener chainedListener) {
+        setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final MenuItem menuItem) {
                 if (chainedListener != null) {
@@ -76,9 +86,9 @@ public class ToolbarHelper {
         });
     }
 
-    public static void addStandardMenuItemClickListener(final Activity activity, Toolbar toolbar,
-            final Toolbar.OnMenuItemClickListener chainedListener) {
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+    public void addStandardMenuItemClickListener(final Activity activity,
+            final android.support.v7.widget.Toolbar.OnMenuItemClickListener chainedListener) {
+        setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final MenuItem menuItem) {
                 if (chainedListener != null) {
@@ -97,12 +107,13 @@ public class ToolbarHelper {
         });
     }
 
-    public static void hideBackButton(Toolbar toolbar) {
-        toolbar.setNavigationIcon(null);
-        toolbar.setNavigationOnClickListener(null);
+    public void hideBackButton() {
+        setNavigationIcon(null);
+        setNavigationOnClickListener(null);
     }
 
-    public static void manuallySetupSearchView(Activity activity, SearchView searchView) {
+    public static void manuallySetupSearchView(final Activity activity,
+            final SearchView searchView) {
         SearchManager searchManager = (SearchManager) activity
                 .getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.getComponentName()));
@@ -112,10 +123,9 @@ public class ToolbarHelper {
      * Make the toolbar show a "back" button. Use this when you have the toolbar inside a fragment.
      *
      * @param fragment The fragment to get the current {@link Activity} from.
-     * @param toolbar  The toolbar to show the back button on.
      */
-    public static void showBackButton(final Fragment fragment, final Toolbar toolbar) {
-        showBackButton(fragment.getActivity(), toolbar);
+    public void showBackButton(final Fragment fragment) {
+        showBackButton(fragment.getActivity());
     }
 
     /**
@@ -123,11 +133,10 @@ public class ToolbarHelper {
      * activity.
      *
      * @param activity The activity used to set the back button action.
-     * @param toolbar  The toolbar to show the back button on.
      */
-    private static void showBackButton(final Activity activity, final Toolbar toolbar) {
-        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+    private void showBackButton(final Activity activity) {
+        setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (activity != null) {
@@ -137,31 +146,26 @@ public class ToolbarHelper {
         });
     }
 
-    private static boolean standardOnMenuItemClick(final Context context, final MenuItem menuItem) {
-        boolean isConsumed = true;
-
+    private boolean standardOnMenuItemClick(final Context context, final MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_outputs:
                 final Intent outputIntent = new Intent(context,
                         SimpleLibraryActivity.class);
                 outputIntent.putExtra(AudioOutput.EXTRA, "1");
                 context.startActivity(outputIntent);
-                break;
+                return true;
             case R.id.menu_refresh:
                 LocalBroadcastManager.getInstance(MPDApplication.getInstance()).sendBroadcast(
                         new Intent(MPDApplication.INTENT_ACTION_REFRESH));
-                break;
+                return true;
             case R.id.menu_settings:
                 context.startActivity(new Intent(context, SettingsActivity.class));
-                break;
+                return true;
             case R.id.menu_about:
                 context.startActivity(new Intent(context, AboutActivity.class));
-                break;
+                return true;
             default:
-                isConsumed = false;
-                break;
+                return false;
         }
-
-        return isConsumed;
     }
 }

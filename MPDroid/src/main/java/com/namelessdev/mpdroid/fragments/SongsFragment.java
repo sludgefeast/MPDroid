@@ -16,37 +16,6 @@
 
 package com.namelessdev.mpdroid.fragments;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.PopupMenuCompat;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.PopupMenu;
-import android.widget.PopupMenu.OnMenuItemClickListener;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import com.anpmech.mpd.MPD;
 import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.item.Album;
@@ -64,9 +33,39 @@ import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
 import com.namelessdev.mpdroid.preferences.Preferences;
 import com.namelessdev.mpdroid.tools.Tools;
-import com.namelessdev.mpdroid.ui.ToolbarHelper;
+import com.namelessdev.mpdroid.ui.Toolbar;
 import com.namelessdev.mpdroid.views.FavoriteButton;
 import com.namelessdev.mpdroid.views.SongDataBinder;
+
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.StringRes;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.PopupMenuCompat;
+import android.support.v7.graphics.Palette;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -362,8 +361,8 @@ public class SongsFragment extends BrowseFragment<Music> implements
         }
 
         if (mHeaderToolbar != null) {
-            ToolbarHelper.addSearchView(getActivity(), mHeaderToolbar);
-            ToolbarHelper.showBackButton(this, mHeaderToolbar);
+            mHeaderToolbar.addSearchView(getActivity());
+            mHeaderToolbar.showBackButton(this);
         }
 
         mCoverArtListener = new AlbumCoverDownloadListener(mCoverArt, mCoverArtProgress, false) {

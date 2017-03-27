@@ -19,7 +19,7 @@ package com.namelessdev.mpdroid.fragments;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.preferences.Preferences;
 import com.namelessdev.mpdroid.tools.LibraryTabsUtil;
-import com.namelessdev.mpdroid.ui.ToolbarHelper;
+import com.namelessdev.mpdroid.ui.Toolbar;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -31,7 +31,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,9 +87,9 @@ abstract class LibraryFragmentBase extends Fragment {
         final Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         toolbar.inflateMenu(R.menu.mpd_main_menu);
-        ToolbarHelper.addStandardMenuItemClickListener(this, toolbar, null);
-        ToolbarHelper.addSearchView(getActivity(), toolbar);
-        ToolbarHelper.addRefresh(toolbar);
+        toolbar.addStandardMenuItemClickListener(this, null);
+        toolbar.addSearchView(getActivity());
+        toolbar.addRefresh();
 
         return view;
     }
