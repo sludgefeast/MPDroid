@@ -151,7 +151,7 @@
     <string name="search_label">MPDroid</string>
     <string name="search_hint">Suchen …</string>
     <string name="warningTitle">Bitte lesen</string>
-    <string name="warningText1">Willkommen bei MPDroid 1.0!\nDiese Meldung wird nur einmal angezeigt.\n\nZuerst: Falls Sie nicht wissen, was ein MPD-Server ist, sollten Sie diese App wieder deinstallieren. Sie ist nichts für Sie.\n\nFür Benutzer der alten Version: Vielen Dank für Ihre Unterstützung und Mitarbeit. Ich hoffe wirklich, dass Ihnen diese neue MPDroid-Version gefällt. Sie können mir gerne per E-Mail mitteilen, was Ihnen gefällt oder auch nicht gefällt  :)\nDie alte Version gibt es noch auf meiner Github-Seite.</string>
+    <string name="warningText1">Willkommen bei MPDroid!\nDiese Meldung wird nur einmal angezeigt.\n\nZuerst: Falls Sie nicht wissen, was ein MPD-Server ist, sollten Sie diese App wieder deinstallieren. Sie ist nichts für Sie.\n\nFür Benutzer der alten Version: Vielen Dank für Ihre Unterstützung und Mitarbeit. Ich hoffe wirklich, dass Ihnen diese neue MPDroid-Version gefällt. Sie können mir gerne per E-Mail mitteilen, was Ihnen gefällt oder auch nicht gefällt  :)\nDie alte Version gibt es noch auf meiner Github-Seite.</string>
     <string name="editPlaylist">Bearbeiten</string>
     <string name="nowPlaying">Du hörst</string>
     <string name="cancel">Abbrechen</string>

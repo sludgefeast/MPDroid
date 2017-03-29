@@ -128,7 +128,7 @@
     <string name="search_hint">搜索中 …</string>
     <string name="libraryTabActivity">音乐库</string>
     <string name="warningTitle">请注意</string>
-    <string name="warningText1">欢迎使用MPDroid 1.0 !\n这段消息将只显示一次.\n\n首先，如果您不知道MPD服务器是什么，可以删除此软件，这个软件可能不适合您。\n\n一直以来的用户：非常感谢你们的支持和贡献.</string>
+    <string name="warningText1">欢迎使用MPDroid!\n这段消息将只显示一次.\n\n首先，如果您不知道MPD服务器是什么，可以删除此软件，这个软件可能不适合您。\n\n一直以来的用户：非常感谢你们的支持和贡献.</string>
     <string name="editPlaylist">编辑</string>
     <string name="nowPlaying">正在播放</string>
     <string name="cancel">取消</string>

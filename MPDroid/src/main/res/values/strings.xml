@@ -117,6 +117,10 @@
     <string name="playlistAdded">Playlist %s added</string>
     <string name="addedDirectoryToPlaylist">Added %s to playlist</string>
     <string name="artistAdded">Artist %s added</string>
+    <string name="servers">Servers</string>
+    <string name="servername">Name</string>
+    <string name="servernameDescription">Name of MPD server</string>
+    <string name="servernameDefault">Default</string>
     <string name="host">Host</string>
     <string name="hostDescription">MPD server hostname or IP address</string>
     <string name="port">Port</string>
@@ -173,7 +177,7 @@
     <string name="search_label">MPDroid</string>
     <string name="search_hint">Search …</string>
     <string name="warningTitle">Please read</string>
-    <string name="warningText1">Welcome to MPDroid 1.0 !\nThis will only display once.\n\nFirst of all, if you don\'t know what a MPD server is, you should uninstall the application now, it is not made for you.\n\nFor previous users, thanks a lot for your support and contributions.</string>
+    <string name="warningText1">Welcome to MPDroid!\nThis will only display once.\n\nFirst of all, if you don\'t know what a MPD server is, you should uninstall the application now, it is not made for you.\n\nFor previous users, thanks a lot for your support and contributions.</string>
     <string name="editPlaylist">Edit</string>
     <string name="nowPlaying">Now Playing</string>
     <string name="cancel">Cancel</string>
@@ -380,4 +384,6 @@
     <string name="sortStreamsDescription">Alphabetically sort streams. Otherwise list them in order of addition.</string>
     <string name="clearLocalAlbumCacheDescription">Force Rebuilding of the Local Album Cache</string>
     <string name="clearLocalAlbumCache">Clear Album Cache</string>
+    <string name="delete">Delete</string>
+    <string name="setCurrent">Set current</string>
 </resources>

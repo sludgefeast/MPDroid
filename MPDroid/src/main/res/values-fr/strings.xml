@@ -135,7 +135,7 @@
     <string name="search_label">MPDroid</string>
     <string name="search_hint">Rechercher …</string>
     <string name="warningTitle">Merci de lire ce qui suit.</string>
-    <string name="warningText1">Bienvenue dans MPDroid 1.0 !\nCette popup ne s\'affichera qu\'une seule fois.\n\nPremièrement, si vous ne savez pas ce qu\'est un serveur MPD, passez vôtre chemin, cette application n\'est pas faite pour vous.\n\nPour les "anciens" utilisateurs de MPDroid : Merci beaucoup pour votre support et contributions. J\'espère que cette nouvelle version vous plaira.</string>
+    <string name="warningText1">Bienvenue dans MPDroid!\nCette popup ne s\'affichera qu\'une seule fois.\n\nPremièrement, si vous ne savez pas ce qu\'est un serveur MPD, passez vôtre chemin, cette application n\'est pas faite pour vous.\n\nPour les "anciens" utilisateurs de MPDroid : Merci beaucoup pour votre support et contributions. J\'espère que cette nouvelle version vous plaira.</string>
     <string name="editPlaylist">Modifier</string>
     <string name="nowPlaying">En cours</string>
     <string name="cancel">Annuler</string>
