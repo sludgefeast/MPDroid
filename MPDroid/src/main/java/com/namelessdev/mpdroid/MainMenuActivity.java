@@ -19,22 +19,11 @@ package com.namelessdev.mpdroid;
 import com.namelessdev.mpdroid.fragments.BrowseFragment;
 import com.namelessdev.mpdroid.fragments.LibraryFragment;
 import com.namelessdev.mpdroid.helpers.MPDConnectionHandler;
-import com.namelessdev.mpdroid.preferences.ConnectionModifier;
-import com.namelessdev.mpdroid.preferences.ConnectionSettings;
 import com.namelessdev.mpdroid.library.LibraryFragmentActivity;
+import com.namelessdev.mpdroid.preferences.ConnectionSettingsActivity;
+import com.namelessdev.mpdroid.preferences.ServerSetting;
 import com.namelessdev.mpdroid.tools.Tools;
 
-import com.namelessdev.mpdroid.fragments.BrowseFragment;
-import com.namelessdev.mpdroid.fragments.LibraryFragment;
-import com.namelessdev.mpdroid.helpers.MPDConnectionHandler;
-import com.namelessdev.mpdroid.fragments.CollapsedPlaylistFragment;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
-import com.namelessdev.mpdroid.preferences.ConnectionModifier;
-import com.namelessdev.mpdroid.preferences.ConnectionSettings;
-import com.namelessdev.mpdroid.tools.Tools;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -49,26 +38,16 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 
-import com.namelessdev.mpdroid.fragments.BrowseFragment;
-import com.namelessdev.mpdroid.fragments.LibraryFragment;
-import com.namelessdev.mpdroid.helpers.MPDConnectionHandler;
-import com.namelessdev.mpdroid.fragments.CollapsedPlaylistFragment;
-import com.namelessdev.mpdroid.helpers.MPDControl;
-import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
-import com.namelessdev.mpdroid.preferences.ConnectionModifier;
-import com.namelessdev.mpdroid.preferences.ConnectionSettings;
-import com.namelessdev.mpdroid.tools.Tools;
-
 public class MainMenuActivity extends MPDActivity implements
         LibraryFragmentActivity {
 
     private static final boolean DEBUG = false;
 
-    private static final String EXTRA_DISPLAY_MODE = "displaymode";
+    //private static final String EXTRA_DISPLAY_MODE = "displaymode";
 
     private static final String FRAGMENT_TAG_LIBRARY = "library";
 
-    private static final String FRAGMENT_TAG_OUTPUTS = "outputs";
+    //private static final String FRAGMENT_TAG_OUTPUTS = "outputs";
 
     private static final int SETTINGS = 5;
 
@@ -81,14 +60,10 @@ public class MainMenuActivity extends MPDActivity implements
     /**
      * This method determines if a default server has been setup yet.
      *
-     * @param context The context to retrieve the settings.
      * @return True if a default server has been setup, false otherwise.
      */
-    private static boolean hasDefaultServer(final Context context) {
-        final SharedPreferences settings =
-                PreferenceManager.getDefaultSharedPreferences(context);
-
-        return settings.contains(ConnectionModifier.KEY_HOSTNAME);
+    private boolean hasDefaultServer() {
+        return ServerSetting.current() != null;
     }
 
     /**
@@ -98,15 +73,7 @@ public class MainMenuActivity extends MPDActivity implements
      */
     @Override
     protected int getThemeResId() {
-        final int themeID;
-
-        if (isLightThemeSelected()) {
-            themeID = R.style.AppTheme_MainMenu_Light;
-        } else {
-            themeID = R.style.AppTheme_MainMenu;
-        }
-
-        return themeID;
+        return isLightThemeSelected() ? R.style.AppTheme_MainMenu_Light : R.style.AppTheme_MainMenu;
     }
 
     private void initializeLibraryFragment() {
@@ -145,8 +112,8 @@ public class MainMenuActivity extends MPDActivity implements
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!hasDefaultServer(this)) {
-            final Intent intent = new Intent(this, ConnectionSettings.class);
+        if (!hasDefaultServer()) {
+            final Intent intent = new Intent(this, ConnectionSettingsActivity.class);
 
             // Absolutely no settings defined! Open Settings!
             startActivityForResult(intent, SETTINGS);
@@ -221,13 +188,10 @@ public class MainMenuActivity extends MPDActivity implements
 
     @Override
     public void pushLibraryFragment(final Fragment fragment, final String label,
-                                    final View transitionView, final String transitionName, final Transition transition) {
-        final String title;
-        if (fragment instanceof BrowseFragment) {
-            title = ((BrowseFragment<?>) fragment).getTitle();
-        } else {
-            title = fragment.toString();
-        }
+            final View transitionView, final String transitionName, final Transition transition) {
+        final String title = fragment instanceof BrowseFragment ?
+                ((BrowseFragment<?>) fragment).getTitle() : fragment.toString();
+
         final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (transitionView != null) {
             ft.addSharedElement(transitionView, transitionName);

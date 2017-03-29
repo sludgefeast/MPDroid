@@ -16,6 +16,17 @@
 
 package com.namelessdev.mpdroid.preferences;
 
+import com.anpmech.mpd.MPD;
+import com.anpmech.mpd.exception.MPDException;
+import com.anpmech.mpd.subsystem.status.MPDStatistics;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.SearchRecentProvider;
+import com.namelessdev.mpdroid.cover.CoverManager;
+import com.namelessdev.mpdroid.cover.retriever.CachedCover;
+import com.namelessdev.mpdroid.helpers.CachedMPD;
+import com.namelessdev.mpdroid.tools.Tools;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -29,17 +40,6 @@ import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
 import android.text.format.Formatter;
 import android.util.Log;
-
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.subsystem.status.MPDStatistics;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.SearchRecentProvider;
-import com.namelessdev.mpdroid.cover.CoverManager;
-import com.namelessdev.mpdroid.cover.retriever.CachedCover;
-import com.namelessdev.mpdroid.tools.Tools;
-import com.namelessdev.mpdroid.helpers.CachedMPD;
 
 import java.io.IOException;
 
@@ -135,12 +135,6 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
-        /** Allow these to be changed individually, pauseOnPhoneStateChange might be overridden. */
-        final CheckBoxPreference phonePause = (CheckBoxPreference) findPreference(
-                "pauseOnPhoneStateChange");
-        final CheckBoxPreference phoneStateChange = (CheckBoxPreference) findPreference(
-                "playOnPhoneStateChange");
-
         refreshDynamicFields();
 
         findPreference("ratings_favorites").setEnabled(
@@ -149,7 +143,7 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(final PreferenceScreen preferenceScreen,
-                                         @NonNull final Preference preference) {
+            @NonNull final Preference preference) {
         // Is it the connection screen which is called?
         if (preference.getKey() == null) {
             return false;
@@ -171,8 +165,6 @@ public class SettingsFragment extends PreferenceFragment {
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(final DialogInterface dialog, final int which) {
-                            // Todo : The covermanager must already have been
-                            // initialized, get rid of the getInstance arguments
                             CoverManager.getInstance().clear();
                             mCacheUsage1.setSummary("0.00B");
                             mCacheUsage2.setSummary("0.00B");
@@ -193,23 +185,15 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         }
 
-        if ("pauseOnPhoneStateChange".equals(preference.getKey())) {
-            /**
-             * Allow these to be changed individually,
-             * pauseOnPhoneStateChange might be overridden.
-             */
-            final CheckBoxPreference phonePause = (CheckBoxPreference) findPreference(
-                    "pauseOnPhoneStateChange");
-            final CheckBoxPreference phoneStateChange = (CheckBoxPreference) findPreference(
-                    "playOnPhoneStateChange");
-        } else if ("clearSearchHistory".equals(preference.getKey())) {
+        if ("clearSearchHistory".equals(preference.getKey())) {
             final SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(),
                     SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE);
             suggestions.clearHistory();
             preference.setEnabled(false);
+            return true;
         }
 
-        return false;
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private void refreshDynamicFields() {
@@ -222,4 +206,5 @@ public class SettingsFragment extends PreferenceFragment {
         mCacheUsage2.setSummary(usage);
         onConnectionStateChanged();
     }
+
 }

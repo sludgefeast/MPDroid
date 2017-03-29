@@ -1239,12 +1239,12 @@ public final class MPDroidService extends Service implements
         }
 
         /**
-         * This processes the incoming (and likely changed) {@code ConnectionSettings} object.
+         * This processes the incoming (and likely changed) {@code ConnectionSettingsActivity} object.
          * <p>
          * <p>This method is necessary as the {@code MPDAsyncHelper}, which produces the {@code
-         * ConnectionSettings} object, only changes in the remote process upon connection settings
+         * ConnectionSettingsActivity} object, only changes in the remote process upon connection settings
          * change. It is then parceled, bundled and sent as a message here then processed back into
-         * a {@code ConnectionSettings} object. It is then sent to our {@code MPDAsyncHelper}
+         * a {@code ConnectionSettingsActivity} object. It is then sent to our {@code MPDAsyncHelper}
          * instance.</p>
          * <p>
          * <p>Once sent to this process instance {@code MPDAsyncHelper}, this will then call the

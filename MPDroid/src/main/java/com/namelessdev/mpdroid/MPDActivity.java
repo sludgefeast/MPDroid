@@ -43,7 +43,7 @@ import com.anpmech.mpd.connection.MPDConnectionStatus;
 import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.subsystem.status.IdleSubsystemMonitor;
 import com.namelessdev.mpdroid.helpers.MPDControl;
-import com.namelessdev.mpdroid.preferences.ConnectionSettings;
+import com.namelessdev.mpdroid.preferences.ConnectionSettingsActivity;
 import com.namelessdev.mpdroid.preferences.SettingsActivity;
 import com.namelessdev.mpdroid.tools.Tools;
 
@@ -382,7 +382,7 @@ public abstract class MPDActivity extends AppCompatActivity implements IdleSubsy
      */
     @Override
     public void onMPDError(final MPDException e) {
-        final Intent intent = new Intent(this, ConnectionSettings.class);
+        final Intent intent = new Intent(this, ConnectionSettingsActivity.class);
 
         switch (e.mErrorCode) {
             case MPDException.ACK_ERROR_PASSWORD:
@@ -476,7 +476,7 @@ public abstract class MPDActivity extends AppCompatActivity implements IdleSubsy
         public void onClick(final DialogInterface dialog, final int which) {
             switch (which) {
                 case DialogInterface.BUTTON_NEUTRAL:
-                    final Intent intent = new Intent(mActivity, ConnectionSettings.class);
+                    final Intent intent = new Intent(mActivity, ConnectionSettingsActivity.class);
                     // Show Settings
                     mActivity.startActivityForResult(intent, SETTINGS);
                     break;

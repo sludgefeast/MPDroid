@@ -16,43 +16,43 @@
 
 package com.namelessdev.mpdroid.preferences;
 
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuItem;
-
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.MainMenuActivity;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.tools.Tools;
 
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+
 /**
  * This Activity is used to modify connection preferences.
  */
-public class ConnectionSettings extends PreferenceActivity {
+public class ConnectionSettingsActivity extends PreferenceActivity {
 
     /**
-     * This is the modifier fragment which will be called from the {@link ConnectionChooser} class
+     * This is the modifier fragment which will be called from the {@link ConnectionChooserFragment} class
      * upon preference choice.
      */
     public static final String FRAGMENT_MODIFIER_NAME
-            = "com.namelessdev.mpdroid.preferences.ConnectionModifier";
+            = "com.namelessdev.mpdroid.preferences.ConnectionModifierFragment";
 
     public static final int MAIN = 0;
 
     /**
      * The class log identifier.
      */
-    private static final String TAG = "ConnectionSettings";
+    private static final String TAG = "ConnectionSettingsActivity";
 
     /**
      * This method checks to see if preferences have been setup for this application previously.
@@ -60,8 +60,7 @@ public class ConnectionSettings extends PreferenceActivity {
      * @return True if preferences haven't been setup for this application, false otherwise.
      */
     private boolean hasEmptyPreferences() {
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        return preferences.getString(ConnectionModifier.KEY_HOSTNAME, "").isEmpty();
+        return ServerSetting.read().isEmpty();
     }
 
     /**
@@ -81,20 +80,47 @@ public class ConnectionSettings extends PreferenceActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.servers);
+
+        //final ImageButton addButton = (ImageButton) findViewById(R.id.serversAddButton);
+        //addButton.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(final View v) {
+        //        onNewServer();
+        //    }
+        //});
 
         if (hasEmptyPreferences()) {
-            // Initialize the default preferences.
-            PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.settings, false);
-
-            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            builder.setMessage(R.string.warningText1);
-            builder.setPositiveButton(R.string.ok, Tools.NOOP_CLICK_LISTENER);
-
-            builder.show();
+            //// Initialize the default preferences.
+            //PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.settings, false);
+            onNewServer();
+            showWelcomeAlert();
+        } else {
+            final Fragment fragment =
+                    Fragment.instantiate(this, ConnectionChooserFragment.class.getName());
+            replaceFragment(fragment);
         }
+    }
 
-        final Fragment fragment = Fragment.instantiate(this, ConnectionChooser.class.getName());
+    private void showWelcomeAlert() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.warningText1);
+        builder.setPositiveButton(R.string.ok, Tools.NOOP_CLICK_LISTENER);
+        builder.show();
+    }
+
+    void onNewServer() {
+        final ServerSetting serverSetting = ServerSetting.create();
+
+        final Bundle bundle = new Bundle();
+        bundle.putParcelable(ConnectionModifierFragment.EXTRA_SERVER_SETTING, serverSetting);
+        final Fragment fragment = Fragment.instantiate(this,
+                ConnectionModifierFragment.class.getName(), bundle);
+
+        replaceFragment(fragment);
+    }
+
+    private void replaceFragment(final Fragment fragment) {
         getFragmentManager().beginTransaction().replace(android.R.id.content, fragment)
                 .commit();
     }

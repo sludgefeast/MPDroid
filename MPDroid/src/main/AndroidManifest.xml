@@ -90,7 +90,7 @@
             android:label="@string/settings"
             android:theme="@style/AppTheme.Settings" />
         <activity
-            android:name=".preferences.ConnectionSettings"
+            android:name=".preferences.ConnectionSettingsActivity"
             android:label="@string/settings"
             android:theme="@style/AppTheme.Settings" />
         <activity

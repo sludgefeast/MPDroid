@@ -16,23 +16,23 @@
 
 package com.namelessdev.mpdroid.helpers;
 
+import com.namelessdev.mpdroid.ConnectionInfo;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.cover.retriever.GracenoteCover;
+import com.namelessdev.mpdroid.preferences.ServerSetting;
+
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.preference.PreferenceManager;
 
-import com.namelessdev.mpdroid.ConnectionInfo;
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.cover.retriever.GracenoteCover;
-import com.namelessdev.mpdroid.preferences.ConnectionModifier;
-import com.namelessdev.mpdroid.tools.SettingsHelper;
-
 /**
  * Asynchronous worker thread-class for long during operations on JMPDComm.
  */
 public class MPDAsyncWorker implements Handler.Callback,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        ServerSetting.CurrentConnectionChangeListener {
 
     private static final int LOCAL_UID = 500;
 
@@ -55,6 +55,8 @@ public class MPDAsyncWorker implements Handler.Callback,
         final SharedPreferences settings = PreferenceManager
                 .getDefaultSharedPreferences(MPDApplication.getInstance());
         settings.registerOnSharedPreferenceChangeListener(this);
+
+        ServerSetting.addCurrentConnectionChangeListener(this);
 
         mHelperHandler = helperHandler;
     }
@@ -81,6 +83,11 @@ public class MPDAsyncWorker implements Handler.Callback,
         return result;
     }
 
+    @Override
+    public void onCurrentConnectionChanged() {
+        updateConnectionSettings();
+    }
+
     /**
      * Called when a shared preference is changed, added, or removed.
      * <p>
@@ -92,31 +99,19 @@ public class MPDAsyncWorker implements Handler.Callback,
      */
     @Override
     public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences,
-                                          final String key) {
-        final String currentSSID = SettingsHelper.getCurrentSSID();
+            final String key) {
 
-        if (key != null && currentSSID != null && key.startsWith(currentSSID)) {
-            switch (key.substring(currentSSID.length())) {
-                case ConnectionModifier.KEY_HOSTNAME:
-                case ConnectionModifier.KEY_PASSWORD:
-                case ConnectionModifier.KEY_PERSISTENT_NOTIFICATION:
-                case ConnectionModifier.KEY_PORT:
-                case ConnectionModifier.KEY_STREAM_URL:
-                    updateConnectionSettings();
-                    break;
-                case MPDApplication.USE_LOCAL_ALBUM_CACHE_KEY:
-                    final boolean useAlbumCache = sharedPreferences.getBoolean(key, false);
+        switch (key) {
+            case MPDApplication.USE_LOCAL_ALBUM_CACHE_KEY:
+                final boolean useAlbumCache = sharedPreferences.getBoolean(key, false);
 
-                    mHelperHandler.obtainMessage(MPDAsyncHelper.EVENT_SET_USE_CACHE, useAlbumCache);
-                    break;
-                case GracenoteCover.PREFERENCE_CUSTOM_CLIENT_ID_KEY:
-                    final SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.remove(GracenoteCover.USER_ID);
-                    editor.apply();
-                    break;
-                default:
-                    break;
-            }
+                mHelperHandler.obtainMessage(MPDAsyncHelper.EVENT_SET_USE_CACHE, useAlbumCache);
+                break;
+            case GracenoteCover.PREFERENCE_CUSTOM_CLIENT_ID_KEY:
+                final SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove(GracenoteCover.USER_ID);
+                editor.apply();
+                break;
         }
     }
 
@@ -132,8 +127,10 @@ public class MPDAsyncWorker implements Handler.Callback,
     }
 
     ConnectionInfo updateConnectionSettings() {
-        final ConnectionInfo connectionInfo =
-                SettingsHelper.getConnectionSettings(mConnectionInfo);
+
+        final ServerSetting currentServer = ServerSetting.current();
+        final ConnectionInfo connectionInfo = currentServer != null ?
+                currentServer.getConnectionInfo(mConnectionInfo) : ConnectionInfo.EMPTY;
 
         if (connectionInfo.hasServerChanged() || connectionInfo.hasStreamInfoChanged()
                 || connectionInfo.wasNotificationPersistent() !=
