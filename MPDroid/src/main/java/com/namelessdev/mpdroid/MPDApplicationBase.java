@@ -16,16 +16,6 @@
 
 package com.namelessdev.mpdroid;
 
-import android.annotation.SuppressLint;
-import android.app.Application;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.StrictMode;
-import android.preference.PreferenceManager;
-import android.util.Log;
-
 import com.anpmech.mpd.MPD;
 import com.anpmech.mpd.subsystem.status.IdleSubsystemMonitor;
 import com.anpmech.mpd.subsystem.status.StatusChangeListener;
@@ -38,6 +28,15 @@ import com.namelessdev.mpdroid.service.NotificationHandler;
 import com.namelessdev.mpdroid.service.ServiceBinder;
 import com.namelessdev.mpdroid.service.StreamHandler;
 import com.namelessdev.mpdroid.tools.Tools;
+
+import android.app.Application;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.StrictMode;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -344,11 +343,6 @@ class MPDApplicationBase extends Application implements
     public final boolean isTabletUiEnabled() {
         return getResources().getBoolean(R.bool.isTablet)
                 && mSettings.getBoolean("tabletUI", true);
-    }
-
-    @SuppressLint("CommitPrefEdits")
-    public final void markGooglePlayThankYouAsRead() {
-        mSettings.edit().putBoolean("googlePlayThankYouShown", true).apply();
     }
 
     /**
