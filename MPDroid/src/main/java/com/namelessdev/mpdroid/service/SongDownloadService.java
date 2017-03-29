@@ -29,7 +29,7 @@ import android.util.Log;
 
 import com.anpmech.mpd.item.Item;
 import com.anpmech.mpd.item.Music;
-import com.namelessdev.mpdroid.ConnectionInfo;
+import com.namelessdev.mpdroid.LocalWebServer;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.tools.Tools;
 
@@ -81,7 +81,7 @@ public class SongDownloadService extends IntentService {
     }
 
     public static <T extends Item<T>> void download(final Context context,
-                                                    final ConnectionInfo.LocalWebServer localWebServer,
+                                                    final LocalWebServer localWebServer,
                                                     final T item,
                                                     final SongProvider<T> songProvider) {
         Tools.notifyUser(R.string.downloadItem, item.getName());
@@ -89,7 +89,7 @@ public class SongDownloadService extends IntentService {
     }
 
     static void start(final Context context, final String title,
-                      final ConnectionInfo.LocalWebServer localWebServer,
+                      final LocalWebServer localWebServer,
                       final Collection<Music> songs) {
         final Intent intent = new Intent(context, SongDownloadService.class);
 
@@ -132,8 +132,8 @@ public class SongDownloadService extends IntentService {
 
         final String title = intent.getStringExtra(TITLE);
 
-        final ConnectionInfo.LocalWebServer localWebServer =
-                (ConnectionInfo.LocalWebServer) intent.getSerializableExtra(WEB_SERVER);
+        final LocalWebServer localWebServer =
+                (LocalWebServer) intent.getSerializableExtra(WEB_SERVER);
         final List<String> songsPaths = (List<String>) intent.getSerializableExtra(SONG_PATHS);
 
         final Intent cancelIntent = new Intent(this, CancelActionReceiver.class);
@@ -182,7 +182,7 @@ public class SongDownloadService extends IntentService {
     }
 
     private String downloadSong(final int downloadID,
-                                final ConnectionInfo.LocalWebServer localWebServer,
+                                final LocalWebServer localWebServer,
                                 final String songPath) {
         final File downloadDestination = new File(MUSIC_DIRECTORY + songPath);
         downloadDestination.getParentFile().mkdirs();
@@ -249,12 +249,12 @@ public class SongDownloadService extends IntentService {
 
         private final Context mContext;
 
-        private final ConnectionInfo.LocalWebServer mLocalWebServer;
+        private final LocalWebServer mLocalWebServer;
 
         private final SongProvider<ItemT> mSongProvider;
 
         MusicCollectionTask(final Context context,
-                            final ConnectionInfo.LocalWebServer localWebServer,
+                            final LocalWebServer localWebServer,
                             final SongProvider<ItemT> songProvider) {
             mContext = context;
             mLocalWebServer = localWebServer;

@@ -27,7 +27,6 @@ import com.anpmech.mpd.Tools;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -119,9 +118,9 @@ public final class ConnectionInfo implements Parcelable {
      * @see Builder
      */
     private ConnectionInfo(@NotNull final String server, final int port, final String password,
-                           @NonNull final Uri stream, final boolean isNotificationPersistent,
-                           final String musicPath, final String coverFilename,
-                           final ConnectionInfo lastConnection) {
+            @NonNull final Uri stream, final boolean isNotificationPersistent,
+            final String musicPath, final String coverFilename,
+            final ConnectionInfo lastConnection) {
         mServer = server;
         mPort = port;
         mPassword = password;
@@ -165,12 +164,12 @@ public final class ConnectionInfo implements Parcelable {
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
-            }
+        }
 
         final ConnectionInfo otherCI = (ConnectionInfo) o;
         return areEqual(this, otherCI) &&
                 areEqual(this.mLastConnection, otherCI.mLastConnection);
-            }
+    }
 
     private static boolean areEqual(final ConnectionInfo ci1,
             final ConnectionInfo ci2) {
@@ -181,7 +180,7 @@ public final class ConnectionInfo implements Parcelable {
                 Tools.areEqual(ci1.mCoverFilename, ci2.mCoverFilename) &&
                 ci1.mIsNotificationPersistent == ci2.mIsNotificationPersistent &&
                 ci1.mPort == ci2.mPort;
-        }
+    }
 
     @Override
     public int hashCode() {
@@ -191,7 +190,7 @@ public final class ConnectionInfo implements Parcelable {
 
         if (mIsNotificationPersistent) {
             result += 1;
-    }
+        }
 
         result *= 31 + mPort;
 
@@ -563,58 +562,4 @@ public final class ConnectionInfo implements Parcelable {
         }
     }
 
-    public static class LocalWebServer implements Serializable {
-
-        private static final String URL_PREFIX = "http://";
-
-        private final String mWebserverPath;
-
-        private final String mMpdServerName;
-
-        private LocalWebServer(final String webserverPath, final String mpdServerName) {
-            mWebserverPath = webserverPath;
-            mMpdServerName = mpdServerName;
-        }
-
-        public String buildUrl(final String path, final String fileName) {
-            return buildUrl(mMpdServerName, mWebserverPath, path, fileName);
-        }
-
-        public String buildUrl(final String pathFileName) {
-            return buildUrl(mMpdServerName, mWebserverPath, pathFileName, null);
-        }
-
-        private static String buildUrl(final String mpdServerName, final String webserverPath,
-                                       final String path, final String fileName) {
-            final String serverName;
-            final String musicPath;
-            if (webserverPath.startsWith(URL_PREFIX)) {
-                int hostPortEnd = webserverPath.indexOf(URL_PREFIX.length(), '/');
-                if (hostPortEnd == -1) {
-                    hostPortEnd = webserverPath.length();
-                }
-                serverName = webserverPath.substring(URL_PREFIX.length(), hostPortEnd);
-                musicPath = webserverPath.substring(hostPortEnd);
-            } else {
-                serverName = mpdServerName;
-                musicPath = webserverPath;
-            }
-            final Uri.Builder uriBuilder = Uri.parse(URL_PREFIX + serverName).buildUpon();
-            appendPathString(uriBuilder, musicPath);
-            appendPathString(uriBuilder, path);
-            appendPathString(uriBuilder, fileName);
-
-            final Uri uri = uriBuilder.build();
-            return uri.toString();
-        }
-
-        private static void appendPathString(final Uri.Builder builder, final String baseString) {
-            if (baseString != null && !baseString.isEmpty()) {
-                final String[] components = baseString.split("/");
-                for (final String component : components) {
-                    builder.appendPath(component);
-                }
-            }
-        }
-    }
 }

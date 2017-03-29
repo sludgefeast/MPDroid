@@ -16,7 +16,7 @@
 
 package com.namelessdev.mpdroid.cover.retriever;
 
-import com.namelessdev.mpdroid.ConnectionInfo;
+import com.namelessdev.mpdroid.LocalWebServer;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 
@@ -55,7 +55,7 @@ public class LocalCover implements ICoverRetriever {
 
         FILENAMES[0] = mApp.getConnectionSettings().getCoverFilename();
 
-        final ConnectionInfo.LocalWebServer localWebServer =
+        final LocalWebServer localWebServer =
                 mApp.getConnectionSettings().getLocalWebServer();
 
         String lfilename, url;
