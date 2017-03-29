@@ -44,7 +44,7 @@ import com.namelessdev.mpdroid.adapters.ArrayIndexerAdapter;
 import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 import com.namelessdev.mpdroid.cover.CoverManager;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
+import com.namelessdev.mpdroid.library.LibraryFragmentActivity;
 import com.namelessdev.mpdroid.models.GenresGroup;
 import com.namelessdev.mpdroid.tools.Tools;
 import com.namelessdev.mpdroid.views.AlbumDataBinder;
@@ -263,12 +263,12 @@ public class AlbumsFragment extends BrowseFragment<Album> {
 
             bundle.putString(SongsFragment.COVER_TRANSITION_NAME_BASE, transitionName);
 
-            ((ILibraryFragmentActivity) activity).pushLibraryFragment(
+            ((LibraryFragmentActivity) activity).pushLibraryFragment(
                     fragment, "songs", albumCoverView,
                     albumCoverView.getTransitionName(),
                     inflater.inflateTransition(R.transition.album_songs_transition));
         } else {*/
-        ((ILibraryFragmentActivity) activity).pushLibraryFragment(fragment, "songs");
+        ((LibraryFragmentActivity) activity).pushLibraryFragment(fragment, "songs");
         //}
     }
 

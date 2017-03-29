@@ -19,9 +19,9 @@ package com.namelessdev.mpdroid;
 import com.namelessdev.mpdroid.fragments.BrowseFragment;
 import com.namelessdev.mpdroid.fragments.LibraryFragment;
 import com.namelessdev.mpdroid.helpers.MPDConnectionHandler;
-import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
 import com.namelessdev.mpdroid.preferences.ConnectionModifier;
 import com.namelessdev.mpdroid.preferences.ConnectionSettings;
+import com.namelessdev.mpdroid.library.LibraryFragmentActivity;
 import com.namelessdev.mpdroid.tools.Tools;
 
 import com.namelessdev.mpdroid.fragments.BrowseFragment;
@@ -60,7 +60,7 @@ import com.namelessdev.mpdroid.preferences.ConnectionSettings;
 import com.namelessdev.mpdroid.tools.Tools;
 
 public class MainMenuActivity extends MPDActivity implements
-        ILibraryFragmentActivity {
+        LibraryFragmentActivity {
 
     private static final boolean DEBUG = false;
 

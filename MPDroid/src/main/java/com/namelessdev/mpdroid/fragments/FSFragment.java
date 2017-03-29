@@ -43,7 +43,7 @@ import com.anpmech.mpd.item.Music;
 import com.anpmech.mpd.item.PlaylistFile;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
+import com.namelessdev.mpdroid.library.LibraryFragmentActivity;
 import com.namelessdev.mpdroid.tools.StringComparators;
 import com.namelessdev.mpdroid.tools.Tools;
 
@@ -207,7 +207,7 @@ public class FSFragment extends BrowseFragment {
         bundle.putParcelable(Directory.EXTRA, Directory.byPath(path));
         bundle.putBoolean(EXTRA_USE_BACK_STACK, useBackStack);
 
-        ((ILibraryFragmentActivity) activity)
+        ((LibraryFragmentActivity) activity)
                 .pushLibraryFragment(fragment, "filesystem");
     }
 

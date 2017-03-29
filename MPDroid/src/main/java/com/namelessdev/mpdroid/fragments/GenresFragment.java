@@ -32,7 +32,7 @@ import com.anpmech.mpd.item.Artist;
 import com.anpmech.mpd.item.Genre;
 import com.anpmech.mpd.item.PlaylistFile;
 import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
+import com.namelessdev.mpdroid.library.LibraryFragmentActivity;
 import com.namelessdev.mpdroid.models.GenresGroup;
 import com.namelessdev.mpdroid.tools.Tools;
 
@@ -173,7 +173,7 @@ public class GenresFragment extends BrowseFragment<GenresGroup> {
 
         bundle.putParcelable(GenresGroup.EXTRA, mItems.get(position));
 
-        ((ILibraryFragmentActivity) getActivity()).pushLibraryFragment(fragment, Artist.EXTRA);
+        ((LibraryFragmentActivity) getActivity()).pushLibraryFragment(fragment, Artist.EXTRA);
     }
 
 }

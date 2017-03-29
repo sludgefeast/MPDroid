@@ -18,9 +18,7 @@ package com.namelessdev.mpdroid.library;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
@@ -42,7 +40,6 @@ import com.namelessdev.mpdroid.MPDActivity;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.fragments.AlbumsFragment;
 import com.namelessdev.mpdroid.fragments.AlbumsGridFragment;
-import com.namelessdev.mpdroid.fragments.ArtistsFragment;
 import com.namelessdev.mpdroid.fragments.BrowseFragment;
 import com.namelessdev.mpdroid.fragments.FSFragment;
 import com.namelessdev.mpdroid.fragments.OutputsFragment;
@@ -52,7 +49,7 @@ import com.namelessdev.mpdroid.helpers.MPDControl;
 import com.namelessdev.mpdroid.preferences.Preferences;
 import com.namelessdev.mpdroid.tools.Tools;
 
-public class SimpleLibraryActivity extends MPDActivity implements ILibraryFragmentActivity,
+public class SimpleLibraryActivity extends MPDActivity implements LibraryFragmentActivity,
         OnBackStackChangedListener {
 
     private TextView mTitleView;

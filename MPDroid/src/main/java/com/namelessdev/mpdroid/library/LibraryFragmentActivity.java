@@ -20,7 +20,7 @@ import android.support.v4.app.Fragment;
 import android.transition.Transition;
 import android.view.View;
 
-public interface ILibraryFragmentActivity {
+public interface LibraryFragmentActivity {
 
     void pushLibraryFragment(Fragment fragment, String label);
 

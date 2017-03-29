@@ -37,7 +37,7 @@ import com.anpmech.mpd.item.Artist;
 import com.anpmech.mpd.item.PlaylistFile;
 import com.anpmech.mpd.item.Stream;
 import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.library.ILibraryFragmentActivity;
+import com.namelessdev.mpdroid.library.LibraryFragmentActivity;
 import com.namelessdev.mpdroid.library.PlaylistEditActivity;
 import com.namelessdev.mpdroid.tools.Tools;
 
@@ -135,7 +135,7 @@ public class PlaylistsFragment extends BrowseFragment<PlaylistFile> {
 
         bundle.putParcelable(PlaylistFile.EXTRA, mItems.get(position));
 
-        ((ILibraryFragmentActivity) activity).pushLibraryFragment(fragment, "stored_playlist");
+        ((LibraryFragmentActivity) activity).pushLibraryFragment(fragment, "stored_playlist");
     }
 
     @Override
