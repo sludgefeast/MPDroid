@@ -154,7 +154,7 @@ public abstract class MPDConnection implements MPDConnectionListener {
     /**
      * The default media server password command.
      */
-    private MPDCommand mPassword;
+    private MPDCommand mPasswordCommand;
 
     /**
      * The constructor method. This method does not connect to the server.
@@ -401,7 +401,7 @@ public abstract class MPDConnection implements MPDConnectionListener {
         final int atIndex = host.indexOf('@');
 
         if (atIndex == -1) {
-            mPassword = null;
+            mPasswordCommand = null;
         } else {
             setDefaultPassword(host.substring(0, atIndex));
             host = host.substring(atIndex + 1);
@@ -479,8 +479,8 @@ public abstract class MPDConnection implements MPDConnectionListener {
             throw new IllegalStateException(NO_EMPTY_COMMAND_QUEUE);
         }
 
-        if (mPassword != null) {
-            commandQueue.add(0, mPassword);
+        if (mPasswordCommand != null) {
+            commandQueue.add(0, mPasswordCommand);
         }
 
         return processCommand(commandQueue.toString());
@@ -496,10 +496,10 @@ public abstract class MPDConnection implements MPDConnectionListener {
     private ResultFuture processCommand(final MPDCommand mpdCommand) {
         final String commandString;
 
-        if (mPassword == null) {
+        if (mPasswordCommand == null) {
             commandString = mpdCommand.getCommand();
         } else {
-            commandString = new CommandQueue(mPassword, mpdCommand).toString();
+            commandString = new CommandQueue(mPasswordCommand, mpdCommand).toString();
         }
 
         return processCommand(commandString);
@@ -538,10 +538,10 @@ public abstract class MPDConnection implements MPDConnectionListener {
         }
 
         final int[] excludeResponses;
-        if (mPassword == null) {
+        if (mPasswordCommand == null) {
             excludeResponses = null;
         } else {
-            commandQueue.add(0, mPassword);
+            commandQueue.add(0, mPasswordCommand);
             excludeResponses = new int[]{0};
         }
 
@@ -598,10 +598,10 @@ public abstract class MPDConnection implements MPDConnectionListener {
      * @param password The main password for this connection.
      */
     public void setDefaultPassword(final CharSequence password) {
-        if (password == null) {
-            mPassword = null;
+        if (password == null || password.length() == 0) {
+            mPasswordCommand = null;
         } else {
-            mPassword = MPDCommand.create(MPDCommand.MPD_CMD_PASSWORD, password);
+            mPasswordCommand = MPDCommand.create(MPDCommand.MPD_CMD_PASSWORD, password);
         }
     }
 
