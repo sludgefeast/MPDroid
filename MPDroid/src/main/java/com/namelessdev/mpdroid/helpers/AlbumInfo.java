@@ -249,11 +249,11 @@ public class AlbumInfo {
         if (isEqual == null || isEqual.equals(Boolean.TRUE)) {
             final AlbumInfo albumInfo = (AlbumInfo) o;
 
-            if (Tools.isNotEqual(mAlbumName, albumInfo.mAlbumName)) {
+            if (!Tools.areEqual(mAlbumName, albumInfo.mAlbumName)) {
                 isEqual = Boolean.FALSE;
             }
 
-            if (Tools.isNotEqual(mArtistName, albumInfo.mArtistName)) {
+            if (!Tools.areEqual(mArtistName, albumInfo.mArtistName)) {
                 isEqual = Boolean.FALSE;
             }
         }

@@ -106,7 +106,7 @@ abstract class AbstractAudioOutput {
              * checked at construction.
              */
             //noinspection ConstantConditions
-            if (Tools.isNotEqual(mResponseObject, entry.mResponseObject)) {
+            if (!Tools.areEqual(mResponseObject, entry.mResponseObject)) {
                 isEqual = Boolean.FALSE;
             }
         }

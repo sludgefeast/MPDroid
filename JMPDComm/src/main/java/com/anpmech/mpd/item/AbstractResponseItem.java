@@ -99,7 +99,7 @@ public abstract class AbstractResponseItem<T extends AbstractResponseItem<T>> ex
             //noinspection unchecked
             final T entry = (T) o;
 
-            if (Tools.isNotEqual(mResponseObject, entry.mResponseObject)) {
+            if (!Tools.areEqual(mResponseObject, entry.mResponseObject)) {
                 isEqual = Boolean.FALSE;
             }
         }

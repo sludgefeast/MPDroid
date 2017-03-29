@@ -91,7 +91,7 @@ class AlbumCoverHandler implements CoverDownloadListener {
             lastAlbumName = mLastAlbumInfo.getAlbumName();
         }
 
-        return Tools.equals(albumName, lastAlbumName);
+        return Tools.areEqual(albumName, lastAlbumName);
     }
 
     private boolean isSameArtist(final AlbumInfo albumInfo) {
@@ -105,7 +105,7 @@ class AlbumCoverHandler implements CoverDownloadListener {
             lastArtistName = mLastAlbumInfo.getArtistName();
         }
 
-        return Tools.equals(artistName, lastArtistName);
+        return Tools.areEqual(artistName, lastArtistName);
     }
 
     /**

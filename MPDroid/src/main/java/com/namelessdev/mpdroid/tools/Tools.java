@@ -16,6 +16,9 @@
 
 package com.namelessdev.mpdroid.tools;
 
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.helpers.MPDControl;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,14 +29,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.StringRes;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.widget.Toast;
-
-import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.helpers.MPDControl;
 
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
@@ -55,18 +53,6 @@ public final class Tools {
     private static final String TAG = "Tools";
 
     private Tools() {
-    }
-
-    /**
-     * Converts density independent pixels to pixels for the current device.
-     *
-     * @param context The context to get the resources from.
-     * @param dip     The density independent pixel count to convert to pixel count for the device.
-     * @return The device pixel equivalent of the incoming dip count.
-     */
-    public static float convertDpToPixel(final Context context, final float dip) {
-        final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, metrics);
     }
 
     /**

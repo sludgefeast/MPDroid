@@ -134,12 +134,10 @@ public class AbstractCommandResult {
 
         if (isEqual == null || isEqual.equals(Boolean.TRUE)) {
             /** This has to be the same due to the class check above. */
-            //noinspection unchecked
             final AbstractCommandResult result = (AbstractCommandResult) o;
 
-            //noinspection ConstantConditions
-            if (Tools.isNotEqual(mResult, result.mResult) ||
-                    Tools.isNotEqual(mConnectionResult, result.mConnectionResult)) {
+            if (!Tools.areEqual(mResult, result.mResult) ||
+                    !Tools.areEqual(mConnectionResult, result.mConnectionResult)) {
                 isEqual = Boolean.FALSE;
             }
         }

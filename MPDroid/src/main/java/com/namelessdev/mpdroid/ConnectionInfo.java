@@ -160,63 +160,42 @@ public final class ConnectionInfo implements Parcelable {
 
     @Override
     public boolean equals(final Object o) {
-        Boolean isEqual = null;
-
         if (this == o) {
-            isEqual = Boolean.TRUE;
-        } else if (o == null || getClass() != o.getClass()) {
-            isEqual = Boolean.FALSE;
+            return true;
         }
-
-        if (isEqual == null || isEqual.equals(Boolean.TRUE)) {
-            /** This has to be the same due to the class check above. */
-            //noinspection unchecked
-            final ConnectionInfo connectionInfo = (ConnectionInfo) o;
-
-            /**
-             * Fields must be individually tested against the last connection to avoid a stack
-             * overflow.
-             */
-            //noinspection ConstantConditions
-            final Object[][] objects = {
-                    {mLastConnection.mPassword, connectionInfo.mLastConnection.mPassword},
-                    {mPassword, connectionInfo.mPassword},
-                    {mLastConnection.mServer, connectionInfo.mLastConnection.mServer},
-                    {mServer, connectionInfo.mServer},
-                    {mLastConnection.mStream, connectionInfo.mLastConnection.mStream},
-                    {mStream, connectionInfo.mStream}
-            };
-
-            if (Tools.isNotEqual(objects)) {
-                isEqual = Boolean.FALSE;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
             }
 
-            if (mIsNotificationPersistent != connectionInfo.mIsNotificationPersistent ||
-                    mLastConnection.mIsNotificationPersistent !=
-                            connectionInfo.mLastConnection.mIsNotificationPersistent) {
-                isEqual = Boolean.FALSE;
+        final ConnectionInfo otherCI = (ConnectionInfo) o;
+        return areEqual(this, otherCI) &&
+                areEqual(this.mLastConnection, otherCI.mLastConnection);
             }
 
-            if (mPort != connectionInfo.mPort ||
-                    mLastConnection.mPort != connectionInfo.mLastConnection.mPort) {
-                isEqual = Boolean.FALSE;
-            }
+    private static boolean areEqual(final ConnectionInfo ci1,
+            final ConnectionInfo ci2) {
+        return Tools.areEqual(ci1.mPassword, ci2.mPassword) &&
+                Tools.areEqual(ci1.mServer, ci2.mServer) &&
+                Tools.areEqual(ci1.mStream, ci2.mStream) &&
+                Tools.areEqual(ci1.mMusicPath, ci2.mMusicPath) &&
+                Tools.areEqual(ci1.mCoverFilename, ci2.mCoverFilename) &&
+                ci1.mIsNotificationPersistent == ci2.mIsNotificationPersistent &&
+                ci1.mPort == ci2.mPort;
         }
 
-        if (isEqual == null) {
-            isEqual = Boolean.TRUE;
-        }
+    @Override
+    public int hashCode() {
+        final Object[] objects =
+                {mLastConnection, mPassword, mServer, mStream, mMusicPath, mCoverFilename};
+        int result = Arrays.hashCode(objects);
 
-        return isEqual;
+        if (mIsNotificationPersistent) {
+            result += 1;
     }
 
-    /**
-     * This method returns the connection information prior to this connection.
-     *
-     * @return The the last ConnectionInfo object.
-     */
-    public ConnectionInfo getLastConnection() {
-        return mLastConnection;
+        result *= 31 + mPort;
+
+        return result;
     }
 
     /**
@@ -325,20 +304,6 @@ public final class ConnectionInfo implements Parcelable {
      */
     public boolean hasStreamInfoChanged() {
         return !mLastConnection.mStream.equals(mStream);
-    }
-
-    @Override
-    public int hashCode() {
-        final Object[] objects = {mLastConnection, mPassword, mServer, mStream};
-        int result = Arrays.hashCode(objects);
-
-        if (mIsNotificationPersistent) {
-            result += 1;
-        }
-
-        result *= 31 + mPort;
-
-        return result;
     }
 
     /**
@@ -513,8 +478,8 @@ public final class ConnectionInfo implements Parcelable {
          * This method sets the notification is not persistent for this connection.
          */
         public void setNotificationNotPersistent() {
-            mIsNotificationPersistent = false;
             mPersistentRunFirst = true;
+            mIsNotificationPersistent = false;
         }
 
         /**

@@ -51,27 +51,27 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
     final long mDate;
 
     public static final Comparator<Album> SORT_BY_LASTMOD =
-        new Comparator<Album>() {
-            /**
-             * Compares albums by last modification date, newest first
-             */
-            @Override
-            public int compare(final Album lhs, final Album rhs) {
-                int compare = 0;
+            new Comparator<Album>() {
+                /**
+                 * Compares albums by last modification date, newest first
+                 */
+                @Override
+                public int compare(final Album lhs, final Album rhs) {
+                    int compare = 0;
 
-                if (lhs.mLastMod < rhs.mLastMod) {
-                    compare = 1;
-                } else if (lhs.mLastMod > rhs.mLastMod) {
-                    compare = -1;
+                    if (lhs.mLastMod < rhs.mLastMod) {
+                        compare = 1;
+                    } else if (lhs.mLastMod > rhs.mLastMod) {
+                        compare = -1;
+                    }
+
+                    if (compare == 0) {
+                        compare = lhs.compareTo(rhs);
+                    }
+
+                    return compare;
                 }
-
-                if (compare == 0) {
-                    compare = lhs.compareTo(rhs);
-                }
-
-                return compare;
-            }
-        };
+            };
 
     private final long mDuration;
 
@@ -86,8 +86,8 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
     final long mLastMod; /* last modified, latest lastMod of all tracks */
 
     AbstractAlbum(final String name, final Artist artist, final boolean hasAlbumArtist,
-                  final long songCount, final long duration, final long date, final String path,
-                  final long lastMod) {
+            final long songCount, final long duration, final long date, final String path,
+            final long lastMod) {
         super();
         mName = name;
         mSongCount = songCount;
@@ -109,42 +109,24 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
      */
     @Override
     public boolean equals(final Object o) {
-        Boolean isEqual = null;
-
         if (this == o) {
-            isEqual = Boolean.TRUE;
-        } else if (o == null || getClass() != o.getClass()) {
-            isEqual = Boolean.FALSE;
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
         }
 
-        if (isEqual == null || isEqual.equals(Boolean.TRUE)) {
-            /** This has to be the same due to the class check above. */
-            //noinspection unchecked
-            final AbstractAlbum<T> album = (AbstractAlbum<T>) o;
+        /** This has to be the same due to the class check above. */
+        final AbstractAlbum<T> album = (AbstractAlbum<T>) o;
 
-            final Object[][] equalsObjects = {
-                    {mArtist, album.mArtist},
-                    {mName, album.mName},
-                    {mPath, album.mPath}
-            };
+        return Tools.areEqual(mArtist, album.mArtist) &&
+                Tools.areEqual(mName, album.mName) &&
+                Tools.areEqual(mPath, album.mPath) &&
+                mDuration == album.mDuration &&
+                mSongCount == album.mSongCount &&
+                mDate == album.mDate &&
+                mHasAlbumArtist == album.mHasAlbumArtist;
 
-            final long[][] equalsLong = {
-                    {mDuration, album.mDuration},
-                    {mSongCount, album.mSongCount},
-                    {mDate, album.mDate}
-            };
-
-            if (Tools.isNotEqual(equalsObjects) || Tools.isNotEqual(equalsLong) ||
-                    mHasAlbumArtist != album.mHasAlbumArtist) {
-                isEqual = Boolean.FALSE;
-            }
-        }
-
-        if (isEqual == null) {
-            isEqual = Boolean.TRUE;
-        }
-
-        return isEqual.booleanValue();
     }
 
     public Artist getArtist() {
@@ -176,7 +158,7 @@ abstract class AbstractAlbum<T extends Album> extends Item<Album> {
         return mHasAlbumArtist;
     }
 
-    public long getLastMod() {
+    long getLastMod() {
         return mLastMod;
     }
 

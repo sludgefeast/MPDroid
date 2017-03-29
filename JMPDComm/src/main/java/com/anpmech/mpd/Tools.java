@@ -82,22 +82,6 @@ public final class Tools {
     }
 
     /**
-     * Null-safe equivalent of {@code a.equals(b)}. The result should be equivalent to
-     * Object.equals().
-     *
-     * @param a An object.
-     * @param b An object to be compared with a for equality.
-     * @return True if the arguments are equal to each other, false otherwise
-     */
-    public static boolean equals(final Object a, final Object b) {
-        if (a == null) {
-            return b == null;
-        } else {
-            return a.equals(b);
-        }
-    }
-
-    /**
      * This method searches for the next value in a String, beginning at the specified position.
      * <p>
      * <p>The rationale behind this method is to provide a fast find method for key/value
@@ -119,7 +103,7 @@ public final class Tools {
      * {@code keys} parameter is empty, or -1 if not found.
      */
     private static int getNextIndex(final String result, final int position, final boolean getValue,
-                                    final String... keys) {
+            final String... keys) {
         int index = -1;
         int mpdDelimiterIndex = result.indexOf(MPD_KV_DELIMITER, position);
         int keyIndex;
@@ -180,7 +164,7 @@ public final class Tools {
      * keys} parameter is empty, or -1 if not found.
      */
     public static int getNextKeyIndex(final String result, final int position,
-                                      final String... keys) {
+            final String... keys) {
         return getNextIndex(result, position, false, keys);
     }
 
@@ -202,8 +186,8 @@ public final class Tools {
      * @return The index of the first key value found, the index of the first value found if the
      * {@code keys} parameter is empty, or -1 if not found.
      */
-    public static int getNextValueIndex(final String result, final int position,
-                                        final String... keys) {
+    static int getNextValueIndex(final String result, final int position,
+            final String... keys) {
         return getNextIndex(result, position, true, keys);
     }
 
@@ -218,75 +202,15 @@ public final class Tools {
     }
 
     /**
-     * This method iterates through a 3 dimensional array to check each two element inner array for
-     * equality of it's inner objects with the isNotEqual(object, object) method.
+     * Null-safe equivalent of {@code a.equals(b)}. The result should be equivalent to
+     * Object.equals().
      *
-     * @param arrays The 3 dimensional array with objects to check for equality.
-     * @return Returns true if an inner array was not equal.
+     * @param a An object.
+     * @param b An object to be compared with a for equality.
+     * @return True if the arguments are equal to each other, false otherwise
      */
-    public static boolean isNotEqual(final Object[][] arrays) {
-        boolean result = false;
-
-        for (final Object[] array : arrays) {
-            if (isNotEqual(array[0], array[1])) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
-
-    /**
-     * Compares inside objects for an Object.equals(object) implementation.
-     *
-     * @param objectA An object to be compared.
-     * @param objectB An object to be compared.
-     * @return False if objects are both null or are equal, true otherwise.
-     */
-    public static boolean isNotEqual(final Object objectA, final Object objectB) {
-        if (objectA == null) {
-            return objectB != null;
-        }
-        return !objectA.equals(objectB);
-    }
-
-    /**
-     * Compares inside int values for an Object.equals(object) implementation.
-     *
-     * @param arrays A an array of two element arrays to be checked for equality.
-     * @return True if all two element arrays are equal, false otherwise.
-     */
-    public static boolean isNotEqual(final int[][] arrays) {
-        boolean result = false;
-
-        for (final int[] array : arrays) {
-            if (array[0] != array[1]) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
-
-    /**
-     * Compares inside long values for an Object.equals(object) implementation.
-     *
-     * @param arrays A an array of two element arrays to be checked for equality.
-     * @return True if all two element arrays are equal, false otherwise.
-     */
-    public static boolean isNotEqual(final long[][] arrays) {
-        boolean result = false;
-
-        for (final long[] array : arrays) {
-            if (array[0] != array[1]) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
+    public static boolean areEqual(final Object a, final Object b) {
+        return a == null ? b == null : a.equals(b);
     }
 
     /**
@@ -335,7 +259,7 @@ public final class Tools {
      *                     int.
      * @return The value as a primitive int, {@code defaultValue} if the value cannot be converted.
      */
-    public static int parseInteger(final String value, final int defaultValue) {
+    private static int parseInteger(final String value, final int defaultValue) {
         int result;
 
         if (value == null || value.isEmpty()) {
@@ -362,7 +286,7 @@ public final class Tools {
      * @return The value as a primitive {@code long}, {@code defaultValue} if the value cannot be
      * converted.
      */
-    public static long parseLong(final String value, final long defaultValue) {
+    private static long parseLong(final String value, final long defaultValue) {
         long result;
 
         if (value == null || value.isEmpty()) {
@@ -401,7 +325,7 @@ public final class Tools {
      * @return A collection of numbered range strings.
      * @see #sequentialToRange(int...)
      */
-    public static List<CharSequence> sequentialToRange(final List<Integer> integers) {
+    static List<CharSequence> sequentialToRange(final List<Integer> integers) {
         final ListIterator<Integer> iterator = integers.listIterator(integers.size());
         final List<CharSequence> ranges = new ArrayList<>();
         final StringBuilder stringBuilder = new StringBuilder(10);
@@ -459,7 +383,7 @@ public final class Tools {
      * @return A collection of numbered range strings.
      * @see #sequentialToRange(List)
      */
-    public static List<CharSequence> sequentialToRange(final int... integers) {
+    static List<CharSequence> sequentialToRange(final int... integers) {
         final List<CharSequence> ranges = new ArrayList<>();
         final StringBuilder stringBuilder = new StringBuilder(10);
         boolean inSequenceRange = false;
@@ -579,7 +503,7 @@ public final class Tools {
      * @throws InterruptedException If the current thread is {@link Thread#interrupted()}.
      */
     public static boolean waitForValidity(final Semaphore semaphore, final long timeout,
-                                          final TimeUnit unit) throws InterruptedException {
+            final TimeUnit unit) throws InterruptedException {
         boolean isValid = false;
 
         try {

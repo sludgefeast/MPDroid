@@ -357,11 +357,11 @@ public class MPDPlaylist {
         /** Don't allow the list to change before we've computed the CommandList. */
         synchronized (mList) {
             for (final Music track : mList) {
-                if (Tools.equals(albumName, track.getAlbumName())) {
+                if (Tools.areEqual(albumName, track.getAlbumName())) {
                     final boolean songIsAlbumArtist = usingAlbumArtist &&
-                            Tools.equals(artistName, track.getAlbumArtistName());
+                            Tools.areEqual(artistName, track.getAlbumArtistName());
                     final boolean songIsArtist = !usingAlbumArtist &&
-                            Tools.equals(artistName, track.getArtistName());
+                            Tools.areEqual(artistName, track.getArtistName());
 
                     if (songIsArtist || songIsAlbumArtist) {
                         matchingPositions.add(track.getPos());
