@@ -113,7 +113,6 @@
     <string name="version">Версія</string>
     <string name="songs">Пісні</string>
     <string name="serverInformation">Інформація про сервер</string>
-    <string name="serverInformationDescription">Інша інформація про MPD-сервер, як версія, кількість пісень…</string>
     <string name="connectionSettings">Налаштування підключення</string>
     <string name="connectionSettingsDescription">Встановити MPD-хост/порт та пароль</string>
     <string name="outputs">Виходи</string>

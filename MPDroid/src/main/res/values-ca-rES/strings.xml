@@ -91,7 +91,6 @@
     <string name="version">Versió</string>Default
     <string name="songs">Cançons</string>
     <string name="serverInformation">Informació del servidor</string>
-    <string name="serverInformationDescription">Informació del servidor com a versió, nombre de cançons ...</string>
     <string name="connectionSettings">Configuració de connexió</string>
     <string name="connectionSettingsDescription">Establir la direcció, port i contrasenya del servidor MPD</string>
     <string name="outputs">Sortides</string>

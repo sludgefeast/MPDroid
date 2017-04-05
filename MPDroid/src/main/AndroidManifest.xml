@@ -86,6 +86,10 @@
             android:name="com.namelessdev.mpdroid.library.SimpleLibraryActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity
+            android:name=".library.ServerInformationActivity"
+            android:label="@string/serverInformation"
+            android:theme="@style/AppTheme.Settings" />
+        <activity
             android:name=".preferences.SettingsActivity"
             android:label="@string/settings"
             android:theme="@style/AppTheme.Settings" />

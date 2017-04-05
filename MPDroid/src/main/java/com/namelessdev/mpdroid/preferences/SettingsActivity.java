@@ -16,106 +16,20 @@
 
 package com.namelessdev.mpdroid.preferences;
 
-import android.os.Bundle;
-
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.subsystem.status.StatusChangeListener;
 import com.namelessdev.mpdroid.MPDActivity;
 import com.namelessdev.mpdroid.R;
 
-public class SettingsActivity extends MPDActivity implements StatusChangeListener {
+import android.os.Bundle;
 
-    private SettingsFragment mSettingsFragment;
-
-    /**
-     * Called upon connection.
-     *
-     * @param commandErrorCode If this number is non-zero, the number will correspond to a
-     *                         {@link MPDException} error code. If this number is zero, the
-     *                         connection MPD protocol commands were successful.
-     */
-    @Override
-    public void connectionConnected(final int commandErrorCode) {
-        super.connectionConnected(commandErrorCode);
-        mSettingsFragment.onConnectionStateChanged();
-    }
-
-    /**
-     * Called upon disconnection.
-     *
-     * @param reason The reason given for disconnection.
-     */
-    @Override
-    public void connectionDisconnected(final String reason) {
-        super.connectionDisconnected(reason);
-        mSettingsFragment.onConnectionStateChanged();
-    }
-
-    @Override
-    protected int getThemeResId() {
-        return isLightThemeSelected() ? R.style.AppTheme_Light : R.style.AppTheme;
-    }
-
-    @Override
-    public void libraryStateChanged(final boolean updating, final boolean dbChanged) {
-    }
+public class SettingsActivity extends MPDActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        mSettingsFragment = new SettingsFragment();
+        final SettingsFragment settingsFragment = new SettingsFragment();
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, mSettingsFragment).commit();
+                .replace(android.R.id.content, settingsFragment).commit();
     }
 
-    @Override
-    public void onPause() {
-        mApp.getMPD().getConnectionStatus().removeListener(this);
-        mApp.removeStatusChangeListener(this);
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mApp.addStatusChangeListener(this);
-        mApp.getMPD().getConnectionStatus().addListener(this);
-    }
-
-    @Override
-    public void outputsChanged() {
-    }
-
-    @Override
-    public void playlistChanged(final int oldPlaylistVersion) {
-    }
-
-    @Override
-    public void randomChanged() {
-    }
-
-    @Override
-    public void repeatChanged() {
-    }
-
-    @Override
-    public void stateChanged(final int oldState) {
-    }
-
-    @Override
-    public void stickerChanged() {
-    }
-
-    @Override
-    public void storedPlaylistChanged() {
-    }
-
-    @Override
-    public void trackChanged(final int oldTrack) {
-    }
-
-    @Override
-    public void volumeChanged(final int oldVolume) {
-    }
 }

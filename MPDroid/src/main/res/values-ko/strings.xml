@@ -115,7 +115,6 @@
     <string name="version">버전</string>
     <string name="songs">곡</string>
     <string name="serverInformation">서버 정보</string>
-    <string name="serverInformationDescription">버전과 곡 수 등 각종 MPD 서버 정보를 보여줍니다</string>
     <string name="connectionSettings">연결 설정</string>
     <string name="connectionSettingsDescription">MPD 호스트/포트와 비밀번호를 설정합니다</string>
     <string name="outputs">출력</string>

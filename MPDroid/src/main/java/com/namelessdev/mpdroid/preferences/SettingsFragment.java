@@ -16,9 +16,6 @@
 
 package com.namelessdev.mpdroid.preferences;
 
-import com.anpmech.mpd.MPD;
-import com.anpmech.mpd.exception.MPDException;
-import com.anpmech.mpd.subsystem.status.MPDStatistics;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.SearchRecentProvider;
@@ -31,7 +28,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -39,73 +35,17 @@ import android.preference.PreferenceScreen;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
 import android.text.format.Formatter;
-import android.util.Log;
-
-import java.io.IOException;
 
 public class SettingsFragment extends PreferenceFragment {
 
-    private static final String TAG = "SettingsFragment";
-
     private final MPDApplication mApp = MPDApplication.getInstance();
 
-    private Preference mAlbums;
-
-    private Preference mArtists;
-
-    private Preference mSongs;
-
-    private Preference mVersion;
-
-    private Preference mCacheUsage1;
-
     private Preference mCacheUsage2;
-
-    private Handler mHandler;
-
-    private PreferenceScreen mInformationScreen;
-
-    public void onConnectionStateChanged() {
-        final MPD mpd = mApp.getMPD();
-        final boolean isConnected = mpd.isConnected();
-
-        mInformationScreen.setEnabled(isConnected);
-
-        if (isConnected) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        mpd.getStatistics().waitForValidity();
-                    } catch (final InterruptedException ignored) {
-                    }
-
-                    final String versionText = mpd.getMpdVersion();
-                    final MPDStatistics mpdStatistics = mpd.getStatistics();
-
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            mVersion.setSummary(versionText);
-                            mArtists.setSummary(String.valueOf(mpdStatistics.getArtists()));
-                            mAlbums.setSummary(String.valueOf(mpdStatistics.getAlbums()));
-                            mSongs.setSummary(String.valueOf(mpdStatistics.getSongs()));
-                            //TODO: display all statistics
-                        }
-                    });
-                }
-            }).start();
-        }
-    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
-
-        mHandler = new Handler();
-
-        mInformationScreen = (PreferenceScreen) findPreference("informationScreen");
 
         if (!getResources().getBoolean(R.bool.isTablet)) {
             final PreferenceScreen interfaceCategory = (PreferenceScreen) findPreference(
@@ -113,17 +53,11 @@ public class SettingsFragment extends PreferenceFragment {
             interfaceCategory.removePreference(findPreference("tabletUI"));
         }
 
-        mVersion = findPreference("version");
-        mArtists = findPreference("artists");
-        mAlbums = findPreference("albums");
-        mSongs = findPreference("songs");
-
         // Small seekbars don't work on lollipop
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             findPreference("smallSeekbars").setEnabled(false);
         }
 
-        mCacheUsage1 = findPreference("cacheUsage1");
         mCacheUsage2 = findPreference("cacheUsage2");
 
         final CheckBoxPreference lightTheme = (CheckBoxPreference) findPreference("lightTheme");
@@ -149,15 +83,6 @@ public class SettingsFragment extends PreferenceFragment {
             return false;
         }
 
-        if ("refreshMPDDatabase".equals(preference.getKey())) {
-            try {
-                mApp.getMPD().refreshDatabase();
-            } catch (final IOException | MPDException e) {
-                Log.e(TAG, "Failed to refresh the database.", e);
-            }
-            return true;
-        }
-
         if ("clearLocalCoverCache".equals(preference.getKey())) {
             new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.clearLocalCoverCache)
@@ -166,7 +91,6 @@ public class SettingsFragment extends PreferenceFragment {
                         @Override
                         public void onClick(final DialogInterface dialog, final int which) {
                             CoverManager.getInstance().clear();
-                            mCacheUsage1.setSummary("0.00B");
                             mCacheUsage2.setSummary("0.00B");
                         }
                     })
@@ -202,9 +126,7 @@ public class SettingsFragment extends PreferenceFragment {
         }
         final long size = new CachedCover().getCacheUsage();
         final String usage = Formatter.formatFileSize(mApp, size);
-        mCacheUsage1.setSummary(usage);
         mCacheUsage2.setSummary(usage);
-        onConnectionStateChanged();
     }
 
 }

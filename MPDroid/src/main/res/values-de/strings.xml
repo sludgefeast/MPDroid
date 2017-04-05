@@ -120,7 +120,7 @@
     <string name="version">Version</string>
     <string name="songs">Titel</string>
     <string name="serverInformation">Server-Informationen</string>
-    <string name="serverInformationDescription">Diverse MPD-Server-Informationen wie Version, Anzahl Stücke …</string>
+    <string name="statistics">Statistiken</string>
     <string name="connectionSettings">Verbindungseinstellungen</string>
     <string name="connectionSettingsDescription">Setze MPD-Host/Port und Passwort</string>
     <string name="outputs">Ausgänge</string>

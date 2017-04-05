@@ -105,7 +105,6 @@
     <string name="version">Version</string>
     <string name="songs">Chansons</string>
     <string name="serverInformation">Informations serveur</string>
-    <string name="serverInformationDescription">Informations du serveur MPD comme la version, le nombre de chansons …</string>
     <string name="connectionSettings">Paramètres de connexion</string>
     <string name="connectionSettingsDescription">Définir l\'addresse/port et mot de passe du serveur MPD</string>
     <string name="outputs">Sorties</string>

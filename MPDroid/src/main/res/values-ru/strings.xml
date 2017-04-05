@@ -111,7 +111,6 @@
     <string name="version">Версия</string>
     <string name="songs">Записи</string>
     <string name="serverInformation">О сервере</string>
-    <string name="serverInformationDescription">Информация о сервере MPD, такая, как версия, кол-во записей и т.д.</string>
     <string name="connectionSettings">Настройки соединения</string>
     <string name="connectionSettingsDescription">Указать IP-адрес сервера MPD, порт и пароль</string>
     <string name="outputs">Выходы</string>

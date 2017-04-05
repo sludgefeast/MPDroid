@@ -89,7 +89,6 @@
     <string name="version">版本</string>
     <string name="songs">歌曲</string>
     <string name="serverInformation">服务器信息</string>
-    <string name="serverInformationDescription">各种MPD服务器信息，例如：版本，歌曲数等等</string>
     <string name="connectionSettings">连接设置</string>
     <string name="connectionSettingsDescription">设置MPD-主机/商品和密码</string>
     <string name="outputs">输出</string>

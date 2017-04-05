@@ -20,40 +20,6 @@
     android:key="preferencescreen">
 
     <PreferenceScreen
-        android:key="informationScreen"
-        android:summary="@string/serverInformationDescription"
-        android:title="@string/serverInformation">
-
-        <PreferenceScreen
-            android:key="refreshMPDDatabase"
-            android:title="@string/updateDBDetails" />
-
-        <PreferenceCategory android:title="@string/serverInformation">
-
-            <Preference
-                android:key="version"
-                android:title="@string/version" />
-
-            <Preference
-                android:key="artists"
-                android:title="@string/artists" />
-
-            <Preference
-                android:key="albums"
-                android:title="@string/albums" />
-
-            <Preference
-                android:key="songs"
-                android:title="@string/songs" />
-
-            <Preference
-                android:key="cacheUsage1"
-                android:title="@string/cacheUsage" />
-
-        </PreferenceCategory>
-    </PreferenceScreen>
-
-    <PreferenceScreen
         android:key="connectionScreen"
         android:summary="@string/connectionSettingsDescription"
         android:title="@string/connectionSettings">

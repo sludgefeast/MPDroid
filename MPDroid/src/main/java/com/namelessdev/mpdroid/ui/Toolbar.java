@@ -21,6 +21,7 @@ import com.anpmech.mpd.subsystem.AudioOutput;
 import com.namelessdev.mpdroid.AboutActivity;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.library.ServerInformationActivity;
 import com.namelessdev.mpdroid.library.SimpleLibraryActivity;
 import com.namelessdev.mpdroid.preferences.SettingsActivity;
 
@@ -148,6 +149,9 @@ public class Toolbar extends android.support.v7.widget.Toolbar {
 
     private boolean standardOnMenuItemClick(final Context context, final MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.menu_server_info:
+                context.startActivity(new Intent(context, ServerInformationActivity.class));
+                return true;
             case R.id.menu_outputs:
                 final Intent outputIntent = new Intent(context,
                         SimpleLibraryActivity.class);
