@@ -18,13 +18,13 @@ package com.namelessdev.mpdroid.fragments;
 
 import com.anpmech.mpd.MPD;
 import com.anpmech.mpd.MPDCommand;
+import com.anpmech.mpd.commandresponse.StreamResponse;
 import com.anpmech.mpd.exception.MPDException;
 import com.anpmech.mpd.item.Artist;
 import com.anpmech.mpd.item.PlaylistFile;
 import com.anpmech.mpd.item.Stream;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.preferences.Preferences;
 import com.namelessdev.mpdroid.tools.StreamFetcher;
 import com.namelessdev.mpdroid.tools.Tools;
 
@@ -146,17 +146,12 @@ public class StreamsFragment extends BrowseFragment<Stream> {
 
     @Override
     protected void asyncUpdate() {
-        final List<Stream> streams = new ArrayList<>();
-        mUnordered.clear();
+        StreamResponse streamResponse = new StreamResponse();
 
         /** Many users have playlist support disabled, no need for an exception. */
         if (mApp.getMPD().isCommandAvailable(MPDCommand.MPD_CMD_LISTPLAYLISTS)) {
             try {
-                streams.addAll(mApp.getMPD().getSavedStreams());
-                mUnordered.addAll(streams);
-                if (Preferences.readBoolean(Preferences.PREFERENCE_KEY_SORT_STREAMS, true)) {
-                    Collections.sort(streams);
-                }
+                streamResponse = mApp.getMPD().getSavedStreams();
             } catch (final IOException | MPDException e) {
                 Log.e(TAG, "Failed to retrieve saved streams.", e);
             }
@@ -164,6 +159,10 @@ public class StreamsFragment extends BrowseFragment<Stream> {
             Log.w(TAG, "Streams fragment can't load streams, playlist support not enabled.");
         }
 
+        final List<Stream> streams = new ArrayList<>(streamResponse);
+        mUnordered.clear();
+        mUnordered.addAll(streams);
+        Collections.sort(streams);
         replaceItems(streams);
     }
 

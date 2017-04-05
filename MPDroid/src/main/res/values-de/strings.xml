@@ -339,7 +339,4 @@
     <string name="downloadInProgress">Läuft...</string>
     <string name="downloadItem">Download %s</string>
     <!-- End MediaPlayer Error Strings -->
-    <string name="sortStreams">Streams sortieren</string>
-    <string name="sortStreamsDescription">Alphabetische Sortierrung. Anderenfalls Reihenfolge des Hinzufügens.</string>
-
 </resources>

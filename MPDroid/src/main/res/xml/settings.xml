@@ -169,13 +169,6 @@
             android:summary="@string/showAlbumTrackCountDescription"
             android:title="@string/showAlbumTrackCount" />
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="sortStreams"
-            android:persistent="true"
-            android:summary="@string/sortStreamsDescription"
-            android:title="@string/sortStreams" />
-
         <PreferenceCategory android:title="@string/genres">
 
             <CheckBoxPreference

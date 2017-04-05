@@ -40,11 +40,6 @@ public final class Preferences {
     /**
      * Preference key of the personalization key.
      */
-    public static final String PREFERENCE_KEY_SORT_STREAMS = "sortStreams";
-
-    /**
-     * Preference key of the personalization key.
-     */
     private static final String PREFERENCE_KEY_RATING_KEY = "ratingKey";
 
     /**
