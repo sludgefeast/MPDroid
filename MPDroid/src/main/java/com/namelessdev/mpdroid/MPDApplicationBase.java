@@ -23,6 +23,7 @@ import com.anpmech.mpd.subsystem.status.TrackPositionListener;
 import com.namelessdev.mpdroid.helpers.CachedMPD;
 import com.namelessdev.mpdroid.helpers.MPDAsyncHelper;
 import com.namelessdev.mpdroid.helpers.UpdateTrackInfo;
+import com.namelessdev.mpdroid.preferences.Preferences;
 import com.namelessdev.mpdroid.service.MPDroidService;
 import com.namelessdev.mpdroid.service.NotificationHandler;
 import com.namelessdev.mpdroid.service.ServiceBinder;
@@ -368,15 +369,12 @@ class MPDApplicationBase extends Application implements
         debug("onCreate Application");
 
         mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+        Preferences.upgrade();
 
         mMPDAsyncHelper = new MPDAsyncHelper();
         mConnectionInfo = mMPDAsyncHelper.updateConnectionSettings();
 
-        if (mSettings.getBoolean(USE_LOCAL_ALBUM_CACHE_KEY, false)) {
-            mMPD = new CachedMPD();
-        } else {
-            mMPD = new MPD();
-        }
+        mMPD = mSettings.getBoolean(USE_LOCAL_ALBUM_CACHE_KEY, false) ? new CachedMPD() : new MPD();
 
         mIdleSubsystemMonitor = new IdleSubsystemMonitor(mMPD);
     }

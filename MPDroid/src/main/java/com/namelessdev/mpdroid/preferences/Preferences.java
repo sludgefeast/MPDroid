@@ -16,10 +16,22 @@
 
 package com.namelessdev.mpdroid.preferences;
 
+import com.anpmech.mpd.Log;
+import com.namelessdev.mpdroid.BuildConfig;
+import com.namelessdev.mpdroid.MPDApplication;
+import com.namelessdev.mpdroid.preferences.upgrade.ConnectionPreferenceUpgrader;
+import com.namelessdev.mpdroid.preferences.upgrade.PreferenceUpgrader;
+
+import android.app.Application;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 
-import com.namelessdev.mpdroid.MPDApplication;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public final class Preferences {
 
@@ -45,6 +57,10 @@ public final class Preferences {
      */
     private static final String PREFERENCE_KEY_FAVORITE_KEY = "favoriteKey";
 
+    private static final String PREFERENCE_KEY_PREFERENCES_VERSION = "preferencesVersion";
+
+    private static final String TAG = "Preferences";
+
     private Preferences() {
     }
 
@@ -53,9 +69,7 @@ public final class Preferences {
     }
 
     public static String ratingsPersonalizationKey() {
-        final SharedPreferences settings =
-                PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
-        return settings.getString(PREFERENCE_KEY_RATING_KEY, "").trim();
+        return preferences().getString(PREFERENCE_KEY_RATING_KEY, "").trim();
     }
 
     /**
@@ -64,21 +78,69 @@ public final class Preferences {
      * @return true, if activated.
      */
     public static boolean areFavoritesActivated() {
-        final SharedPreferences settings =
-                PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
-        return settings.getBoolean(PREFERENCE_KEY_USE_FAVORITE, false);
+        return preferences().getBoolean(PREFERENCE_KEY_USE_FAVORITE, false);
     }
 
     public static String favoritesPersonalizationKey() {
-        final SharedPreferences settings =
-                PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
-        return settings.getString(PREFERENCE_KEY_FAVORITE_KEY, "").trim();
+        return preferences().getString(PREFERENCE_KEY_FAVORITE_KEY, "").trim();
     }
 
     public static boolean readBoolean(final String key, final boolean defaultValue) {
-        final SharedPreferences settings =
-                PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
-        return settings.getBoolean(key, defaultValue);
+        return preferences().getBoolean(key, defaultValue);
+    }
+
+    private static SharedPreferences preferences() {
+        return PreferenceManager.getDefaultSharedPreferences(MPDApplication.getInstance());
+    }
+
+    public static void upgrade() {
+        final Application app = MPDApplication.getInstance();
+        try {
+            final PackageInfo packageInfo = app.getPackageManager()
+                    .getPackageInfo(app.getPackageName(), 0);
+            Log.info(TAG, "" + packageInfo.versionCode);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        final SharedPreferences preferences = preferences();
+        final int preferencesVersion = preferences.getInt(PREFERENCE_KEY_PREFERENCES_VERSION, 0);
+
+        final List<PreferenceUpgrader> upgraders = readPreferenceUpgraders(preferencesVersion);
+        if (upgraders.isEmpty()) {
+            return;
+        }
+
+        final SharedPreferences.Editor editor = preferences.edit();
+
+        for (final PreferenceUpgrader upgrader : upgraders) {
+            upgrader.upgrade(preferences, editor);
+        }
+        editor.putInt(PREFERENCE_KEY_PREFERENCES_VERSION, BuildConfig.VERSION_CODE);
+
+        editor.apply();
+    }
+
+    private static List<PreferenceUpgrader> readPreferenceUpgraders(final int preferencesVersion) {
+        //TODO don't list available preference upgraders here
+        final PreferenceUpgrader[] availableUpgraders = {new ConnectionPreferenceUpgrader()};
+
+        final List<PreferenceUpgrader> upgraders = new ArrayList<>();
+
+        for (final PreferenceUpgrader upgrader : availableUpgraders) {
+            if (upgrader.getBasedAppVersionCode() >= preferencesVersion) {
+                upgraders.add(upgrader);
+            }
+        }
+
+        Collections.sort(upgraders, new Comparator<PreferenceUpgrader>() {
+            @Override
+            public int compare(final PreferenceUpgrader lhs, final PreferenceUpgrader rhs) {
+                return lhs.getBasedAppVersionCode() - rhs.getBasedAppVersionCode();
+            }
+        });
+
+        return upgraders;
     }
 
 }
