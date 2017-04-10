@@ -20,10 +20,6 @@ MPDroid works on **all** devices from 4.0.3 (API 15) to 4.4+
 - DragSortListView - Really nice and widely used TouchInterceptor replacement.
 - ActionBar-PullToRefresh - Pull to refresh for library.  
 
-## Known issues
-
-- Limited multi server support (based on WLAN name)
-
 ## Roadmap
 
 New features will most likely be delayed. MPDroid is, in my opinion, almost fully-featured and pushes (hits) MPD's API limits. Widely requested features (like better search, better library browsing) can't be done without duplicating MPD's database locally. This is a huge project, and it will take a lot of time (if ever done).
@@ -34,7 +30,6 @@ So, the current roadmap is:
 
 ####1.1  
 
- - [ ] Make MPDroid configurable for multiple servers (Better implementation than the hackish WLAN based one)
  - [ ] Add Bonjour support
  - [ ] Rework Streams storage
  - [ ] Split album details by CD and allow only one CD to be added to the playlist
