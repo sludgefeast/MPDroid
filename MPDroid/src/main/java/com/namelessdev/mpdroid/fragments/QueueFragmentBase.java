@@ -82,6 +82,7 @@ import com.namelessdev.mpdroid.models.AbstractPlaylistMusic;
 import com.namelessdev.mpdroid.models.PlaylistSong;
 import com.namelessdev.mpdroid.models.PlaylistStream;
 import com.namelessdev.mpdroid.tools.Tools;
+import com.namelessdev.mpdroid.ui.MenuButton;
 import com.namelessdev.mpdroid.views.holders.PlayQueueViewHolder;
 
 import java.io.IOException;
@@ -220,35 +221,14 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
      */
     @DrawableRes
     public int getStateDrawable() {
-        final int newPlay;
-
-        if (mLightTheme) {
-            switch (mMPDStatus.getState()) {
-                case MPDStatusMap.STATE_PLAYING:
-                    newPlay = R.drawable.ic_media_play_light;
-                    break;
-                case MPDStatusMap.STATE_PAUSED:
-                    newPlay = R.drawable.ic_media_pause_light;
-                    break;
-                default:
-                    newPlay = R.drawable.ic_media_stop_light;
-                    break;
-            }
-        } else {
-            switch (mMPDStatus.getState()) {
-                case MPDStatusMap.STATE_PLAYING:
-                    newPlay = R.drawable.ic_media_play;
-                    break;
-                case MPDStatusMap.STATE_PAUSED:
-                    newPlay = R.drawable.ic_media_pause;
-                    break;
-                default:
-                    newPlay = R.drawable.ic_media_stop;
-                    break;
-            }
+        switch (mMPDStatus.getState()) {
+            case MPDStatusMap.STATE_PLAYING:
+                return mLightTheme ? R.drawable.ic_media_play_light : R.drawable.ic_media_play;
+            case MPDStatusMap.STATE_PAUSED:
+                return mLightTheme ? R.drawable.ic_media_pause_light : R.drawable.ic_media_pause;
+            default:
+                return mLightTheme ? R.drawable.ic_media_stop_light : R.drawable.ic_media_stop;
         }
-
-        return newPlay;
     }
 
     protected boolean isFiltered(final String item) {
@@ -300,7 +280,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-                             final Bundle savedInstanceState) {
+            final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         mRootView = container;
@@ -511,7 +491,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(final DialogInterface dialog,
-                                                            final int which) {
+                                                final int which) {
                                             savePlaylist(mPlaylistToSave);
                                         }
                                     }
@@ -561,11 +541,9 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
 
     protected void refreshListColorCacheHint() {
         if (mList != null) {
-            if (mLightTheme) {
-                mList.setCacheColorHint(getResources().getColor(android.R.color.background_light));
-            } else {
-                mList.setCacheColorHint(getResources().getColor(R.color.nowplaying_background));
-            }
+            mList.setCacheColorHint(getResources().getColor(
+                    mLightTheme ? android.R.color.background_light
+                            : R.color.nowplaying_background));
         }
     }
 
@@ -625,7 +603,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(final DialogInterface dialog,
-                                                            final int which) {
+                                                final int which) {
                                             final String name = input.getText().toString().trim();
                                             if (!name.isEmpty()) {
                                                 savePlaylist(name);
@@ -646,17 +624,17 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
 
         if (songPos == -1) {
             Log.d(TAG, "Missing list item.");
-        } else {
-
-            if (mActivity instanceof MainMenuActivity) {
-                ((NowPlayingActivity) mActivity).showQueue();
-            }
-
-            final ListView listView = getListView();
-            listView.requestFocusFromTouch();
-            listView.setSelection(songPos);
-            listView.clearFocus();
+            return;
         }
+
+        if (mActivity instanceof MainMenuActivity) {
+            ((NowPlayingActivity) mActivity).showQueue();
+        }
+
+        final ListView listView = getListView();
+        listView.requestFocusFromTouch();
+        listView.setSelection(songPos);
+        listView.clearFocus();
     }
 
     /**
@@ -667,7 +645,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
      * @param parcelable the {@link Intent#putExtra(String, boolean)} parcelable.
      */
     private void startSimpleLibraryActivity(final Activity activity, final String extra,
-                                            final Parcelable parcelable) {
+            final Parcelable parcelable) {
         final Intent intent = new Intent(activity, SimpleLibraryActivity.class);
         intent.putExtra(extra, parcelable);
         startActivityForResult(intent, -1);
@@ -775,7 +753,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
      * @param listPlayingID The current playing playlist id.
      */
     protected void updateScrollbar(final ArrayList<AbstractPlaylistMusic> newSongList,
-                                   final int listPlayingID) {
+            final int listPlayingID) {
         mActivity.runOnUiThread(new Runnable() {
             /**
              * This is a helper method to workaround shortcomings of the fast scroll API.
@@ -784,7 +762,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
              * @param isAlwaysVisible The visibility of the scrollbar.
              */
             private void refreshFastScrollStyle(final int scrollbarStyle,
-                                                final boolean isAlwaysVisible) {
+                    final boolean isAlwaysVisible) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     mList.setFastScrollAlwaysVisible(isAlwaysVisible);
                     mList.setScrollBarStyle(scrollbarStyle);
@@ -854,7 +832,7 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
     private class QueueAdapter extends ArrayAdapter<AbstractPlaylistMusic> {
 
         QueueAdapter(final Context context, @LayoutRes final int resource,
-                     final List<AbstractPlaylistMusic> data) {
+                final List<AbstractPlaylistMusic> data) {
             super(context, resource, data);
         }
 
@@ -892,17 +870,8 @@ abstract class QueueFragmentBase extends ListFragment implements StatusChangeLis
                 viewHolder.mAlbumCover.setTag(R.id.CoverAsyncHelper, viewHolder.mCoverHelper);
                 viewHolder.mCoverHelper.addCoverDownloadListener(acd);
                 viewHolder.mMenuButton = (ImageButton) view.findViewById(R.id.menu);
+                MenuButton.tint(viewHolder.mMenuButton, getResources());
                 viewHolder.mMenuButton.setOnClickListener(mItemMenuButtonListener);
-
-                // Tint the overflow button if needed
-                if (MPDApplication.getInstance().isLightThemeSelected()) {
-                    Drawable drawable = viewHolder.mMenuButton.getDrawable();
-
-                    drawable = DrawableCompat.wrap(drawable);
-                    DrawableCompat.setTint(drawable,
-                            getResources().getColor(android.R.color.darker_gray));
-                    viewHolder.mMenuButton.setImageDrawable(drawable);
-                }
 
                 view.setTag(viewHolder);
             } else {

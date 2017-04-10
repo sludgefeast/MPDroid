@@ -17,47 +17,47 @@
 package com.namelessdev.mpdroid.preferences;
 
 import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.adapters.ArrayAdapter;
+import com.namelessdev.mpdroid.adapters.ArrayDataBinder;
+import com.namelessdev.mpdroid.ui.MenuButton;
+import com.namelessdev.mpdroid.views.holders.ViewHolder;
 
+import android.app.ListFragment;
+import android.content.Context;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import java.util.List;
 
 /**
  * This class lists all connections for choosing to modify a connection settings.
  */
-public class ConnectionChooserFragment extends PreferenceFragment
-        implements MenuItem.OnMenuItemClickListener {
+public class ConnectionChooserFragment extends ListFragment {
 
-    private static final int CURRENT = 0;
-
-    private static final int DELETE = 1;
+    private AbsListView mListView;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.servers, container, false);
 
-        final AbsListView listView = (AbsListView) view.findViewById(android.R.id.list);
-        registerForContextMenu(listView);
+        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        registerForContextMenu(mListView);
 
         final ImageButton addButton = (ImageButton) view.findViewById(R.id.serversAddButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                ((ConnectionSettingsActivity) getActivity()).onNewServer();
+                final ServerSetting serverSetting = ServerSetting.create();
+                ConnectionModifierFragment.edit(serverSetting, getActivity());
             }
         });
 
@@ -67,77 +67,136 @@ public class ConnectionChooserFragment extends PreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        setPreferenceScreen(buildServerPreferencesScreen());
+        refreshItems();
     }
 
-    private PreferenceScreen buildServerPreferencesScreen() {
-        final PreferenceScreen screen =
-                getPreferenceManager().createPreferenceScreen(getActivity());
-
-        final Preference category = new PreferenceCategory(screen.getContext());
-        category.setTitle(R.string.servers);
-        screen.addPreference(category);
-
-        final List<ServerSetting> serverSettings = ServerSetting.read();
-        for (final ServerSetting serverSetting : serverSettings) {
-            addServerPreference(screen, serverSetting);
-        }
-
-        return screen;
+    private void refreshItems() {
+        mListView.setAdapter(
+                new ArrayAdapter<>(this.getActivity(), new ServerSettingDataBinder(),
+                        ServerSetting.read()));
     }
 
-    @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenu.ContextMenuInfo menuInfo) {
-        final ServerSetting serverSetting = geServerSettingForMenuInfo(menuInfo);
+    private static class ServerItemTag {
 
-        if (!serverSetting.isCurrent()) {
-            menu.add(Menu.NONE, CURRENT, CURRENT, R.string.setCurrent)
-                    .setOnMenuItemClickListener(this);
-        }
-        menu.add(Menu.NONE, DELETE, DELETE, R.string.delete).setOnMenuItemClickListener(this);
-    }
+        ServerSetting mServerSetting;
 
-    @Override
-    public boolean onMenuItemClick(final MenuItem item) {
-        final ServerSetting serverSetting = geServerSettingForMenuInfo(item.getMenuInfo());
+        boolean mIsMenu;
 
-        switch (item.getItemId()) {
-            case CURRENT:
-                serverSetting.setAsCurrent();
-                return true;
-            case DELETE:
-                serverSetting.delete();
-                setPreferenceScreen(buildServerPreferencesScreen());
-                return true;
-            default:
-                return false;
+        ServerItemTag(final ServerSetting serverSetting, final boolean isMenu) {
+            mServerSetting = serverSetting;
+            mIsMenu = isMenu;
         }
     }
 
-    private ServerSetting geServerSettingForMenuInfo(final ContextMenu.ContextMenuInfo menuInfo) {
-        final AdapterView.AdapterContextMenuInfo info =
-                (AdapterView.AdapterContextMenuInfo) menuInfo;
+    private class ServerSettingDataBinder
+            implements ArrayDataBinder<ServerSetting>, View.OnClickListener {
 
-        final int serverIndex =
-                info.position - 1; // preference category also counts, but doesn't matter
+        @Override
+        public ViewHolder findInnerViews(final View targetView) {
+            final ServerSettingViewHolder viewHolder = new ServerSettingViewHolder();
+            viewHolder.mServerIconCurrent = (ImageView) targetView
+                    .findViewById(R.id.server_icon_current);
+            viewHolder.mServerNameTextView = (TextView) targetView.findViewById(R.id.server_name);
+            viewHolder.mServerURLTextView = (TextView) targetView.findViewById(R.id.server_url);
+            viewHolder.mMenuButton = (ImageButton) targetView.findViewById(R.id.menu);
+            return viewHolder;
+        }
 
-        return ServerSetting.read().get(serverIndex);
+        @Override
+        public int getLayoutId() {
+            return R.layout.server_list_item;
+        }
+
+        @Override
+        public boolean isEnabled(final int position, final List<ServerSetting> items,
+                final Object item) {
+            return true;
+        }
+
+        @Override
+        public void onDataBind(final Context context, final View targetView,
+                final ViewHolder viewHolder,
+                final List<ServerSetting> items, final ServerSetting item, final int position) {
+            final ServerSettingViewHolder holder = (ServerSettingViewHolder) viewHolder;
+            holder.mServerIconCurrent
+                    .setVisibility(item.isCurrent() ? View.VISIBLE : View.INVISIBLE);
+
+            holder.mServerNameTextView.setText(item.getName());
+            holder.mServerNameTextView.setOnClickListener(this);
+            holder.mServerNameTextView.setTag(new ServerItemTag(item, false));
+            holder.mServerURLTextView.setText(item.getHost() + ":" + item.getPort());
+            holder.mServerURLTextView.setOnClickListener(this);
+            holder.mServerURLTextView.setTag(new ServerItemTag(item, false));
+
+            MenuButton.tint(holder.mMenuButton, ConnectionChooserFragment.this.getResources());
+            holder.mMenuButton.setOnClickListener(this);
+            holder.mMenuButton.setTag(new ServerItemTag(item, true));
+        }
+
+        @Override
+        public View onLayoutInflation(final Context context, final View targetView,
+                final List<ServerSetting> items) {
+            return targetView;
+        }
+
+        @Override
+        public void onClick(final View v) {
+            final ServerItemTag serverItemTag = (ServerItemTag) v.getTag();
+
+            if (serverItemTag.mIsMenu) {
+                final PopupMenu popupMenu = new ServerPopupMenu(serverItemTag.mServerSetting, v);
+                popupMenu.show();
+            } else {
+                ConnectionModifierFragment
+                        .edit(serverItemTag.mServerSetting,
+                                ConnectionChooserFragment.this.getActivity());
+            }
+        }
     }
 
-    private void addServerPreference(final PreferenceScreen screen,
-            final ServerSetting serverSetting) {
-        final Preference serverItem = new Preference(screen.getContext());
+    private static class ServerSettingViewHolder implements ViewHolder {
 
-        serverItem.setPersistent(false);
-        serverItem.setKey(serverSetting.getKeyPrefix());
-        serverItem.setTitle(serverSetting.getName());
-        serverItem.setSummary(serverSetting.getHost() + ":" + serverSetting.getPort());
-        serverItem.getExtras()
-                .putParcelable(ConnectionModifierFragment.EXTRA_SERVER_SETTING, serverSetting);
-        serverItem.setFragment(ConnectionSettingsActivity.FRAGMENT_MODIFIER_NAME);
+        ImageView mServerIconCurrent;
 
-        screen.addPreference(serverItem);
+        TextView mServerNameTextView;
+
+        TextView mServerURLTextView;
+
+        ImageButton mMenuButton;
+
+    }
+
+    private class ServerPopupMenu extends PopupMenu implements PopupMenu.OnMenuItemClickListener {
+
+        private final ServerSetting mServerSetting;
+
+        ServerPopupMenu(final ServerSetting serverSetting, final View anchor) {
+            super(ConnectionChooserFragment.this.getActivity(), anchor);
+
+            mServerSetting = serverSetting;
+
+            getMenuInflater().inflate(R.menu.mpd_servermenu, getMenu());
+            if (mServerSetting.isCurrent()) {
+                getMenu().findItem(R.id.server_current).setVisible(false);
+            }
+            setOnMenuItemClickListener(this);
+        }
+
+        @Override
+        public boolean onMenuItemClick(final MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.server_current:
+                    mServerSetting.setAsCurrent();
+                    refreshItems();
+                    return true;
+                case R.id.server_delete:
+                    mServerSetting.delete();
+                    refreshItems();
+                    return true;
+                default:
+                    return false;
+            }
+        }
     }
 
 }

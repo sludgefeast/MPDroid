@@ -16,6 +16,9 @@
 
 package com.namelessdev.mpdroid.preferences;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
@@ -34,6 +37,19 @@ public class ConnectionModifierFragment extends PreferenceFragment {
     private static final String KEY_CONNECTION_CATEGORY = "connectionCategory";
 
     private ServerSetting mServerSetting;
+
+    static void edit(final ServerSetting serverSetting, final Activity activity) {
+        final Bundle bundle = new Bundle();
+        bundle.putParcelable(ConnectionModifierFragment.EXTRA_SERVER_SETTING, serverSetting);
+        final Fragment fragment = Fragment.instantiate(activity,
+                ConnectionModifierFragment.class.getName(), bundle);
+
+        final FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(android.R.id.content, fragment)
+                .addToBackStack(serverSetting.getName())
+                .commit();
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
