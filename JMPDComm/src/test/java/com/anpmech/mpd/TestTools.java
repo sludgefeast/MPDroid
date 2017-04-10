@@ -2,7 +2,7 @@ package com.anpmech.mpd;
 
 /*
  * Copyright (C) 2004 Felipe Gustavo de Almeida
- * Copyright (C) 2010-2016 The MPDroid Project
+ * Copyright (C) 2010-2017 The MPDroid Project
  *
  * All Rights Reserved.
  *
