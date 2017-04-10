@@ -16,16 +16,6 @@
 
 package com.namelessdev.mpdroid.views;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.LayoutRes;
-import android.support.v4.view.ViewCompat;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import com.anpmech.mpd.Tools;
 import com.anpmech.mpd.item.Album;
 import com.anpmech.mpd.item.Artist;
@@ -35,8 +25,18 @@ import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 import com.namelessdev.mpdroid.fragments.SongsFragment;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
 import com.namelessdev.mpdroid.views.holders.AlbumViewHolder;
+import com.namelessdev.mpdroid.views.holders.ViewHolder;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.annotation.LayoutRes;
+import android.support.v4.view.ViewCompat;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class AlbumDataBinder<T extends Item<T>> extends BaseDataBinder<T> {
     }
 
     @Override
-    public AbstractViewHolder findInnerViews(final View targetView) {
+    public ViewHolder findInnerViews(final View targetView) {
         // look up all references to inner views
         final AlbumViewHolder viewHolder = new AlbumViewHolder();
         viewHolder.mAlbumName = (TextView) targetView.findViewById(R.id.album_name);
@@ -109,7 +109,7 @@ public class AlbumDataBinder<T extends Item<T>> extends BaseDataBinder<T> {
 
     @Override
     public void onDataBind(final Context context, final View targetView,
-                           final AbstractViewHolder viewHolder, final List<T> items, final Object item,
+                           final ViewHolder viewHolder, final List<T> items, final T item,
                            final int position) {
         final AlbumViewHolder holder = (AlbumViewHolder) viewHolder;
         final Album album = (Album) item;

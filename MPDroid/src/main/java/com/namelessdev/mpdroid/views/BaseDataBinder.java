@@ -16,14 +16,6 @@
 
 package com.namelessdev.mpdroid.views;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.view.View;
-
-import com.anpmech.mpd.item.Item;
 import com.namelessdev.mpdroid.MPDApplication;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.adapters.ArrayDataBinder;
@@ -32,12 +24,14 @@ import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 import com.namelessdev.mpdroid.cover.CoverDownloadListener;
 import com.namelessdev.mpdroid.cover.CoverManager;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
 import com.namelessdev.mpdroid.views.holders.AlbumCoverHolder;
 
-import java.util.List;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.annotation.IdRes;
+import android.view.View;
 
-abstract class BaseDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
+abstract class BaseDataBinder<T> implements ArrayDataBinder<T> {
 
     static final CharSequence SEPARATOR = " - ";
 
@@ -51,7 +45,7 @@ abstract class BaseDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
     }
 
     static CoverAsyncHelper getCoverHelper(final AlbumCoverHolder holder,
-                                           final int defaultSize) {
+            final int defaultSize) {
         final CoverAsyncHelper coverHelper = new CoverAsyncHelper();
         final int height = holder.mAlbumCover.getHeight();
 
@@ -69,12 +63,12 @@ abstract class BaseDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
     }
 
     static void loadArtwork(final CoverAsyncHelper coverHelper,
-                            final AlbumInfo albumInfo) {
+            final AlbumInfo albumInfo) {
         coverHelper.downloadCover(albumInfo);
     }
 
     static CoverDownloadListener setCoverListener(final AlbumCoverHolder holder,
-                                                  final CoverAsyncHelper coverHelper) {
+            final CoverAsyncHelper coverHelper) {
         // listen for new artwork to be loaded
         final CoverDownloadListener acd =
                 new AlbumCoverDownloadListener(holder.mAlbumCover, holder.mCoverArtProgress, false);
@@ -105,29 +99,10 @@ abstract class BaseDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
      * @return The unmodified targetView.
      */
     static View setViewVisible(final View targetView, @IdRes final int resource,
-                               final boolean isVisible) {
+            final boolean isVisible) {
         final View view = targetView.findViewById(resource);
         view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         return targetView;
     }
-
-    @Override
-    public abstract AbstractViewHolder findInnerViews(View targetView);
-
-    @Override
-    @LayoutRes
-    public abstract int getLayoutId();
-
-    @Override
-    public abstract boolean isEnabled(int position, List<T> items, Object item);
-
-    @Override
-    public abstract void onDataBind(Context context, View targetView,
-                                    AbstractViewHolder viewHolder, List<T> items,
-                                    Object item, int position);
-
-    @Override
-    public abstract View onLayoutInflation(Context context, View targetView,
-                                           List<T> items);
 
 }

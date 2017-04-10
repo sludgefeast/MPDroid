@@ -16,14 +16,14 @@
 
 package com.namelessdev.mpdroid.adapters;
 
+import com.namelessdev.mpdroid.views.holders.ViewHolder;
+
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.anpmech.mpd.item.Item;
-import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +32,7 @@ import java.util.List;
 //Stolen from http://www.anddev.org/tutalphabetic_fastscroll_listview_-_similar_to_contacts-t10123.html
 //Thanks qlimax !
 
-public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter<T> {
+public class ArrayAdapter<T> extends android.widget.ArrayAdapter<T> {
 
     private static final int TYPE_DEFAULT = 0;
 
@@ -45,7 +45,7 @@ public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter
     private final List<T> mItems;
 
     public ArrayAdapter(final Context context, final ArrayDataBinder<T> dataBinder,
-                        final List<T> items) {
+            final List<T> items) {
         super(context, 0, items);
         mDataBinder = dataBinder;
 
@@ -61,7 +61,7 @@ public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter
     }
 
     ArrayAdapter(final Context context, @LayoutRes final int textViewResourceId,
-                 final List<T> items) {
+            final List<T> items) {
         super(context, textViewResourceId, items);
         mDataBinder = null;
 
@@ -76,24 +76,22 @@ public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter
         }
     }
 
-    public ArrayDataBinder<T> getDataBinder() {
-        return mDataBinder;
-    }
-
     @Override
     public int getItemViewType(final int position) {
         return TYPE_DEFAULT;
     }
 
+    @NonNull
     @Override
-    public View getView(final int position, final View convertView, final ViewGroup parent) {
+    public View getView(final int position, final View convertView,
+            @NonNull final ViewGroup parent) {
         if (mDataBinder == null) {
             return super.getView(position, convertView, parent);
         }
 
         View resultView;
         // cache all inner view references with ViewHolder pattern
-        final AbstractViewHolder holder;
+        final ViewHolder holder;
 
         if (convertView == null) {
             resultView = mInflater.inflate(mDataBinder.getLayoutId(), parent, false);
@@ -104,7 +102,7 @@ public class ArrayAdapter<T extends Item<T>> extends android.widget.ArrayAdapter
             resultView.setTag(holder);
         } else {
             resultView = convertView;
-            holder = (AbstractViewHolder) resultView.getTag();
+            holder = (ViewHolder) resultView.getTag();
         }
 
         mDataBinder.onDataBind(mContext, resultView, holder, mItems, mItems.get(position),

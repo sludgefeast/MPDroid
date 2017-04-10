@@ -27,7 +27,7 @@ import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 import com.namelessdev.mpdroid.preferences.Preferences;
-import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
+import com.namelessdev.mpdroid.views.holders.ViewHolder;
 import com.namelessdev.mpdroid.views.holders.AlbumViewHolder;
 
 import java.util.List;
@@ -65,21 +65,21 @@ public class AlbumGridDataBinder extends AlbumDataBinder<Album> {
     }
 
     @Override
-    public AbstractViewHolder findInnerViews(final View targetView) {
+    public ViewHolder findInnerViews(final View targetView) {
         final AlbumViewHolder viewHolder = (AlbumViewHolder) super.findInnerViews(targetView);
         viewHolder.mFavoriteButton = (FavoriteButton) targetView.findViewById(R.id.favoriteButton);
         return viewHolder;
     }
 
     @Override
-    public void onDataBind(Context context, View targetView, AbstractViewHolder viewHolder,
-                           List<Album> items, Object item, int position) {
+    public void onDataBind(Context context, View targetView, ViewHolder viewHolder,
+            List<Album> items, Album item, int position) {
         super.onDataBind(context, targetView, viewHolder, items, item, position);
 
         final AlbumViewHolder holder = (AlbumViewHolder) viewHolder;
-        holder.mFavoriteButton.setAlbum((Album) item);
+        holder.mFavoriteButton.setAlbum(item);
         holder.mFavoriteButton.setVisibility(Preferences.areFavoritesActivated() &&
-                        MPDApplication.getInstance().getMPD().getStickerManager().isAvailable() ?
-                        View.VISIBLE : View.GONE);
+                MPDApplication.getInstance().getMPD().getStickerManager().isAvailable() ?
+                View.VISIBLE : View.GONE);
     }
 }

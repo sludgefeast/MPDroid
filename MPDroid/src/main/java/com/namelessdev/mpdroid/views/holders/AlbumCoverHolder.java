@@ -22,7 +22,7 @@ import android.widget.ProgressBar;
 /**
  * This class defines a holder for album covers.
  */
-public class AlbumCoverHolder extends AbstractViewHolder {
+public class AlbumCoverHolder implements ViewHolder {
 
     public ImageView mAlbumCover;
 

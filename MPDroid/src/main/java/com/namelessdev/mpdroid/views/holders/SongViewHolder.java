@@ -26,7 +26,7 @@ import com.namelessdev.mpdroid.views.SongDataBinder;
 /**
  * This class holds the {@link View}s required for the {@link SongDataBinder}.
  */
-public class SongViewHolder extends AbstractViewHolder {
+public class SongViewHolder implements ViewHolder {
 
     /**
      * The comment button View.

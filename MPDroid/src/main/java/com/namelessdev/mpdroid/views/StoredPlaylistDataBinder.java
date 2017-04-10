@@ -29,7 +29,7 @@ import com.anpmech.mpd.item.Music;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.cover.CoverAsyncHelper;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
-import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
+import com.namelessdev.mpdroid.views.holders.ViewHolder;
 import com.namelessdev.mpdroid.views.holders.PlaylistViewHolder;
 
 import java.util.List;
@@ -37,7 +37,7 @@ import java.util.List;
 public class StoredPlaylistDataBinder<T extends Item<T>> extends BaseDataBinder<T> {
 
     @Override
-    public AbstractViewHolder findInnerViews(final View targetView) {
+    public ViewHolder findInnerViews(final View targetView) {
         final PlaylistViewHolder viewHolder = new PlaylistViewHolder();
 
         viewHolder.mName = (TextView) targetView.findViewById(R.id.playlist_name);
@@ -62,7 +62,7 @@ public class StoredPlaylistDataBinder<T extends Item<T>> extends BaseDataBinder<
 
     @Override
     public void onDataBind(final Context context, final View targetView,
-                           final AbstractViewHolder viewHolder, final List<T> items, final Object item,
+                           final ViewHolder viewHolder, final List<T> items, final T item,
                            final int position) {
         final PlaylistViewHolder holder = (PlaylistViewHolder) viewHolder;
         final Music music = (Music) item;

@@ -16,20 +16,20 @@
 
 package com.namelessdev.mpdroid.views;
 
+import com.anpmech.mpd.item.Item;
+import com.anpmech.mpd.item.Music;
+import com.namelessdev.mpdroid.R;
+import com.namelessdev.mpdroid.SongCommentActivity;
+import com.namelessdev.mpdroid.adapters.ArrayDataBinder;
+import com.namelessdev.mpdroid.views.holders.SongViewHolder;
+import com.namelessdev.mpdroid.views.holders.ViewHolder;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
-
-import com.anpmech.mpd.item.Item;
-import com.anpmech.mpd.item.Music;
-import com.namelessdev.mpdroid.R;
-import com.namelessdev.mpdroid.SongCommentActivity;
-import com.namelessdev.mpdroid.adapters.ArrayDataBinder;
-import com.namelessdev.mpdroid.views.holders.AbstractViewHolder;
-import com.namelessdev.mpdroid.views.holders.SongViewHolder;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class SongDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
     }
 
     @Override
-    public AbstractViewHolder findInnerViews(final View targetView) {
+    public ViewHolder findInnerViews(final View targetView) {
         return new SongViewHolder(targetView);
     }
 
@@ -59,7 +59,7 @@ public class SongDataBinder<T extends Item<T>> implements ArrayDataBinder<T> {
 
     @Override
     public void onDataBind(final Context context, final View targetView,
-                           final AbstractViewHolder viewHolder, final List<T> items, final Object item,
+                           final ViewHolder viewHolder, final List<T> items, final T item,
                            final int position) {
         final SongViewHolder holder = (SongViewHolder) viewHolder;
         final Music song = (Music) item;
