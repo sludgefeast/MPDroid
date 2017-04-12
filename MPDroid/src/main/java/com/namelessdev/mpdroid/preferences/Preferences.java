@@ -19,13 +19,9 @@ package com.namelessdev.mpdroid.preferences;
 import com.anpmech.mpd.Log;
 import com.namelessdev.mpdroid.BuildConfig;
 import com.namelessdev.mpdroid.MPDApplication;
-import com.namelessdev.mpdroid.preferences.upgrade.ConnectionPreferenceUpgrader;
 import com.namelessdev.mpdroid.preferences.upgrade.PreferenceUpgrader;
 
-import android.app.Application;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 
 import java.util.ArrayList;
@@ -89,15 +85,6 @@ public final class Preferences {
     }
 
     public static void upgrade() {
-        final Application app = MPDApplication.getInstance();
-        try {
-            final PackageInfo packageInfo = app.getPackageManager()
-                    .getPackageInfo(app.getPackageName(), 0);
-            Log.info(TAG, "" + packageInfo.versionCode);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
         final SharedPreferences preferences = preferences();
         final int preferencesVersion = preferences.getInt(PREFERENCE_KEY_PREFERENCES_VERSION, 0);
 
@@ -117,8 +104,7 @@ public final class Preferences {
     }
 
     private static List<PreferenceUpgrader> readPreferenceUpgraders(final int preferencesVersion) {
-        //TODO don't list available preference upgraders here
-        final PreferenceUpgrader[] availableUpgraders = {new ConnectionPreferenceUpgrader()};
+        final List<PreferenceUpgrader> availableUpgraders = findAvailableUpgraders();
 
         final List<PreferenceUpgrader> upgraders = new ArrayList<>();
 
@@ -134,6 +120,23 @@ public final class Preferences {
                 return lhs.getBasedAppVersionCode() - rhs.getBasedAppVersionCode();
             }
         });
+
+        return upgraders;
+    }
+
+    private static List<PreferenceUpgrader> findAvailableUpgraders() {
+        final List<PreferenceUpgrader> upgraders = new ArrayList<>();
+
+        for (final Class<? extends PreferenceUpgrader> upgraderClass :
+                PreferenceUpgrader.UPGRADER_CLASSES) {
+            try {
+                upgraders.add(upgraderClass.newInstance());
+            } catch (final InstantiationException e) {
+                Log.error(TAG, "Unable to create an instance of " + upgraderClass.getName(), e);
+            } catch (final IllegalAccessException e) {
+                Log.error(TAG, "Unable to create an instance of " + upgraderClass.getName(), e);
+            }
+        }
 
         return upgraders;
     }

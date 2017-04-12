@@ -20,6 +20,9 @@ import android.content.SharedPreferences;
 
 public interface PreferenceUpgrader {
 
+    Class<? extends PreferenceUpgrader>[] UPGRADER_CLASSES = new Class[]{
+            ConnectionPreferenceUpgrader.class};
+
     int getBasedAppVersionCode();
 
     void upgrade(SharedPreferences preferences, SharedPreferences.Editor editor);
