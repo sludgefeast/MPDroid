@@ -28,7 +28,7 @@ Also, MPDroid's speed isn't that great, but considering that MPD's API was never
 
 So, the current roadmap is:
 
-####1.1  
+#### 1.1  
 
  - [ ] Add Bonjour support
  - [ ] Rework Streams storage
