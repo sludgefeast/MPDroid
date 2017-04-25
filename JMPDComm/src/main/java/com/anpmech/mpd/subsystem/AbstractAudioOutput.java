@@ -88,34 +88,24 @@ abstract class AbstractAudioOutput {
      */
     @Override
     public boolean equals(final Object o) {
-        Boolean isEqual = null;
-
         if (this == o) {
-            isEqual = Boolean.TRUE;
-        } else if (o == null || getClass() != o.getClass()) {
-            isEqual = Boolean.FALSE;
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
         }
 
-        if (isEqual == null || isEqual.equals(Boolean.TRUE)) {
-            /** This has to be the same due to the class check above. */
-            //noinspection unchecked
-            final AbstractAudioOutput entry = (AbstractAudioOutput) o;
+        /** This has to be the same due to the class check above. */
+        //noinspection unchecked
+        final AbstractAudioOutput entry = (AbstractAudioOutput) o;
 
-            /**
-             * Neither can be null at this point, one or the other is not null,
-             * checked at construction.
-             */
-            //noinspection ConstantConditions
-            if (!Tools.areEqual(mResponseObject, entry.mResponseObject)) {
-                isEqual = Boolean.FALSE;
-            }
-        }
+        /**
+         * Neither can be null at this point, one or the other is not null,
+         * checked at construction.
+         */
+        //noinspection ConstantConditions
+        return Tools.areEqual(mResponseObject, entry.mResponseObject);
 
-        if (isEqual == null) {
-            isEqual = Boolean.TRUE;
-        }
-
-        return isEqual.booleanValue();
     }
 
     /**

@@ -159,7 +159,7 @@ public class AlbumInfo {
      * @param filename        The filename with relation to this album.
      */
     private AlbumInfo(final String artistName, final String albumName, final String parentDirectory,
-                      final String filename) {
+            final String filename) {
         mArtistName = artistName;
         mAlbumName = albumName;
         mParentDirectory = parentDirectory;
@@ -238,31 +238,18 @@ public class AlbumInfo {
      */
     @Override
     public boolean equals(final Object o) {
-        Boolean isEqual = null;
-
         if (this == o) {
-            isEqual = Boolean.TRUE;
-        } else if (o == null || getClass() != o.getClass()) {
-            isEqual = Boolean.FALSE;
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
         }
 
-        if (isEqual == null || isEqual.equals(Boolean.TRUE)) {
-            final AlbumInfo albumInfo = (AlbumInfo) o;
+        final AlbumInfo albumInfo = (AlbumInfo) o;
 
-            if (!Tools.areEqual(mAlbumName, albumInfo.mAlbumName)) {
-                isEqual = Boolean.FALSE;
-            }
+        return Tools.areEqual(mAlbumName, albumInfo.mAlbumName) &&
+                Tools.areEqual(mArtistName, albumInfo.mArtistName);
 
-            if (!Tools.areEqual(mArtistName, albumInfo.mArtistName)) {
-                isEqual = Boolean.FALSE;
-            }
-        }
-
-        if (isEqual == null) {
-            isEqual = Boolean.TRUE;
-        }
-
-        return isEqual;
     }
 
     /**

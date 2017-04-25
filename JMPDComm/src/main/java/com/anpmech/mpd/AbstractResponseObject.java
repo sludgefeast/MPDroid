@@ -121,48 +121,28 @@ public class AbstractResponseObject {
      */
     @Override
     public boolean equals(final Object o) {
-        Boolean isEqual = null;
-
         if (this == o) {
-            isEqual = Boolean.TRUE;
-        } else if (o == null || getClass() != o.getClass()) {
-            isEqual = Boolean.FALSE;
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
         }
 
-        if (isEqual == null || isEqual.equals(Boolean.TRUE)) {
-            /** This has to be the same due to the class check above. */
-            //noinspection unchecked
-            final AbstractResponseObject entry = (AbstractResponseObject) o;
+        /** This has to be the same due to the class check above. */
+        //noinspection unchecked
+        final AbstractResponseObject entry = (AbstractResponseObject) o;
 
-            final String thisString;
-            final String thatString;
-            if (mResponse == null) {
-                thisString = mName;
-            } else {
-                thisString = valueResponse(mResponse);
-            }
+        final String thisString = mResponse == null ? mName : valueResponse(mResponse);
+        final String thatString = entry.mResponse == null ? entry.mName
+                : valueResponse(entry.mResponse);
 
-            if (entry.mResponse == null) {
-                thatString = entry.mName;
-            } else {
-                thatString = valueResponse(entry.mResponse);
-            }
+        /**
+         * Neither can be null at this point, one or the other is not null,
+         * checked at construction.
+         */
+        //noinspection ConstantConditions
+        return thisString.equals(thatString);
 
-            /**
-             * Neither can be null at this point, one or the other is not null,
-             * checked at construction.
-             */
-            //noinspection ConstantConditions
-            if (!thisString.equals(thatString)) {
-                isEqual = Boolean.FALSE;
-            }
-        }
-
-        if (isEqual == null) {
-            isEqual = Boolean.TRUE;
-        }
-
-        return isEqual;
     }
 
     /**

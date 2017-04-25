@@ -123,33 +123,23 @@ public class KeyValueIterator extends FullBlockResult<Map.Entry<String, String>>
          */
         @Override
         public boolean equals(final Object o) {
-            Boolean isEqual = null;
-
             if (this == o) {
-                isEqual = Boolean.TRUE;
-            } else if (o == null || getClass() != o.getClass()) {
-                isEqual = Boolean.FALSE;
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
             }
 
-            if (isEqual == null || isEqual.equals(Boolean.TRUE)) {
-                /** This has to be the same due to the class check above. */
-                //noinspection unchecked
-                final SimplerImmutableEntry entry = (SimplerImmutableEntry) o;
+            /** This has to be the same due to the class check above. */
+            //noinspection unchecked
+            final SimplerImmutableEntry entry = (SimplerImmutableEntry) o;
 
-                /**
-                 * A null value would have been an error during construction.
-                 */
-                //noinspection ConstantConditions
-                if (!mEntry.equals(entry.mEntry)) {
-                    isEqual = Boolean.FALSE;
-                }
-            }
+            /**
+             * A null value would have been an error during construction.
+             */
+            //noinspection ConstantConditions
+            return mEntry.equals(entry.mEntry);
 
-            if (isEqual == null) {
-                isEqual = Boolean.TRUE;
-            }
-
-            return isEqual.booleanValue();
         }
 
         /**
