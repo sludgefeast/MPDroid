@@ -16,18 +16,20 @@
 
 package com.namelessdev.mpdroid.preferences;
 
-import com.namelessdev.mpdroid.MPDActivity;
 import com.namelessdev.mpdroid.R;
 import com.namelessdev.mpdroid.tools.Tools;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.StyleRes;
+import android.support.v7.app.AppCompatActivity;
+import android.view.ContextThemeWrapper;
 
 /**
  * This Activity is used to modify connection preferences.
  */
-public class ConnectionSettingsActivity extends MPDActivity {
+public class ConnectionSettingsActivity extends AppCompatActivity {
 
     /**
      * This method checks to see if preferences have been setup for this application previously.
@@ -63,4 +65,28 @@ public class ConnectionSettingsActivity extends MPDActivity {
         builder.show();
     }
 
+    /**
+     * This method overrides {@link ContextThemeWrapper#setTheme(int)} to use
+     * {@link #getThemeResId()}.
+     *
+     * @param resid The resource ID for the current theme.
+     */
+    @Override
+    public void setTheme(final int resid) {
+        super.setTheme(getThemeResId());
+    }
+
+    /**
+     * This method returns the current theme resource ID.
+     *
+     * @return The current theme resource ID.
+     */
+    @StyleRes
+    private int getThemeResId() {
+        return isLightThemeSelected() ? R.style.AppTheme_Light : R.style.AppTheme;
+    }
+
+    private boolean isLightThemeSelected() {
+        return Tools.isLightThemeSelected(this);
+    }
 }
