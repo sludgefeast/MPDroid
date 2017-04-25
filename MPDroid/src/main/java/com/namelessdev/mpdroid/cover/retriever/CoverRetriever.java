@@ -20,7 +20,7 @@ import com.namelessdev.mpdroid.helpers.AlbumInfo;
 
 import java.util.List;
 
-public interface ICoverRetriever {
+public interface CoverRetriever {
 
     List<String> getCoverUrls(AlbumInfo albumInfo) throws Exception;
 

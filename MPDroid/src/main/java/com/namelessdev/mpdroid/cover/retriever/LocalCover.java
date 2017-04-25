@@ -26,7 +26,7 @@ import java.util.List;
 
 import static android.text.TextUtils.isEmpty;
 
-public class LocalCover implements ICoverRetriever {
+public class LocalCover implements CoverRetriever {
 
     private static final String[] EXT = {
             "jpg", "png", "jpeg",

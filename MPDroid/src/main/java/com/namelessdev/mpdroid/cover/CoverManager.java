@@ -34,7 +34,7 @@ import com.namelessdev.mpdroid.cover.retriever.CachedCover;
 import com.namelessdev.mpdroid.cover.retriever.CoverArtArchiveCover;
 import com.namelessdev.mpdroid.cover.retriever.DeezerCover;
 import com.namelessdev.mpdroid.cover.retriever.GracenoteCover;
-import com.namelessdev.mpdroid.cover.retriever.ICoverRetriever;
+import com.namelessdev.mpdroid.cover.retriever.CoverRetriever;
 import com.namelessdev.mpdroid.cover.retriever.ItunesCover;
 import com.namelessdev.mpdroid.cover.retriever.JamendoCover;
 import com.namelessdev.mpdroid.cover.retriever.LastFMCover;
@@ -117,7 +117,7 @@ public final class CoverManager implements SharedPreferences.OnSharedPreferenceC
     /**
      * This Collection stores all enabled cover retrievers.
      */
-    private final List<ICoverRetriever> mCoverRetrievers = new ArrayList<>();
+    private final List<CoverRetriever> mCoverRetrievers = new ArrayList<>();
 
     private final HashMap<String, String> mCoverUrlMap = new HashMap<>();
 
@@ -436,7 +436,7 @@ public final class CoverManager implements SharedPreferences.OnSharedPreferenceC
     private CachedCover getCacheRetriever() {
         CachedCover cachedRetriever = null;
 
-        for (final ICoverRetriever retriever : mCoverRetrievers) {
+        for (final CoverRetriever retriever : mCoverRetrievers) {
             if (retriever instanceof CachedCover && retriever.isCoverLocal()) {
                 cachedRetriever = (CachedCover) retriever;
             }
@@ -890,7 +890,7 @@ public final class CoverManager implements SharedPreferences.OnSharedPreferenceC
                     canStart = false;
                 }
 
-                for (final ICoverRetriever coverRetriever : mCoverRetrievers) {
+                for (final CoverRetriever coverRetriever : mCoverRetrievers) {
                     try {
 
                         if (coverRetriever == null) {
@@ -984,7 +984,7 @@ public final class CoverManager implements SharedPreferences.OnSharedPreferenceC
             return mRunningRequests.get(mRunningRequests.indexOf(coverInfo));
         }
 
-        private boolean isLastCoverRetriever(final ICoverRetriever retriever) {
+        private boolean isLastCoverRetriever(final CoverRetriever retriever) {
             final int size = mCoverRetrievers.size();
             return size > 0 && mCoverRetrievers.get(size - 1).getName().equals(retriever.getName());
         }

@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-public class CachedCover implements ICoverRetriever {
+public class CachedCover implements CoverRetriever {
 
     private static final String TAG = "CachedCover";
 

@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 /**
  * This class represents a base for cover retrievers.
  */
-abstract class AbstractWebCover implements ICoverRetriever {
+abstract class AbstractWebCover implements CoverRetriever {
 
     /**
      * This pattern compiles to match an ampersand.

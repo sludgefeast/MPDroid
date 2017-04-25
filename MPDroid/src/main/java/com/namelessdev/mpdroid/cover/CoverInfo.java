@@ -18,7 +18,7 @@ package com.namelessdev.mpdroid.cover;
 
 import android.graphics.Bitmap;
 
-import com.namelessdev.mpdroid.cover.retriever.ICoverRetriever;
+import com.namelessdev.mpdroid.cover.retriever.CoverRetriever;
 import com.namelessdev.mpdroid.helpers.AlbumInfo;
 
 import java.util.Arrays;
@@ -35,7 +35,7 @@ class CoverInfo extends AlbumInfo {
 
     private int mCoverMaxSize = MAX_SIZE;
 
-    private ICoverRetriever mCoverRetriever;
+    private CoverRetriever mCoverRetriever;
 
     private CoverDownloadListener mListener;
 
@@ -78,7 +78,7 @@ class CoverInfo extends AlbumInfo {
         return mCoverMaxSize;
     }
 
-    ICoverRetriever getCoverRetriever() {
+    CoverRetriever getCoverRetriever() {
         return mCoverRetriever;
     }
 
@@ -114,7 +114,7 @@ class CoverInfo extends AlbumInfo {
         mCoverMaxSize = coverMaxSize;
     }
 
-    void setCoverRetriever(final ICoverRetriever coverRetriever) {
+    void setCoverRetriever(final CoverRetriever coverRetriever) {
         mCoverRetriever = coverRetriever;
     }
 
